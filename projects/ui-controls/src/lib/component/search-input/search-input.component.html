@@ -1,0 +1,57 @@
+<div [ngClass]="{ 'required-text': required && !modelValue }">
+  <mat-form-field appearance="outline">
+    @if(label){
+    <mat-label>{{ label | translate }}</mat-label>
+    } @if(searchButtonPosition === 'before'){
+    <button
+      type="button"
+      [disabled]="searchButtonDisabled"
+      (click)="onSearchClick()"
+      [matTooltip]="searchButtonTooltip"
+      matSuffix
+    >
+      <mat-icon matSuffix svgIcon="searchIcon"> </mat-icon>
+    </button>
+    }
+    <input
+      [id]="effectiveId"
+      type="text"
+      matInput
+      uiInputRules
+      [inputType]="inputType"
+      uiPreventClipboard [preventCopyPasteCut]="preventCopyPasteCut"
+      uiTrimLeadingSpace
+      [disabled]="searchDisabled"
+      [(ngModel)]="modelValue"
+      [ngModelOptions]="{ standalone: true }"
+      [maxLength]="maxLength"
+      (ngModelChange)="modelValueChange($event)"
+      (input)="inputChange($event)"
+      [attr.maxLength]="wordsLimit > 0 ? wordsLimit : null"
+      aria-required="true"
+      (focus)="focusChange($event)"
+      (blur)="blurChange($event)"
+      placeholder="{{ placeholder | translate }}"
+      [readonly]="readonly"
+      (keydown)="keydownHandle($event)"
+      (keyup)="keyupHandle($event)"
+      (keyup.enter)="keyEnterHandle($event)"
+      (click)="inputClick($event)"
+    />
+    @if(searchButtonPosition === 'after'){
+    <button
+      type="button"
+      [disabled]="searchButtonDisabled"
+      (click)="onSearchClick()"
+      [matTooltip]="searchButtonTooltip"
+      matSuffix
+    >
+      <mat-icon svgIcon="searchIcon" class="text-primary Icon-sm"> </mat-icon>
+    </button>
+    } @if(required && errorMessage){
+    <mat-error>
+      {{ errorMessage | translate }}
+    </mat-error>
+    }
+  </mat-form-field>
+</div>

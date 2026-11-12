@@ -1,0 +1,16 @@
+.pdf-viewer-container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.pdf-iframe {
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  width: calc(100% + 35px);
+  height: calc(100% + 24px);
+  border: none;
+  background: transparent;
+}

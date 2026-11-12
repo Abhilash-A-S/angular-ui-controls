@@ -1,0 +1,110 @@
+<div class="row m-0 search-drop">
+  <div class="col-sm-8 col-lg-8 col-8 p-0">
+    <ng-content select="[primaryFilter]">
+      <mat-form-field appearance="outline">
+        @if(searchTextLabel){
+        <mat-label>{{ searchTextLabel | translate }}</mat-label>
+        }
+        <button
+          type="button"
+          [disabled]="disabled"
+          (click)="onSearchClick()"
+          [matTooltip]="searchButtonTooltip"
+          matIconPrefix
+        >
+          <mat-icon
+            matIconPrefix
+            svgIcon="searchIcon"
+            class="text-primary Icon-sm"
+          >
+          </mat-icon>
+        </button>
+        <input
+          [id]="effectiveId"
+          type="text"
+          matInput
+          uiInputRules
+          [inputType]="inputType"
+          uiPreventClipboard [preventCopyPasteCut]="preventCopyPasteCut"
+          uiTrimLeadingSpace
+          [disabled]="disabled"
+          [(ngModel)]="modelValue"
+          [ngModelOptions]="{ standalone: true }"
+          [maxLength]="maxLength"
+          (ngModelChange)="modelValueChange($event)"
+          (input)="inputChange($event)"
+          [attr.maxLength]="wordsLimit > 0 ? wordsLimit : null"
+          aria-required="true"
+          (focus)="focusChange($event)"
+          (blur)="blurChange($event)"
+          placeholder="{{ placeholder | translate }}"
+          [readonly]="readonly"
+          (keydown)="keydownHandle($event)"
+          (keyup)="keyupHandle($event)"
+          (keyup.enter)="keyEnterHandle($event)"
+          (click)="inputClick($event)"
+        />
+        @if(required && errorMessage){
+        <mat-error>
+          {{ errorMessage | translate }}
+        </mat-error>
+        }
+      </mat-form-field>
+    </ng-content>
+  </div>
+  <div class="col-sm-4 col-lg-4 col-4 p-0 search-select">
+    <ng-content select="[secondaryFilter]">
+      <mat-form-field appearance="outline">
+        @if(searchSelectLabel){
+        <mat-label [uiEllipsisTooltip]="searchSelectLabel | translate">{{
+          searchSelectLabel | translate
+        }}</mat-label>
+        } @if(inputModelValue && showClearIcon){
+        <button
+          type="button"
+          matTooltip="Clear"
+          matSuffix
+          mat-icon-button
+          (click)="$event.stopPropagation(); clearSelect()"
+        >
+          <mat-icon
+            svgIcon="closeIcon"
+            class="Icon-xs text-danger me-1 text-danger d-flex"
+          ></mat-icon>
+        </button>
+        }
+        <mat-select
+          [id]="effectiveId"
+          [(ngModel)]="inputModelValue"
+          [ngModelOptions]="{ standalone: true }"
+          placeholder="{{ selectPlaceholder | translate }}"
+          (selectionChange)="handleSelectionChange($event)"
+          [multiple]="multiple"
+          (openedChange)="openedChange($event)"
+          (opened)="opened()"
+          (closed)="closed()"
+          (blur)="blur()"
+          [disabled]="disabled"
+        >
+          @for(option of options; track option){
+          <mat-option
+            [value]="valueKey && !multiple ? option[valueKey] : option"
+            (onSelectionChange)="optionSelectionChange($event, option)"
+            (click)="optionClick(option)"
+            [matTooltip]="labelKey ? option[labelKey] : option"
+            [disabled]="option?.['isDisabled']"
+            matTooltipPosition="above"
+          >
+            {{ labelKey ? option[labelKey] : option }}
+          </mat-option>
+          }
+        </mat-select>
+        @if(required && errorMessage){
+        <mat-error>
+          {{ errorMessage | translate }}
+        </mat-error>
+        }
+      </mat-form-field>
+    </ng-content>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+<div [ngClass]="{ 'required-text': required && !fileName }">
+  @if(showDropZone){
+  <div class="section-no-grow file-upload-drag-drop">
+    <div class="upload-top w-100 position-relative">
+      <input
+        type="file"
+        [id]="effectiveId || 'imageUpload'"
+        [accept]="accept"
+        [disabled]="disabled"
+        (change)="onFileChange($event)"
+        multiple
+        class="file-up"
+      />
+      <div class="drag-holder">
+        <div class="browse-file py-2">
+          Drag & Drop here or <b class="text-primary">Browse Files</b>
+        </div>
+        <div class="icon-area">
+          <mat-icon
+            svgIcon="uploadIcon"
+            aria-hidden="false"
+            class="Icon-sm text-primary"
+          ></mat-icon>
+        </div>
+        @if (accept) {
+        <div class="accepted-files py-2">
+          ACCEPTED FILE TYPES: {{ acceptedFiles }}
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+  }@else{
+  <div [hidden]="true">
+    <input
+      #fileInput
+      type="file"
+      [id]="effectiveId || 'imageUpload'"
+      [accept]="accept"
+      [disabled]="disabled"
+      (change)="onFileChange($event)"
+    />
+  </div>
+  <div
+    class="filepath py-1 px-2 d-flex align-items-center justify-content-between"
+    [class.disabled]="disabled"
+    (click)="!disabled && fileInput.click()"
+    [matTooltip]="fileName ? fileName : ''"
+  >
+    <span class="truncate-width flex-grow-1 text-truncate">{{
+      fileName || placeholder | translate
+    }}</span>
+
+    <div class="d-flex align-items-center ms-2">
+      @if (fileName && showClearIcon) {
+      <button
+        mat-icon-button
+        type="button"
+        class="btn-icon"
+        [disabled]="disabled"
+        (click)="clearFile($event)"
+        matTooltip="{{ 'Clear' | translate }}"
+      >
+        <mat-icon
+          svgIcon="closeIcon"
+          class="Icon-xs text-danger d-flex"
+        ></mat-icon>
+      </button>
+      } @else {
+      <mat-icon svgIcon="uploadIcon" class="Icon-sm text-secondary"></mat-icon>
+      }
+    </div>
+  </div>
+  } @if(required && errorMessage && !fileName){
+  <div class="text-danger small mt-1">
+    {{ errorMessage | translate }}
+  </div>
+  } @if(isInvalidFile && fileFormatErrorMessage){
+  <div class="text-danger small mt-1">
+    {{ fileFormatErrorMessage | translate }}
+  </div>
+  }
+</div>

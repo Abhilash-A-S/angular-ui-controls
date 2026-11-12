@@ -1,0 +1,38 @@
+<div [class.required-text]="required && !inputModelValue">
+  <div class="d-flex gap-2">
+    <div
+      class="slide-toggle-container"
+      [class.prevent-toggle]="preventToggleOnClick"
+      (click)="preventToggleOnClick ? handleOverlayClick($event) : null"
+    >
+      <mat-slide-toggle
+        [id]="effectiveId"
+        [(ngModel)]="inputModelValue"
+        [ngModelOptions]="{ standalone: true }"
+        [disabled]="disabled"
+        [required]="required"
+        [disableRipple]="disableRipple"
+        [color]="color"
+        [labelPosition]="labelPosition"
+        [tabIndex]="preventToggleOnClick ? -1 : 0"
+        (change)="onToggleValueChange($event)"
+        (toggleChange)="onToggleChange()"
+        (click)="handleOnClick($event)"
+      >
+        @if(label){
+        {{ label | translate }}
+        }
+      </mat-slide-toggle>
+
+      @if (preventToggleOnClick) {
+      <div class="click-blocker" (click)="handleOverlayClick($event)"></div>
+      }
+    </div>
+
+    @if (required && errorMessage && !inputModelValue) {
+    <div>
+      {{ errorMessage | translate }}
+    </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<div [ngClass]="{ 'required-text': required && !modelValue }">
+  <div class="d-flex flex-column">
+    <mat-form-field appearance="outline">
+      @if(label){
+      <mat-label>{{ label | translate }}</mat-label>
+      }
+      <input
+        matInput
+        [ngxMatDatetimePicker]="pickerWithActions"
+        [(ngModel)]="modelValue"
+        [ngModelOptions]="{ standalone: true }"
+        [id]="effectiveId"
+        (dateChange)="handleDateChange($event)"
+        (ngModelChange)="handleModelChange($event)"
+        (focus)="onFocus($event)"
+        (blur)="onBlur($event)"
+        (keyup)="onKeyUp($event)"
+        (keydown)="onKeyDown($event)"
+        (input)="onInput($event)"
+        (change)="onChangeHandler($event)"
+        [disabled]="disabled"
+        placeholder="{{ placeholder | translate }}"
+        [uiAutoPopulateCurrentDate]="autoPopulateDateTime"
+        [min]="minDate"
+        [max]="maxDate"
+        [readonly]="readonly"
+        [required]="required"
+      />
+      @if(required && errorMessage){
+      <mat-error>
+        {{ errorMessage | translate }}
+      </mat-error>
+      }
+      <ngx-mat-datepicker-toggle
+        matSuffix
+        [for]="pickerWithActions"
+      ></ngx-mat-datepicker-toggle>
+      <ngx-mat-datetime-picker #pickerWithActions (opened)="onPickerOpened()">
+        <ngx-mat-datepicker-actions>
+          <button
+            type="button"
+            class="text-primary mb-2"
+            [disabled]="isApplyDisabled(pickerWithActions)"
+            ngxMatDatepickerApply
+          >
+            <mat-icon svgIcon="tickIcon" class="Icon-xs"></mat-icon>
+          </button>
+        </ngx-mat-datepicker-actions>
+      </ngx-mat-datetime-picker>
+    </mat-form-field>
+  </div>
+</div>

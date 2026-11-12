@@ -1,0 +1,5 @@
+@if(showEditor){
+<ckeditor [id]="effectiveId" [editor]="decoupledEditor" [(ngModel)]="modelValue" [ngModelOptions]="{ standalone: true }" (ready)="onReady($event)"
+    [config]="editorConfig" (change)="onChangeHandler()" [disabled]="disabled" (blur)="onBlurHandler()">
+</ckeditor>
+}

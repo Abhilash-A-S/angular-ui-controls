@@ -1,0 +1,97 @@
+<div [ngClass]="{ 'required-text': !!error || (!!required && !modelValue) }">
+  <mat-form-field appearance="outline">
+    <mat-label *ngIf="label">{{ label | translate }}</mat-label>
+    <!-- add custom [cdkAutosizeMinRows], [cdkAutosizeMaxRows], [mention]-->
+    <ui-abbreviation-textarea
+      *ngIf="useAbbreviationHighlight; else defaultTextArea"
+      [preventCopy]="preventCopyPasteCut"
+      [preventCut]="preventCopyPasteCut"
+      [preventPaste]="preventCopyPasteCut"
+      [disabled]="disabled"
+      [(ngModel)]="modelValue"
+      [ngModelOptions]="{ standalone: true }"
+      (ngModelChange)="updateChanges()"
+      (controlTextChange)="onChange($event)"
+      [maxLength]="maxLength > 0 ? maxLength : null"
+      placeholder="{{ placeholder | translate }}"
+      [readOnly]="readonly"
+      [restrictedWords]="restrictedWords"
+      [abbreviationList]="abbreviationList"
+      (focusIn)="onTextAreaFocus()"
+      (focusOut)="onTextAreaBlur()"
+      [minRows]="minRows"
+      [maxRows]="maxRows"
+      [mentionConfig]="abbreviationMentionConfig?.length ? abbreviationMentionConfig : abbreviationHighlightMentionList"
+      [assistantFieldId]="assistantFieldId"
+    >
+    </ui-abbreviation-textarea>
+    <ng-template #defaultTextArea>
+      <textarea
+        matInput
+        uiPreventClipboard
+        uiTrimLeadingSpace
+        [preventCopyPasteCut]="preventCopyPasteCut"
+        tabindex="0"
+        contenteditable="true"
+        aria-multiline="true"
+        [disabled]="disabled"
+        [cols]="columns"
+        [(ngModel)]="modelValue"
+        [ngModelOptions]="{ standalone: true }"
+        (ngModelChange)="updateChanges()"
+        [value]="modelValue"
+        (input)="changeTextareaValue($event)"
+        [attr.maxLength]="maxLength > 0 ? maxLength : null"
+        (focus)="onTextAreaFocus()"
+        (blur)="onTextAreaBlur()"
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        [cdkAutosizeMinRows]="minRows"
+        [cdkAutosizeMaxRows]="maxRows"
+        placeholder="{{ placeholder | translate }}"
+        [readonly]="readonly"
+        [mention]="mentionsList"
+        [id]="effectiveId"
+        [attr.ChatGptAttr]="assistantFieldId || null"
+        [mentionConfig]="mentionConfig"
+        (itemSelected)="itemSelected.emit($event)"
+        uiArabicInput
+        [isEnabledArabicText]="enableArabicInput"
+      ></textarea>
+    </ng-template>
+  </mat-form-field>
+  <div
+    *ngIf="showRemainingCharacters"
+    class="remaining-words-section d-flex justify-content-end"
+  >
+    <span class="remaning-label" *ngIf="showWordsLimitLabel"
+      >{{ maxLength - (modelValue?.length || 0) }}/ {{ maxLength }}</span
+    >
+  </div>
+  <!-- <button
+      (click)="!readonly ? expandButton() : ''"
+      class="expand-input-buttons"
+      id="expandBtnID"
+      [ngClass]="{
+        'arabic-expand-view': arabicLanguage === selectedLanguage?.value
+      }"
+    >
+      <mat-icon
+        class="Icon-sm text-primary show-me"
+        svgIcon="dialogueIcon"
+      ></mat-icon>
+    </button> -->
+  <div *ngIf="showCharacterCount">
+    <div id="the-count" *ngIf="!!maxLength && modelValue?.length < maxLength">
+      <span id="current"
+        >you have entered&nbsp;<b>{{
+          modelValue?.length ? modelValue?.length : 0
+        }}</b
+        >&nbsp;characters ,maximum:&nbsp;<b>{{ maxLength }}</b></span
+      >
+    </div>
+    <div id="the-count" *ngIf="!!maxLength && modelValue?.length == maxLength">
+      <span id="current">you have entered maximum characters</span>
+    </div>
+  </div>
+</div>

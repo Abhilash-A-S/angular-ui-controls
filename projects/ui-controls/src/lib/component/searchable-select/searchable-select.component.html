@@ -1,0 +1,117 @@
+<div [ngClass]="{ 'required-text': required && (inputModelValue | isEmpty) }">
+  <mat-form-field appearance="outline">
+    @if(label){
+    <mat-label [uiEllipsisTooltip]="label | translate">{{
+      label | translate
+    }}</mat-label>
+    } @if(inputModelValue && showClearIcon){
+    <button
+      type="button"
+      matTooltip="Clear"
+      matSuffix
+      mat-icon-button
+      (click)="$event.stopPropagation(); clearSelect()"
+    >
+      <mat-icon
+        svgIcon="closeIcon"
+        class="Icon-xs text-danger me-1 text-danger d-flex"
+      ></mat-icon>
+    </button>
+    }
+    <mat-select
+      [id]="effectiveId"
+      [(ngModel)]="inputModelValue"
+      [ngModelOptions]="{ standalone: true }"
+      placeholder="{{ selectPlaceholder | translate }}"
+      (selectionChange)="handleSelectionChange($event)"
+      [multiple]="multiple"
+      (openedChange)="handleOpenedChange($event); openedChange($event)"
+      (opened)="opened()"
+      (closed)="closed()"
+      (blur)="blur()"
+      [disabled]="disabled"
+      [compareWith]="compareObjects"
+    >
+      @if (hasSelectedValue) {
+      <mat-select-trigger>
+        {{ getTriggerText() }}
+      </mat-select-trigger>
+      }
+      @if(showSearch && internalSelectList?.length){
+      <mat-option>
+        <ngx-mat-select-search
+          placeholderLabel="{{ searchPlaceholder | translate }}"
+          [noEntriesFoundLabel]="noEntriesFoundLabel"
+          [(ngModel)]="searchText"
+          [ngModelOptions]="{ standalone: true }"
+          [showToggleAllCheckbox]="showSearchCheckbox"
+          [toggleAllCheckboxTooltipMessage]="toggleAllCheckboxTooltipMessage"
+          (toggleAll)="toggleSelectAll($event)"
+          (ngModelChange)="searchTextModelChange($event)"
+        ></ngx-mat-select-search>
+      </mat-option>
+      }
+      <cdk-virtual-scroll-viewport
+        [class.single-line-viewport]="singleLineOption"
+        [itemSize]="itemSize"
+        minBufferPx="600"
+        maxBufferPx="1000"
+        [style.height.px]="
+          internalSelectList?.length < 6
+            ? internalSelectList?.length * itemSize
+            : 216
+        "
+      >
+        @for (option of hiddenOptions(); track option) {
+        <!-- IMPORTANT! Keep the content of 'mat-option' the same -->
+        <mat-option [value]="option" [style.display]="'none'">
+          {{ labelKey ? option?.[labelKey] : option }}
+        </mat-option>
+        }
+        <mat-option
+          #virtualOption
+          class="ui-select-search-option"
+          [class.single-line-option]="singleLineOption"
+          *cdkVirtualFor="
+            let option of internalSelectList
+              | searchFilter
+                : (serverSideSearch ? '' : searchText)
+                : labelKey
+                : filterConditionStartWith;
+            trackBy: trackByFn;
+            templateCacheSize: 50
+          "
+          [value]="valueKey && !multiple ? option[valueKey] : option"
+          (onSelectionChange)="optionSelectionChange($event, option)"
+          (click)="optionClick(option)"
+          [matTooltip]="labelKey ? option[labelKey] : option"
+          [disabled]="option?.['isDisabled']"
+          matTooltipPosition="above"
+          [matTooltipDisabled]="
+            singleLineOption ||
+            isTooltipDisabled(
+              virtualOption,
+              labelKey ? option[labelKey] : option
+            )
+          "
+        >
+          @if (singleLineOption) {
+          <span
+            class="single-line-option-text"
+            [uiEllipsisTooltip]="labelKey ? option[labelKey] : option"
+            tooltipPosition="above"
+            >{{ labelKey ? option[labelKey] : option }}</span
+          >
+          } @else {
+          {{ labelKey ? option[labelKey] : option }}
+          }
+        </mat-option>
+      </cdk-virtual-scroll-viewport>
+    </mat-select>
+    @if(required && errorMessage){
+    <mat-error>
+      {{ errorMessage | translate }}
+    </mat-error>
+    }
+  </mat-form-field>
+</div>

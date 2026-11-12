@@ -1,0 +1,4437 @@
+{
+  "selectors": {
+    "st-auto-complete": "ui-autocomplete",
+    "st-checkbox": "ui-checkbox",
+    "st-custom-select-search": "ui-advanced-select",
+    "custom-time-picker": "ui-time-input",
+    "st-date-picker": "ui-date-picker",
+    "st-date-range-picker": "ui-date-range-picker",
+    "st-date-time-picker": "ui-date-time-picker",
+    "st-input-number": "ui-number-input",
+    "st-input-box-password": "ui-password-input",
+    "st-input-text": "ui-text-input",
+    "st-input-file": "ui-file-upload",
+    "st-more-details-menu": "ui-action-menu",
+    "st-pdf-viwer": "ui-pdf-viewer",
+    "st-radio-button": "ui-radio-button",
+    "st-search-filter": "ui-search-filter",
+    "st-search-input": "ui-search-input",
+    "st-select-search": "ui-searchable-select",
+    "st-selection-list": "ui-selection-list",
+    "st-slide-toggle": "ui-slide-toggle",
+    "st-tab-button-toggle": "ui-segmented-control",
+    "st-text-area": "ui-text-area",
+    "st-text-editor": "ui-rich-text-editor",
+    "st-time-picker": "ui-time-picker"
+  },
+  "directives": {
+    "libUiInputPreventCopyPasteCut": "uiPreventClipboard",
+    "yarAutopopulateCurrentDate": "uiAutoPopulateCurrentDate"
+  },
+  "types": {
+    "InputComponent": "TextInputComponent",
+    "InputBoxNumberComponent": "NumberInputComponent",
+    "InputBoxPasswordComponent": "PasswordInputComponent",
+    "InputFileComponent": "FileUploadComponent",
+    "AutoCompleteComponent": "AutocompleteComponent",
+    "CustomSelectSearchComponent": "AdvancedSelectComponent",
+    "SelectSearchComponent": "SearchableSelectComponent",
+    "CustomTimePickerComponent": "TimeInputComponent",
+    "MoreDetailsMenuComponent": "ActionMenuComponent",
+    "TabButtonToggleComponent": "SegmentedControlComponent",
+    "TextEditorComponent": "RichTextEditorComponent",
+    "TextEditorService": "RichTextEditorService",
+    "TextEditorImageUpload": "RichTextEditorImageUpload",
+    "PdfViwerComponent": "PdfViewerComponent",
+    "UIInputsModule": "UiInputsModule",
+    "PreventCopyPasteCut": "PreventClipboardDirective",
+    "AutopopulateCurrentDateDirective": "AutoPopulateCurrentDateDirective",
+    "IAutoCompleteModel": "AutocompleteModel",
+    "SelectSearchFieldInfo": "SearchableSelectFieldInfo",
+    "SelectSearchSelectionChangeEvent": "SearchableSelectSelectionChangeEvent",
+    "SelectSearchToggleAllEvent": "SearchableSelectToggleAllEvent",
+    "SelectSearchOpenCloseEvent": "SearchableSelectOpenCloseEvent",
+    "SelectSearchOptionClickEvent": "SearchableSelectOptionClickEvent",
+    "SelectSearchOptionItem": "SearchableSelectOptionItem",
+    "SelectSearchOption": "SearchableSelectOption",
+    "InputBoxNumberFieldInfo": "NumberInputFieldInfo",
+    "InputBoxNumberModelChangeEvent": "NumberInputModelChangeEvent",
+    "InputBoxNumberInputEvent": "NumberInputInputEvent",
+    "InputBoxNumberFocusEvent": "NumberInputFocusEvent",
+    "InputBoxNumberBlurEvent": "NumberInputBlurEvent",
+    "InputBoxNumberKeydownEvent": "NumberInputKeydownEvent",
+    "InputBoxNumberKeyupEvent": "NumberInputKeyupEvent",
+    "InputBoxNumberKeyEnterEvent": "NumberInputKeyEnterEvent",
+    "InputBoxPasswordFieldInfo": "PasswordInputFieldInfo",
+    "InputBoxPasswordModelChangeEvent": "PasswordInputModelChangeEvent",
+    "InputBoxPasswordInputEvent": "PasswordInputInputEvent",
+    "InputBoxPasswordFocusEvent": "PasswordInputFocusEvent",
+    "InputBoxPasswordBlurEvent": "PasswordInputBlurEvent",
+    "InputBoxPasswordKeydownEvent": "PasswordInputKeydownEvent",
+    "InputBoxPasswordKeyupEvent": "PasswordInputKeyupEvent",
+    "InputBoxPasswordKeyEnterEvent": "PasswordInputKeyEnterEvent",
+    "InputBoxTextFieldInfo": "TextInputFieldInfo",
+    "InputBoxTextModelChangeEvent": "TextInputModelChangeEvent",
+    "InputBoxTextInputEvent": "TextInputInputEvent",
+    "InputBoxTextFocusEvent": "TextInputFocusEvent",
+    "InputBoxTextBlurEvent": "TextInputBlurEvent",
+    "InputBoxTextKeydownEvent": "TextInputKeydownEvent",
+    "InputBoxTextKeyupEvent": "TextInputKeyupEvent",
+    "InputBoxTextKeyEnterEvent": "TextInputKeyEnterEvent",
+    "InputBoxTextClickEvent": "TextInputClickEvent",
+    "SearchInputsInfo": "SearchInputInfo",
+    "SearchInputsModelChangeEvent": "SearchInputModelChangeEvent",
+    "SearchInputsInputEvent": "SearchInputInputEvent",
+    "SearchInputsFocusEvent": "SearchInputFocusEvent",
+    "SearchInputsBlurEvent": "SearchInputBlurEvent",
+    "SearchInputsKeydownEvent": "SearchInputKeydownEvent",
+    "SearchInputsKeyupEvent": "SearchInputKeyupEvent",
+    "SearchInputsKeyEnterEvent": "SearchInputKeyEnterEvent",
+    "SearchInputsClickEvent": "SearchInputClickEvent"
+  },
+  "paths": {
+    "input-box-text": "text-input",
+    "input-box-number": "number-input",
+    "input-box-password": "password-input",
+    "input-file": "file-upload",
+    "auto-complete": "autocomplete",
+    "custom-select-search": "advanced-select",
+    "select-search": "searchable-select",
+    "custom-time-picker": "time-input",
+    "more-details-menu": "action-menu",
+    "tab-button-toggle": "segmented-control",
+    "text-editor": "rich-text-editor"
+  },
+  "members": [
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Input",
+      "old": "inputId",
+      "new": "inputId",
+      "description": "Identifier assigned to the inner control; combined with idPrefix when supplied."
+    },
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Input",
+      "old": "readonly",
+      "new": "readonly",
+      "description": "Requests the existing read-only behavior without disabling the parent form control."
+    },
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Input",
+      "old": "required",
+      "new": "required",
+      "description": "Marks this control as required in its existing template; parent-form validators remain separately configured."
+    },
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Input",
+      "old": "autoCompleteList",
+      "new": "options",
+      "description": "Options rendered by the control; use the label/value key inputs for object options."
+    },
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Input",
+      "old": "label",
+      "new": "label",
+      "description": "Label text or translation key displayed for this control."
+    },
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Input",
+      "old": "wordsLimit",
+      "new": "wordsLimit",
+      "description": "Legacy character-limit input bound to maxlength (not a word counter). Retained separately from maxLength; existing precedence is unchanged."
+    },
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Input",
+      "old": "displayKey",
+      "new": "labelKey",
+      "description": "Property name read from an option object to obtain its visible label."
+    },
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Input",
+      "old": "bindValueKey",
+      "new": "valueKey",
+      "description": "Property name used to identify or extract an option value."
+    },
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Input",
+      "old": "optionNgClass",
+      "new": "optionNgClass",
+      "description": "Optional resolver returning an ngClass value for each option (conditional coloring/styling). Receives the raw option and may return a string, string[] or { className: boolean } map."
+    },
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Input",
+      "old": "panelClass",
+      "new": "panelClass",
+      "description": "Additional CSS class or classes applied to the existing overlay panel."
+    },
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Input",
+      "old": "errorMessage",
+      "new": "errorMessage",
+      "description": "to show error message"
+    },
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Input",
+      "old": "virtualScroll",
+      "new": "virtualScroll",
+      "description": "Renders the options inside a cdk virtual scroll viewport (use for large lists)"
+    },
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Input",
+      "old": "singleLineOption",
+      "new": "singleLineOption",
+      "description": "Keeps each option on a single line with ellipsis; full text is shown in a tooltip on hover when truncated"
+    },
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Input",
+      "old": "virtualScrollItemSize",
+      "new": "virtualScrollItemSize",
+      "description": "Height (px) of a single option row; must match the rendered mat-option height when virtualScroll is on"
+    },
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Input",
+      "old": "virtualScrollMaxHeight",
+      "new": "virtualScrollMaxHeight",
+      "description": "Maximum height (px) of the virtual scroll viewport (mat-autocomplete panel max-height is 256px)"
+    },
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Input",
+      "old": "autoCompleteModel",
+      "new": "autocompleteModel",
+      "description": "Autocomplete value and field metadata object; its value is synchronized with the shared control value."
+    },
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Input",
+      "old": "error",
+      "new": "error",
+      "description": "Flag to indicate validation error state (used with reactive forms)"
+    },
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Input",
+      "old": "textFieldName",
+      "new": "fieldName",
+      "description": "Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved."
+    },
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Input",
+      "old": "placeholder",
+      "new": "placeholder",
+      "description": "Hint text or translation key displayed while the control is empty."
+    },
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Output",
+      "old": "inputChangeValue",
+      "new": "valueChanged",
+      "description": "Emits the existing value-change payload; remains separate from modelChange."
+    },
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Output",
+      "old": "onModelChange",
+      "new": "modelChange",
+      "description": "Emits when the component model-change handler runs."
+    },
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Output",
+      "old": "onInputChange",
+      "new": "inputChanged",
+      "description": "Emits from the existing input/change handler."
+    },
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Output",
+      "old": "onFocusChange",
+      "new": "focusGained",
+      "description": "Emits when the inner field gains focus."
+    },
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Output",
+      "old": "onBlurChange",
+      "new": "focusLost",
+      "description": "Emits when the inner field loses focus."
+    },
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Output",
+      "old": "onKeydownHandle",
+      "new": "keyPressed",
+      "description": "Emits on the inner field keydown event."
+    },
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Output",
+      "old": "onKeyupHandle",
+      "new": "keyReleased",
+      "description": "Emits on the inner field keyup event."
+    },
+    {
+      "component": "AutocompleteComponent",
+      "file": "component/autocomplete/autocomplete.component.ts",
+      "kind": "Output",
+      "old": "onKeyEnterHandle",
+      "new": "enterPressed",
+      "description": "Emits when Enter is released in the inner field."
+    },
+    {
+      "component": "BaseControlValueAccessor",
+      "file": "component/base-control-value-accessor.directive.ts",
+      "kind": "Input",
+      "old": "disabled",
+      "new": "disabled",
+      "description": "Disables the control. Angular Forms can also update this state through setDisabledState."
+    },
+    {
+      "component": "BaseControlValueAccessor",
+      "file": "component/base-control-value-accessor.directive.ts",
+      "kind": "Input",
+      "old": "idPrefix",
+      "new": "idPrefix",
+      "description": "Optional namespace prepended to inner control IDs to distinguish repeated instances."
+    },
+    {
+      "component": "BaseControlValueAccessor",
+      "file": "component/base-control-value-accessor.directive.ts",
+      "kind": "Input",
+      "old": "value",
+      "new": "value",
+      "description": "Shared control value. Assigning this input follows the existing change/touch callback behavior; Angular Forms writes use writeValue."
+    },
+    {
+      "component": "BaseControlValueAccessor",
+      "file": "component/base-control-value-accessor.directive.ts",
+      "kind": "Input",
+      "old": "checked",
+      "new": "checked",
+      "description": "Alternate binding to the shared value, retained on the base class for compatibility."
+    },
+    {
+      "component": "CheckboxComponent",
+      "file": "component/checkbox/checkbox.component.ts",
+      "kind": "Input",
+      "old": "inputId",
+      "new": "inputId",
+      "description": "Identifier assigned to the inner control; combined with idPrefix when supplied."
+    },
+    {
+      "component": "CheckboxComponent",
+      "file": "component/checkbox/checkbox.component.ts",
+      "kind": "Input",
+      "old": "tooltip",
+      "new": "tooltip",
+      "description": "Tooltip text displayed on hover"
+    },
+    {
+      "component": "CheckboxComponent",
+      "file": "component/checkbox/checkbox.component.ts",
+      "kind": "Input",
+      "old": "label",
+      "new": "label",
+      "description": "Label text or translation key displayed for this control."
+    },
+    {
+      "component": "CheckboxComponent",
+      "file": "component/checkbox/checkbox.component.ts",
+      "kind": "Input",
+      "old": "errorMessage",
+      "new": "errorMessage",
+      "description": "Error message displayed for validation"
+    },
+    {
+      "component": "CheckboxComponent",
+      "file": "component/checkbox/checkbox.component.ts",
+      "kind": "Input",
+      "old": "required",
+      "new": "required",
+      "description": "Marks this control as required in its existing template; parent-form validators remain separately configured."
+    },
+    {
+      "component": "CheckboxComponent",
+      "file": "component/checkbox/checkbox.component.ts",
+      "kind": "Input",
+      "old": "textFieldName",
+      "new": "fieldName",
+      "description": "Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved."
+    },
+    {
+      "component": "CheckboxComponent",
+      "file": "component/checkbox/checkbox.component.ts",
+      "kind": "Input",
+      "old": "indeterminate",
+      "new": "indeterminate",
+      "description": "The indeterminate state is typically used in a \"select all\" scenario, where it indicates that some but not all child items are selected."
+    },
+    {
+      "component": "CheckboxComponent",
+      "file": "component/checkbox/checkbox.component.ts",
+      "kind": "Output",
+      "old": "onClick",
+      "new": "clicked",
+      "description": "Emits when the existing click handler runs."
+    },
+    {
+      "component": "CheckboxComponent",
+      "file": "component/checkbox/checkbox.component.ts",
+      "kind": "Output",
+      "old": "onModelChange",
+      "new": "modelChange",
+      "description": "Emits when the component model-change handler runs."
+    },
+    {
+      "component": "CheckboxComponent",
+      "file": "component/checkbox/checkbox.component.ts",
+      "kind": "Output",
+      "old": "onInputChange",
+      "new": "inputChanged",
+      "description": "Emits from the existing input/change handler."
+    },
+    {
+      "component": "CheckboxComponent",
+      "file": "component/checkbox/checkbox.component.ts",
+      "kind": "Input",
+      "old": "inputModelValue",
+      "new": "inputModelValue",
+      "description": "Internal model bound to checkbox"
+    },
+    {
+      "component": "CheckboxComponent",
+      "file": "component/checkbox/checkbox.component.ts",
+      "kind": "Input",
+      "old": "modelValue",
+      "new": "modelValue",
+      "description": "Direct binding to the component model, backed by its existing value accessor."
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "itemSize",
+      "new": "itemSize",
+      "description": "Height in pixels of each option for virtual scrolling (defaults to 36px)"
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "preventCopyPasteCut",
+      "new": "preventCopyPasteCut",
+      "description": "Clipboard restriction flag retained with its current wiring. The local uiPreventClipboard directive blocks copy, cut, and paste when true."
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "inputId",
+      "new": "inputId",
+      "description": "Identifier assigned to the inner control; combined with idPrefix when supplied."
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "label",
+      "new": "label",
+      "description": "Label text or translation key displayed for this control."
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "showSearch",
+      "new": "showSearch",
+      "description": "Enable the search in the option"
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "errorMessage",
+      "new": "errorMessage",
+      "description": "Error message shown when validation fails"
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "required",
+      "new": "required",
+      "description": "Marks this control as required in its existing template; parent-form validators remain separately configured."
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "textFieldName",
+      "new": "fieldName",
+      "description": "Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved."
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "selectPlaceholder",
+      "new": "selectPlaceholder",
+      "description": "Placeholder text for the select field"
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "searchPlaceholder",
+      "new": "searchPlaceholder",
+      "description": "Placeholder text for search input"
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "readonly",
+      "new": "readonly",
+      "description": "Requests the existing read-only behavior without disabling the parent form control."
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "isMultiSelect",
+      "new": "isMultiSelect",
+      "description": "Enables multi-select behavior"
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "showToggleAllCheckbox",
+      "new": "showToggleAllCheckbox",
+      "description": "Displays \"Select All\" checkbox"
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "noEntriesFoundLabel",
+      "new": "noEntriesFoundLabel",
+      "description": "Label shown when no entries are found"
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "toggleAllCheckboxTooltipMessage",
+      "new": "toggleAllCheckboxTooltipMessage",
+      "description": "Tooltip message for select-all checkbox"
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "showSearchCheckBox",
+      "new": "showSearchCheckbox",
+      "description": "Shows checkbox in search area"
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "showMultiSelect",
+      "new": "multiple",
+      "description": "Enables the existing multiple-selection mode."
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "selectList",
+      "new": "options",
+      "description": "Options rendered by the control; use the label/value key inputs for object options."
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "displayKey",
+      "new": "labelKey",
+      "description": "Property name read from an option object to obtain its visible label."
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "idKey",
+      "new": "valueKey",
+      "description": "Property name used to identify or extract an option value."
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "hiddenKey",
+      "new": "hiddenKey",
+      "description": "Key in option object used to determine if the option should be hidden from dropdown. Defaults to 'isHidden'."
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "isGroupingEnabled",
+      "new": "isGroupingEnabled",
+      "description": "Enables grouped select display"
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "groupLabelKey",
+      "new": "groupLabelKey",
+      "description": "Property key for group label (defaults to '')"
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "groupChildrenKey",
+      "new": "groupChildrenKey",
+      "description": "Property key for group child options array (defaults to '')"
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "enableAllOption",
+      "new": "enableAllOption",
+      "description": "Key used to map model value to option"
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "enableSorting",
+      "new": "enableSorting",
+      "description": "Key used to enable / disable sorting"
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "sortAscending",
+      "new": "sortAscending",
+      "description": "Defines whether the list should be sorted in ascending order."
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "sortKey",
+      "new": "sortKey",
+      "description": "Key used to sort the array"
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "isMultiOptions",
+      "new": "isMultiOptions",
+      "description": "Enables multiple options display"
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "showClearIcon",
+      "new": "showClearIcon",
+      "description": "To clear the selected dropdown list"
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "displayFields",
+      "new": "displayFields",
+      "description": "Conatins the multiple options"
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "layoutMode",
+      "new": "layoutMode",
+      "description": "Option text layout: inline joins the display fields; split separates primary and secondary fields."
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "serverSideSearch",
+      "new": "serverSideSearch",
+      "description": "Enables server-side/external search by bypassing local pipe filtering"
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "singleLineOption",
+      "new": "singleLineOption",
+      "description": "Keeps each option on a single line with ellipsis; full text is shown in a tooltip on hover when truncated"
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "modelValue",
+      "new": "modelValue",
+      "description": "Direct binding to the component model, backed by its existing value accessor."
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Input",
+      "old": "isSearchStartsWith",
+      "new": "searchStartsWith",
+      "description": "Configuration for search starts with."
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Output",
+      "old": "toggleSelectHandle",
+      "new": "selectAllChange",
+      "description": "Emits when the select-all action runs."
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Output",
+      "old": "onselectionChange",
+      "new": "selectionChange",
+      "description": "Emits when the selection handler processes a selection."
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Output",
+      "old": "onOpenedChange",
+      "new": "panelOpenChange",
+      "description": "Emits when the select panel open state changes."
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Output",
+      "old": "onOpened",
+      "new": "panelOpened",
+      "description": "Emits when the select panel opens."
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Output",
+      "old": "onClosed",
+      "new": "panelClosed",
+      "description": "Emits when the select panel closes."
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Output",
+      "old": "onBlur",
+      "new": "blurred",
+      "description": "Emits when the control loses focus."
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Output",
+      "old": "onOptionClick",
+      "new": "optionClicked",
+      "description": "Emits when an option is clicked."
+    },
+    {
+      "component": "AdvancedSelectComponent",
+      "file": "component/advanced-select/advanced-select.component.ts",
+      "kind": "Output",
+      "old": "onSearchTextModelChange",
+      "new": "searchTextChange",
+      "description": "Emits the updated search string for consumer filtering."
+    },
+    {
+      "component": "TimeInputComponent",
+      "file": "component/time-input/time-input.component.ts",
+      "kind": "Input",
+      "old": "preventCopyPasteCut",
+      "new": "preventCopyPasteCut",
+      "description": "Clipboard restriction flag retained with its current wiring. The local uiPreventClipboard directive blocks copy, cut, and paste when true."
+    },
+    {
+      "component": "TimeInputComponent",
+      "file": "component/time-input/time-input.component.ts",
+      "kind": "Input",
+      "old": "inputIdHr",
+      "new": "hoursInputId",
+      "description": "Identifier for the hours input, combined with idPrefix when supplied."
+    },
+    {
+      "component": "TimeInputComponent",
+      "file": "component/time-input/time-input.component.ts",
+      "kind": "Input",
+      "old": "inputIdMin",
+      "new": "minutesInputId",
+      "description": "Identifier for the minutes input, combined with idPrefix when supplied."
+    },
+    {
+      "component": "TimeInputComponent",
+      "file": "component/time-input/time-input.component.ts",
+      "kind": "Input",
+      "old": "errorMessage",
+      "new": "errorMessage",
+      "description": "Validation error message"
+    },
+    {
+      "component": "TimeInputComponent",
+      "file": "component/time-input/time-input.component.ts",
+      "kind": "Input",
+      "old": "required",
+      "new": "required",
+      "description": "Marks this control as required in its existing template; parent-form validators remain separately configured."
+    },
+    {
+      "component": "TimeInputComponent",
+      "file": "component/time-input/time-input.component.ts",
+      "kind": "Input",
+      "old": "textFieldName",
+      "new": "fieldName",
+      "description": "Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved."
+    },
+    {
+      "component": "TimeInputComponent",
+      "file": "component/time-input/time-input.component.ts",
+      "kind": "Input",
+      "old": "readonly",
+      "new": "readonly",
+      "description": "Requests the existing read-only behavior without disabling the parent form control."
+    },
+    {
+      "component": "TimeInputComponent",
+      "file": "component/time-input/time-input.component.ts",
+      "kind": "Input",
+      "old": "modelValue",
+      "new": "modelValue",
+      "description": "Direct binding to the component model, backed by its existing value accessor."
+    },
+    {
+      "component": "TimeInputComponent",
+      "file": "component/time-input/time-input.component.ts",
+      "kind": "Output",
+      "old": "onModelChange",
+      "new": "modelChange",
+      "description": "Emits when the component model-change handler runs."
+    },
+    {
+      "component": "TimeInputComponent",
+      "file": "component/time-input/time-input.component.ts",
+      "kind": "Output",
+      "old": "onInputChange",
+      "new": "inputChanged",
+      "description": "Emits from the existing input/change handler."
+    },
+    {
+      "component": "TimeInputComponent",
+      "file": "component/time-input/time-input.component.ts",
+      "kind": "Output",
+      "old": "onFocusChange",
+      "new": "focusGained",
+      "description": "Emits when the inner field gains focus."
+    },
+    {
+      "component": "TimeInputComponent",
+      "file": "component/time-input/time-input.component.ts",
+      "kind": "Output",
+      "old": "onBlurChange",
+      "new": "focusLost",
+      "description": "Emits when the inner field loses focus."
+    },
+    {
+      "component": "TimeInputComponent",
+      "file": "component/time-input/time-input.component.ts",
+      "kind": "Output",
+      "old": "onKeydownHandle",
+      "new": "keyPressed",
+      "description": "Emits on the inner field keydown event."
+    },
+    {
+      "component": "TimeInputComponent",
+      "file": "component/time-input/time-input.component.ts",
+      "kind": "Output",
+      "old": "onKeyupHandle",
+      "new": "keyReleased",
+      "description": "Emits on the inner field keyup event."
+    },
+    {
+      "component": "TimeInputComponent",
+      "file": "component/time-input/time-input.component.ts",
+      "kind": "Output",
+      "old": "onKeyEnterHandle",
+      "new": "enterPressed",
+      "description": "Emits when Enter is released in the inner field."
+    },
+    {
+      "component": "DatePickerComponent",
+      "file": "component/date-picker/date-picker.component.ts",
+      "kind": "Input",
+      "old": "inputId",
+      "new": "inputId",
+      "description": "Identifier assigned to the inner control; combined with idPrefix when supplied."
+    },
+    {
+      "component": "DatePickerComponent",
+      "file": "component/date-picker/date-picker.component.ts",
+      "kind": "Input",
+      "old": "preventCopyPasteCut",
+      "new": "preventCopyPasteCut",
+      "description": "Clipboard restriction flag retained with its current wiring. The local uiPreventClipboard directive blocks copy, cut, and paste when true."
+    },
+    {
+      "component": "DatePickerComponent",
+      "file": "component/date-picker/date-picker.component.ts",
+      "kind": "Input",
+      "old": "label",
+      "new": "label",
+      "description": "Label text or translation key displayed for this control."
+    },
+    {
+      "component": "DatePickerComponent",
+      "file": "component/date-picker/date-picker.component.ts",
+      "kind": "Input",
+      "old": "modelValue",
+      "new": "modelValue",
+      "description": "Direct binding to the component model, backed by its existing value accessor."
+    },
+    {
+      "component": "DatePickerComponent",
+      "file": "component/date-picker/date-picker.component.ts",
+      "kind": "Input",
+      "old": "errorMessage",
+      "new": "errorMessage",
+      "description": "Error message displayed for validation"
+    },
+    {
+      "component": "DatePickerComponent",
+      "file": "component/date-picker/date-picker.component.ts",
+      "kind": "Input",
+      "old": "required",
+      "new": "required",
+      "description": "Marks this control as required in its existing template; parent-form validators remain separately configured."
+    },
+    {
+      "component": "DatePickerComponent",
+      "file": "component/date-picker/date-picker.component.ts",
+      "kind": "Input",
+      "old": "textFieldName",
+      "new": "fieldName",
+      "description": "Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved."
+    },
+    {
+      "component": "DatePickerComponent",
+      "file": "component/date-picker/date-picker.component.ts",
+      "kind": "Input",
+      "old": "placeholder",
+      "new": "placeholder",
+      "description": "Hint text or translation key displayed while the control is empty."
+    },
+    {
+      "component": "DatePickerComponent",
+      "file": "component/date-picker/date-picker.component.ts",
+      "kind": "Input",
+      "old": "readonly",
+      "new": "readonly",
+      "description": "Requests the existing read-only behavior without disabling the parent form control."
+    },
+    {
+      "component": "DatePickerComponent",
+      "file": "component/date-picker/date-picker.component.ts",
+      "kind": "Input",
+      "old": "autoPopulateDateTime",
+      "new": "autoPopulateDateTime",
+      "description": "Automatically populate current date on load"
+    },
+    {
+      "component": "DatePickerComponent",
+      "file": "component/date-picker/date-picker.component.ts",
+      "kind": "Input",
+      "old": "minDate",
+      "new": "minDate",
+      "description": "Minimum selectable date"
+    },
+    {
+      "component": "DatePickerComponent",
+      "file": "component/date-picker/date-picker.component.ts",
+      "kind": "Input",
+      "old": "maxDate",
+      "new": "maxDate",
+      "description": "Maximum selectable date"
+    },
+    {
+      "component": "DatePickerComponent",
+      "file": "component/date-picker/date-picker.component.ts",
+      "kind": "Input",
+      "old": "showTodayDate",
+      "new": "showTodayDate",
+      "description": "Flag to control whether today's date should be displayed in the UI"
+    },
+    {
+      "component": "DatePickerComponent",
+      "file": "component/date-picker/date-picker.component.ts",
+      "kind": "Output",
+      "old": "onModelChange",
+      "new": "modelChange",
+      "description": "Emits when the component model-change handler runs."
+    },
+    {
+      "component": "DatePickerComponent",
+      "file": "component/date-picker/date-picker.component.ts",
+      "kind": "Output",
+      "old": "onChange",
+      "new": "changeCommitted",
+      "description": "Emits from the existing change handler."
+    },
+    {
+      "component": "DatePickerComponent",
+      "file": "component/date-picker/date-picker.component.ts",
+      "kind": "Output",
+      "old": "onInputChange",
+      "new": "inputChanged",
+      "description": "Emits from the existing input/change handler."
+    },
+    {
+      "component": "DatePickerComponent",
+      "file": "component/date-picker/date-picker.component.ts",
+      "kind": "Output",
+      "old": "onFocusChange",
+      "new": "focusGained",
+      "description": "Emits when the inner field gains focus."
+    },
+    {
+      "component": "DatePickerComponent",
+      "file": "component/date-picker/date-picker.component.ts",
+      "kind": "Output",
+      "old": "onBlurChange",
+      "new": "focusLost",
+      "description": "Emits when the inner field loses focus."
+    },
+    {
+      "component": "DatePickerComponent",
+      "file": "component/date-picker/date-picker.component.ts",
+      "kind": "Output",
+      "old": "onKeydownHandle",
+      "new": "keyPressed",
+      "description": "Emits on the inner field keydown event."
+    },
+    {
+      "component": "DatePickerComponent",
+      "file": "component/date-picker/date-picker.component.ts",
+      "kind": "Output",
+      "old": "onKeyupHandle",
+      "new": "keyReleased",
+      "description": "Emits on the inner field keyup event."
+    },
+    {
+      "component": "DatePickerComponent",
+      "file": "component/date-picker/date-picker.component.ts",
+      "kind": "Output",
+      "old": "onKeyEnterHandle",
+      "new": "enterPressed",
+      "description": "Reserved output retained for API compatibility. No emission site exists in the supplied implementation."
+    },
+    {
+      "component": "DatePickerComponent",
+      "file": "component/date-picker/date-picker.component.ts",
+      "kind": "Output",
+      "old": "onDateChange",
+      "new": "dateChange",
+      "description": "Emits when the date-selection handler runs."
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Input",
+      "old": "inputIdFrom",
+      "new": "startInputId",
+      "description": "Identifier for the range start input, combined with idPrefix when supplied."
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Input",
+      "old": "inputIdTo",
+      "new": "endInputId",
+      "description": "Identifier for the range end input, combined with idPrefix when supplied."
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Input",
+      "old": "preventCopyPasteCut",
+      "new": "preventCopyPasteCut",
+      "description": "Clipboard restriction flag retained with its current wiring. The local uiPreventClipboard directive blocks copy, cut, and paste when true."
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Input",
+      "old": "label",
+      "new": "label",
+      "description": "Label text or translation key displayed for this control."
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Input",
+      "old": "errorMessage",
+      "new": "errorMessage",
+      "description": "Error message displayed for validation"
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Input",
+      "old": "required",
+      "new": "required",
+      "description": "Marks this control as required in its existing template; parent-form validators remain separately configured."
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Input",
+      "old": "startDisabled",
+      "new": "startDisabled",
+      "description": "Disable start date input"
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Input",
+      "old": "endDisabled",
+      "new": "endDisabled",
+      "description": "Disable end date input"
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Input",
+      "old": "textFieldName",
+      "new": "fieldName",
+      "description": "Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved."
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Input",
+      "old": "startPlaceholder",
+      "new": "startPlaceholder",
+      "description": "Placeholder for start date input"
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Input",
+      "old": "endPlaceholder",
+      "new": "endPlaceholder",
+      "description": "Placeholder for end date input"
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Input",
+      "old": "endReadonly",
+      "new": "endReadonly",
+      "description": "Makes end date input read-only"
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Input",
+      "old": "startReadonly",
+      "new": "startReadonly",
+      "description": "Makes start date input read-only"
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Input",
+      "old": "autoPopulateDateTime",
+      "new": "autoPopulateDateTime",
+      "description": "Automatically populate current date"
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Input",
+      "old": "startMinDate",
+      "new": "startMinDate",
+      "description": "Minimum allowed start date"
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Input",
+      "old": "startMaxDate",
+      "new": "startMaxDate",
+      "description": "Maximum allowed start date"
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Input",
+      "old": "endMinDate",
+      "new": "endMinDate",
+      "description": "Minimum allowed end date"
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Input",
+      "old": "endMaxDate",
+      "new": "endMaxDate",
+      "description": "Maximum allowed end date"
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Output",
+      "old": "onModelChange",
+      "new": "modelChange",
+      "description": "Emits when the component model-change handler runs."
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Output",
+      "old": "onChange",
+      "new": "changeCommitted",
+      "description": "Emits from the existing change handler."
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Output",
+      "old": "onInputChange",
+      "new": "inputChanged",
+      "description": "Emits from the existing input/change handler."
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Output",
+      "old": "onFocusChange",
+      "new": "focusGained",
+      "description": "Emits when the inner field gains focus."
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Output",
+      "old": "onBlurChange",
+      "new": "focusLost",
+      "description": "Emits when the inner field loses focus."
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Output",
+      "old": "onKeydownHandle",
+      "new": "keyPressed",
+      "description": "Emits on the inner field keydown event."
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Output",
+      "old": "onKeyupHandle",
+      "new": "keyReleased",
+      "description": "Emits on the inner field keyup event."
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Output",
+      "old": "onKeyEnterHandle",
+      "new": "enterPressed",
+      "description": "Reserved output retained for API compatibility. No emission site exists in the supplied implementation."
+    },
+    {
+      "component": "DateRangePickerComponent",
+      "file": "component/date-range-picker/date-range-picker.component.ts",
+      "kind": "Output",
+      "old": "onDateChange",
+      "new": "dateChange",
+      "description": "Emits when the date-selection handler runs."
+    },
+    {
+      "component": "DateTimePickerComponent",
+      "file": "component/date-time-picker/date-time-picker.component.ts",
+      "kind": "Input",
+      "old": "preventCopyPasteCut",
+      "new": "preventCopyPasteCut",
+      "description": "Clipboard restriction flag retained with its current wiring. The local uiPreventClipboard directive blocks copy, cut, and paste when true."
+    },
+    {
+      "component": "DateTimePickerComponent",
+      "file": "component/date-time-picker/date-time-picker.component.ts",
+      "kind": "Input",
+      "old": "label",
+      "new": "label",
+      "description": "Label text or translation key displayed for this control."
+    },
+    {
+      "component": "DateTimePickerComponent",
+      "file": "component/date-time-picker/date-time-picker.component.ts",
+      "kind": "Input",
+      "old": "inputId",
+      "new": "inputId",
+      "description": "Identifier assigned to the inner control; combined with idPrefix when supplied."
+    },
+    {
+      "component": "DateTimePickerComponent",
+      "file": "component/date-time-picker/date-time-picker.component.ts",
+      "kind": "Input",
+      "old": "modelValue",
+      "new": "modelValue",
+      "description": "Direct binding to the component model, backed by its existing value accessor."
+    },
+    {
+      "component": "DateTimePickerComponent",
+      "file": "component/date-time-picker/date-time-picker.component.ts",
+      "kind": "Input",
+      "old": "errorMessage",
+      "new": "errorMessage",
+      "description": "Error message displayed for validation"
+    },
+    {
+      "component": "DateTimePickerComponent",
+      "file": "component/date-time-picker/date-time-picker.component.ts",
+      "kind": "Input",
+      "old": "required",
+      "new": "required",
+      "description": "Marks this control as required in its existing template; parent-form validators remain separately configured."
+    },
+    {
+      "component": "DateTimePickerComponent",
+      "file": "component/date-time-picker/date-time-picker.component.ts",
+      "kind": "Input",
+      "old": "textFieldName",
+      "new": "fieldName",
+      "description": "Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved."
+    },
+    {
+      "component": "DateTimePickerComponent",
+      "file": "component/date-time-picker/date-time-picker.component.ts",
+      "kind": "Input",
+      "old": "placeholder",
+      "new": "placeholder",
+      "description": "Hint text or translation key displayed while the control is empty."
+    },
+    {
+      "component": "DateTimePickerComponent",
+      "file": "component/date-time-picker/date-time-picker.component.ts",
+      "kind": "Input",
+      "old": "readonly",
+      "new": "readonly",
+      "description": "Requests the existing read-only behavior without disabling the parent form control."
+    },
+    {
+      "component": "DateTimePickerComponent",
+      "file": "component/date-time-picker/date-time-picker.component.ts",
+      "kind": "Input",
+      "old": "autoPopulateDateTime",
+      "new": "autoPopulateDateTime",
+      "description": "Automatically populate current date-time"
+    },
+    {
+      "component": "DateTimePickerComponent",
+      "file": "component/date-time-picker/date-time-picker.component.ts",
+      "kind": "Input",
+      "old": "minDate",
+      "new": "minDate",
+      "description": "Minimum selectable date-time"
+    },
+    {
+      "component": "DateTimePickerComponent",
+      "file": "component/date-time-picker/date-time-picker.component.ts",
+      "kind": "Input",
+      "old": "maxDate",
+      "new": "maxDate",
+      "description": "Maximum selectable date-time"
+    },
+    {
+      "component": "DateTimePickerComponent",
+      "file": "component/date-time-picker/date-time-picker.component.ts",
+      "kind": "Output",
+      "old": "onDateChange",
+      "new": "dateChange",
+      "description": "Emits when the date-selection handler runs."
+    },
+    {
+      "component": "DateTimePickerComponent",
+      "file": "component/date-time-picker/date-time-picker.component.ts",
+      "kind": "Output",
+      "old": "onModelChange",
+      "new": "modelChange",
+      "description": "Emits when the component model-change handler runs."
+    },
+    {
+      "component": "DateTimePickerComponent",
+      "file": "component/date-time-picker/date-time-picker.component.ts",
+      "kind": "Output",
+      "old": "onChange",
+      "new": "changeCommitted",
+      "description": "Emits from the existing change handler."
+    },
+    {
+      "component": "DateTimePickerComponent",
+      "file": "component/date-time-picker/date-time-picker.component.ts",
+      "kind": "Output",
+      "old": "onInputChange",
+      "new": "inputChanged",
+      "description": "Emits from the existing input/change handler."
+    },
+    {
+      "component": "DateTimePickerComponent",
+      "file": "component/date-time-picker/date-time-picker.component.ts",
+      "kind": "Output",
+      "old": "onFocusChange",
+      "new": "focusGained",
+      "description": "Emits when the inner field gains focus."
+    },
+    {
+      "component": "DateTimePickerComponent",
+      "file": "component/date-time-picker/date-time-picker.component.ts",
+      "kind": "Output",
+      "old": "onBlurChange",
+      "new": "focusLost",
+      "description": "Emits when the inner field loses focus."
+    },
+    {
+      "component": "DateTimePickerComponent",
+      "file": "component/date-time-picker/date-time-picker.component.ts",
+      "kind": "Output",
+      "old": "onKeydownHandle",
+      "new": "keyPressed",
+      "description": "Emits on the inner field keydown event."
+    },
+    {
+      "component": "DateTimePickerComponent",
+      "file": "component/date-time-picker/date-time-picker.component.ts",
+      "kind": "Output",
+      "old": "onKeyupHandle",
+      "new": "keyReleased",
+      "description": "Emits on the inner field keyup event."
+    },
+    {
+      "component": "DateTimePickerComponent",
+      "file": "component/date-time-picker/date-time-picker.component.ts",
+      "kind": "Output",
+      "old": "onKeyEnterHandle",
+      "new": "enterPressed",
+      "description": "Reserved output retained for API compatibility. No emission site exists in the supplied implementation."
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Input",
+      "old": "preventCopyPasteCut",
+      "new": "preventCopyPasteCut",
+      "description": "Clipboard restriction flag retained with its current wiring. The local uiPreventClipboard directive blocks copy, cut, and paste when true."
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Input",
+      "old": "inputId",
+      "new": "inputId",
+      "description": "Identifier assigned to the inner control; combined with idPrefix when supplied."
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Input",
+      "old": "tooltip",
+      "new": "tooltip",
+      "description": "Tooltip text displayed on hover"
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Input",
+      "old": "label",
+      "new": "label",
+      "description": "Label text or translation key displayed for this control."
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Input",
+      "old": "modelValue",
+      "new": "modelValue",
+      "description": "Direct binding to the component model, backed by its existing value accessor."
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Input",
+      "old": "errorMessage",
+      "new": "errorMessage",
+      "description": "Error message displayed when validation fails"
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Input",
+      "old": "required",
+      "new": "required",
+      "description": "Marks this control as required in its existing template; parent-form validators remain separately configured."
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Input",
+      "old": "textFieldName",
+      "new": "fieldName",
+      "description": "Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved."
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Input",
+      "old": "placeholder",
+      "new": "placeholder",
+      "description": "Hint text or translation key displayed while the control is empty."
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Input",
+      "old": "readonly",
+      "new": "readonly",
+      "description": "Requests the existing read-only behavior without disabling the parent form control."
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Input",
+      "old": "inputType",
+      "new": "inputType",
+      "description": "Defines input behavior: number or percentage"
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Input",
+      "old": "textAlign",
+      "new": "textAlign",
+      "description": "Text alignment inside the input: 'left' | 'right' | 'center' (defaults to 'left')"
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Input",
+      "old": "maxDigits",
+      "new": "maxDigits",
+      "description": "Maximum allowed digits"
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Input",
+      "old": "minValue",
+      "new": "minValue",
+      "description": "Minimum allowed numeric value"
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Input",
+      "old": "maxValue",
+      "new": "maxValue",
+      "description": "Maximum allowed numeric value"
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Input",
+      "old": "allowDecimal",
+      "new": "allowDecimal",
+      "description": "Allows decimal values when true"
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Input",
+      "old": "decimalPlaces",
+      "new": "decimalPlaces",
+      "description": "Maximum number of decimal places allowed"
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Input",
+      "old": "allowNegative",
+      "new": "allowNegative",
+      "description": "Allows negative numbers when true"
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Input",
+      "old": "prefix",
+      "new": "prefix",
+      "description": "Text displayed before the input value (e.g. '$', '+91', 'kg')."
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Input",
+      "old": "showPrefix",
+      "new": "showPrefix",
+      "description": "Controls whether the prefix is rendered. Set to `true` only when the prefix should be visible."
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Input",
+      "old": "postfix",
+      "new": "suffix",
+      "description": "Text displayed after the input, such as a unit or percentage sign."
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Input",
+      "old": "showPostfix",
+      "new": "showSuffix",
+      "description": "Controls whether the suffix is rendered."
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Output",
+      "old": "onModelChange",
+      "new": "modelChange",
+      "description": "Emits when the component model-change handler runs."
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Output",
+      "old": "onInputChange",
+      "new": "inputChanged",
+      "description": "Emits from the existing input/change handler."
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Output",
+      "old": "onFocusChange",
+      "new": "focusGained",
+      "description": "Emits when the inner field gains focus."
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Output",
+      "old": "onBlurChange",
+      "new": "focusLost",
+      "description": "Emits when the inner field loses focus."
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Output",
+      "old": "onKeydownHandle",
+      "new": "keyPressed",
+      "description": "Emits on the inner field keydown event."
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Output",
+      "old": "onKeyupHandle",
+      "new": "keyReleased",
+      "description": "Emits on the inner field keyup event."
+    },
+    {
+      "component": "NumberInputComponent",
+      "file": "component/number-input/number-input.component.ts",
+      "kind": "Output",
+      "old": "onKeyEnterHandle",
+      "new": "enterPressed",
+      "description": "Emits when Enter is released in the inner field."
+    },
+    {
+      "component": "PasswordInputComponent",
+      "file": "component/password-input/password-input.component.ts",
+      "kind": "Input",
+      "old": "preventCopyPasteCut",
+      "new": "preventCopyPasteCut",
+      "description": "Clipboard restriction flag retained with its current wiring. The local uiPreventClipboard directive blocks copy, cut, and paste when true."
+    },
+    {
+      "component": "PasswordInputComponent",
+      "file": "component/password-input/password-input.component.ts",
+      "kind": "Input",
+      "old": "inputId",
+      "new": "inputId",
+      "description": "Identifier assigned to the inner control; combined with idPrefix when supplied."
+    },
+    {
+      "component": "PasswordInputComponent",
+      "file": "component/password-input/password-input.component.ts",
+      "kind": "Input",
+      "old": "label",
+      "new": "label",
+      "description": "Label text or translation key displayed for this control."
+    },
+    {
+      "component": "PasswordInputComponent",
+      "file": "component/password-input/password-input.component.ts",
+      "kind": "Input",
+      "old": "modelValue",
+      "new": "modelValue",
+      "description": "Direct binding to the component model, backed by its existing value accessor."
+    },
+    {
+      "component": "PasswordInputComponent",
+      "file": "component/password-input/password-input.component.ts",
+      "kind": "Input",
+      "old": "errorMessage",
+      "new": "errorMessage",
+      "description": "Error message shown when validation fails"
+    },
+    {
+      "component": "PasswordInputComponent",
+      "file": "component/password-input/password-input.component.ts",
+      "kind": "Input",
+      "old": "required",
+      "new": "required",
+      "description": "Marks this control as required in its existing template; parent-form validators remain separately configured."
+    },
+    {
+      "component": "PasswordInputComponent",
+      "file": "component/password-input/password-input.component.ts",
+      "kind": "Input",
+      "old": "textFieldName",
+      "new": "fieldName",
+      "description": "Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved."
+    },
+    {
+      "component": "PasswordInputComponent",
+      "file": "component/password-input/password-input.component.ts",
+      "kind": "Input",
+      "old": "placeholder",
+      "new": "placeholder",
+      "description": "Hint text or translation key displayed while the control is empty."
+    },
+    {
+      "component": "PasswordInputComponent",
+      "file": "component/password-input/password-input.component.ts",
+      "kind": "Input",
+      "old": "readonly",
+      "new": "readonly",
+      "description": "Requests the existing read-only behavior without disabling the parent form control."
+    },
+    {
+      "component": "PasswordInputComponent",
+      "file": "component/password-input/password-input.component.ts",
+      "kind": "Input",
+      "old": "appToArabic",
+      "new": "enableArabicInput",
+      "description": "Passes the Arabic typing flag to the existing utility directive."
+    },
+    {
+      "component": "PasswordInputComponent",
+      "file": "component/password-input/password-input.component.ts",
+      "kind": "Output",
+      "old": "onModelChange",
+      "new": "modelChange",
+      "description": "Emits when the component model-change handler runs."
+    },
+    {
+      "component": "PasswordInputComponent",
+      "file": "component/password-input/password-input.component.ts",
+      "kind": "Output",
+      "old": "onInputChange",
+      "new": "inputChanged",
+      "description": "Emits from the existing input/change handler."
+    },
+    {
+      "component": "PasswordInputComponent",
+      "file": "component/password-input/password-input.component.ts",
+      "kind": "Output",
+      "old": "onFocusChange",
+      "new": "focusGained",
+      "description": "Emits when the inner field gains focus."
+    },
+    {
+      "component": "PasswordInputComponent",
+      "file": "component/password-input/password-input.component.ts",
+      "kind": "Output",
+      "old": "onBlurChange",
+      "new": "focusLost",
+      "description": "Emits when the inner field loses focus."
+    },
+    {
+      "component": "PasswordInputComponent",
+      "file": "component/password-input/password-input.component.ts",
+      "kind": "Output",
+      "old": "onKeydownHandle",
+      "new": "keyPressed",
+      "description": "Emits on the inner field keydown event."
+    },
+    {
+      "component": "PasswordInputComponent",
+      "file": "component/password-input/password-input.component.ts",
+      "kind": "Output",
+      "old": "onKeyupHandle",
+      "new": "keyReleased",
+      "description": "Emits on the inner field keyup event."
+    },
+    {
+      "component": "PasswordInputComponent",
+      "file": "component/password-input/password-input.component.ts",
+      "kind": "Output",
+      "old": "onKeyEnterHandle",
+      "new": "enterPressed",
+      "description": "Emits when Enter is released in the inner field."
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Input",
+      "old": "preventCopyPasteCut",
+      "new": "preventCopyPasteCut",
+      "description": "Clipboard restriction flag retained with its current wiring. The local uiPreventClipboard directive blocks copy, cut, and paste when true."
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Input",
+      "old": "inputId",
+      "new": "inputId",
+      "description": "Identifier assigned to the inner control; combined with idPrefix when supplied."
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Input",
+      "old": "tooltip",
+      "new": "tooltip",
+      "description": "Tooltip text displayed on hover"
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Input",
+      "old": "label",
+      "new": "label",
+      "description": "Label text or translation key displayed for this control."
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Input",
+      "old": "wordsLimit",
+      "new": "wordsLimit",
+      "description": "Legacy character-limit input bound to maxlength (not a word counter). Retained separately from maxLength; existing precedence is unchanged."
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Input",
+      "old": "modelValue",
+      "new": "modelValue",
+      "description": "Direct binding to the component model, backed by its existing value accessor."
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Input",
+      "old": "errorMessage",
+      "new": "errorMessage",
+      "description": "Validation error message"
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Input",
+      "old": "required",
+      "new": "required",
+      "description": "Marks this control as required in its existing template; parent-form validators remain separately configured."
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Input",
+      "old": "textFieldName",
+      "new": "fieldName",
+      "description": "Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved."
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Input",
+      "old": "placeholder",
+      "new": "placeholder",
+      "description": "Hint text or translation key displayed while the control is empty."
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Input",
+      "old": "readonly",
+      "new": "readonly",
+      "description": "Requests the existing read-only behavior without disabling the parent form control."
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Input",
+      "old": "maxLength",
+      "new": "maxLength",
+      "description": "Maximum number of characters allowed"
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Input",
+      "old": "showToolTip",
+      "new": "showTooltip",
+      "description": "Shows the current input value in the tooltip when enabled."
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Input",
+      "old": "chatGptAttr",
+      "new": "assistantFieldId",
+      "description": "Value written to the existing ChatGptAttr DOM attribute for field discovery."
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Input",
+      "old": "onlyAlphabets",
+      "new": "onlyAlphabets",
+      "description": "Prevents numbers and special special character"
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Input",
+      "old": "appToArabic",
+      "new": "enableArabicInput",
+      "description": "Passes the Arabic typing flag to the existing utility directive."
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Input",
+      "old": "prefix",
+      "new": "prefix",
+      "description": "Text displayed before the input value (e.g. '$', '+91', 'kg')."
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Input",
+      "old": "showPrefix",
+      "new": "showPrefix",
+      "description": "Controls whether the prefix is rendered. Set to `true` only when the prefix should be visible."
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Input",
+      "old": "postfix",
+      "new": "suffix",
+      "description": "Text displayed after the input, such as a unit or percentage sign."
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Input",
+      "old": "showPostfix",
+      "new": "showSuffix",
+      "description": "Controls whether the suffix is rendered."
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Output",
+      "old": "onModelChange",
+      "new": "modelChange",
+      "description": "Emits when the component model-change handler runs."
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Output",
+      "old": "onInputChange",
+      "new": "inputChanged",
+      "description": "Emits from the existing input/change handler."
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Output",
+      "old": "onFocusChange",
+      "new": "focusGained",
+      "description": "Emits when the inner field gains focus."
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Output",
+      "old": "onBlurChange",
+      "new": "focusLost",
+      "description": "Emits when the inner field loses focus."
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Output",
+      "old": "onKeydownHandle",
+      "new": "keyPressed",
+      "description": "Emits on the inner field keydown event."
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Output",
+      "old": "onKeyupHandle",
+      "new": "keyReleased",
+      "description": "Emits on the inner field keyup event."
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Output",
+      "old": "onKeyEnterHandle",
+      "new": "enterPressed",
+      "description": "Emits when Enter is released in the inner field."
+    },
+    {
+      "component": "TextInputComponent",
+      "file": "component/text-input/text-input.component.ts",
+      "kind": "Output",
+      "old": "onInputClickHandle",
+      "new": "inputClicked",
+      "description": "Emits when the inner input is clicked."
+    },
+    {
+      "component": "FileUploadComponent",
+      "file": "component/file-upload/file-upload.component.ts",
+      "kind": "Input",
+      "old": "inputId",
+      "new": "inputId",
+      "description": "Identifier assigned to the inner control; combined with idPrefix when supplied."
+    },
+    {
+      "component": "FileUploadComponent",
+      "file": "component/file-upload/file-upload.component.ts",
+      "kind": "Input",
+      "old": "label",
+      "new": "label",
+      "description": "Label text or translation key displayed for this control."
+    },
+    {
+      "component": "FileUploadComponent",
+      "file": "component/file-upload/file-upload.component.ts",
+      "kind": "Input",
+      "old": "placeholder",
+      "new": "placeholder",
+      "description": "Hint text or translation key displayed while the control is empty."
+    },
+    {
+      "component": "FileUploadComponent",
+      "file": "component/file-upload/file-upload.component.ts",
+      "kind": "Input",
+      "old": "errorMessage",
+      "new": "errorMessage",
+      "description": "Validation error message for empty/required fields"
+    },
+    {
+      "component": "FileUploadComponent",
+      "file": "component/file-upload/file-upload.component.ts",
+      "kind": "Input",
+      "old": "required",
+      "new": "required",
+      "description": "Marks this control as required in its existing template; parent-form validators remain separately configured."
+    },
+    {
+      "component": "FileUploadComponent",
+      "file": "component/file-upload/file-upload.component.ts",
+      "kind": "Input",
+      "old": "accept",
+      "new": "accept",
+      "description": "File types allowed (e.g. '.csv, .xlsx', 'image/*', '.pdf')"
+    },
+    {
+      "component": "FileUploadComponent",
+      "file": "component/file-upload/file-upload.component.ts",
+      "kind": "Input",
+      "old": "showClearIcon",
+      "new": "showClearIcon",
+      "description": "Shows the clear button when a file is selected"
+    },
+    {
+      "component": "FileUploadComponent",
+      "file": "component/file-upload/file-upload.component.ts",
+      "kind": "Input",
+      "old": "textFieldName",
+      "new": "fieldName",
+      "description": "Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved."
+    },
+    {
+      "component": "FileUploadComponent",
+      "file": "component/file-upload/file-upload.component.ts",
+      "kind": "Input",
+      "old": "showFileDragDrop",
+      "new": "showDropZone",
+      "description": "Uses the existing drag/drop presentation with multiple file selection; false uses the single-file browse presentation."
+    },
+    {
+      "component": "FileUploadComponent",
+      "file": "component/file-upload/file-upload.component.ts",
+      "kind": "Output",
+      "old": "onFileSelect",
+      "new": "fileSelected",
+      "description": "Emits after selected files pass the configured extension/MIME checks."
+    },
+    {
+      "component": "FileUploadComponent",
+      "file": "component/file-upload/file-upload.component.ts",
+      "kind": "Output",
+      "old": "onClear",
+      "new": "cleared",
+      "description": "Emits after the selected file is cleared."
+    },
+    {
+      "component": "FileUploadComponent",
+      "file": "component/file-upload/file-upload.component.ts",
+      "kind": "Output",
+      "old": "onValidationError",
+      "new": "validationError",
+      "description": "Emits the validation message when a selected file fails the configured format check."
+    },
+    {
+      "component": "ActionMenuComponent",
+      "file": "component/action-menu/action-menu.component.ts",
+      "kind": "Input",
+      "old": "menuTitle",
+      "new": "menuTitle",
+      "description": "Optional heading displayed in the action menu."
+    },
+    {
+      "component": "ActionMenuComponent",
+      "file": "component/action-menu/action-menu.component.ts",
+      "kind": "Input",
+      "old": "menuItems",
+      "new": "menuItems",
+      "description": "Menu entries rendered by the action menu; disabled entries are not emitted on click."
+    },
+    {
+      "component": "ActionMenuComponent",
+      "file": "component/action-menu/action-menu.component.ts",
+      "kind": "Input",
+      "old": "rowData",
+      "new": "rowData",
+      "description": "Consumer context attached to the emitted menu item as rowData."
+    },
+    {
+      "component": "ActionMenuComponent",
+      "file": "component/action-menu/action-menu.component.ts",
+      "kind": "Output",
+      "old": "menuItemClick",
+      "new": "menuItemSelected",
+      "description": "Emits the enabled menu item with rowData attached."
+    },
+    {
+      "component": "ActionMenuComponent",
+      "file": "component/action-menu/action-menu.component.ts",
+      "kind": "Output",
+      "old": "closed",
+      "new": "closed",
+      "description": "Emits when the action menu closes."
+    },
+    {
+      "component": "ActionMenuComponent",
+      "file": "component/action-menu/action-menu.component.ts",
+      "kind": "Input",
+      "old": "customPanelClass",
+      "new": "panelClass",
+      "description": "Additional CSS class or classes applied to the existing overlay panel."
+    },
+    {
+      "component": "PdfViewerComponent",
+      "file": "component/pdf-viewer/pdf-viewer.component.ts",
+      "kind": "Input",
+      "old": "pdfUrl",
+      "new": "pdfUrl",
+      "description": "Resource URL embedded in the viewer. The current implementation trusts this URL; callers must supply a trusted source."
+    },
+    {
+      "component": "RadioButtonComponent",
+      "file": "component/radio-button/radio-button.component.ts",
+      "kind": "Input",
+      "old": "inputId",
+      "new": "inputId",
+      "description": "Identifier assigned to the inner control; combined with idPrefix when supplied."
+    },
+    {
+      "component": "RadioButtonComponent",
+      "file": "component/radio-button/radio-button.component.ts",
+      "kind": "Input",
+      "old": "label",
+      "new": "label",
+      "description": "Label text or translation key displayed for this control."
+    },
+    {
+      "component": "RadioButtonComponent",
+      "file": "component/radio-button/radio-button.component.ts",
+      "kind": "Input",
+      "old": "displayLabelKey",
+      "new": "labelKey",
+      "description": "Property name read from an option object to obtain its visible label."
+    },
+    {
+      "component": "RadioButtonComponent",
+      "file": "component/radio-button/radio-button.component.ts",
+      "kind": "Input",
+      "old": "radioButtonsList",
+      "new": "options",
+      "description": "Options rendered by the control; use the label/value key inputs for object options."
+    },
+    {
+      "component": "RadioButtonComponent",
+      "file": "component/radio-button/radio-button.component.ts",
+      "kind": "Input",
+      "old": "errorMessage",
+      "new": "errorMessage",
+      "description": "Error message displayed on validation failure"
+    },
+    {
+      "component": "RadioButtonComponent",
+      "file": "component/radio-button/radio-button.component.ts",
+      "kind": "Input",
+      "old": "required",
+      "new": "required",
+      "description": "Marks this control as required in its existing template; parent-form validators remain separately configured."
+    },
+    {
+      "component": "RadioButtonComponent",
+      "file": "component/radio-button/radio-button.component.ts",
+      "kind": "Input",
+      "old": "textFieldName",
+      "new": "fieldName",
+      "description": "Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved."
+    },
+    {
+      "component": "RadioButtonComponent",
+      "file": "component/radio-button/radio-button.component.ts",
+      "kind": "Input",
+      "old": "idKey",
+      "new": "valueKey",
+      "description": "Property name used to identify or extract an option value."
+    },
+    {
+      "component": "RadioButtonComponent",
+      "file": "component/radio-button/radio-button.component.ts",
+      "kind": "Output",
+      "old": "onModelChange",
+      "new": "modelChange",
+      "description": "Emits when the component model-change handler runs."
+    },
+    {
+      "component": "RadioButtonComponent",
+      "file": "component/radio-button/radio-button.component.ts",
+      "kind": "Output",
+      "old": "onInputChange",
+      "new": "inputChanged",
+      "description": "Emits from the existing input/change handler."
+    },
+    {
+      "component": "RadioButtonComponent",
+      "file": "component/radio-button/radio-button.component.ts",
+      "kind": "Input",
+      "old": "modelValue",
+      "new": "modelValue",
+      "description": "Direct binding to the component model, backed by its existing value accessor."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Input",
+      "old": "preventCopyPasteCut",
+      "new": "preventCopyPasteCut",
+      "description": "Clipboard restriction flag retained with its current wiring. The local uiPreventClipboard directive blocks copy, cut, and paste when true."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Input",
+      "old": "idPrefix",
+      "new": "idPrefix",
+      "description": "Optional namespace prepended to inner control IDs to distinguish repeated instances."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Input",
+      "old": "inputId",
+      "new": "inputId",
+      "description": "Identifier assigned to the inner control; combined with idPrefix when supplied."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Input",
+      "old": "tooltip",
+      "new": "tooltip",
+      "description": "Tooltip text displayed on hover"
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Input",
+      "old": "searchTextLabel",
+      "new": "searchTextLabel",
+      "description": "Label displayed above the input field"
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Input",
+      "old": "searchSelectLabel",
+      "new": "searchSelectLabel",
+      "description": "Label displayed above the dropdown"
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Input",
+      "old": "wordsLimit",
+      "new": "wordsLimit",
+      "description": "Legacy character-limit input bound to maxlength (not a word counter). Retained separately from maxLength; existing precedence is unchanged."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Input",
+      "old": "disabled",
+      "new": "disabled",
+      "description": "Disables the control. Angular Forms can also update this state through setDisabledState."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Input",
+      "old": "textFieldName",
+      "new": "fieldName",
+      "description": "Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Input",
+      "old": "placeholder",
+      "new": "placeholder",
+      "description": "Hint text or translation key displayed while the control is empty."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Input",
+      "old": "readonly",
+      "new": "readonly",
+      "description": "Requests the existing read-only behavior without disabling the parent form control."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Input",
+      "old": "maxLength",
+      "new": "maxLength",
+      "description": "Maximum number of characters allowed"
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Input",
+      "old": "inputType",
+      "new": "inputType",
+      "description": "Defines input behavior: number or percentage"
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Input",
+      "old": "errorMessage",
+      "new": "errorMessage",
+      "description": "Error message displayed when validation fails"
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Input",
+      "old": "required",
+      "new": "required",
+      "description": "Marks this control as required in its existing template; parent-form validators remain separately configured."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Input",
+      "old": "searchBtnToolTip",
+      "new": "searchButtonTooltip",
+      "description": "Tooltip text or translation key for the search button."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Input",
+      "old": "selectPlaceholder",
+      "new": "selectPlaceholder",
+      "description": "Placeholder text for select dropdown"
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Input",
+      "old": "selectList",
+      "new": "options",
+      "description": "Options rendered by the control; use the label/value key inputs for object options."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Input",
+      "old": "displayKey",
+      "new": "labelKey",
+      "description": "Property name read from an option object to obtain its visible label."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Input",
+      "old": "idKey",
+      "new": "valueKey",
+      "description": "Property name used to identify or extract an option value."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Input",
+      "old": "showMultiSelect",
+      "new": "multiple",
+      "description": "Enables the existing multiple-selection mode."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Input",
+      "old": "showClearIcon",
+      "new": "showClearIcon",
+      "description": "Show clear icon button in select dropdown"
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Output",
+      "old": "onModelChange",
+      "new": "modelChange",
+      "description": "Emits when the component model-change handler runs."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Output",
+      "old": "onInputChange",
+      "new": "inputChanged",
+      "description": "Emits from the existing input/change handler."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Output",
+      "old": "onFocusChange",
+      "new": "focusGained",
+      "description": "Emits when the inner field gains focus."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Output",
+      "old": "onBlurChange",
+      "new": "focusLost",
+      "description": "Emits when the inner field loses focus."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Output",
+      "old": "onKeydownHandle",
+      "new": "keyPressed",
+      "description": "Emits on the inner field keydown event."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Output",
+      "old": "onKeyupHandle",
+      "new": "keyReleased",
+      "description": "Emits on the inner field keyup event."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Output",
+      "old": "onKeyEnterHandle",
+      "new": "enterPressed",
+      "description": "Emits when Enter is released in the inner field."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Output",
+      "old": "onInputClickHandle",
+      "new": "inputClicked",
+      "description": "Emits when the inner input is clicked."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Output",
+      "old": "onSearchClickHandle",
+      "new": "searchClicked",
+      "description": "Emits when the search action is activated."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Output",
+      "old": "onselectionChange",
+      "new": "selectionChange",
+      "description": "Emits when the selection handler processes a selection."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Output",
+      "old": "onOpenedChange",
+      "new": "panelOpenChange",
+      "description": "Emits when the select panel open state changes."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Output",
+      "old": "onOpened",
+      "new": "panelOpened",
+      "description": "Emits when the select panel opens."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Output",
+      "old": "onClosed",
+      "new": "panelClosed",
+      "description": "Emits when the select panel closes."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Output",
+      "old": "onBlur",
+      "new": "blurred",
+      "description": "Emits when the control loses focus."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Output",
+      "old": "onOptionClick",
+      "new": "optionClicked",
+      "description": "Emits when an option is clicked."
+    },
+    {
+      "component": "SearchFilterComponent",
+      "file": "component/search-filter/search-filter.component.ts",
+      "kind": "Output",
+      "old": "onOptionSelectionChange",
+      "new": "optionSelectionChanged",
+      "description": "Emits when the existing option-selection handler runs."
+    },
+    {
+      "component": "SearchInputComponent",
+      "file": "component/search-input/search-input.component.ts",
+      "kind": "Input",
+      "old": "preventCopyPasteCut",
+      "new": "preventCopyPasteCut",
+      "description": "Clipboard restriction flag retained with its current wiring. The local uiPreventClipboard directive blocks copy, cut, and paste when true."
+    },
+    {
+      "component": "SearchInputComponent",
+      "file": "component/search-input/search-input.component.ts",
+      "kind": "Input",
+      "old": "inputId",
+      "new": "inputId",
+      "description": "Identifier assigned to the inner control; combined with idPrefix when supplied."
+    },
+    {
+      "component": "SearchInputComponent",
+      "file": "component/search-input/search-input.component.ts",
+      "kind": "Input",
+      "old": "tooltip",
+      "new": "tooltip",
+      "description": "Tooltip text displayed on hover"
+    },
+    {
+      "component": "SearchInputComponent",
+      "file": "component/search-input/search-input.component.ts",
+      "kind": "Input",
+      "old": "label",
+      "new": "label",
+      "description": "Label text or translation key displayed for this control."
+    },
+    {
+      "component": "SearchInputComponent",
+      "file": "component/search-input/search-input.component.ts",
+      "kind": "Input",
+      "old": "wordsLimit",
+      "new": "wordsLimit",
+      "description": "Legacy character-limit input bound to maxlength (not a word counter). Retained separately from maxLength; existing precedence is unchanged."
+    },
+    {
+      "component": "SearchInputComponent",
+      "file": "component/search-input/search-input.component.ts",
+      "kind": "Input",
+      "old": "modelValue",
+      "new": "modelValue",
+      "description": "Direct binding to the component model, backed by its existing value accessor."
+    },
+    {
+      "component": "SearchInputComponent",
+      "file": "component/search-input/search-input.component.ts",
+      "kind": "Input",
+      "old": "disableSearch",
+      "new": "searchDisabled",
+      "description": "Disables the search text input independently of the search button."
+    },
+    {
+      "component": "SearchInputComponent",
+      "file": "component/search-input/search-input.component.ts",
+      "kind": "Input",
+      "old": "disableIcon",
+      "new": "searchButtonDisabled",
+      "description": "Disables the search action button independently of the text input."
+    },
+    {
+      "component": "SearchInputComponent",
+      "file": "component/search-input/search-input.component.ts",
+      "kind": "Input",
+      "old": "textFieldName",
+      "new": "fieldName",
+      "description": "Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved."
+    },
+    {
+      "component": "SearchInputComponent",
+      "file": "component/search-input/search-input.component.ts",
+      "kind": "Input",
+      "old": "placeholder",
+      "new": "placeholder",
+      "description": "Hint text or translation key displayed while the control is empty."
+    },
+    {
+      "component": "SearchInputComponent",
+      "file": "component/search-input/search-input.component.ts",
+      "kind": "Input",
+      "old": "readonly",
+      "new": "readonly",
+      "description": "Requests the existing read-only behavior without disabling the parent form control."
+    },
+    {
+      "component": "SearchInputComponent",
+      "file": "component/search-input/search-input.component.ts",
+      "kind": "Input",
+      "old": "maxLength",
+      "new": "maxLength",
+      "description": "Maximum number of characters allowed"
+    },
+    {
+      "component": "SearchInputComponent",
+      "file": "component/search-input/search-input.component.ts",
+      "kind": "Input",
+      "old": "searchButtonPosition",
+      "new": "searchButtonPosition",
+      "description": "Determines where the search button is rendered relative to the input"
+    },
+    {
+      "component": "SearchInputComponent",
+      "file": "component/search-input/search-input.component.ts",
+      "kind": "Input",
+      "old": "inputType",
+      "new": "inputType",
+      "description": "Defines input behavior: number or percentage"
+    },
+    {
+      "component": "SearchInputComponent",
+      "file": "component/search-input/search-input.component.ts",
+      "kind": "Input",
+      "old": "errorMessage",
+      "new": "errorMessage",
+      "description": "Error message displayed when validation fails"
+    },
+    {
+      "component": "SearchInputComponent",
+      "file": "component/search-input/search-input.component.ts",
+      "kind": "Input",
+      "old": "required",
+      "new": "required",
+      "description": "Marks this control as required in its existing template; parent-form validators remain separately configured."
+    },
+    {
+      "component": "SearchInputComponent",
+      "file": "component/search-input/search-input.component.ts",
+      "kind": "Input",
+      "old": "searchBtnToolTip",
+      "new": "searchButtonTooltip",
+      "description": "Tooltip text or translation key for the search button."
+    },
+    {
+      "component": "SearchInputComponent",
+      "file": "component/search-input/search-input.component.ts",
+      "kind": "Output",
+      "old": "onModelChange",
+      "new": "modelChange",
+      "description": "Emits when the component model-change handler runs."
+    },
+    {
+      "component": "SearchInputComponent",
+      "file": "component/search-input/search-input.component.ts",
+      "kind": "Output",
+      "old": "onInputChange",
+      "new": "inputChanged",
+      "description": "Emits from the existing input/change handler."
+    },
+    {
+      "component": "SearchInputComponent",
+      "file": "component/search-input/search-input.component.ts",
+      "kind": "Output",
+      "old": "onFocusChange",
+      "new": "focusGained",
+      "description": "Emits when the inner field gains focus."
+    },
+    {
+      "component": "SearchInputComponent",
+      "file": "component/search-input/search-input.component.ts",
+      "kind": "Output",
+      "old": "onBlurChange",
+      "new": "focusLost",
+      "description": "Emits when the inner field loses focus."
+    },
+    {
+      "component": "SearchInputComponent",
+      "file": "component/search-input/search-input.component.ts",
+      "kind": "Output",
+      "old": "onKeydownHandle",
+      "new": "keyPressed",
+      "description": "Emits on the inner field keydown event."
+    },
+    {
+      "component": "SearchInputComponent",
+      "file": "component/search-input/search-input.component.ts",
+      "kind": "Output",
+      "old": "onKeyupHandle",
+      "new": "keyReleased",
+      "description": "Emits on the inner field keyup event."
+    },
+    {
+      "component": "SearchInputComponent",
+      "file": "component/search-input/search-input.component.ts",
+      "kind": "Output",
+      "old": "onKeyEnterHandle",
+      "new": "enterPressed",
+      "description": "Emits when Enter is released in the inner field."
+    },
+    {
+      "component": "SearchInputComponent",
+      "file": "component/search-input/search-input.component.ts",
+      "kind": "Output",
+      "old": "onInputClickHandle",
+      "new": "inputClicked",
+      "description": "Emits when the inner input is clicked."
+    },
+    {
+      "component": "SearchInputComponent",
+      "file": "component/search-input/search-input.component.ts",
+      "kind": "Output",
+      "old": "onSearchClickHandle",
+      "new": "searchClicked",
+      "description": "Emits when the search action is activated."
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "itemSize",
+      "new": "itemSize",
+      "description": "Height in pixels of each option for virtual scrolling (defaults to 36px)"
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "preventCopyPasteCut",
+      "new": "preventCopyPasteCut",
+      "description": "Clipboard restriction flag retained with its current wiring. The local uiPreventClipboard directive blocks copy, cut, and paste when true."
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "inputId",
+      "new": "inputId",
+      "description": "Identifier assigned to the inner control; combined with idPrefix when supplied."
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "label",
+      "new": "label",
+      "description": "Label text or translation key displayed for this control."
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "showSearch",
+      "new": "showSearch",
+      "description": "Enable the search in the option"
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "errorMessage",
+      "new": "errorMessage",
+      "description": "Error message shown when validation fails"
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "required",
+      "new": "required",
+      "description": "Marks this control as required in its existing template; parent-form validators remain separately configured."
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "textFieldName",
+      "new": "fieldName",
+      "description": "Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved."
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "selectPlaceholder",
+      "new": "selectPlaceholder",
+      "description": "Placeholder text for the select field"
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "searchPlaceholder",
+      "new": "searchPlaceholder",
+      "description": "Placeholder text for search input"
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "readonly",
+      "new": "readonly",
+      "description": "Requests the existing read-only behavior without disabling the parent form control."
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "isMultiSelect",
+      "new": "isMultiSelect",
+      "description": "Enables multi-select behavior"
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "showToggleAllCheckbox",
+      "new": "showToggleAllCheckbox",
+      "description": "Displays \"Select All\" checkbox"
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "noEntriesFoundLabel",
+      "new": "noEntriesFoundLabel",
+      "description": "Label shown when no entries are found"
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "toggleAllCheckboxTooltipMessage",
+      "new": "toggleAllCheckboxTooltipMessage",
+      "description": "Tooltip message for select-all checkbox"
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "showSearchCheckBox",
+      "new": "showSearchCheckbox",
+      "description": "Shows checkbox in search area"
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "showMultiSelect",
+      "new": "multiple",
+      "description": "Enables the existing multiple-selection mode."
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "selectList",
+      "new": "options",
+      "description": "Options rendered by the control; use the label/value key inputs for object options."
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "displayKey",
+      "new": "labelKey",
+      "description": "Property name read from an option object to obtain its visible label."
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "idKey",
+      "new": "valueKey",
+      "description": "Property name used to identify or extract an option value."
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "hiddenKey",
+      "new": "hiddenKey",
+      "description": "Key in option object used to determine if the option should be hidden from dropdown. Defaults to 'isHidden'."
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "serverSideSearch",
+      "new": "serverSideSearch",
+      "description": "Enables server-side/external search by bypassing local pipe filtering"
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "modelValue",
+      "new": "modelValue",
+      "description": "Direct binding to the component model, backed by its existing value accessor."
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "isSearchStartsWith",
+      "new": "searchStartsWith",
+      "description": "Configuration for search starts with."
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "showClearIcon",
+      "new": "showClearIcon",
+      "description": "To clear the selected dropdown list"
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Output",
+      "old": "toggleSelectHandle",
+      "new": "selectAllChange",
+      "description": "Emits when the select-all action runs."
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Output",
+      "old": "onselectionChange",
+      "new": "selectionChange",
+      "description": "Emits when the selection handler processes a selection."
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Output",
+      "old": "onOpenedChange",
+      "new": "panelOpenChange",
+      "description": "Emits when the select panel open state changes."
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Output",
+      "old": "onOpened",
+      "new": "panelOpened",
+      "description": "Emits when the select panel opens."
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Output",
+      "old": "onClosed",
+      "new": "panelClosed",
+      "description": "Emits when the select panel closes."
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Output",
+      "old": "onBlur",
+      "new": "blurred",
+      "description": "Emits when the control loses focus."
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Output",
+      "old": "onOptionClick",
+      "new": "optionClicked",
+      "description": "Emits when an option is clicked."
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Output",
+      "old": "onSearchTextModelChange",
+      "new": "searchTextChange",
+      "description": "Emits the updated search string for consumer filtering."
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "enableAllOption",
+      "new": "enableAllOption",
+      "description": "Key used to map model value to option"
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "hideAllOption",
+      "new": "hideAllOption",
+      "description": "Removes the \"All\" option that is otherwise added automatically in multi-select mode"
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "enableSorting",
+      "new": "enableSorting",
+      "description": "Key used to enable / disable sorting"
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "singleLineOption",
+      "new": "singleLineOption",
+      "description": "Keeps each option on a single line with ellipsis; full text is shown in a tooltip on hover when truncated"
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "sortAscending",
+      "new": "sortAscending",
+      "description": "Defines whether the list should be sorted in ascending order."
+    },
+    {
+      "component": "SearchableSelectComponent",
+      "file": "component/searchable-select/searchable-select.component.ts",
+      "kind": "Input",
+      "old": "sortKey",
+      "new": "sortKey",
+      "description": "Key used to sort the array"
+    },
+    {
+      "component": "SelectionListComponent",
+      "file": "component/selection-list/selection-list.component.ts",
+      "kind": "Input",
+      "old": "inputId",
+      "new": "inputId",
+      "description": "Identifier assigned to the inner control; combined with idPrefix when supplied."
+    },
+    {
+      "component": "SelectionListComponent",
+      "file": "component/selection-list/selection-list.component.ts",
+      "kind": "Input",
+      "old": "tooltip",
+      "new": "tooltip",
+      "description": "Tooltip text displayed on hover"
+    },
+    {
+      "component": "SelectionListComponent",
+      "file": "component/selection-list/selection-list.component.ts",
+      "kind": "Input",
+      "old": "label",
+      "new": "label",
+      "description": "Label text or translation key displayed for this control."
+    },
+    {
+      "component": "SelectionListComponent",
+      "file": "component/selection-list/selection-list.component.ts",
+      "kind": "Input",
+      "old": "errorMessage",
+      "new": "errorMessage",
+      "description": "Error message displayed for validation"
+    },
+    {
+      "component": "SelectionListComponent",
+      "file": "component/selection-list/selection-list.component.ts",
+      "kind": "Input",
+      "old": "required",
+      "new": "required",
+      "description": "Marks this control as required in its existing template; parent-form validators remain separately configured."
+    },
+    {
+      "component": "SelectionListComponent",
+      "file": "component/selection-list/selection-list.component.ts",
+      "kind": "Input",
+      "old": "multiple",
+      "new": "multiple",
+      "description": "Enables the existing multiple-selection mode."
+    },
+    {
+      "component": "SelectionListComponent",
+      "file": "component/selection-list/selection-list.component.ts",
+      "kind": "Input",
+      "old": "selectList",
+      "new": "options",
+      "description": "Options rendered by the control; use the label/value key inputs for object options."
+    },
+    {
+      "component": "SelectionListComponent",
+      "file": "component/selection-list/selection-list.component.ts",
+      "kind": "Input",
+      "old": "displayKey",
+      "new": "labelKey",
+      "description": "Property name read from an option object to obtain its visible label."
+    },
+    {
+      "component": "SelectionListComponent",
+      "file": "component/selection-list/selection-list.component.ts",
+      "kind": "Input",
+      "old": "idKey",
+      "new": "valueKey",
+      "description": "Property name used to identify or extract an option value."
+    },
+    {
+      "component": "SelectionListComponent",
+      "file": "component/selection-list/selection-list.component.ts",
+      "kind": "Input",
+      "old": "textFieldName",
+      "new": "fieldName",
+      "description": "Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved."
+    },
+    {
+      "component": "SelectionListComponent",
+      "file": "component/selection-list/selection-list.component.ts",
+      "kind": "Output",
+      "old": "onSelectionChange",
+      "new": "selectionChange",
+      "description": "Emits when the selection handler processes a selection."
+    },
+    {
+      "component": "SelectionListComponent",
+      "file": "component/selection-list/selection-list.component.ts",
+      "kind": "Output",
+      "old": "onModelChange",
+      "new": "modelChange",
+      "description": "Emits when the component model-change handler runs."
+    },
+    {
+      "component": "SelectionListComponent",
+      "file": "component/selection-list/selection-list.component.ts",
+      "kind": "Input",
+      "old": "modelValue",
+      "new": "modelValue",
+      "description": "Direct binding to the component model, backed by its existing value accessor."
+    },
+    {
+      "component": "SlideToggleComponent",
+      "file": "component/slide-toggle/slide-toggle.component.ts",
+      "kind": "Input",
+      "old": "inputId",
+      "new": "inputId",
+      "description": "Identifier assigned to the inner control; combined with idPrefix when supplied."
+    },
+    {
+      "component": "SlideToggleComponent",
+      "file": "component/slide-toggle/slide-toggle.component.ts",
+      "kind": "Input",
+      "old": "inputModelValue",
+      "new": "inputModelValue",
+      "description": "Two-way bound value for the toggle (true/false)"
+    },
+    {
+      "component": "SlideToggleComponent",
+      "file": "component/slide-toggle/slide-toggle.component.ts",
+      "kind": "Input",
+      "old": "required",
+      "new": "required",
+      "description": "Marks this control as required in its existing template; parent-form validators remain separately configured."
+    },
+    {
+      "component": "SlideToggleComponent",
+      "file": "component/slide-toggle/slide-toggle.component.ts",
+      "kind": "Input",
+      "old": "disableRipple",
+      "new": "disableRipple",
+      "description": "Disable ripple animation effect"
+    },
+    {
+      "component": "SlideToggleComponent",
+      "file": "component/slide-toggle/slide-toggle.component.ts",
+      "kind": "Input",
+      "old": "color",
+      "new": "color",
+      "description": "Theme color: 'primary' | 'accent' | 'warn'"
+    },
+    {
+      "component": "SlideToggleComponent",
+      "file": "component/slide-toggle/slide-toggle.component.ts",
+      "kind": "Input",
+      "old": "labelPosition",
+      "new": "labelPosition",
+      "description": "Label position: 'before' | 'after'"
+    },
+    {
+      "component": "SlideToggleComponent",
+      "file": "component/slide-toggle/slide-toggle.component.ts",
+      "kind": "Input",
+      "old": "label",
+      "new": "label",
+      "description": "Label text or translation key displayed for this control."
+    },
+    {
+      "component": "SlideToggleComponent",
+      "file": "component/slide-toggle/slide-toggle.component.ts",
+      "kind": "Input",
+      "old": "errorMessage",
+      "new": "errorMessage",
+      "description": "Optional error message when required validation fails"
+    },
+    {
+      "component": "SlideToggleComponent",
+      "file": "component/slide-toggle/slide-toggle.component.ts",
+      "kind": "Input",
+      "old": "textFieldName",
+      "new": "fieldName",
+      "description": "Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved."
+    },
+    {
+      "component": "SlideToggleComponent",
+      "file": "component/slide-toggle/slide-toggle.component.ts",
+      "kind": "Input",
+      "old": "preventToggleOnClick",
+      "new": "preventToggleOnClick",
+      "description": "Whether to prevent the slide toggle from changing its value on click"
+    },
+    {
+      "component": "SlideToggleComponent",
+      "file": "component/slide-toggle/slide-toggle.component.ts",
+      "kind": "Output",
+      "old": "onChangeEventHandler",
+      "new": "stateChange",
+      "description": "Emits when a permitted toggle state change is processed."
+    },
+    {
+      "component": "SlideToggleComponent",
+      "file": "component/slide-toggle/slide-toggle.component.ts",
+      "kind": "Output",
+      "old": "toggleChange",
+      "new": "toggleChange",
+      "description": "Emits when a permitted toggle action is processed."
+    },
+    {
+      "component": "SlideToggleComponent",
+      "file": "component/slide-toggle/slide-toggle.component.ts",
+      "kind": "Output",
+      "old": "onClickHandler",
+      "new": "clicked",
+      "description": "Emits when the existing click handler runs."
+    },
+    {
+      "component": "SegmentedControlComponent",
+      "file": "component/segmented-control/segmented-control.component.ts",
+      "kind": "Input",
+      "old": "options",
+      "new": "options",
+      "description": "Options rendered by the control; use the label/value key inputs for object options."
+    },
+    {
+      "component": "SegmentedControlComponent",
+      "file": "component/segmented-control/segmented-control.component.ts",
+      "kind": "Input",
+      "old": "currentValue",
+      "new": "currentValue",
+      "description": "Selected segment value, backed by the shared form value."
+    },
+    {
+      "component": "SegmentedControlComponent",
+      "file": "component/segmented-control/segmented-control.component.ts",
+      "kind": "Input",
+      "old": "size",
+      "new": "size",
+      "description": "Segmented-control size: md or lg."
+    },
+    {
+      "component": "SegmentedControlComponent",
+      "file": "component/segmented-control/segmented-control.component.ts",
+      "kind": "Output",
+      "old": "selectionChange",
+      "new": "selectionChange",
+      "description": "Emits when the selection handler processes a selection."
+    },
+    {
+      "component": "SegmentedControlComponent",
+      "file": "component/segmented-control/segmented-control.component.ts",
+      "kind": "Output",
+      "old": "widthCalculated",
+      "new": "widthCalculated",
+      "description": "Emits measured segment widths in pixels, in option order."
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Input",
+      "old": "inputId",
+      "new": "inputId",
+      "description": "Identifier assigned to the inner control; combined with idPrefix when supplied."
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Input",
+      "old": "resize",
+      "new": "resize",
+      "description": "Enables or disables textarea resize"
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Input",
+      "old": "preventCopyPasteCut",
+      "new": "preventCopyPasteCut",
+      "description": "Clipboard restriction flag retained with its current wiring. The local uiPreventClipboard directive blocks copy, cut, and paste when true."
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Input",
+      "old": "minRow",
+      "new": "minRows",
+      "description": "Minimum visible textarea rows passed to the existing textarea configuration."
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Input",
+      "old": "maxRow",
+      "new": "maxRows",
+      "description": "Maximum textarea rows passed to the existing textarea configuration."
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Input",
+      "old": "numCols",
+      "new": "columns",
+      "description": "Textarea column count passed to the native cols attribute."
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Input",
+      "old": "label",
+      "new": "label",
+      "description": "Label text or translation key displayed for this control."
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Input",
+      "old": "limit",
+      "new": "maxLength",
+      "description": "Maximum allowed characters"
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Input",
+      "old": "displayCharactersStats",
+      "new": "showCharacterCount",
+      "description": "Controls display of the existing character-count indicator."
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Input",
+      "old": "modelValue",
+      "new": "modelValue",
+      "description": "Direct binding to the component model, backed by its existing value accessor."
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Input",
+      "old": "error",
+      "new": "error",
+      "description": "Shows validation error state"
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Input",
+      "old": "required",
+      "new": "required",
+      "description": "Marks this control as required in its existing template; parent-form validators remain separately configured."
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Input",
+      "old": "showRemainingWordsStatus",
+      "new": "showRemainingCharacters",
+      "description": "Shows the remaining-character indicator when the existing focus/limit conditions allow it."
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Input",
+      "old": "textFieldName",
+      "new": "fieldName",
+      "description": "Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved."
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Input",
+      "old": "templateLabel",
+      "new": "templateLabel",
+      "description": "Label used in expandable dialog"
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Input",
+      "old": "placeholder",
+      "new": "placeholder",
+      "description": "Hint text or translation key displayed while the control is empty."
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Input",
+      "old": "readonly",
+      "new": "readonly",
+      "description": "Requests the existing read-only behavior without disabling the parent form control."
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Input",
+      "old": "mentionsList",
+      "new": "mentionsList",
+      "description": "Mention list for @ mentions"
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Input",
+      "old": "mentionConfig",
+      "new": "mentionConfig",
+      "description": "Mention configuration"
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Input",
+      "old": "useAbbreviationHighlight",
+      "new": "useAbbreviationHighlight",
+      "description": "Enables abbreviation highlight textarea"
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Input",
+      "old": "abbreviationList",
+      "new": "abbreviationList",
+      "description": "Allowed abbreviations"
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Input",
+      "old": "appToArabic",
+      "new": "enableArabicInput",
+      "description": "Passes the Arabic typing flag to the existing utility directive."
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Input",
+      "old": "restrictedWords",
+      "new": "restrictedWords",
+      "description": "Restricted words list"
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Input",
+      "old": "yarMentionConfig",
+      "new": "abbreviationMentionConfig",
+      "description": "Optional replacement configuration for abbreviation mentions; null uses the component-built configuration."
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Input",
+      "old": "fieldTrim",
+      "new": "trimOnBlur",
+      "description": "Trims leading and trailing whitespace when the textarea loses focus."
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Input",
+      "old": "chatGptAttr",
+      "new": "assistantFieldId",
+      "description": "Value written to the existing ChatGptAttr DOM attribute for field discovery."
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Output",
+      "old": "inputChangeValue",
+      "new": "valueChanged",
+      "description": "Emits the existing value-change payload; remains separate from modelChange."
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Output",
+      "old": "expandButtonClickcallback",
+      "new": "expandRequested",
+      "description": "Reserved output retained for API compatibility. No emission site exists in the supplied implementation."
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Output",
+      "old": "onInputChange",
+      "new": "inputChanged",
+      "description": "Emits from the existing input/change handler."
+    },
+    {
+      "component": "TextAreaComponent",
+      "file": "component/text-area/text-area.component.ts",
+      "kind": "Output",
+      "old": "itemSelected",
+      "new": "itemSelected",
+      "description": "Emits when an abbreviation is picked from the mention list"
+    },
+    {
+      "component": "RichTextEditorComponent",
+      "file": "component/rich-text-editor/rich-text-editor.component.ts",
+      "kind": "Input",
+      "old": "inputId",
+      "new": "inputId",
+      "description": "Identifier assigned to the inner control; combined with idPrefix when supplied."
+    },
+    {
+      "component": "RichTextEditorComponent",
+      "file": "component/rich-text-editor/rich-text-editor.component.ts",
+      "kind": "Input",
+      "old": "modelValue",
+      "new": "modelValue",
+      "description": "Direct binding to the component model, backed by its existing value accessor."
+    },
+    {
+      "component": "RichTextEditorComponent",
+      "file": "component/rich-text-editor/rich-text-editor.component.ts",
+      "kind": "Input",
+      "old": "removeToolList",
+      "new": "hiddenToolbarItems",
+      "description": "Toolbar item identifiers removed from the editor configuration."
+    },
+    {
+      "component": "RichTextEditorComponent",
+      "file": "component/rich-text-editor/rich-text-editor.component.ts",
+      "kind": "Input",
+      "old": "editorType",
+      "new": "editorType",
+      "description": "Editor type identifier"
+    },
+    {
+      "component": "RichTextEditorComponent",
+      "file": "component/rich-text-editor/rich-text-editor.component.ts",
+      "kind": "Input",
+      "old": "resize",
+      "new": "resize",
+      "description": "Enables or disables resize option"
+    },
+    {
+      "component": "RichTextEditorComponent",
+      "file": "component/rich-text-editor/rich-text-editor.component.ts",
+      "kind": "Input",
+      "old": "preventCopyPasteCut",
+      "new": "preventCopyPasteCut",
+      "description": "Clipboard restriction flag retained with its current wiring. The local uiPreventClipboard directive blocks copy, cut, and paste when true."
+    },
+    {
+      "component": "RichTextEditorComponent",
+      "file": "component/rich-text-editor/rich-text-editor.component.ts",
+      "kind": "Input",
+      "old": "label",
+      "new": "label",
+      "description": "Label text or translation key displayed for this control."
+    },
+    {
+      "component": "RichTextEditorComponent",
+      "file": "component/rich-text-editor/rich-text-editor.component.ts",
+      "kind": "Input",
+      "old": "error",
+      "new": "error",
+      "description": "Displays validation error state"
+    },
+    {
+      "component": "RichTextEditorComponent",
+      "file": "component/rich-text-editor/rich-text-editor.component.ts",
+      "kind": "Input",
+      "old": "required",
+      "new": "required",
+      "description": "Marks this control as required in its existing template; parent-form validators remain separately configured."
+    },
+    {
+      "component": "RichTextEditorComponent",
+      "file": "component/rich-text-editor/rich-text-editor.component.ts",
+      "kind": "Input",
+      "old": "textFieldName",
+      "new": "fieldName",
+      "description": "Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved."
+    },
+    {
+      "component": "RichTextEditorComponent",
+      "file": "component/rich-text-editor/rich-text-editor.component.ts",
+      "kind": "Input",
+      "old": "placeholder",
+      "new": "placeholder",
+      "description": "Hint text or translation key displayed while the control is empty."
+    },
+    {
+      "component": "RichTextEditorComponent",
+      "file": "component/rich-text-editor/rich-text-editor.component.ts",
+      "kind": "Input",
+      "old": "readonly",
+      "new": "readonly",
+      "description": "Requests the existing read-only behavior without disabling the parent form control."
+    },
+    {
+      "component": "RichTextEditorComponent",
+      "file": "component/rich-text-editor/rich-text-editor.component.ts",
+      "kind": "Output",
+      "old": "modelChange",
+      "new": "modelChange",
+      "description": "Emits when the component model-change handler runs."
+    },
+    {
+      "component": "RichTextEditorComponent",
+      "file": "component/rich-text-editor/rich-text-editor.component.ts",
+      "kind": "Output",
+      "old": "onBlur",
+      "new": "blurred",
+      "description": "Emits when the control loses focus."
+    },
+    {
+      "component": "TimePickerComponent",
+      "file": "component/time-picker/time-picker.component.ts",
+      "kind": "Input",
+      "old": "inputId",
+      "new": "inputId",
+      "description": "Identifier assigned to the inner control; combined with idPrefix when supplied."
+    },
+    {
+      "component": "TimePickerComponent",
+      "file": "component/time-picker/time-picker.component.ts",
+      "kind": "Input",
+      "old": "label",
+      "new": "label",
+      "description": "Label text or translation key displayed for this control."
+    },
+    {
+      "component": "TimePickerComponent",
+      "file": "component/time-picker/time-picker.component.ts",
+      "kind": "Input",
+      "old": "modelValue",
+      "new": "modelValue",
+      "description": "Direct binding to the component model, backed by its existing value accessor."
+    },
+    {
+      "component": "TimePickerComponent",
+      "file": "component/time-picker/time-picker.component.ts",
+      "kind": "Input",
+      "old": "errorMessage",
+      "new": "errorMessage",
+      "description": "Validation error message"
+    },
+    {
+      "component": "TimePickerComponent",
+      "file": "component/time-picker/time-picker.component.ts",
+      "kind": "Input",
+      "old": "required",
+      "new": "required",
+      "description": "Marks this control as required in its existing template; parent-form validators remain separately configured."
+    },
+    {
+      "component": "TimePickerComponent",
+      "file": "component/time-picker/time-picker.component.ts",
+      "kind": "Input",
+      "old": "textFieldName",
+      "new": "fieldName",
+      "description": "Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved."
+    },
+    {
+      "component": "TimePickerComponent",
+      "file": "component/time-picker/time-picker.component.ts",
+      "kind": "Input",
+      "old": "placeholder",
+      "new": "placeholder",
+      "description": "Hint text or translation key displayed while the control is empty."
+    },
+    {
+      "component": "TimePickerComponent",
+      "file": "component/time-picker/time-picker.component.ts",
+      "kind": "Input",
+      "old": "readonly",
+      "new": "readonly",
+      "description": "Requests the existing read-only behavior without disabling the parent form control."
+    },
+    {
+      "component": "TimePickerComponent",
+      "file": "component/time-picker/time-picker.component.ts",
+      "kind": "Input",
+      "old": "minTime",
+      "new": "minTime",
+      "description": "Minimum selectable time"
+    },
+    {
+      "component": "TimePickerComponent",
+      "file": "component/time-picker/time-picker.component.ts",
+      "kind": "Input",
+      "old": "maxTime",
+      "new": "maxTime",
+      "description": "Maximum selectable time"
+    },
+    {
+      "component": "TimePickerComponent",
+      "file": "component/time-picker/time-picker.component.ts",
+      "kind": "Output",
+      "old": "onModelChange",
+      "new": "modelChange",
+      "description": "Emits when the component model-change handler runs."
+    },
+    {
+      "component": "TimePickerComponent",
+      "file": "component/time-picker/time-picker.component.ts",
+      "kind": "Output",
+      "old": "onChange",
+      "new": "changeCommitted",
+      "description": "Emits from the existing change handler."
+    },
+    {
+      "component": "TimePickerComponent",
+      "file": "component/time-picker/time-picker.component.ts",
+      "kind": "Output",
+      "old": "onInputChange",
+      "new": "inputChanged",
+      "description": "Emits from the existing input/change handler."
+    },
+    {
+      "component": "TimePickerComponent",
+      "file": "component/time-picker/time-picker.component.ts",
+      "kind": "Output",
+      "old": "onFocusChange",
+      "new": "focusGained",
+      "description": "Emits when the inner field gains focus."
+    },
+    {
+      "component": "TimePickerComponent",
+      "file": "component/time-picker/time-picker.component.ts",
+      "kind": "Output",
+      "old": "onBlurChange",
+      "new": "focusLost",
+      "description": "Emits when the inner field loses focus."
+    },
+    {
+      "component": "TimePickerComponent",
+      "file": "component/time-picker/time-picker.component.ts",
+      "kind": "Output",
+      "old": "onKeydownHandle",
+      "new": "keyPressed",
+      "description": "Emits on the inner field keydown event."
+    },
+    {
+      "component": "TimePickerComponent",
+      "file": "component/time-picker/time-picker.component.ts",
+      "kind": "Output",
+      "old": "onKeyupHandle",
+      "new": "keyReleased",
+      "description": "Emits on the inner field keyup event."
+    },
+    {
+      "component": "TimePickerComponent",
+      "file": "component/time-picker/time-picker.component.ts",
+      "kind": "Output",
+      "old": "onKeyEnterHandle",
+      "new": "enterPressed",
+      "description": "Reserved output retained for API compatibility. No emission site exists in the supplied implementation."
+    },
+    {
+      "component": "AutoPopulateCurrentDateDirective",
+      "file": "directive/auto-populate-current-date.directive.ts",
+      "kind": "Input",
+      "old": "yarAutopopulateCurrentDate",
+      "new": "uiAutoPopulateCurrentDate",
+      "description": "Enables the Shift+R shortcut that writes the current date into the attached form control."
+    },
+    {
+      "component": "PreventClipboardDirective",
+      "file": "directive/prevent-clipboard.directive.ts",
+      "kind": "Input",
+      "old": "preventCopyPasteCut",
+      "new": "preventCopyPasteCut",
+      "description": "Clipboard restriction flag retained with its current wiring. The local uiPreventClipboard directive blocks copy, cut, and paste when true."
+    }
+  ],
+  "localRenames": {
+    "component/autocomplete/autocomplete.component.ts": {
+      "inputId": "inputId",
+      "readonly": "readonly",
+      "required": "required",
+      "autoCompleteList": "options",
+      "label": "label",
+      "wordsLimit": "wordsLimit",
+      "displayKey": "labelKey",
+      "bindValueKey": "valueKey",
+      "optionNgClass": "optionNgClass",
+      "panelClass": "panelClass",
+      "errorMessage": "errorMessage",
+      "virtualScroll": "virtualScroll",
+      "singleLineOption": "singleLineOption",
+      "virtualScrollItemSize": "virtualScrollItemSize",
+      "virtualScrollMaxHeight": "virtualScrollMaxHeight",
+      "autoCompleteModel": "autocompleteModel",
+      "error": "error",
+      "textFieldName": "fieldName",
+      "placeholder": "placeholder",
+      "inputChangeValue": "valueChanged",
+      "onModelChange": "modelChange",
+      "onInputChange": "inputChanged",
+      "onFocusChange": "focusGained",
+      "onBlurChange": "focusLost",
+      "onKeydownHandle": "keyPressed",
+      "onKeyupHandle": "keyReleased",
+      "onKeyEnterHandle": "enterPressed"
+    },
+    "component/base-control-value-accessor.directive.ts": {
+      "disabled": "disabled",
+      "idPrefix": "idPrefix",
+      "value": "value",
+      "checked": "checked"
+    },
+    "component/checkbox/checkbox.component.ts": {
+      "inputId": "inputId",
+      "tooltip": "tooltip",
+      "label": "label",
+      "errorMessage": "errorMessage",
+      "required": "required",
+      "textFieldName": "fieldName",
+      "indeterminate": "indeterminate",
+      "onClick": "clicked",
+      "onModelChange": "modelChange",
+      "onInputChange": "inputChanged",
+      "inputModelValue": "inputModelValue",
+      "modelValue": "modelValue"
+    },
+    "component/advanced-select/advanced-select.component.ts": {
+      "itemSize": "itemSize",
+      "preventCopyPasteCut": "preventCopyPasteCut",
+      "inputId": "inputId",
+      "label": "label",
+      "showSearch": "showSearch",
+      "errorMessage": "errorMessage",
+      "required": "required",
+      "textFieldName": "fieldName",
+      "selectPlaceholder": "selectPlaceholder",
+      "searchPlaceholder": "searchPlaceholder",
+      "readonly": "readonly",
+      "isMultiSelect": "isMultiSelect",
+      "showToggleAllCheckbox": "showToggleAllCheckbox",
+      "noEntriesFoundLabel": "noEntriesFoundLabel",
+      "toggleAllCheckboxTooltipMessage": "toggleAllCheckboxTooltipMessage",
+      "showSearchCheckBox": "showSearchCheckbox",
+      "showMultiSelect": "multiple",
+      "selectList": "options",
+      "displayKey": "labelKey",
+      "idKey": "valueKey",
+      "hiddenKey": "hiddenKey",
+      "isGroupingEnabled": "isGroupingEnabled",
+      "groupLabelKey": "groupLabelKey",
+      "groupChildrenKey": "groupChildrenKey",
+      "enableAllOption": "enableAllOption",
+      "enableSorting": "enableSorting",
+      "sortAscending": "sortAscending",
+      "sortKey": "sortKey",
+      "isMultiOptions": "isMultiOptions",
+      "showClearIcon": "showClearIcon",
+      "displayFields": "displayFields",
+      "layoutMode": "layoutMode",
+      "serverSideSearch": "serverSideSearch",
+      "singleLineOption": "singleLineOption",
+      "modelValue": "modelValue",
+      "isSearchStartsWith": "searchStartsWith",
+      "toggleSelectHandle": "selectAllChange",
+      "onselectionChange": "selectionChange",
+      "onOpenedChange": "panelOpenChange",
+      "onOpened": "panelOpened",
+      "onClosed": "panelClosed",
+      "onBlur": "blurred",
+      "onOptionClick": "optionClicked",
+      "onSearchTextModelChange": "searchTextChange",
+      "selectionChange": "handleSelectionChange"
+    },
+    "component/time-input/time-input.component.ts": {
+      "preventCopyPasteCut": "preventCopyPasteCut",
+      "inputIdHr": "hoursInputId",
+      "inputIdMin": "minutesInputId",
+      "errorMessage": "errorMessage",
+      "required": "required",
+      "textFieldName": "fieldName",
+      "readonly": "readonly",
+      "modelValue": "modelValue",
+      "onModelChange": "modelChange",
+      "onInputChange": "inputChanged",
+      "onFocusChange": "focusGained",
+      "onBlurChange": "focusLost",
+      "onKeydownHandle": "keyPressed",
+      "onKeyupHandle": "keyReleased",
+      "onKeyEnterHandle": "enterPressed"
+    },
+    "component/date-picker/date-picker.component.ts": {
+      "inputId": "inputId",
+      "preventCopyPasteCut": "preventCopyPasteCut",
+      "label": "label",
+      "modelValue": "modelValue",
+      "errorMessage": "errorMessage",
+      "required": "required",
+      "textFieldName": "fieldName",
+      "placeholder": "placeholder",
+      "readonly": "readonly",
+      "autoPopulateDateTime": "autoPopulateDateTime",
+      "minDate": "minDate",
+      "maxDate": "maxDate",
+      "showTodayDate": "showTodayDate",
+      "onModelChange": "modelChange",
+      "onChange": "changeCommitted",
+      "onInputChange": "inputChanged",
+      "onFocusChange": "focusGained",
+      "onBlurChange": "focusLost",
+      "onKeydownHandle": "keyPressed",
+      "onKeyupHandle": "keyReleased",
+      "onKeyEnterHandle": "enterPressed",
+      "onDateChange": "dateChange",
+      "modelChange": "handleModelChange",
+      "dateChange": "handleDateChange"
+    },
+    "component/date-range-picker/date-range-picker.component.ts": {
+      "inputIdFrom": "startInputId",
+      "inputIdTo": "endInputId",
+      "preventCopyPasteCut": "preventCopyPasteCut",
+      "label": "label",
+      "errorMessage": "errorMessage",
+      "required": "required",
+      "startDisabled": "startDisabled",
+      "endDisabled": "endDisabled",
+      "textFieldName": "fieldName",
+      "startPlaceholder": "startPlaceholder",
+      "endPlaceholder": "endPlaceholder",
+      "endReadonly": "endReadonly",
+      "startReadonly": "startReadonly",
+      "autoPopulateDateTime": "autoPopulateDateTime",
+      "startMinDate": "startMinDate",
+      "startMaxDate": "startMaxDate",
+      "endMinDate": "endMinDate",
+      "endMaxDate": "endMaxDate",
+      "onModelChange": "modelChange",
+      "onChange": "changeCommitted",
+      "onInputChange": "inputChanged",
+      "onFocusChange": "focusGained",
+      "onBlurChange": "focusLost",
+      "onKeydownHandle": "keyPressed",
+      "onKeyupHandle": "keyReleased",
+      "onKeyEnterHandle": "enterPressed",
+      "onDateChange": "dateChange",
+      "modelChange": "handleModelChange",
+      "dateChange": "handleDateChange"
+    },
+    "component/date-time-picker/date-time-picker.component.ts": {
+      "preventCopyPasteCut": "preventCopyPasteCut",
+      "label": "label",
+      "inputId": "inputId",
+      "modelValue": "modelValue",
+      "errorMessage": "errorMessage",
+      "required": "required",
+      "textFieldName": "fieldName",
+      "placeholder": "placeholder",
+      "readonly": "readonly",
+      "autoPopulateDateTime": "autoPopulateDateTime",
+      "minDate": "minDate",
+      "maxDate": "maxDate",
+      "onDateChange": "dateChange",
+      "onModelChange": "modelChange",
+      "onChange": "changeCommitted",
+      "onInputChange": "inputChanged",
+      "onFocusChange": "focusGained",
+      "onBlurChange": "focusLost",
+      "onKeydownHandle": "keyPressed",
+      "onKeyupHandle": "keyReleased",
+      "onKeyEnterHandle": "enterPressed",
+      "dateChange": "handleDateChange",
+      "modelChange": "handleModelChange"
+    },
+    "component/number-input/number-input.component.ts": {
+      "preventCopyPasteCut": "preventCopyPasteCut",
+      "inputId": "inputId",
+      "tooltip": "tooltip",
+      "label": "label",
+      "modelValue": "modelValue",
+      "errorMessage": "errorMessage",
+      "required": "required",
+      "textFieldName": "fieldName",
+      "placeholder": "placeholder",
+      "readonly": "readonly",
+      "inputType": "inputType",
+      "textAlign": "textAlign",
+      "maxDigits": "maxDigits",
+      "minValue": "minValue",
+      "maxValue": "maxValue",
+      "allowDecimal": "allowDecimal",
+      "decimalPlaces": "decimalPlaces",
+      "allowNegative": "allowNegative",
+      "prefix": "prefix",
+      "showPrefix": "showPrefix",
+      "postfix": "suffix",
+      "showPostfix": "showSuffix",
+      "onModelChange": "modelChange",
+      "onInputChange": "inputChanged",
+      "onFocusChange": "focusGained",
+      "onBlurChange": "focusLost",
+      "onKeydownHandle": "keyPressed",
+      "onKeyupHandle": "keyReleased",
+      "onKeyEnterHandle": "enterPressed"
+    },
+    "component/password-input/password-input.component.ts": {
+      "preventCopyPasteCut": "preventCopyPasteCut",
+      "inputId": "inputId",
+      "label": "label",
+      "modelValue": "modelValue",
+      "errorMessage": "errorMessage",
+      "required": "required",
+      "textFieldName": "fieldName",
+      "placeholder": "placeholder",
+      "readonly": "readonly",
+      "appToArabic": "enableArabicInput",
+      "onModelChange": "modelChange",
+      "onInputChange": "inputChanged",
+      "onFocusChange": "focusGained",
+      "onBlurChange": "focusLost",
+      "onKeydownHandle": "keyPressed",
+      "onKeyupHandle": "keyReleased",
+      "onKeyEnterHandle": "enterPressed"
+    },
+    "component/text-input/text-input.component.ts": {
+      "preventCopyPasteCut": "preventCopyPasteCut",
+      "inputId": "inputId",
+      "tooltip": "tooltip",
+      "label": "label",
+      "wordsLimit": "wordsLimit",
+      "modelValue": "modelValue",
+      "errorMessage": "errorMessage",
+      "required": "required",
+      "textFieldName": "fieldName",
+      "placeholder": "placeholder",
+      "readonly": "readonly",
+      "maxLength": "maxLength",
+      "showToolTip": "showTooltip",
+      "chatGptAttr": "assistantFieldId",
+      "onlyAlphabets": "onlyAlphabets",
+      "appToArabic": "enableArabicInput",
+      "prefix": "prefix",
+      "showPrefix": "showPrefix",
+      "postfix": "suffix",
+      "showPostfix": "showSuffix",
+      "onModelChange": "modelChange",
+      "onInputChange": "inputChanged",
+      "onFocusChange": "focusGained",
+      "onBlurChange": "focusLost",
+      "onKeydownHandle": "keyPressed",
+      "onKeyupHandle": "keyReleased",
+      "onKeyEnterHandle": "enterPressed",
+      "onInputClickHandle": "inputClicked"
+    },
+    "component/file-upload/file-upload.component.ts": {
+      "inputId": "inputId",
+      "label": "label",
+      "placeholder": "placeholder",
+      "errorMessage": "errorMessage",
+      "required": "required",
+      "accept": "accept",
+      "showClearIcon": "showClearIcon",
+      "textFieldName": "fieldName",
+      "showFileDragDrop": "showDropZone",
+      "onFileSelect": "fileSelected",
+      "onClear": "cleared",
+      "onValidationError": "validationError"
+    },
+    "component/action-menu/action-menu.component.ts": {
+      "menuTitle": "menuTitle",
+      "menuItems": "menuItems",
+      "rowData": "rowData",
+      "menuItemClick": "menuItemSelected",
+      "closed": "closed",
+      "customPanelClass": "panelClass"
+    },
+    "component/pdf-viewer/pdf-viewer.component.ts": {
+      "pdfUrl": "pdfUrl"
+    },
+    "component/radio-button/radio-button.component.ts": {
+      "inputId": "inputId",
+      "label": "label",
+      "displayLabelKey": "labelKey",
+      "radioButtonsList": "options",
+      "errorMessage": "errorMessage",
+      "required": "required",
+      "textFieldName": "fieldName",
+      "idKey": "valueKey",
+      "onModelChange": "modelChange",
+      "onInputChange": "inputChanged",
+      "modelValue": "modelValue"
+    },
+    "component/search-filter/search-filter.component.ts": {
+      "preventCopyPasteCut": "preventCopyPasteCut",
+      "idPrefix": "idPrefix",
+      "inputId": "inputId",
+      "tooltip": "tooltip",
+      "searchTextLabel": "searchTextLabel",
+      "searchSelectLabel": "searchSelectLabel",
+      "wordsLimit": "wordsLimit",
+      "disabled": "disabled",
+      "textFieldName": "fieldName",
+      "placeholder": "placeholder",
+      "readonly": "readonly",
+      "maxLength": "maxLength",
+      "inputType": "inputType",
+      "errorMessage": "errorMessage",
+      "required": "required",
+      "searchBtnToolTip": "searchButtonTooltip",
+      "selectPlaceholder": "selectPlaceholder",
+      "selectList": "options",
+      "displayKey": "labelKey",
+      "idKey": "valueKey",
+      "showMultiSelect": "multiple",
+      "showClearIcon": "showClearIcon",
+      "onModelChange": "modelChange",
+      "onInputChange": "inputChanged",
+      "onFocusChange": "focusGained",
+      "onBlurChange": "focusLost",
+      "onKeydownHandle": "keyPressed",
+      "onKeyupHandle": "keyReleased",
+      "onKeyEnterHandle": "enterPressed",
+      "onInputClickHandle": "inputClicked",
+      "onSearchClickHandle": "searchClicked",
+      "onselectionChange": "selectionChange",
+      "onOpenedChange": "panelOpenChange",
+      "onOpened": "panelOpened",
+      "onClosed": "panelClosed",
+      "onBlur": "blurred",
+      "onOptionClick": "optionClicked",
+      "onOptionSelectionChange": "optionSelectionChanged",
+      "selectionChange": "handleSelectionChange"
+    },
+    "component/search-input/search-input.component.ts": {
+      "preventCopyPasteCut": "preventCopyPasteCut",
+      "inputId": "inputId",
+      "tooltip": "tooltip",
+      "label": "label",
+      "wordsLimit": "wordsLimit",
+      "modelValue": "modelValue",
+      "disableSearch": "searchDisabled",
+      "disableIcon": "searchButtonDisabled",
+      "textFieldName": "fieldName",
+      "placeholder": "placeholder",
+      "readonly": "readonly",
+      "maxLength": "maxLength",
+      "searchButtonPosition": "searchButtonPosition",
+      "inputType": "inputType",
+      "errorMessage": "errorMessage",
+      "required": "required",
+      "searchBtnToolTip": "searchButtonTooltip",
+      "onModelChange": "modelChange",
+      "onInputChange": "inputChanged",
+      "onFocusChange": "focusGained",
+      "onBlurChange": "focusLost",
+      "onKeydownHandle": "keyPressed",
+      "onKeyupHandle": "keyReleased",
+      "onKeyEnterHandle": "enterPressed",
+      "onInputClickHandle": "inputClicked",
+      "onSearchClickHandle": "searchClicked"
+    },
+    "component/searchable-select/searchable-select.component.ts": {
+      "itemSize": "itemSize",
+      "preventCopyPasteCut": "preventCopyPasteCut",
+      "inputId": "inputId",
+      "label": "label",
+      "showSearch": "showSearch",
+      "errorMessage": "errorMessage",
+      "required": "required",
+      "textFieldName": "fieldName",
+      "selectPlaceholder": "selectPlaceholder",
+      "searchPlaceholder": "searchPlaceholder",
+      "readonly": "readonly",
+      "isMultiSelect": "isMultiSelect",
+      "showToggleAllCheckbox": "showToggleAllCheckbox",
+      "noEntriesFoundLabel": "noEntriesFoundLabel",
+      "toggleAllCheckboxTooltipMessage": "toggleAllCheckboxTooltipMessage",
+      "showSearchCheckBox": "showSearchCheckbox",
+      "showMultiSelect": "multiple",
+      "selectList": "options",
+      "displayKey": "labelKey",
+      "idKey": "valueKey",
+      "hiddenKey": "hiddenKey",
+      "serverSideSearch": "serverSideSearch",
+      "modelValue": "modelValue",
+      "isSearchStartsWith": "searchStartsWith",
+      "showClearIcon": "showClearIcon",
+      "toggleSelectHandle": "selectAllChange",
+      "onselectionChange": "selectionChange",
+      "onOpenedChange": "panelOpenChange",
+      "onOpened": "panelOpened",
+      "onClosed": "panelClosed",
+      "onBlur": "blurred",
+      "onOptionClick": "optionClicked",
+      "onSearchTextModelChange": "searchTextChange",
+      "enableAllOption": "enableAllOption",
+      "hideAllOption": "hideAllOption",
+      "enableSorting": "enableSorting",
+      "singleLineOption": "singleLineOption",
+      "sortAscending": "sortAscending",
+      "sortKey": "sortKey",
+      "selectionChange": "handleSelectionChange"
+    },
+    "component/selection-list/selection-list.component.ts": {
+      "inputId": "inputId",
+      "tooltip": "tooltip",
+      "label": "label",
+      "errorMessage": "errorMessage",
+      "required": "required",
+      "multiple": "multiple",
+      "selectList": "options",
+      "displayKey": "labelKey",
+      "idKey": "valueKey",
+      "textFieldName": "fieldName",
+      "onSelectionChange": "selectionChange",
+      "onModelChange": "modelChange",
+      "modelValue": "modelValue"
+    },
+    "component/slide-toggle/slide-toggle.component.ts": {
+      "inputId": "inputId",
+      "inputModelValue": "inputModelValue",
+      "required": "required",
+      "disableRipple": "disableRipple",
+      "color": "color",
+      "labelPosition": "labelPosition",
+      "label": "label",
+      "errorMessage": "errorMessage",
+      "textFieldName": "fieldName",
+      "preventToggleOnClick": "preventToggleOnClick",
+      "onChangeEventHandler": "stateChange",
+      "toggleChange": "toggleChange",
+      "onClickHandler": "clicked"
+    },
+    "component/segmented-control/segmented-control.component.ts": {
+      "options": "options",
+      "currentValue": "currentValue",
+      "size": "size",
+      "selectionChange": "selectionChange",
+      "widthCalculated": "widthCalculated"
+    },
+    "component/text-area/text-area.component.ts": {
+      "inputId": "inputId",
+      "resize": "resize",
+      "preventCopyPasteCut": "preventCopyPasteCut",
+      "minRow": "minRows",
+      "maxRow": "maxRows",
+      "numCols": "columns",
+      "label": "label",
+      "limit": "maxLength",
+      "displayCharactersStats": "showCharacterCount",
+      "modelValue": "modelValue",
+      "error": "error",
+      "required": "required",
+      "showRemainingWordsStatus": "showRemainingCharacters",
+      "textFieldName": "fieldName",
+      "templateLabel": "templateLabel",
+      "placeholder": "placeholder",
+      "readonly": "readonly",
+      "mentionsList": "mentionsList",
+      "mentionConfig": "mentionConfig",
+      "useAbbreviationHighlight": "useAbbreviationHighlight",
+      "abbreviationList": "abbreviationList",
+      "appToArabic": "enableArabicInput",
+      "restrictedWords": "restrictedWords",
+      "yarMentionConfig": "abbreviationMentionConfig",
+      "fieldTrim": "trimOnBlur",
+      "chatGptAttr": "assistantFieldId",
+      "inputChangeValue": "valueChanged",
+      "expandButtonClickcallback": "expandRequested",
+      "onInputChange": "inputChanged",
+      "itemSelected": "itemSelected"
+    },
+    "component/rich-text-editor/rich-text-editor.component.ts": {
+      "inputId": "inputId",
+      "modelValue": "modelValue",
+      "removeToolList": "hiddenToolbarItems",
+      "editorType": "editorType",
+      "resize": "resize",
+      "preventCopyPasteCut": "preventCopyPasteCut",
+      "label": "label",
+      "error": "error",
+      "required": "required",
+      "textFieldName": "fieldName",
+      "placeholder": "placeholder",
+      "readonly": "readonly",
+      "modelChange": "modelChange",
+      "onBlur": "blurred"
+    },
+    "component/time-picker/time-picker.component.ts": {
+      "inputId": "inputId",
+      "label": "label",
+      "modelValue": "modelValue",
+      "errorMessage": "errorMessage",
+      "required": "required",
+      "textFieldName": "fieldName",
+      "placeholder": "placeholder",
+      "readonly": "readonly",
+      "minTime": "minTime",
+      "maxTime": "maxTime",
+      "onModelChange": "modelChange",
+      "onChange": "changeCommitted",
+      "onInputChange": "inputChanged",
+      "onFocusChange": "focusGained",
+      "onBlurChange": "focusLost",
+      "onKeydownHandle": "keyPressed",
+      "onKeyupHandle": "keyReleased",
+      "onKeyEnterHandle": "enterPressed",
+      "modelChange": "handleModelChange"
+    },
+    "directive/auto-populate-current-date.directive.ts": {
+      "isAutoPopulateDate": "enabled"
+    },
+    "directive/prevent-clipboard.directive.ts": {
+      "preventCopyPasteCut": "preventCopyPasteCut"
+    }
+  }
+}

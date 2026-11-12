@@ -1,0 +1,21 @@
+:host {
+  width: 100%;
+  display: inline-block;
+}
+
+.mat-mdc-option.multi-option {
+  .mdc-list-item__primary-text {
+    width: 100%;
+  }
+}
+
+.custom-select-indicator {
+  width: 15px;
+  height: 15px;
+  border-radius: 10px;
+  border: 1px solid #fff;
+}
+
+.single-line-viewport {
+  overflow-x: hidden;
+}

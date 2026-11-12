@@ -1,0 +1,52 @@
+{
+    "version": 1,
+    "cli": {
+        "analytics": false
+    },
+    "projects": {
+        "ui-controls": {
+            "projectType": "library",
+            "root": "projects/ui-controls",
+            "sourceRoot": "projects/ui-controls/src",
+            "prefix": "ui",
+            "architect": {
+                "build": {
+                    "builder": "@angular/build:ng-packagr",
+                    "options": {
+                        "project": "projects/ui-controls/ng-package.json",
+                        "tsConfig": "projects/ui-controls/tsconfig.lib.json"
+                    }
+                }
+            }
+        },
+        "demo": {
+            "projectType": "application",
+            "root": "projects/demo",
+            "sourceRoot": "projects/demo/src",
+            "architect": {
+                "build": {
+                    "builder": "@angular/build:application",
+                    "options": {
+                        "outputPath": "dist/demo",
+                        "browser": "projects/demo/src/main.ts",
+                        "index": "projects/demo/src/index.html",
+                        "tsConfig": "projects/demo/tsconfig.app.json",
+                        "polyfills": [
+                            "zone.js"
+                        ],
+                        "styles": [
+                            "@angular/material/prebuilt-themes/indigo-pink.css",
+                            "projects/demo/src/styles.scss"
+                        ]
+                    }
+                },
+                "serve": {
+                    "builder": "@angular/build:dev-server",
+                    "options": {
+                        "buildTarget": "demo:build"
+                    }
+                }
+            }
+        }
+    }
+}

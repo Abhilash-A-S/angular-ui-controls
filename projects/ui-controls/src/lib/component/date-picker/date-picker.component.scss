@@ -1,0 +1,16 @@
+:host {
+  display: inline-block;
+  width: 100%;
+}
+
+.datepicker-footer {
+  .today-date {
+    color: var(--bs-primary);
+    cursor: pointer;
+    display: flex;
+    font-size: 1rem;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+}

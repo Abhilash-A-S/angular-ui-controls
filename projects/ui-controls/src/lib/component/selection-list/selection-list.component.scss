@@ -1,0 +1,13 @@
+:host {
+  display: block;
+  width: 100%;
+
+  .selection-list-label {
+    font-weight: 500;
+  }
+
+  .error-message {
+    font-size: 0.75rem;
+    color: var(--bs-danger, #dc3545);
+  }
+}

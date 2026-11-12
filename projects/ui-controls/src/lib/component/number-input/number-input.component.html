@@ -1,0 +1,46 @@
+<div [ngClass]="{ 'required-text': required && !modelValue }">
+  <mat-form-field appearance="outline">
+    @if(label){
+    <mat-label>{{ label | translate }}</mat-label>
+    } @if (enablePrefix) {
+    <span matTextPrefix>{{ prefix }}&nbsp;</span>
+    }
+    <input
+      [id]="effectiveId"
+      matInput
+      uiInputRules
+      uiTrimLeadingSpace
+      [inputType]="inputType"
+      [style.text-align]="textAlign"
+      [maxDigits]="maxDigits"
+      [minValue]="minValue"
+      [maxValue]="maxValue"
+      [allowDecimal]="allowDecimal"
+      [decimalPlaces]="decimalPlaces"
+      [allowNegative]="allowNegative"
+      uiPreventClipboard [preventCopyPasteCut]="preventCopyPasteCut"
+      [disabled]="disabled"
+      [(ngModel)]="modelValue"
+      [ngModelOptions]="{ standalone: true }"
+      (ngModelChange)="modelValueChange($event)"
+      (input)="inputChange($event)"
+      (focus)="focusChange($event)"
+      (blur)="blurChange($event)"
+      placeholder="{{ placeholder | translate }}"
+      [readonly]="readonly"
+      (keydown)="keydownHandle($event)"
+      (keyup)="keyupHandle($event)"
+      (keyup.enter)="keyEnterHandle($event)"
+      [required]="required"
+      (wheel)="onWheel($event)"
+    />
+    @if (enablePostfix) {
+    <span matTextSuffix>&nbsp;{{ suffix }}</span>
+    }
+    @if(required && errorMessage){
+    <mat-error>
+      {{ errorMessage | translate }}
+    </mat-error>
+    }
+  </mat-form-field>
+</div>

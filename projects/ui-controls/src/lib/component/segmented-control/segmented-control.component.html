@@ -1,0 +1,21 @@
+<div class="ui-switch-holder" [ngClass]="size">
+  <div class="ui-tab-container">
+    <div
+      class="tab-active-bg"
+      [style.left.px]="activeOffset"
+      [style.width.px]="activeWidth"
+    ></div>
+    @for (option of options; track $index) {
+    <button
+      #btn
+      type="button"
+      class="ui-tab-btn"
+      [class.active]="currentValue === option.value"
+      (click)="select(option.value)"
+      [disabled]="option.disable"
+    >
+      {{ option.label }}
+    </button>
+    }
+  </div>
+</div>

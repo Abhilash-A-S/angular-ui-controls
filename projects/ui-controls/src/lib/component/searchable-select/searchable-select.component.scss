@@ -1,0 +1,15 @@
+:host{
+    width: 100%;
+    display: inline-block;
+}
+
+.single-line-option-text {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.single-line-viewport {
+    overflow-x: hidden;
+}

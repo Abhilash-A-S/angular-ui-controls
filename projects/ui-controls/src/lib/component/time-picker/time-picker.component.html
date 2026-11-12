@@ -1,0 +1,33 @@
+<div [ngClass]="{ 'required-text': required && !modelValue }">
+  <mat-form-field>
+    @if(label){
+    <mat-label>{{ label | translate }}</mat-label>
+    }
+    <input
+      #timeInput
+      matInput
+      [id]="effectiveId"
+      type="time"
+      (click)="openTimePicker()"
+      [(ngModel)]="modelValue"
+      [ngModelOptions]="{ standalone: true }"
+      (ngModelChange)="handleModelChange($event)"
+      (focus)="onFocus()"
+      (blur)="onBlur()"
+      (keyup)="onKeyUp($event)"
+      (keydown)="onKeyDown($event)"
+      (input)="onInput($event)"
+      (change)="onChangeHandler($event)"
+      [disabled]="disabled"
+      placeholder="{{ placeholder | translate }}"
+      [min]="minTime"
+      [max]="maxTime"
+      [readonly]="readonly"
+    />
+    @if(required && errorMessage){
+    <mat-error>
+      {{ errorMessage | translate }}
+    </mat-error>
+    }
+  </mat-form-field>
+</div>

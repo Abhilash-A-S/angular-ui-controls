@@ -1,0 +1,11 @@
+:host{
+    display: inline-block;
+    width: 100%;
+}
+
+.single-line-option-text {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

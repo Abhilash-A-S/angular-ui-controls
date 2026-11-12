@@ -1,0 +1,97 @@
+<div [ngClass]="{'required-text': required && !autocompleteModel?.value}">
+  <mat-form-field appearance="outline">
+    @if(label){
+    <mat-label> {{ label | translate }}</mat-label>
+    }
+    <input
+      matInput
+      uiAutocompletePosition
+      [matAutocomplete]="auto"
+      #autoComplete="ngModel"
+      [id]="effectiveId"
+      [(ngModel)]="autocompleteModel.value"
+      [ngModelOptions]="{ standalone: true }"
+      (input)="searchTextChanges($event)"
+      [readonly]="readonly"
+      [disabled]="disabled"
+      [required]="required"
+      (ngModelChange)="modelValueChange()"
+      [attr.maxLength]="wordsLimit > 0 ? wordsLimit : null"
+      aria-required="true"
+      (focus)="focusChange()"
+      (blur)="blurChange()"
+      placeholder="{{ placeholder | translate }}"
+      (keydown)="keydownHandle($event)"
+      (keyup)="keyupHandle($event)"
+      (keyup.enter)="keyEnterHandle($event)"
+    />
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      (optionSelected)="onSelectionChange()"
+      (opened)="onPanelOpened()"
+      (closed)="onPanelClosed()"
+      [displayWith]="autoCompleteBindvalue"
+      [class]="panelClassList"
+    >
+      @if(virtualScroll){
+      @let filteredList = options | searchFilter: searchText : labelKey;
+      <cdk-virtual-scroll-viewport
+        [class.single-line-viewport]="singleLineOption"
+        [itemSize]="virtualScrollItemSize"
+        minBufferPx="200"
+        maxBufferPx="400"
+        [style.height.px]="getViewportHeight(filteredList?.length)"
+      >
+        <mat-option
+          *cdkVirtualFor="let dropdownValue of filteredList; trackBy: trackByFn"
+          [value]="valueKey ? dropdownValue[valueKey] : dropdownValue"
+          [ngClass]="optionNgClass ? optionNgClass(dropdownValue) : ''"
+          [class.single-line-option]="singleLineOption"
+        >
+          <ng-container
+            [ngTemplateOutlet]="optionLabel"
+            [ngTemplateOutletContext]="{ $implicit: dropdownValue }"
+          ></ng-container>
+        </mat-option>
+      </cdk-virtual-scroll-viewport>
+      }@else{
+      @for(dropdownValue of options | searchFilter: searchText :
+      labelKey; track $index){
+      <mat-option
+        [value]="dropdownValue"
+        [class.single-line-option]="singleLineOption"
+      >
+        <span
+          [class.single-line-option-text]="singleLineOption"
+          [uiEllipsisTooltip]="singleLineOption ? (labelKey ? dropdownValue[labelKey] : dropdownValue) : ''"
+        >
+          @if(labelKey){
+          {{ dropdownValue[labelKey] }}
+          }@else{
+          {{ dropdownValue }}
+          }
+        </span>
+      </mat-option>
+      }
+      }
+    </mat-autocomplete>
+    <ng-template #optionLabel let-dropdownValue>
+      <span
+        [class.single-line-option-text]="singleLineOption"
+        [uiEllipsisTooltip]="singleLineOption ? (labelKey ? dropdownValue[labelKey] : dropdownValue) : ''"
+      >
+        @if(labelKey){
+        {{ dropdownValue[labelKey] }}
+        }@else{
+        {{ dropdownValue }}
+        }
+      </span>
+    </ng-template>
+     @if(required && errorMessage){
+  <mat-error>
+    {{errorMessage}}
+  </mat-error>
+  }
+  </mat-form-field>
+ 
+</div>

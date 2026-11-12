@@ -1,0 +1,111 @@
+<div [ngClass]="{ 'required-text': required && !modelValue }">
+  <mat-form-field appearance="outline">
+    @if(label){
+    <mat-label>{{ label | translate }}</mat-label>
+    } @if(inputModelValue && showClearIcon){
+    <button type="button" matTooltip="Clear" matSuffix mat-icon-button
+      (click)="$event.stopPropagation(); clearSelect()">
+      <mat-icon svgIcon="closeIcon" class="Icon-xs text-danger d-flex"></mat-icon>
+    </button>
+    }
+    <mat-select [id]="effectiveId" [(ngModel)]="inputModelValue" [ngModelOptions]="{ standalone: true }"
+      placeholder="{{ selectPlaceholder | translate }}" (selectionChange)="handleSelectionChange($event)"
+      [multiple]="multiple" (openedChange)="handleOpenedChange($event); openedChange($event)" (opened)="opened()"
+      (closed)="closed()" (blur)="blur()" [disabled]="disabled">
+      <mat-select-trigger>
+        {{ getTriggerText() }}
+      </mat-select-trigger>
+      @if(showSearch && (options?.length || internalSelectList?.length ||
+      rawOptionsList?.length)){
+      <mat-option>
+        <ngx-mat-select-search placeholderLabel="{{ searchPlaceholder | translate }}" [noEntriesFoundLabel]="''"
+          [(ngModel)]="searchText" [ngModelOptions]="{ standalone: true }" [showToggleAllCheckbox]="showSearchCheckbox"
+          [toggleAllCheckboxTooltipMessage]="toggleAllCheckboxTooltipMessage" (toggleAll)="toggleSelectAll($event)"
+          (ngModelChange)="searchTextModelChange($event)"></ngx-mat-select-search>
+      </mat-option>
+      } @if(hasNoMatchingEntries){
+      <mat-option disabled class="no-entries-option">
+        {{ noEntriesFoundLabel || 'No records found' | translate }}
+      </mat-option>
+      }
+      <cdk-virtual-scroll-viewport [class.single-line-viewport]="singleLineOption" [itemSize]="itemSize"
+        minBufferPx="600" maxBufferPx="1000" [style.display]="hasNoMatchingEntries ? 'none' : null" [style.height.px]="
+          internalSelectList?.length < 6
+            ? internalSelectList?.length * itemSize
+            : 216
+        ">
+        @for (option of hiddenOptions(); track option) {
+        <!-- IMPORTANT! Keep the content of 'mat-option' the same -->
+        <mat-option [value]="option" [style.display]="'none'">
+          {{ labelKey ? option?.[labelKey] : option }}
+        </mat-option>
+        }
+        <mat-option [class.multi-option]="!option?.isGroupHeader" [class.group-header]="option?.isGroupHeader"
+          class="multi-option" [class.single-line-option]="singleLineOption" #virtualOption *cdkVirtualFor="
+            let option of internalSelectList;
+            trackBy: trackByFn;
+            templateCacheSize: 50
+          " [value]="option?.isGroupHeader ? null : option" (onSelectionChange)="optionSelectionChange($event, option)"
+          (click)="optionClick(option)" [matTooltip]="option?.isGroupHeader ? '' : getOptionText(option)"
+          [disabled]="option?.isGroupHeader || option?.['isDisabled']" matTooltipPosition="above" [matTooltipDisabled]="
+            option?.isGroupHeader ||
+            singleLineOption ||
+            isTooltipDisabled(virtualOption, getOptionText(option))
+          ">
+          @if (option?.isGroupHeader) {
+          <div class="group-header-label">
+            {{
+            groupLabelKey
+            ? (option[groupLabelKey] | translate)
+            : (option?.label | translate)
+            }}
+          </div>
+          } @else {
+          <!-- SPLIT MODE -->
+          <div class="d-flex align-items-center gap-2 justify-content-between" [ngClass]="option.optionClassList">
+            <!-- LEFT-->
+            <div class="d-flex align-items-center gap-2 flex-grow-1 text-truncate">
+              @if(option?.showIcon){ @if(option.iconType === "CLASS"){
+              <div [ngClass]="option.classList" class="flex-shrink-0"></div>
+              }@else if(option.iconType === 'URL'){
+              <img [src]="option.url" class="round-icon-svg Icon-md rounded-pill" />
+              }@else if(option.iconType === 'ICON'){
+              <mat-icon [svgIcon]="option?.icon" aria-hidden="false" class="Icon-xs h-auto m-0"></mat-icon>
+              } }
+              <div class="flex-grow-1 text-truncate" [uiEllipsisTooltip]="
+                  singleLineOption ? getOptionText(option) : ''
+                " tooltipPosition="above">
+                @if(layoutMode === 'split'){
+                {{ labelKey ? option[labelKey] : option }}
+                }@else { @if(displayFields?.length){
+                <div class="d-flex align-items-center gap-1 text-truncate">
+                  @for (field of displayFields; track $index; let last = $last)
+                  {
+                  {{ option[field] }}{{ last ? '' : ' - ' }}
+                  }
+                </div>
+                }@else {
+                {{ labelKey ? option[labelKey] : option }}
+                } }
+              </div>
+            </div>
+            @if(layoutMode === 'split' && secondaryFields.length){
+            <div class="d-flex align-items-center justify-content-end gap-2 flex-grow-0 flex-shrink-0">
+              <span>-</span>
+              @for (field of secondaryFields; track $index) {
+              {{ option[field] }}
+              }
+            </div>
+            }
+          </div>
+          }
+        </mat-option>
+      </cdk-virtual-scroll-viewport>
+    </mat-select>
+    @if(required && errorMessage){
+    <mat-error>
+      {{ errorMessage | translate }}
+    </mat-error>
+    }
+  </mat-form-field>
+</div>
