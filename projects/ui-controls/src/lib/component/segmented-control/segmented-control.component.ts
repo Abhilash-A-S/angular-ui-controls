@@ -3,15 +3,17 @@ import {
   Input,
   Output,
   EventEmitter,
-  ViewEncapsulation,
   AfterViewInit,
   ViewChildren,
   QueryList,
   ElementRef,
   ChangeDetectorRef,
+  DestroyRef,
+  inject,
   Optional,
   Self,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { NgControl } from '@angular/forms';
 import { BaseControlValueAccessor } from '../base-control-value-accessor.directive';
@@ -30,7 +32,6 @@ export interface TabOption {
   imports: [CommonModule],
   templateUrl: './segmented-control.component.html',
   styleUrls: ['./segmented-control.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class SegmentedControlComponent
   extends BaseControlValueAccessor<any>
@@ -92,6 +93,8 @@ export class SegmentedControlComponent
     return this.buttonWidths[this.activeIndex];
   }
 
+  private readonly destroyRef = inject(DestroyRef);
+
   constructor(
     @Optional() @Self() public override ngControl: NgControl,
     private changeRef: ChangeDetectorRef,
@@ -101,7 +104,9 @@ export class SegmentedControlComponent
 
   ngAfterViewInit() {
     this.calculateWidths();
-    this.buttons.changes.subscribe(() => this.calculateWidths());
+    this.buttons.changes
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => this.calculateWidths());
   }
 
   calculateWidths() {
@@ -111,7 +116,7 @@ export class SegmentedControlComponent
       // Emit for parent components if needed
       this.widthCalculated.emit(this.buttonWidths);
       // Ensure Angular sees the updated buttonWidths array
-      this.cdr?.detectChanges();
+      this.cdr?.markForCheck();
     }
   }
 

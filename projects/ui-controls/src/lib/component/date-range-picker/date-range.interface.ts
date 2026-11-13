@@ -10,10 +10,10 @@ export type DateType = 'START_DATE' | 'END_DATE';
  */
 export interface DateRangeFieldInfo {
   /** Start date value */
-  startDate: Date;
+  startDate: Date | null;
 
   /** End date value */
-  endDate: Date;
+  endDate: Date | null;
 
   /** Field name provided by parent */
   fieldName: string | number;

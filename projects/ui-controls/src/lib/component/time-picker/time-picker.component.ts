@@ -303,7 +303,7 @@ export class TimePickerComponent extends BaseControlValueAccessor<string> {
       ...{ changeEvent: event },
     });
   }
-  public onEnter(event: KeyboardEvent): void {
+  public onEnter(event: Event): void {
     this.enterPressed.emit({ ...this.fieldInfo(), keyEnterEvent: event } as any);
   }
 }

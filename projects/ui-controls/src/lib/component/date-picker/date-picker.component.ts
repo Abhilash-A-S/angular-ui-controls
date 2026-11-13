@@ -230,13 +230,13 @@ export class DatePickerComponent extends BaseControlValueAccessor<Date> {
    *  This element is appended manually to the mat-calendar rendered inside
    * the Angular Material datepicker overlay.
    */
-  @ViewChild('datePickerFooter', { static: false }) datePickerFooter: ElementRef;
+  @ViewChild('datePickerFooter', { static: false }) datePickerFooter?: ElementRef;
 
   /**ViewChild reference to the MatDatepicker component.
    *  Used to detect when the datepicker opens so overlay DOM manipulation
    *  can be safely performed.
    */
-  @ViewChild('datePicker', { static: false }) datePicker: MatDatepicker<any>;
+  @ViewChild('datePicker', { static: false }) datePicker?: MatDatepicker<any>;
 
   // Stores today's date formatted as DD-MMM-YYYY (e.g., 29-Jan-2026)
   public todayDate: string = '';
@@ -381,6 +381,6 @@ export class DatePickerComponent extends BaseControlValueAccessor<Date> {
     this.modelValue = today as any;
     this.commitValue();
     this.handleModelChange(this.modelValue);
-    this.datePicker.close();
+    this.datePicker?.close();
   }
 }

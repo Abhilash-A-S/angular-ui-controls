@@ -126,6 +126,9 @@ export class SearchFilterComponent implements ControlValueAccessor {
     this.cdr.markForCheck();
   }
   get disabled(): boolean {
+    if (this.ngControl?.control) {
+      return this.ngControl.control.disabled || this._disabled;
+    }
     return this._disabled;
   }
 
@@ -542,6 +545,7 @@ export class SearchFilterComponent implements ControlValueAccessor {
   public openedChange(opened: boolean): void {
     this.panelOpenChange.emit({
       ...this.fieldInfo(),
+      opened: opened,
       selectionChange: opened,
     });
   }
@@ -574,6 +578,7 @@ export class SearchFilterComponent implements ControlValueAccessor {
   /** Clears select dropdown value */
   public clearSelect(): void {
     this.inputModelValue = this.multiple ? [] : null;
+    this.commitValue();
     this.selectionChange.emit({
       ...this.fieldInfo(),
       selectionChange: null,

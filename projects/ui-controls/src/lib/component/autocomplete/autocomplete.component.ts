@@ -78,7 +78,7 @@ export class AutocompleteComponent
    * @default []
    * @renamedFrom autoCompleteList
    */
-  @Input() options: any = [];
+  @Input() options: any[] = [];
 
   /**
    * Label text or translation key displayed for this control.
@@ -88,7 +88,15 @@ export class AutocompleteComponent
   @Input() label: string = '';
 
   /**
+   * Maximum character length for the autocomplete input.
+   * @default 0
+   * @type number
+   */
+  @Input() maxLength: number = 0;
+
+  /**
    * Legacy character-limit input bound to maxlength (not a word counter). Retained separately from maxLength; existing precedence is unchanged.
+   * @deprecated Use maxLength.
    * @default 0
    * @type number
    */

@@ -172,7 +172,8 @@ export class RadioButtonComponent extends BaseControlValueAccessor<any> {
       modelChangeEvent: modelChange,
       index: this.options.findIndex(
         (radioOption) =>
-          (this.valueKey ? radioOption[this.valueKey] : radioOption) === this.inputModelValue,
+          (this.valueKey ? (radioOption as Record<string, any>)[this.valueKey] : radioOption) ===
+          this.inputModelValue,
       ),
     });
   }
@@ -188,9 +189,30 @@ export class RadioButtonComponent extends BaseControlValueAccessor<any> {
       changeEvent: changeValue,
     });
   }
+  getOptionValue(option: RadioButtonOption): any {
+    return this.valueKey && typeof option === 'object' && option !== null
+      ? option[this.valueKey]
+      : option;
+  }
+
+  getOptionLabel(option: RadioButtonOption): any {
+    return this.labelKey && typeof option === 'object' && option !== null
+      ? option[this.labelKey]
+      : option;
+  }
+
+  isOptionDisabled(option: RadioButtonOption): boolean {
+    return typeof option === 'object' && option !== null ? Boolean(option['disabled']) : false;
+  }
+
   getModelValue() {
     if (this.valueKey) {
-      this.options.find((radioOption) => radioOption[this.valueKey] === this.inputModelValue);
+      return (
+        this.options.find(
+          (radioOption) =>
+            (radioOption as Record<string, any>)[this.valueKey] === this.inputModelValue,
+        ) ?? this.inputModelValue
+      );
     }
     return this.inputModelValue;
   }

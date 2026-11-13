@@ -25,9 +25,11 @@
         [minRows]="expandInput ? 12 : minRows"
         [maxRows]="expandInput ? 24 : maxRows"
         [mentionConfig]="
-          abbreviationMentionConfig?.length
-            ? abbreviationMentionConfig
-            : abbreviationHighlightMentionList
+          $any(
+            abbreviationMentionConfig?.length
+              ? abbreviationMentionConfig
+              : abbreviationHighlightMentionList
+          )
         "
         [assistantFieldId]="assistantFieldId"
       >

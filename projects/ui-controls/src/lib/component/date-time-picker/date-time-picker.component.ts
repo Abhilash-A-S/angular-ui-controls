@@ -374,7 +374,7 @@ export class DateTimePickerComponent
    */
   /** Kept for callers; defaultTime and startAt configure the public picker API. */
   public onPickerOpened(): void {}
-  public onEnter(event: KeyboardEvent): void {
+  public onEnter(event: Event): void {
     this.enterPressed.emit({ ...this.fieldInfo(), keyEnterEvent: event } as any);
   }
 }

@@ -106,6 +106,7 @@ export abstract class BaseControlValueAccessor<T = any> implements ControlValueA
 
   /**
    * Alternate binding to the shared value, retained on the base class for compatibility.
+   * @deprecated Use value instead.
    * @type T | null
    */
   @Input()

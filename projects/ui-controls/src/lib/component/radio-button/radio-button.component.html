@@ -14,14 +14,10 @@
     >
       @for (radioItem of options; track $index) {
         <mat-radio-button
-          [value]="valueKey ? radioItem[valueKey] : radioItem"
-          [disabled]="radioItem?.['disabled']"
+          [value]="getOptionValue(radioItem)"
+          [disabled]="isOptionDisabled(radioItem)"
         >
-          @if (labelKey) {
-            {{ radioItem[labelKey] }}
-          } @else {
-            {{ radioItem }}
-          }
+          {{ getOptionLabel(radioItem) }}
         </mat-radio-button>
       }
     </mat-radio-group>

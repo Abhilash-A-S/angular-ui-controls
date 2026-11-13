@@ -58,7 +58,7 @@
         maxBufferPx="1000"
         [style.display]="hasNoMatchingEntries ? 'none' : null"
         [style.height.px]="
-          internalSelectList?.length < 6 ? internalSelectList?.length * itemSize : 216
+          (internalSelectList?.length || 0) < 6 ? (internalSelectList?.length || 0) * itemSize : 216
         "
       >
         @for (option of hiddenOptions(); track option) {

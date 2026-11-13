@@ -513,8 +513,9 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
   getSelectedModelValue(selectedValue: any) {
     if (!this.options) return selectedValue ?? this.inputModelValue;
     return (
-      this.options.find((selectionItem) => selectionItem[this.valueKey] === selectedValue) ??
-      this.inputModelValue
+      this.options.find(
+        (selectionItem) => (selectionItem as Record<string, any>)[this.valueKey] === selectedValue,
+      ) ?? this.inputModelValue
     );
   }
 
@@ -697,7 +698,9 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
    * an "All" option if multiple mode is active, and filtering out hidden options.
    */
   private updateInternalList() {
-    const list = (this.options || []).filter((item) => !item?.[this.hiddenKey]);
+    const list = (this.options || []).filter(
+      (item) => !(item as Record<string, any>)?.[this.hiddenKey],
+    );
 
     if ((this.multiple || this.enableAllOption) && !this.hideAllOption) {
       if (this.valueKey || this.labelKey) {
@@ -733,7 +736,8 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
     // Populate modelNameMapping from the full list so selected hidden items can still resolve label in trigger
     for (const option of this.options || []) {
       if (this.valueKey && option) {
-        this.modelNameMapping.set(option[this.valueKey] ?? option, option[this.labelKey] ?? option);
+        const record = option as Record<string, any>;
+        this.modelNameMapping.set(record[this.valueKey] ?? option, record[this.labelKey] ?? option);
       }
     }
     if (this._allOptionObj && this.valueKey) {

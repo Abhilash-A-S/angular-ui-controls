@@ -316,11 +316,11 @@ export class TimeInputComponent extends BaseControlValueAccessor<string> {
     return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
   }
 
-  public onKeyUp(event: KeyboardEvent, restrictNumber: number, modalValue: string) {
+  public onKeyUp(event: KeyboardEvent, restrictNumber: number, field: 'hours' | 'minutes') {
     if (!['Backspace', 'Delete'].includes(event.key)) {
       const inputElement = event.target as HTMLInputElement;
       if (Number(inputElement.value) > restrictNumber) {
-        inputElement.value = this[modalValue] = restrictNumber.toString();
+        inputElement.value = this[field] = restrictNumber.toString();
       }
     }
   }

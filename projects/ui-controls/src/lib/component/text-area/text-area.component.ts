@@ -131,10 +131,18 @@ export class TextAreaComponent extends BaseControlValueAccessor<any> implements 
 
   /**
    * Shows validation error state
+   * @deprecated Use errorMessage.
    * @default false
    * @type boolean
    */
   @Input() error: boolean = false;
+
+  /**
+   * Error message or translation key displayed when validation fails.
+   * @default ''
+   * @type string
+   */
+  @Input() errorMessage: string = '';
 
   /**
    * Marks this control as required in its existing template; parent-form validators remain separately configured.

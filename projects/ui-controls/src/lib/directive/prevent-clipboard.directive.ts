@@ -11,19 +11,19 @@ export class PreventClipboardDirective {
    */
   @Input() preventCopyPasteCut = false;
   constructor() {}
-  @HostListener('paste', ['$event']) blockPaste(changeEvent: KeyboardEvent) {
+  @HostListener('paste', ['$event']) blockPaste(changeEvent: ClipboardEvent) {
     if (this.preventCopyPasteCut) {
       changeEvent.preventDefault();
     }
   }
 
-  @HostListener('copy', ['$event']) blockCopy(changeEvent: KeyboardEvent) {
+  @HostListener('copy', ['$event']) blockCopy(changeEvent: ClipboardEvent) {
     if (this.preventCopyPasteCut) {
       changeEvent.preventDefault();
     }
   }
 
-  @HostListener('cut', ['$event']) blockCut(changeEvent: KeyboardEvent) {
+  @HostListener('cut', ['$event']) blockCut(changeEvent: ClipboardEvent) {
     if (this.preventCopyPasteCut) {
       changeEvent.preventDefault();
     }

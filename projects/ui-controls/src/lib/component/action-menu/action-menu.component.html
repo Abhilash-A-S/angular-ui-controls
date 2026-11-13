@@ -17,7 +17,7 @@
           [disabled]="item.disabled"
           class="list-group-item gap-2"
           [ngClass]="{ disabled: item.disabled, hstack: item.svgIcon, vstack: !item.svgIcon }"
-          [class]="item.classname"
+          [class]="item.classname || ''"
           (click)="onMenuItemClick(item)"
         >
           @if (item.svgIcon) {

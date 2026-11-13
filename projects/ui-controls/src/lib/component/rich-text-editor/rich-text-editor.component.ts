@@ -122,11 +122,19 @@ export class RichTextEditorComponent extends BaseControlValueAccessor<string> im
 
   /**
    * Displays validation error state
+   * @deprecated Use errorMessage.
    * @default false
    * @type boolean
    * @remarks Retained input; no consumer of this setting is present in the supplied class/template.
    */
   @Input() error: boolean = false;
+
+  /**
+   * Error message or translation key displayed when validation fails.
+   * @default ''
+   * @type string
+   */
+  @Input() errorMessage: string = '';
 
   /**
    * Marks this control as required in its existing template; parent-form validators remain separately configured.
@@ -239,7 +247,9 @@ export class RichTextEditorComponent extends BaseControlValueAccessor<string> im
         this.editorConfig.language = language.value;
         this.showEditor = false;
         setTimeout(() => {
+          if (this.destroyRef.destroyed) return;
           this.showEditor = true;
+          this.changeDetectorRef.markForCheck();
         });
       });
   }

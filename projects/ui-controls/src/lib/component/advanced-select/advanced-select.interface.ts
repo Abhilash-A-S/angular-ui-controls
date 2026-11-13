@@ -19,7 +19,7 @@ export interface SearchableSelectFieldInfo {
  */
 export interface SearchableSelectSelectionChangeEvent extends SearchableSelectFieldInfo {
   /** MatSelect change event containing selected value(s) */
-  selectionChange: MatSelectChange;
+  selectionChange: MatSelectChange | null;
 }
 
 /**

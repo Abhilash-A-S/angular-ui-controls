@@ -10,8 +10,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker'; // For matDatepicker
 import { MatNativeDateModule } from '@angular/material/core'; // For native date support
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatSelectModule } from '@angular/material/select';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
@@ -19,7 +19,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MentionModule } from 'angular-mentions';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatListModule } from '@angular/material/list';
-export function HttpLoaderFactory(http: HttpClient) {
+export function HttpLoaderFactory(_http?: HttpClient) {
   return new TranslateHttpLoader();
 }
 @NgModule({
@@ -34,7 +34,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatDatepickerModule,
     MatNativeDateModule,
     MatAutocompleteModule,
-    HttpClientModule,
     TranslateModule.forChild(),
     MatSelectModule,
     MatTooltipModule,
@@ -55,7 +54,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatNativeDateModule,
     MatAutocompleteModule,
     TranslateModule,
-    HttpClientModule,
     MatSelectModule,
     MatTooltipModule,
     MentionModule,
