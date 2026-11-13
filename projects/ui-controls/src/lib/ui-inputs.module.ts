@@ -49,7 +49,7 @@ import { SelectionListComponent } from './component/selection-list/selection-lis
     FileUploadComponent,
     PdfViewerComponent,
     SearchFilterComponent,
-    SelectionListComponent
+    SelectionListComponent,
   ],
   exports: [
     TextInputComponent,
@@ -74,7 +74,7 @@ import { SelectionListComponent } from './component/selection-list/selection-lis
     FileUploadComponent,
     PdfViewerComponent,
     SearchFilterComponent,
-    SelectionListComponent
-  ]
+    SelectionListComponent,
+  ],
 })
-export class UiInputsModule { }
+export class UiInputsModule {}

@@ -9,13 +9,8 @@ describe('SelectionListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        SelectionListComponent,
-        TranslateModule.forRoot(),
-        NoopAnimationsModule
-      ]
-    })
-    .compileComponents();
+      imports: [SelectionListComponent, TranslateModule.forRoot(), NoopAnimationsModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SelectionListComponent);
     component = fixture.componentInstance;

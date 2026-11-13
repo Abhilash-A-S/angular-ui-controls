@@ -1,7 +1,7 @@
 <div [ngClass]="{ 'required-text': required && !modelValue }">
   <mat-form-field appearance="outline">
-    @if(label){
-    <mat-label>{{ label | translate }}</mat-label>
+    @if (label) {
+      <mat-label>{{ label | translate }}</mat-label>
     }
     <input
       matInput
@@ -10,7 +10,7 @@
       [(ngModel)]="modelValue"
       [ngModelOptions]="{ standalone: true }"
       (dateChange)="handleDateChange($event)"
-      (ngModelChange)="handleModelChange($event)"
+      (ngModelChange)="commitValue(); handleModelChange($event)"
       (focus)="onFocus($event)"
       (blur)="onBlur($event)"
       (keyup)="onKeyUp($event)"
@@ -26,27 +26,19 @@
       [required]="required"
     />
     <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
-    <mat-datepicker
-      #datePicker
-      (opened)="calendarOpen()"
-      panelClass="my-datepicker-panel"
-    ></mat-datepicker>
-    @if(required && errorMessage){
-    <mat-error>
-      {{ errorMessage | translate }}
-    </mat-error>
+    <mat-datepicker #datePicker [disabled]="disabled || readonly" panelClass="my-datepicker-panel">
+      @if (showTodayDate) {
+        <mat-datepicker-actions>
+          <button type="button" (click)="todayDateSelection()">{{ todayDate }}</button>
+          <button type="button" matDatepickerCancel>Cancel</button>
+          <button type="button" matDatepickerApply>Apply</button>
+        </mat-datepicker-actions>
+      }
+    </mat-datepicker>
+    @if (required && errorMessage) {
+      <mat-error>
+        {{ errorMessage | translate }}
+      </mat-error>
     }
   </mat-form-field>
-</div>
-
-<div class="d-none">
-  <div class="datepicker-footer" #datePickerFooter>
-    <button
-      type="button"
-      class="today-date w-100"
-      (click)="todayDateSelection()"
-    >
-      {{ todayDate }}
-    </button>
-  </div>
 </div>

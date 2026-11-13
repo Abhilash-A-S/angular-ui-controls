@@ -1,52 +1,52 @@
 :host {
-    display: block;
-    width: 100%;
+  display: block;
+  width: 100%;
 }
 
 .editor {
-    position: relative;
+  position: relative;
 }
 
 textarea,
 .highlight {
-    box-sizing: border-box;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font: inherit;
-    line-height: 1.5;
-    letter-spacing: inherit;
-    white-space: pre-wrap;
-    overflow-wrap: break-word;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  line-height: 1.5;
+  letter-spacing: inherit;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 
 textarea {
-    position: relative;
-    display: block;
-    resize: vertical;
-    background: transparent;
-    color: inherit;
-    outline: none;
+  position: relative;
+  display: block;
+  resize: vertical;
+  background: transparent;
+  color: inherit;
+  outline: none;
 }
 
 .highlight {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-    color: transparent;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  color: transparent;
 }
 
 .abbreviation {
-    background: rgba(255, 193, 7, .3);
+  background: rgba(255, 193, 7, 0.3);
 }
 
 .restricted {
-    background: rgba(244, 67, 54, .18);
-    text-decoration: underline wavy #d32f2f;
+  background: rgba(244, 67, 54, 0.18);
+  text-decoration: underline wavy #d32f2f;
 }
 
 :host(.disabled) {
-    opacity: .6;
+  opacity: 0.6;
 }

@@ -1,4 +1,12 @@
-import { Component, ChangeDetectorRef, EventEmitter, Input, Output, Optional, Self } from '@angular/core';
+import {
+  Component,
+  ChangeDetectorRef,
+  EventEmitter,
+  Input,
+  Output,
+  Optional,
+  Self,
+} from '@angular/core';
 import { MaterialModule } from '../../material.module';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { CheckboxFieldInfo, CheckboxInputChangeEvent } from './checkbox.interface';
@@ -10,7 +18,7 @@ import { NgControl } from '@angular/forms';
   standalone: true,
   imports: [MaterialModule],
   templateUrl: './checkbox.component.html',
-  styleUrl: './checkbox.component.scss'
+  styleUrl: './checkbox.component.scss',
 })
 export class CheckboxComponent extends BaseControlValueAccessor<boolean> {
   // Unique ID for the checkbox element
@@ -58,7 +66,6 @@ export class CheckboxComponent extends BaseControlValueAccessor<boolean> {
    */
   @Input() required: boolean = false;
 
-
   /**
    * Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved.
    * @type string | number
@@ -95,7 +102,8 @@ export class CheckboxComponent extends BaseControlValueAccessor<boolean> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onInputChange
    */
-  @Output() inputChanged: EventEmitter<CheckboxInputChangeEvent> = new EventEmitter<CheckboxInputChangeEvent>();
+  @Output() inputChanged: EventEmitter<CheckboxInputChangeEvent> =
+    new EventEmitter<CheckboxInputChangeEvent>();
 
   /**
    * Internal model bound to checkbox
@@ -123,68 +131,64 @@ export class CheckboxComponent extends BaseControlValueAccessor<boolean> {
 
   constructor(
     @Optional() @Self() public override ngControl: NgControl,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     super(ngControl, changeDetectorRef);
   }
 
   /**
- * Returns the current field information
- * @returns object containing model value and field name
- */
+   * Returns the current field information
+   * @returns object containing model value and field name
+   */
   private fieldInfo(): CheckboxFieldInfo {
     let inputRef = null;
     if (this.effectiveId) {
-      inputRef = document.querySelector(`#${this.effectiveId}`);
+      inputRef = typeof document === 'undefined' ? null : document.getElementById(this.effectiveId);
     }
     return {
-      ...inputRef && { inputRef: inputRef },
+      ...(inputRef && { inputRef: inputRef }),
       modelValue: this.inputModelValue,
-      textFieldName: this.fieldName
+      textFieldName: this.fieldName,
     };
   }
 
-
   /**
- * Emits updated model value when ngModel changes
- * @returns void (emits modelChange event)
- */
+   * Emits updated model value when ngModel changes
+   * @returns void (emits modelChange event)
+   */
   public modelValueChange(): void {
     this.modelChange.emit(this.fieldInfo());
   }
 
-
   /**
- * Emits input event details along with field info
- * @param changeValue Input event object
- * @returns void (emits inputChanged event)
- */
+   * Emits input event details along with field info
+   * @param changeValue Input event object
+   * @returns void (emits inputChanged event)
+   */
   public inputChange(changeValue: Event, typeofChange: string): void {
     this.inputChanged.emit({
       ...this.fieldInfo(),
-      ...{ changeEvent: changeValue, typeofChange }
+      ...{ changeEvent: changeValue, typeofChange },
     });
   }
 
-
   /**
- * Handles checkbox change event
- * @param changeValue MatCheckboxChange event
- * @returns void (emits inputChanged event)
- */
+   * Handles checkbox change event
+   * @param changeValue MatCheckboxChange event
+   * @returns void (emits inputChanged event)
+   */
   public onChangeHandle(changeValue: MatCheckboxChange, typeofChange: string): void {
     this.inputChanged.emit({
       ...this.fieldInfo(),
-      ...{ changeEvent: changeValue, typeofChange }
+      ...{ changeEvent: changeValue, typeofChange },
     });
   }
 
-
   /**
- * Emits click event when checkbox is clicked
- * @param event Mouse click event
- * @returns void (emits clicked event)
- */
+   * Emits click event when checkbox is clicked
+   * @param event Mouse click event
+   * @returns void (emits clicked event)
+   */
   public onCheckboxClick(event: MouseEvent): void {
     this.clicked.emit(event);
   }

@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, Output, Optional, Self, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  Optional,
+  Self,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { MaterialModule } from '../../material.module';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { SlideToggleFieldInfo } from './slide-toggle.interface';
@@ -39,12 +47,8 @@ export class SlideToggleComponent extends BaseControlValueAccessor<boolean> {
     return !!this.value;
   }
   set inputModelValue(val: boolean) {
-    if (this.preventToggleOnClick) {
-      return;
-    }
     this.value = val;
   }
-
 
   /**
    * Marks this control as required in its existing template; parent-form validators remain separately configured.
@@ -124,8 +128,9 @@ export class SlideToggleComponent extends BaseControlValueAccessor<boolean> {
    */
   @Output() readonly clicked = new EventEmitter<SlideToggleFieldInfo>();
 
-  constructor(@Optional() @Self() public override ngControl: NgControl,
-    private changeDetectorRef: ChangeDetectorRef
+  constructor(
+    @Optional() @Self() public override ngControl: NgControl,
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     super(ngControl, changeDetectorRef);
   }
@@ -137,12 +142,12 @@ export class SlideToggleComponent extends BaseControlValueAccessor<boolean> {
   private fieldInfo(): SlideToggleFieldInfo {
     let inputRef: Element | null = null;
     if (this.effectiveId) {
-      inputRef = document.querySelector(`#${this.effectiveId}`);
+      inputRef = typeof document === 'undefined' ? null : document.getElementById(this.effectiveId);
     }
     return {
-      ...inputRef && { inputRef: inputRef },
+      ...(inputRef && { inputRef: inputRef }),
       modelValue: this.inputModelValue,
-      textFieldName: this.fieldName
+      textFieldName: this.fieldName,
     };
   }
 
@@ -159,6 +164,7 @@ export class SlideToggleComponent extends BaseControlValueAccessor<boolean> {
       return;
     }
 
+    this.commitValue(event.checked);
     this.stateChange.emit(this.fieldInfo());
   }
 
@@ -180,10 +186,9 @@ export class SlideToggleComponent extends BaseControlValueAccessor<boolean> {
       changeValue.preventDefault();
       return;
     }
-    this.onTouchedCallback();
     this.clicked.emit({
       ...this.fieldInfo(),
-      changeEvent: changeValue
+      changeEvent: changeValue,
     });
   }
 
@@ -195,8 +200,7 @@ export class SlideToggleComponent extends BaseControlValueAccessor<boolean> {
     event.preventDefault();
     this.clicked.emit({
       ...this.fieldInfo(),
-      changeEvent: event
+      changeEvent: event,
     });
   }
-
 }

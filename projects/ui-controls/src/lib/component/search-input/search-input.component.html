@@ -1,17 +1,19 @@
 <div [ngClass]="{ 'required-text': required && !modelValue }">
   <mat-form-field appearance="outline">
-    @if(label){
-    <mat-label>{{ label | translate }}</mat-label>
-    } @if(searchButtonPosition === 'before'){
-    <button
-      type="button"
-      [disabled]="searchButtonDisabled"
-      (click)="onSearchClick()"
-      [matTooltip]="searchButtonTooltip"
-      matSuffix
-    >
-      <mat-icon matSuffix svgIcon="searchIcon"> </mat-icon>
-    </button>
+    @if (label) {
+      <mat-label>{{ label | translate }}</mat-label>
+    }
+    @if (searchButtonPosition === 'before') {
+      <button
+        type="button"
+        [disabled]="disabled || searchButtonDisabled"
+        aria-label="Search"
+        (click)="onSearchClick()"
+        [matTooltip]="searchButtonTooltip"
+        matSuffix
+      >
+        <mat-icon matSuffix svgIcon="ui:search"> </mat-icon>
+      </button>
     }
     <input
       [id]="effectiveId"
@@ -19,15 +21,15 @@
       matInput
       uiInputRules
       [inputType]="inputType"
-      uiPreventClipboard [preventCopyPasteCut]="preventCopyPasteCut"
+      uiPreventClipboard
+      [preventCopyPasteCut]="preventCopyPasteCut"
       uiTrimLeadingSpace
-      [disabled]="searchDisabled"
+      [disabled]="disabled || searchDisabled"
       [(ngModel)]="modelValue"
       [ngModelOptions]="{ standalone: true }"
-      [maxLength]="maxLength"
-      (ngModelChange)="modelValueChange($event)"
+      (ngModelChange)="commitValue(); modelValueChange($event)"
       (input)="inputChange($event)"
-      [attr.maxLength]="wordsLimit > 0 ? wordsLimit : null"
+      [attr.maxlength]="maxLength > 0 ? maxLength : wordsLimit > 0 ? wordsLimit : null"
       aria-required="true"
       (focus)="focusChange($event)"
       (blur)="blurChange($event)"
@@ -38,20 +40,22 @@
       (keyup.enter)="keyEnterHandle($event)"
       (click)="inputClick($event)"
     />
-    @if(searchButtonPosition === 'after'){
-    <button
-      type="button"
-      [disabled]="searchButtonDisabled"
-      (click)="onSearchClick()"
-      [matTooltip]="searchButtonTooltip"
-      matSuffix
-    >
-      <mat-icon svgIcon="searchIcon" class="text-primary Icon-sm"> </mat-icon>
-    </button>
-    } @if(required && errorMessage){
-    <mat-error>
-      {{ errorMessage | translate }}
-    </mat-error>
+    @if (searchButtonPosition === 'after') {
+      <button
+        type="button"
+        [disabled]="disabled || searchButtonDisabled"
+        aria-label="Search"
+        (click)="onSearchClick()"
+        [matTooltip]="searchButtonTooltip"
+        matSuffix
+      >
+        <mat-icon svgIcon="ui:search" class="text-primary Icon-sm"> </mat-icon>
+      </button>
+    }
+    @if (required && errorMessage) {
+      <mat-error>
+        {{ errorMessage | translate }}
+      </mat-error>
     }
   </mat-form-field>
 </div>

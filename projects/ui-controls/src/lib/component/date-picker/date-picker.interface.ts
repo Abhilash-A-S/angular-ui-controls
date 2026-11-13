@@ -77,7 +77,6 @@ export interface DatePickerEnterEvent extends DatePickerFieldInfo {
   onKeyUpEvent: KeyboardEvent;
 }
 
-
 /**
  * Optional interface representing all @Input() properties
  */

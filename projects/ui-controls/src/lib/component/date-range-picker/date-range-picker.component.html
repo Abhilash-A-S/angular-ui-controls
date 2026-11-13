@@ -1,11 +1,11 @@
 <div
   [ngClass]="{
-    'required-text': required && !(startModelValue && endModelValue)
+    'required-text': required && !(startModelValue && endModelValue),
   }"
 >
   <mat-form-field appearance="outline">
-    @if(label){
-    <mat-label>{{ label | translate }}</mat-label>
+    @if (label) {
+      <mat-label>{{ label | translate }}</mat-label>
     }
     <mat-date-range-input [rangePicker]="dateRangePicker">
       <input
@@ -18,9 +18,9 @@
         [min]="startMinDate"
         [max]="startMaxDate"
         [readonly]="startReadonly"
-        [disabled]="startDisabled"
+        [disabled]="disabled || startDisabled"
         (dateChange)="handleDateChange($event, 'START_DATE')"
-        (ngModelChange)="handleModelChange($event, 'START_DATE')"
+        (ngModelChange)="commitValue(); handleModelChange($event, 'START_DATE')"
         (focus)="onFocus($event, 'START_DATE')"
         (blur)="onBlur($event, 'START_DATE')"
         (keyup)="onKeyUp($event, 'START_DATE')"
@@ -39,9 +39,9 @@
         [min]="endMinDate"
         [max]="endMaxDate"
         [readonly]="endReadonly"
-        [disabled]="endDisabled"
+        [disabled]="disabled || endDisabled"
         (dateChange)="handleDateChange($event, 'END_DATE')"
-        (ngModelChange)="handleModelChange($event, 'END_DATE')"
+        (ngModelChange)="commitValue(); handleModelChange($event, 'END_DATE')"
         (focus)="onFocus($event, 'END_DATE')"
         (blur)="onBlur($event, 'END_DATE')"
         (keyup)="onKeyUp($event, 'END_DATE')"
@@ -50,15 +50,12 @@
         (change)="onChangeHandler($event, 'END_DATE')"
       />
     </mat-date-range-input>
-    <mat-datepicker-toggle
-      matSuffix
-      [for]="dateRangePicker"
-    ></mat-datepicker-toggle>
+    <mat-datepicker-toggle matSuffix [for]="dateRangePicker"></mat-datepicker-toggle>
     <mat-date-range-picker #dateRangePicker></mat-date-range-picker>
-    @if(required && errorMessage){
-    <mat-error>
-      {{ errorMessage | translate }}
-    </mat-error>
+    @if (required && errorMessage) {
+      <mat-error>
+        {{ errorMessage | translate }}
+      </mat-error>
     }
   </mat-form-field>
 </div>

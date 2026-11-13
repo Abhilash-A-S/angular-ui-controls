@@ -1,13 +1,30 @@
-import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, signal, Signal, computed, viewChildren, viewChild, Optional, Self, ChangeDetectorRef, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  signal,
+  Signal,
+  computed,
+  viewChildren,
+  viewChild,
+  Optional,
+  Self,
+  ChangeDetectorRef,
+  SimpleChanges,
+  ViewEncapsulation,
+} from '@angular/core';
 import { MaterialModule } from '../../material.module';
 import { MatOption, MatSelect, MatSelectChange } from '@angular/material/select';
 import { UiUtilitiesModule } from '../../utilities';
 import {
-  SearchableSelectOption, SearchableSelectToggleAllEvent,
+  SearchableSelectOption,
+  SearchableSelectToggleAllEvent,
   SearchableSelectSelectionChangeEvent,
   SearchableSelectOpenCloseEvent,
   SearchableSelectFieldInfo,
-  SearchableSelectOptionClickEvent
+  SearchableSelectOptionClickEvent,
 } from './searchable-select.interface';
 import { ScrollingModule, CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { BaseControlValueAccessor } from '../base-control-value-accessor.directive';
@@ -20,7 +37,7 @@ import { IsEmptyPipe } from './is-empty.pipe';
   imports: [MaterialModule, UiUtilitiesModule, ScrollingModule, IsEmptyPipe],
   templateUrl: './searchable-select.component.html',
   styleUrl: './searchable-select.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
   /**
@@ -82,7 +99,6 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
    * @type boolean
    */
   @Input() required: boolean = false;
-
 
   /**
    * Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved.
@@ -223,7 +239,7 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
     // Filter out "All" for the external form control value
     let cleanValue = value;
     if (this.multiple && Array.isArray(value)) {
-      cleanValue = value.filter(item => !this.compareObjects(item, this._allOptionObj));
+      cleanValue = value.filter((item) => !this.compareObjects(item, this._allOptionObj));
     }
     if (!this.areValuesEqual(cleanValue, this.value)) {
       this.value = cleanValue;
@@ -232,6 +248,8 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
   }
 
   public internalSelectList: any[] = [];
+  private readonly allOptionKey = Symbol('select-all');
+  private readonly primitiveAllOption = { toString: () => 'All' };
   private _allOptionObj: any = null;
   private modelNameMapping: Map<string, string> = new Map();
   private multiSelectInternalList: any[] = [];
@@ -275,7 +293,8 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom toggleSelectHandle
    */
-  @Output() selectAllChange: EventEmitter<SearchableSelectToggleAllEvent> = new EventEmitter<SearchableSelectToggleAllEvent>();
+  @Output() selectAllChange: EventEmitter<SearchableSelectToggleAllEvent> =
+    new EventEmitter<SearchableSelectToggleAllEvent>();
 
   /**
    * Emits when the selection handler processes a selection.
@@ -283,7 +302,8 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onselectionChange
    */
-  @Output() selectionChange: EventEmitter<SearchableSelectSelectionChangeEvent> = new EventEmitter<SearchableSelectSelectionChangeEvent>();
+  @Output() selectionChange: EventEmitter<SearchableSelectSelectionChangeEvent> =
+    new EventEmitter<SearchableSelectSelectionChangeEvent>();
 
   /**
    * Emits when the select panel open state changes.
@@ -291,7 +311,8 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onOpenedChange
    */
-  @Output() panelOpenChange: EventEmitter<SearchableSelectOpenCloseEvent> = new EventEmitter<SearchableSelectOpenCloseEvent>();
+  @Output() panelOpenChange: EventEmitter<SearchableSelectOpenCloseEvent> =
+    new EventEmitter<SearchableSelectOpenCloseEvent>();
 
   /**
    * Emits when the select panel opens.
@@ -299,7 +320,8 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onOpened
    */
-  @Output() panelOpened: EventEmitter<SearchableSelectFieldInfo> = new EventEmitter<SearchableSelectFieldInfo>();
+  @Output() panelOpened: EventEmitter<SearchableSelectFieldInfo> =
+    new EventEmitter<SearchableSelectFieldInfo>();
 
   /**
    * Emits when the select panel closes.
@@ -307,7 +329,8 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onClosed
    */
-  @Output() panelClosed: EventEmitter<SearchableSelectFieldInfo> = new EventEmitter<SearchableSelectFieldInfo>();
+  @Output() panelClosed: EventEmitter<SearchableSelectFieldInfo> =
+    new EventEmitter<SearchableSelectFieldInfo>();
 
   /**
    * Emits when the control loses focus.
@@ -315,7 +338,8 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onBlur
    */
-  @Output() blurred: EventEmitter<SearchableSelectFieldInfo> = new EventEmitter<SearchableSelectFieldInfo>();
+  @Output() blurred: EventEmitter<SearchableSelectFieldInfo> =
+    new EventEmitter<SearchableSelectFieldInfo>();
 
   /**
    * Emits when an option is clicked.
@@ -323,7 +347,8 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onOptionClick
    */
-  @Output() optionClicked: EventEmitter<SearchableSelectOptionClickEvent> = new EventEmitter<SearchableSelectOptionClickEvent>();
+  @Output() optionClicked: EventEmitter<SearchableSelectOptionClickEvent> =
+    new EventEmitter<SearchableSelectOptionClickEvent>();
 
   /**
    * Emits the updated search string for consumer filtering.
@@ -397,18 +422,17 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
     }
   }
 
-  private sortKeyValue: string = "";
+  private sortKeyValue: string = '';
 
   constructor(
     @Optional() @Self() public override ngControl: NgControl,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     super(ngControl, changeDetectorRef);
     // Computed signal that recalculates whenever:
     // - virtualOptions change
     // - inputModelValue changes
     this.hiddenOptions = computed(() => {
-
       // Create a Set of currently rendered option values
       // This makes lookup O(1) when checking if a value exists
       const virtualOptions = new Set(
@@ -423,9 +447,7 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
         return [];
       }
 
-      const selectedArray = Array.isArray(selectedValue)
-        ? selectedValue
-        : [selectedValue];
+      const selectedArray = Array.isArray(selectedValue) ? selectedValue : [selectedValue];
 
       // Return selected values that are real and NOT currently rendered
       // in the virtual scroll viewport
@@ -437,7 +459,9 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
 
   /** Identifies an option by valueKey, so a parent replacing options with new objects keeps the same option */
   private getOptionKey(option: any): any {
-    return this.valueKey && option !== null && typeof option === 'object' ? option[this.valueKey] : option;
+    return this.valueKey && option !== null && typeof option === 'object'
+      ? option[this.valueKey]
+      : option;
   }
   /**
    * Intercept values written by Angular Forms framework (e.g., ngModel)
@@ -458,10 +482,14 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
 
   compareObjects = (option1: any, option2: any): boolean => {
     if (this.valueKey && option1 != null && option2 != null) {
-      const val1 = typeof option1 === 'object' ?
-        option1 === "" ? this.modelValue[this.valueKey]
-          : option1[this.valueKey]
-        : option1 === "" ? this.inputModelValue : option1;
+      const val1 =
+        typeof option1 === 'object'
+          ? option1 === ''
+            ? this.modelValue[this.valueKey]
+            : option1[this.valueKey]
+          : option1 === ''
+            ? this.inputModelValue
+            : option1;
       const val2 = typeof option2 === 'object' ? option2[this.valueKey] : option2;
       return val1 === val2;
     }
@@ -470,61 +498,70 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
   private fieldInfo(): any {
     let inputRef: Element | null = null;
     if (this.effectiveId) {
-      inputRef = document.querySelector(`#${this.effectiveId}`);
+      inputRef = typeof document === 'undefined' ? null : document.getElementById(this.effectiveId);
     }
     return {
       ...(inputRef && { inputRef }),
-      modelValue: this.multiple ?
-        (Array.isArray(this.inputModelValue) ? this.inputModelValue : []).filter((selectionOption: any) => !this.compareObjects(selectionOption, this._allOptionObj)) :
-        this.getSelectedModelValue(this.inputModelValue),
-      textFieldName: this.fieldName
+      modelValue: this.multiple
+        ? (Array.isArray(this.inputModelValue) ? this.inputModelValue : []).filter(
+            (selectionOption: any) => !this.compareObjects(selectionOption, this._allOptionObj),
+          )
+        : this.getSelectedModelValue(this.inputModelValue),
+      textFieldName: this.fieldName,
     };
   }
   getSelectedModelValue(selectedValue: any) {
     if (!this.options) return selectedValue ?? this.inputModelValue;
-    return this.options.find((selectionItem) =>
-      selectionItem[this.valueKey] === selectedValue) ?? this.inputModelValue;
+    return (
+      this.options.find((selectionItem) => selectionItem[this.valueKey] === selectedValue) ??
+      this.inputModelValue
+    );
   }
 
   /**
- * Emits when the selected value changes in the dropdown.
- *
- * @param handleSelectionChange - MatSelect change event containing selected value(s)
- * @returns void
- */
+   * Emits when the selected value changes in the dropdown.
+   *
+   * @param handleSelectionChange - MatSelect change event containing selected value(s)
+   * @returns void
+   */
   public handleSelectionChange(event: MatSelectChange): void {
     if (this.multiple) {
-      const emittedSelection = this.multiSelectInternalList.filter(item => !this.compareObjects(item, this._allOptionObj));
+      const emittedSelection = this.multiSelectInternalList.filter(
+        (item) => !this.compareObjects(item, this._allOptionObj),
+      );
       this.inputModelValue = [...this.multiSelectInternalList];
       this.multiSelectInternalList = [];
       this.selectionChange.emit({
         ...this.fieldInfo(),
-        selectionChange: { value: emittedSelection, source: event.source as any }
+        selectionChange: { value: emittedSelection, source: event.source as any },
       });
     } else {
       this.inputModelValue = event.value;
       this.selectionChange.emit({
         ...this.fieldInfo(),
-        selectionChange: event
+        selectionChange: event,
       });
     }
+    this.commitValue();
   }
 
   /**
- * Handles select-all toggle action from search checkbox.
- *
- * @param selectAllValue - True to select all options, false to clear selection
- * @returns void
- */
+   * Handles select-all toggle action from search checkbox.
+   *
+   * @param selectAllValue - True to select all options, false to clear selection
+   * @returns void
+   */
   public toggleSelectAll(selectAllValue: boolean): void {
+    if (this.disabled || this.readonly) return;
     if (this.multiple && selectAllValue) {
       this.inputModelValue = [...this.internalSelectList];
     } else {
       this.inputModelValue = [];
     }
+    this.commitValue();
     this.selectAllChange.emit({
       ...this.fieldInfo(),
-      selectAllValue
+      selectAllValue,
     });
   }
 
@@ -548,49 +585,49 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
   }
 
   /**
- * Emits when the open state of the dropdown changes.
- *
- * @param changeEvent - Boolean indicating open (true) or closed (false) state
- * @returns void
- */
+   * Emits when the open state of the dropdown changes.
+   *
+   * @param changeEvent - Boolean indicating open (true) or closed (false) state
+   * @returns void
+   */
   public openedChange(opened: boolean): void {
     this.panelOpenChange.emit({
       ...this.fieldInfo(),
-      selectionChange: opened
+      selectionChange: opened,
     });
   }
   /**
- * Emits when the dropdown panel is opened.
- *
- * @returns void
- */
+   * Emits when the dropdown panel is opened.
+   *
+   * @returns void
+   */
   public opened(): void {
     this.panelOpened.emit(this.fieldInfo());
   }
   /**
- * Emits when the dropdown panel is closed.
- *
- * @returns void
- */
+   * Emits when the dropdown panel is closed.
+   *
+   * @returns void
+   */
   public closed(): void {
     this.panelClosed.emit(this.fieldInfo());
   }
 
   /**
- * Emits when the select element loses focus.
- *
- * @returns void
- */
+   * Emits when the select element loses focus.
+   *
+   * @returns void
+   */
   public blur(): void {
     this.blurred.emit(this.fieldInfo());
   }
 
   /**
- * Emits when a select option is clicked.
- *
- * @param selectedOption - The option object that was clicked
- * @returns void
- */
+   * Emits when a select option is clicked.
+   *
+   * @param selectedOption - The option object that was clicked
+   * @returns void
+   */
   public optionClick(selectedOption: any): void {
     // Basic event emission. All select logic is processed declaratively inside handleSelectionChange()
     this.optionClicked.emit({ activeOption: selectedOption });
@@ -601,7 +638,7 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
   private _cachedOptionWidth: number = 0;
 
   isTooltipDisabled(optionRef: any, text: string): boolean {
-    const textStr = String(text ?? "");
+    const textStr = String(text ?? '');
     if (textStr.length < 20) return true;
 
     if (!this._cachedOptionWidth && optionRef?._element?.nativeElement?.clientWidth) {
@@ -609,31 +646,37 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
     }
     if (this._cachedOptionWidth) {
       const avgCharWidth = 7;
-      return (textStr.length * avgCharWidth) < this._cachedOptionWidth;
+      return textStr.length * avgCharWidth < this._cachedOptionWidth;
     }
     return false;
   }
   getTriggerText(): string {
     if (this.multiple) {
       if (Array.isArray(this.inputModelValue) && this.inputModelValue.length > 0) {
-        const isAllSelected = this.inputModelValue.find(
-          item => this.compareObjects(item, this._allOptionObj)
+        const isAllSelected = this.inputModelValue.find((item) =>
+          this.compareObjects(item, this._allOptionObj),
         );
 
         if (isAllSelected) {
-          return this.labelKey ? this._allOptionObj[this.labelKey] : "All";
+          return this.labelKey ? this._allOptionObj[this.labelKey] : 'All';
         } else {
           return this.inputModelValue
-            .map((options: any) => this.modelNameMapping.get(options[this.valueKey] ?? options) ?? options)
-            .join(", ");
+            .map(
+              (options: any) =>
+                this.modelNameMapping.get(options[this.valueKey] ?? options) ?? options,
+            )
+            .join(', ');
         }
       }
-      return "";
+      return '';
     }
 
-    return (this.modelNameMapping.get(this.inputModelValue as string)
-      || (this.inputModelValue?.[this.labelKey] || "")
-      || String(this.inputModelValue ?? ""));
+    return (
+      this.modelNameMapping.get(this.inputModelValue as string) ||
+      this.inputModelValue?.[this.labelKey] ||
+      '' ||
+      String(this.inputModelValue ?? '')
+    );
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (
@@ -654,31 +697,32 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
    * an "All" option if multiple mode is active, and filtering out hidden options.
    */
   private updateInternalList() {
-    const list = (this.options || []).filter(item => !item?.[this.hiddenKey]);
+    const list = (this.options || []).filter((item) => !item?.[this.hiddenKey]);
 
     if ((this.multiple || this.enableAllOption) && !this.hideAllOption) {
       if (this.valueKey || this.labelKey) {
         // Keep the same object when options is replaced. A new object is not recognised as a
         // rendered option, so it would get a hidden duplicate that takes the checked state.
-        const canReuseAllOption = this._allOptionObj &&
-          (!this.valueKey || this._allOptionObj[this.valueKey] === 'All') &&
+        const canReuseAllOption =
+          this._allOptionObj &&
+          (!this.valueKey || this._allOptionObj[this.valueKey] === this.allOptionKey) &&
           (!this.labelKey || this._allOptionObj[this.labelKey] === 'All');
         if (!canReuseAllOption) {
           this._allOptionObj = {
-            ...(this.valueKey ? { [this.valueKey]: 'All' } : {}),
-            ...(this.labelKey ? { [this.labelKey]: 'All' } : {})
+            ...(this.valueKey ? { [this.valueKey]: this.allOptionKey } : {}),
+            ...(this.labelKey ? { [this.labelKey]: 'All' } : {}),
           };
         }
       } else {
-        this._allOptionObj = 'All';
+        this._allOptionObj = this.primitiveAllOption;
       }
 
-      const hasAll = list.some(item => this.compareObjects(item, this._allOptionObj));
+      const hasAll = list.some((item) => this.compareObjects(item, this._allOptionObj));
       if (!hasAll) {
         this.internalSelectList = [this._allOptionObj, ...list];
       } else {
         this.internalSelectList = [...list];
-        this._allOptionObj = list.find(item => this.compareObjects(item, this._allOptionObj));
+        this._allOptionObj = list.find((item) => this.compareObjects(item, this._allOptionObj));
       }
     } else {
       this._allOptionObj = null;
@@ -687,13 +731,16 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
 
     this.modelNameMapping.clear();
     // Populate modelNameMapping from the full list so selected hidden items can still resolve label in trigger
-    for (const option of (this.options || [])) {
+    for (const option of this.options || []) {
       if (this.valueKey && option) {
-        this.modelNameMapping.set((option[this.valueKey] ?? option), (option[this.labelKey] ?? option));
+        this.modelNameMapping.set(option[this.valueKey] ?? option, option[this.labelKey] ?? option);
       }
     }
     if (this._allOptionObj && this.valueKey) {
-      this.modelNameMapping.set((this._allOptionObj[this.valueKey] ?? this._allOptionObj), (this._allOptionObj[this.labelKey] ?? this._allOptionObj));
+      this.modelNameMapping.set(
+        this._allOptionObj[this.valueKey] ?? this._allOptionObj,
+        this._allOptionObj[this.labelKey] ?? this._allOptionObj,
+      );
     }
 
     if (this.enableSorting) {
@@ -709,8 +756,12 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
     if (!this.multiple || !this.options?.length || !this.internalSelectList?.length) return;
     if (!Array.isArray(this._internalModelValue)) return;
 
-    const currentRealItems = this._internalModelValue.filter(item => !this.compareObjects(item, this._allOptionObj));
-    const selectableCount = this.internalSelectList.filter(item => !this.compareObjects(item, this._allOptionObj)).length;
+    const currentRealItems = this._internalModelValue.filter(
+      (item) => !this.compareObjects(item, this._allOptionObj),
+    );
+    const selectableCount = this.internalSelectList.filter(
+      (item) => !this.compareObjects(item, this._allOptionObj),
+    ).length;
 
     if (currentRealItems.length > 0 && currentRealItems.length === selectableCount) {
       this._internalModelValue = [...this.internalSelectList];
@@ -724,7 +775,7 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
   private areValuesEqual(val1: any, val2: any): boolean {
     if (Array.isArray(val1) && Array.isArray(val2)) {
       if (val1.length !== val2.length) return false;
-      return val1.every(item => val2.some(other => this.compareObjects(item, other)));
+      return val1.every((item) => val2.some((other) => this.compareObjects(item, other)));
     }
     return this.compareObjects(val1, val2);
   }
@@ -736,16 +787,18 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
     const isAllObj = this.compareObjects(option, this._allOptionObj);
 
     let currentVal = Array.isArray(this.inputModelValue) ? [...this.inputModelValue] : [];
-    let baseItems = currentVal.filter(item => !this.compareObjects(item, this._allOptionObj));
+    let baseItems = currentVal.filter((item) => !this.compareObjects(item, this._allOptionObj));
 
     if (isChecking) {
       if (isAllObj) {
         this.multiSelectInternalList = [...this.internalSelectList];
       } else {
-        if (!baseItems.some(item => this.compareObjects(item, option))) {
+        if (!baseItems.some((item) => this.compareObjects(item, option))) {
           baseItems.push(option);
         }
-        const selectableCount = this.internalSelectList.filter(item => !this.compareObjects(item, this._allOptionObj)).length;
+        const selectableCount = this.internalSelectList.filter(
+          (item) => !this.compareObjects(item, this._allOptionObj),
+        ).length;
         if (baseItems.length === selectableCount) {
           this.multiSelectInternalList = [...this.internalSelectList];
         } else {
@@ -756,7 +809,9 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
       if (isAllObj) {
         this.multiSelectInternalList = [];
       } else {
-        this.multiSelectInternalList = baseItems.filter(item => !this.compareObjects(item, option));
+        this.multiSelectInternalList = baseItems.filter(
+          (item) => !this.compareObjects(item, option),
+        );
       }
     }
   }
@@ -766,13 +821,15 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
   }
 
   clearSelect() {
+    if (this.disabled || this.readonly) return;
     this.inputModelValue = null;
     if (this.multiple) {
       this.inputModelValue = [];
     }
+    this.commitValue();
     this.selectionChange.emit({
       ...this.fieldInfo(),
-      selectionChange: null
+      selectionChange: null,
     });
   }
   private sortInternalSelectList(): void {
@@ -782,14 +839,10 @@ export class SearchableSelectComponent extends BaseControlValueAccessor<any> {
       const first = key ? firstValue?.[key] : firstValue;
       const second = key ? secondValue?.[key] : secondValue;
 
-      const sortResult = String(first ?? "").localeCompare(
-        String(second ?? ""),
-        undefined,
-        {
-          numeric: true,
-          sensitivity: "base"
-        }
-      );
+      const sortResult = String(first ?? '').localeCompare(String(second ?? ''), undefined, {
+        numeric: true,
+        sensitivity: 'base',
+      });
 
       return this.isAscendingOrder ? sortResult : -sortResult;
     });

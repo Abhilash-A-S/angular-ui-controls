@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+import { UiIconsService } from './services/ui-icons.service';
+import { NgModule, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // For ngModel (template-driven forms)
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -40,7 +41,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MentionModule,
     NgxMatSelectSearchModule,
     MatSlideToggleModule,
-    MatListModule
+    MatListModule,
   ],
   exports: [
     CommonModule,
@@ -60,7 +61,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     MentionModule,
     NgxMatSelectSearchModule,
     MatSlideToggleModule,
-    MatListModule
-  ]
+    MatListModule,
+  ],
 })
-export class MaterialModule { }
+export class MaterialModule {
+  private readonly icons = inject(UiIconsService);
+}

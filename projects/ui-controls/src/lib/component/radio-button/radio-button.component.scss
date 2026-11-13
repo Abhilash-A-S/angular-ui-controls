@@ -1,8 +1,8 @@
-:host{
-    max-width: 100%;
-    .mat-mdc-radio-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: .5rem;
-    }
+:host {
+  max-width: 100%;
+  .mat-mdc-radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
 }

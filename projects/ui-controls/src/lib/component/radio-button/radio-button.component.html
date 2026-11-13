@@ -1,10 +1,7 @@
-<div
-  class="w-100"
-  [ngClass]="{ 'required-text': required && !inputModelValue }"
->
+<div class="w-100" [ngClass]="{ 'required-text': required && !inputModelValue }">
   <div class="d-flex gap-2 w-100">
-    @if(label){
-    <mat-label>{{ label | translate }}</mat-label>
+    @if (label) {
+      <mat-label>{{ label | translate }}</mat-label>
     }
     <mat-radio-group
       class="text-truncate"
@@ -12,26 +9,26 @@
       [(ngModel)]="inputModelValue"
       [ngModelOptions]="{ standalone: true }"
       [disabled]="disabled"
-      (ngModelChange)="modelValueChange($event)"
+      (ngModelChange)="commitValue(); modelValueChange($event)"
       (input)="inputChange($event)"
     >
-      @for(radioItem of options;track $index){
-      <mat-radio-button
-        [value]="valueKey ? radioItem[valueKey] : radioItem"
-        [disabled]="radioItem?.['disabled']"
-      >
-        @if(labelKey){
-        {{ radioItem[labelKey] }}
-        }@else{
-        {{ radioItem }}
-        }
-      </mat-radio-button>
+      @for (radioItem of options; track $index) {
+        <mat-radio-button
+          [value]="valueKey ? radioItem[valueKey] : radioItem"
+          [disabled]="radioItem?.['disabled']"
+        >
+          @if (labelKey) {
+            {{ radioItem[labelKey] }}
+          } @else {
+            {{ radioItem }}
+          }
+        </mat-radio-button>
       }
     </mat-radio-group>
-    @if(required && errorMessage){
-    <div>
-      {{ errorMessage | translate }}
-    </div>
+    @if (required && errorMessage) {
+      <div>
+        {{ errorMessage | translate }}
+      </div>
     }
   </div>
 </div>

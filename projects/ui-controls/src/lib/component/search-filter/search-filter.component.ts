@@ -1,4 +1,14 @@
-import { booleanAttribute, Component, EventEmitter, Input, Optional, Output, Self, ChangeDetectorRef } from '@angular/core';
+import {
+  booleanAttribute,
+  Component,
+  HostListener,
+  EventEmitter,
+  Input,
+  Optional,
+  Output,
+  Self,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgControl, FormsModule, ControlValueAccessor } from '@angular/forms';
 import {
@@ -10,7 +20,7 @@ import {
   SearchInputKeyupEvent,
   SearchInputKeyEnterEvent,
   SearchInputClickEvent,
-  SearchInputInfo
+  SearchInputInfo,
 } from '../search-input/search-input.interface';
 import { UiUtilitiesModule } from '../../utilities';
 import { MaterialModule } from '../../material.module';
@@ -69,9 +79,10 @@ export class SearchFilterComponent implements ControlValueAccessor {
   }
 
   private configureId(): void {
-    this.effectiveId = this.rawIdPrefix && this.rawInputId 
-      ? `${this.rawIdPrefix}_${this.rawInputId}` 
-      : (this.rawInputId || '');
+    this.effectiveId =
+      this.rawIdPrefix && this.rawInputId
+        ? `${this.rawIdPrefix}_${this.rawInputId}`
+        : this.rawInputId || '';
   }
 
   /**
@@ -143,7 +154,7 @@ export class SearchFilterComponent implements ControlValueAccessor {
    * Maximum number of characters allowed
    * @type number
    */
-  @Input() maxLength !: number;
+  @Input() maxLength!: number;
 
   /**
    * Defines input behavior: number or percentage
@@ -172,7 +183,7 @@ export class SearchFilterComponent implements ControlValueAccessor {
    * @type string
    * @renamedFrom searchBtnToolTip
    */
-  @Input() searchButtonTooltip: string = "";
+  @Input() searchButtonTooltip: string = '';
 
   /**
    * Placeholder text for select dropdown
@@ -226,7 +237,8 @@ export class SearchFilterComponent implements ControlValueAccessor {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onModelChange
    */
-  @Output() modelChange: EventEmitter<SearchInputModelChangeEvent> = new EventEmitter<SearchInputModelChangeEvent>();
+  @Output() modelChange: EventEmitter<SearchInputModelChangeEvent> =
+    new EventEmitter<SearchInputModelChangeEvent>();
 
   /**
    * Emits from the existing input/change handler.
@@ -234,7 +246,8 @@ export class SearchFilterComponent implements ControlValueAccessor {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onInputChange
    */
-  @Output() inputChanged: EventEmitter<SearchInputInputEvent> = new EventEmitter<SearchInputInputEvent>();
+  @Output() inputChanged: EventEmitter<SearchInputInputEvent> =
+    new EventEmitter<SearchInputInputEvent>();
 
   /**
    * Emits when the inner field gains focus.
@@ -242,7 +255,8 @@ export class SearchFilterComponent implements ControlValueAccessor {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onFocusChange
    */
-  @Output() focusGained: EventEmitter<SearchInputFocusEvent> = new EventEmitter<SearchInputFocusEvent>();
+  @Output() focusGained: EventEmitter<SearchInputFocusEvent> =
+    new EventEmitter<SearchInputFocusEvent>();
 
   /**
    * Emits when the inner field loses focus.
@@ -250,7 +264,8 @@ export class SearchFilterComponent implements ControlValueAccessor {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onBlurChange
    */
-  @Output() focusLost: EventEmitter<SearchInputBlurEvent> = new EventEmitter<SearchInputBlurEvent>();
+  @Output() focusLost: EventEmitter<SearchInputBlurEvent> =
+    new EventEmitter<SearchInputBlurEvent>();
 
   /**
    * Emits on the inner field keydown event.
@@ -258,7 +273,8 @@ export class SearchFilterComponent implements ControlValueAccessor {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onKeydownHandle
    */
-  @Output() keyPressed: EventEmitter<SearchInputKeydownEvent> = new EventEmitter<SearchInputKeydownEvent>();
+  @Output() keyPressed: EventEmitter<SearchInputKeydownEvent> =
+    new EventEmitter<SearchInputKeydownEvent>();
 
   /**
    * Emits on the inner field keyup event.
@@ -266,7 +282,8 @@ export class SearchFilterComponent implements ControlValueAccessor {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onKeyupHandle
    */
-  @Output() keyReleased: EventEmitter<SearchInputKeyupEvent> = new EventEmitter<SearchInputKeyupEvent>();
+  @Output() keyReleased: EventEmitter<SearchInputKeyupEvent> =
+    new EventEmitter<SearchInputKeyupEvent>();
 
   /**
    * Emits when Enter is released in the inner field.
@@ -274,7 +291,8 @@ export class SearchFilterComponent implements ControlValueAccessor {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onKeyEnterHandle
    */
-  @Output() enterPressed: EventEmitter<SearchInputKeyEnterEvent> = new EventEmitter<SearchInputKeyEnterEvent>();
+  @Output() enterPressed: EventEmitter<SearchInputKeyEnterEvent> =
+    new EventEmitter<SearchInputKeyEnterEvent>();
 
   /**
    * Emits when the inner input is clicked.
@@ -282,7 +300,8 @@ export class SearchFilterComponent implements ControlValueAccessor {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onInputClickHandle
    */
-  @Output() inputClicked: EventEmitter<SearchInputClickEvent> = new EventEmitter<SearchInputClickEvent>();
+  @Output() inputClicked: EventEmitter<SearchInputClickEvent> =
+    new EventEmitter<SearchInputClickEvent>();
 
   /**
    * Emits when the search action is activated.
@@ -348,6 +367,28 @@ export class SearchFilterComponent implements ControlValueAccessor {
    */
   @Output() optionSelectionChanged = new EventEmitter<any>();
 
+  /** Compound model; legacy searchVal/selectVal keys remain stable. */
+  @Input() get value(): SearchFilterValue | null {
+    return this._value;
+  }
+  set value(value: SearchFilterValue | null) {
+    this.writeValue(value);
+  }
+  @Output() valueChange = new EventEmitter<SearchFilterValue | null>();
+  commitValue(): void {
+    if (this.disabled) return;
+    this.onChangeCallback(this._value);
+    this.valueChange.emit(this._value);
+  }
+  @HostListener('focusout', ['$event'])
+  handleFocusOut(event: FocusEvent): void {
+    if (
+      event.relatedTarget &&
+      (event.currentTarget as HTMLElement)?.contains(event.relatedTarget as Node)
+    )
+      return;
+    this.onTouchedCallback();
+  }
   /** Internal value state */
   private _value: SearchFilterValue | null = null;
 
@@ -356,7 +397,7 @@ export class SearchFilterComponent implements ControlValueAccessor {
 
   constructor(
     @Optional() @Self() public ngControl: NgControl,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {
     if (this.ngControl != null) {
       this.ngControl.valueAccessor = this;
@@ -391,10 +432,8 @@ export class SearchFilterComponent implements ControlValueAccessor {
     const currentSelect = this.inputModelValue;
     this._value = {
       searchVal: val,
-      selectVal: currentSelect
+      selectVal: currentSelect,
     };
-    this.onChangeCallback(this._value);
-    this.onTouchedCallback();
   }
 
   public get inputModelValue(): any {
@@ -405,22 +444,20 @@ export class SearchFilterComponent implements ControlValueAccessor {
     const currentSearch = this.modelValue;
     this._value = {
       searchVal: currentSearch,
-      selectVal: val
+      selectVal: val,
     };
-    this.onChangeCallback(this._value);
-    this.onTouchedCallback();
   }
 
   /** Returns shared field information attached to all emitted events. */
   private fieldInfo(): SearchInputInfo {
     let inputRef: Element | null = null;
     if (this.effectiveId) {
-      inputRef = document.querySelector(`#${this.effectiveId}`);
+      inputRef = typeof document === 'undefined' ? null : document.getElementById(this.effectiveId);
     }
     return {
-      ...inputRef && { inputRef: inputRef },
+      ...(inputRef && { inputRef: inputRef }),
       modelValue: this.modelValue,
-      fieldName: this.fieldName
+      fieldName: this.fieldName,
     };
   }
 
@@ -428,7 +465,7 @@ export class SearchFilterComponent implements ControlValueAccessor {
   public modelValueChange(modelChangeEvent: string): void {
     this.modelChange.emit({
       ...this.fieldInfo(),
-      modelChangeEvent: modelChangeEvent
+      modelChangeEvent: modelChangeEvent,
     });
   }
 
@@ -436,7 +473,7 @@ export class SearchFilterComponent implements ControlValueAccessor {
   public inputChange(changeValue: Event): void {
     this.inputChanged.emit({
       ...this.fieldInfo(),
-      changeEvent: changeValue
+      changeEvent: changeValue,
     });
   }
 
@@ -444,7 +481,7 @@ export class SearchFilterComponent implements ControlValueAccessor {
   public focusChange(onFocusEvent: FocusEvent): void {
     this.focusGained.emit({
       ...this.fieldInfo(),
-      focusEvent: onFocusEvent
+      focusEvent: onFocusEvent,
     });
   }
 
@@ -452,7 +489,7 @@ export class SearchFilterComponent implements ControlValueAccessor {
   public blurChange(blurEvent: FocusEvent): void {
     this.focusLost.emit({
       ...this.fieldInfo(),
-      blurEvent: blurEvent
+      blurEvent: blurEvent,
     });
   }
 
@@ -460,7 +497,7 @@ export class SearchFilterComponent implements ControlValueAccessor {
   public keydownHandle(keyDownEvent: KeyboardEvent): void {
     this.keyPressed.emit({
       ...this.fieldInfo(),
-      keyDownEvent: keyDownEvent
+      keyDownEvent: keyDownEvent,
     });
   }
 
@@ -468,7 +505,7 @@ export class SearchFilterComponent implements ControlValueAccessor {
   public keyupHandle(keyUpEvent: KeyboardEvent): void {
     this.keyReleased.emit({
       ...this.fieldInfo(),
-      keyUpEvent: keyUpEvent
+      keyUpEvent: keyUpEvent,
     });
   }
 
@@ -476,7 +513,7 @@ export class SearchFilterComponent implements ControlValueAccessor {
   public keyEnterHandle(event: Event): void {
     this.enterPressed.emit({
       ...this.fieldInfo(),
-      keyEnterEvent: event
+      keyEnterEvent: event,
     });
   }
 
@@ -484,7 +521,7 @@ export class SearchFilterComponent implements ControlValueAccessor {
   public inputClick(clickEvent: MouseEvent): void {
     this.inputClicked.emit({
       ...this.fieldInfo(),
-      clickEvent: clickEvent
+      clickEvent: clickEvent,
     });
   }
 
@@ -497,7 +534,7 @@ export class SearchFilterComponent implements ControlValueAccessor {
   public handleSelectionChange(event: any): void {
     this.selectionChange.emit({
       ...this.fieldInfo(),
-      selectionChange: event
+      selectionChange: event,
     });
   }
 
@@ -505,7 +542,7 @@ export class SearchFilterComponent implements ControlValueAccessor {
   public openedChange(opened: boolean): void {
     this.panelOpenChange.emit({
       ...this.fieldInfo(),
-      selectionChange: opened
+      selectionChange: opened,
     });
   }
 
@@ -539,7 +576,7 @@ export class SearchFilterComponent implements ControlValueAccessor {
     this.inputModelValue = this.multiple ? [] : null;
     this.selectionChange.emit({
       ...this.fieldInfo(),
-      selectionChange: null
+      selectionChange: null,
     });
   }
 }

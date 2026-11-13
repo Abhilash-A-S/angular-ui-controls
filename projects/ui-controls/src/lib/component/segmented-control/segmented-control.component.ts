@@ -1,6 +1,16 @@
 import {
-  Component, Input, Output, EventEmitter, ViewEncapsulation,
-  AfterViewInit, ViewChildren, QueryList, ElementRef, ChangeDetectorRef, Optional, Self
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ViewEncapsulation,
+  AfterViewInit,
+  ViewChildren,
+  QueryList,
+  ElementRef,
+  ChangeDetectorRef,
+  Optional,
+  Self,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgControl } from '@angular/forms';
@@ -9,7 +19,9 @@ import { BaseControlValueAccessor } from '../base-control-value-accessor.directi
 export interface TabOption {
   label: string;
   value: any;
-  disable?: boolean
+  disabled?: boolean;
+  /** @deprecated Use disabled. */
+  disable?: boolean;
 }
 
 @Component({
@@ -18,9 +30,12 @@ export interface TabOption {
   imports: [CommonModule],
   templateUrl: './segmented-control.component.html',
   styleUrls: ['./segmented-control.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
-export class SegmentedControlComponent extends BaseControlValueAccessor<any> implements AfterViewInit {
+export class SegmentedControlComponent
+  extends BaseControlValueAccessor<any>
+  implements AfterViewInit
+{
   /**
    * Options rendered by the control; use the label/value key inputs for object options.
    * @default []
@@ -62,15 +77,13 @@ export class SegmentedControlComponent extends BaseControlValueAccessor<any> imp
 
   // Find the index of the currently selected value
   get activeIndex(): number {
-    return this.options.findIndex(opt => opt.value === this.currentValue);
+    return this.options.findIndex((opt) => opt.value === this.currentValue);
   }
 
   // Calculate the 'left' position by summing widths of previous buttons
   get activeOffset(): number {
     if (this.activeIndex === -1 || this.buttonWidths.length === 0) return 0;
-    return this.buttonWidths
-      .slice(0, this.activeIndex)
-      .reduce((acc, width) => acc + width, 0);
+    return this.buttonWidths.slice(0, this.activeIndex).reduce((acc, width) => acc + width, 0);
   }
 
   // Get the width of the currently active button
@@ -79,10 +92,9 @@ export class SegmentedControlComponent extends BaseControlValueAccessor<any> imp
     return this.buttonWidths[this.activeIndex];
   }
 
-
   constructor(
     @Optional() @Self() public override ngControl: NgControl,
-    private changeRef: ChangeDetectorRef
+    private changeRef: ChangeDetectorRef,
   ) {
     super(ngControl, changeRef);
   }
@@ -95,16 +107,22 @@ export class SegmentedControlComponent extends BaseControlValueAccessor<any> imp
   calculateWidths() {
     if (this.buttons) {
       // Map the widths into our local array
-      this.buttonWidths = this.buttons.map(btn => btn.nativeElement.offsetWidth);
+      this.buttonWidths = this.buttons.map((btn) => btn.nativeElement.offsetWidth);
       // Emit for parent components if needed
       this.widthCalculated.emit(this.buttonWidths);
       // Ensure Angular sees the updated buttonWidths array
       this.cdr?.detectChanges();
-    };
+    }
   }
 
   select(value: any) {
+    if (
+      this.disabled ||
+      this.options.some((option) => option.value === value && (option.disabled || option.disable))
+    )
+      return;
     this.currentValue = value;
+    this.commitValue(value);
     this.selectionChange.emit(value);
   }
 }

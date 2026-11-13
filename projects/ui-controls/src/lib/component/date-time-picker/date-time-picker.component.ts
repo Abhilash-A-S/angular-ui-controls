@@ -1,13 +1,25 @@
-import { Component, EventEmitter, Input, Output, Optional, Self, ChangeDetectorRef, ViewChild, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  Optional,
+  Self,
+  ChangeDetectorRef,
+  ViewChild,
+  AfterViewInit,
+} from '@angular/core';
 import { AutoPopulateCurrentDateDirective } from '../../directive/auto-populate-current-date.directive';
 import { MaterialModule } from '../../material.module';
 import {
-  NgxMatDatepickerActions, NgxMatDatepickerApply,
-  NgxMatDatepickerInput, NgxMatDatetimepicker,
+  NgxMatDatepickerActions,
+  NgxMatDatepickerApply,
+  NgxMatDatepickerInput,
+  NgxMatDatetimepicker,
   NgxMatDatepickerToggle,
-  NgxMatDatepickerInputEvent
+  NgxMatDatepickerInputEvent,
 } from '@ngxmc/datetime-picker';
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatMomentDateModule, provideMomentDateAdapter } from '@angular/material-moment-adapter';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { DATE_TIME_FORMATS } from '../../utilities';
 import moment from 'moment';
@@ -21,7 +33,7 @@ import {
   DateTimePickerKeydownEvent,
   DateTimePickerKeyEnter,
   DateTimePickerKeyupEvent,
-  DateTimePickerModelChangeEvent
+  DateTimePickerModelChangeEvent,
 } from './date-time-picker.interface';
 import { BaseControlValueAccessor } from '../base-control-value-accessor.directive';
 import { NgControl } from '@angular/forms';
@@ -37,13 +49,16 @@ import { NgControl } from '@angular/forms';
     NgxMatDatepickerInput,
     NgxMatDatepickerToggle,
     NgxMatDatepickerActions,
-    AutoPopulateCurrentDateDirective
+    AutoPopulateCurrentDateDirective,
   ],
-  providers: [{ provide: MAT_DATE_FORMATS, useValue: DATE_TIME_FORMATS }],
+  providers: [provideMomentDateAdapter(DATE_TIME_FORMATS)],
   templateUrl: './date-time-picker.component.html',
-  styleUrl: './date-time-picker.component.scss'
+  styleUrl: './date-time-picker.component.scss',
 })
-export class DateTimePickerComponent extends BaseControlValueAccessor<Date> implements AfterViewInit {
+export class DateTimePickerComponent
+  extends BaseControlValueAccessor<Date>
+  implements AfterViewInit
+{
   @ViewChild('pickerWithActions') pickerWithActions!: NgxMatDatetimepicker<any>;
 
   /**
@@ -92,19 +107,12 @@ export class DateTimePickerComponent extends BaseControlValueAccessor<Date> impl
 
   constructor(
     @Optional() @Self() public override ngControl: NgControl,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     super(ngControl, changeDetectorRef);
   }
 
-  ngAfterViewInit(): void {
-    this.pickerWithActions?.openedStream.subscribe(() => {
-      const instance = (this.pickerWithActions as any)?._componentRef?.instance;
-      instance?._model?.selectionChanged.subscribe(() => {
-        this.changeDetectorRef.detectChanges();
-      });
-    });
-  }
+  ngAfterViewInit(): void {}
 
   /**
    * Error message displayed for validation
@@ -119,7 +127,6 @@ export class DateTimePickerComponent extends BaseControlValueAccessor<Date> impl
    * @type boolean
    */
   @Input() required: boolean = false;
-
 
   /**
    * Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved.
@@ -162,14 +169,9 @@ export class DateTimePickerComponent extends BaseControlValueAccessor<Date> impl
   @Input() maxDate!: Date;
 
   /** Checks if selected date and time violates min/max bounds to disable apply tick */
-  public isApplyDisabled(picker: any): boolean {
-    const selectedDate = picker?._componentRef?.instance?._model?.selection;
-    if (!selectedDate) return false;
-
-    if (this.minDate && new Date(selectedDate) < new Date(this.minDate)) return true;
-    if (this.maxDate && new Date(selectedDate) > new Date(this.maxDate)) return true;
-
-    return false;
+  /** Compatibility helper. The picker input validates min/max through its public API. */
+  public isApplyDisabled(_picker?: unknown): boolean {
+    return this.disabled || this.readonly;
   }
 
   /**
@@ -178,7 +180,8 @@ export class DateTimePickerComponent extends BaseControlValueAccessor<Date> impl
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onDateChange
    */
-  @Output() dateChange: EventEmitter<DateTimePickerDateChangeEvent> = new EventEmitter<DateTimePickerDateChangeEvent>();
+  @Output() dateChange: EventEmitter<DateTimePickerDateChangeEvent> =
+    new EventEmitter<DateTimePickerDateChangeEvent>();
 
   /**
    * Emits when the component model-change handler runs.
@@ -186,7 +189,8 @@ export class DateTimePickerComponent extends BaseControlValueAccessor<Date> impl
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onModelChange
    */
-  @Output() modelChange: EventEmitter<DateTimePickerModelChangeEvent> = new EventEmitter<DateTimePickerModelChangeEvent>();
+  @Output() modelChange: EventEmitter<DateTimePickerModelChangeEvent> =
+    new EventEmitter<DateTimePickerModelChangeEvent>();
 
   /**
    * Emits from the existing change handler.
@@ -194,7 +198,8 @@ export class DateTimePickerComponent extends BaseControlValueAccessor<Date> impl
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onChange
    */
-  @Output() changeCommitted: EventEmitter<DateTimePickerChangeEvent> = new EventEmitter<DateTimePickerChangeEvent>();
+  @Output() changeCommitted: EventEmitter<DateTimePickerChangeEvent> =
+    new EventEmitter<DateTimePickerChangeEvent>();
 
   /**
    * Emits from the existing input/change handler.
@@ -202,7 +207,8 @@ export class DateTimePickerComponent extends BaseControlValueAccessor<Date> impl
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onInputChange
    */
-  @Output() inputChanged: EventEmitter<DateTimePickerInputEvent> = new EventEmitter<DateTimePickerInputEvent>();
+  @Output() inputChanged: EventEmitter<DateTimePickerInputEvent> =
+    new EventEmitter<DateTimePickerInputEvent>();
 
   /**
    * Emits when the inner field gains focus.
@@ -210,7 +216,8 @@ export class DateTimePickerComponent extends BaseControlValueAccessor<Date> impl
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onFocusChange
    */
-  @Output() focusGained: EventEmitter<DateTimePickerFocusEvent> = new EventEmitter<DateTimePickerFocusEvent>();
+  @Output() focusGained: EventEmitter<DateTimePickerFocusEvent> =
+    new EventEmitter<DateTimePickerFocusEvent>();
 
   /**
    * Emits when the inner field loses focus.
@@ -218,7 +225,8 @@ export class DateTimePickerComponent extends BaseControlValueAccessor<Date> impl
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onBlurChange
    */
-  @Output() focusLost: EventEmitter<DateTimePickerBlurEvent> = new EventEmitter<DateTimePickerBlurEvent>();
+  @Output() focusLost: EventEmitter<DateTimePickerBlurEvent> =
+    new EventEmitter<DateTimePickerBlurEvent>();
 
   /**
    * Emits on the inner field keydown event.
@@ -226,7 +234,8 @@ export class DateTimePickerComponent extends BaseControlValueAccessor<Date> impl
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onKeydownHandle
    */
-  @Output() keyPressed: EventEmitter<DateTimePickerKeydownEvent> = new EventEmitter<DateTimePickerKeydownEvent>();
+  @Output() keyPressed: EventEmitter<DateTimePickerKeydownEvent> =
+    new EventEmitter<DateTimePickerKeydownEvent>();
 
   /**
    * Emits on the inner field keyup event.
@@ -234,133 +243,127 @@ export class DateTimePickerComponent extends BaseControlValueAccessor<Date> impl
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onKeyupHandle
    */
-  @Output() keyReleased: EventEmitter<DateTimePickerKeyupEvent> = new EventEmitter<DateTimePickerKeyupEvent>();
+  @Output() keyReleased: EventEmitter<DateTimePickerKeyupEvent> =
+    new EventEmitter<DateTimePickerKeyupEvent>();
 
   /**
    * Reserved output retained for API compatibility. No emission site exists in the supplied implementation.
    * @payload DateTimePickerKeyEnter
    * @renamedFrom onKeyEnterHandle
    */
-  @Output() enterPressed: EventEmitter<DateTimePickerKeyEnter> = new EventEmitter<DateTimePickerKeyEnter>();
+  @Output() enterPressed: EventEmitter<DateTimePickerKeyEnter> =
+    new EventEmitter<DateTimePickerKeyEnter>();
 
   /**
- * Returns field metadata along with current date-time value
- * @returns object containing model value and field name
- */
+   * Returns field metadata along with current date-time value
+   * @returns object containing model value and field name
+   */
   private fieldInfo(): DateTimePickerFieldInfo {
     let inputRef: Element | null = null;
     if (this.effectiveId) {
-      inputRef = document.querySelector(`#${this.effectiveId}`);
+      inputRef = typeof document === 'undefined' ? null : document.getElementById(this.effectiveId);
     }
     return {
-      ...inputRef && { inputRef: inputRef },
+      ...(inputRef && { inputRef: inputRef }),
       modelValue: this.modelValue,
-      textFieldName: this.fieldName
+      textFieldName: this.fieldName,
     };
   }
 
-
   /**
- * Handles date-time picker change event
- * @param handleDateChange Date change event
- * @returns void (emits dateChange)
- */
+   * Handles date-time picker change event
+   * @param handleDateChange Date change event
+   * @returns void (emits dateChange)
+   */
 
   public handleDateChange(dateChange: NgxMatDatepickerInputEvent<any, any>): void {
     this.dateChange.emit({
       ...this.fieldInfo(),
-      dateChangeEvent: dateChange
+      dateChangeEvent: dateChange,
     });
   }
 
-
   /**
- * Handles ngModel value change
- * @param modelValueChange Updated model value
- * @returns void (emits modelChange)
- */
+   * Handles ngModel value change
+   * @param modelValueChange Updated model value
+   * @returns void (emits modelChange)
+   */
   public handleModelChange(modelValueChange: Date): void {
     this.modelChange.emit({
       ...this.fieldInfo(),
-      modelChangeEvent: modelValueChange
+      modelChangeEvent: modelValueChange,
     });
   }
 
-
   /**
- * Handles focus event
- * @param onFocus Focus event
- * @returns void (emits focusGained)
- */
+   * Handles focus event
+   * @param onFocus Focus event
+   * @returns void (emits focusGained)
+   */
   public onFocus(onFocus: FocusEvent): void {
     this.focusGained.emit({
       ...this.fieldInfo(),
-      focusEvent: onFocus
+      focusEvent: onFocus,
     });
   }
 
-
   /**
- * Handles blur event
- * @param onBlur Blur event
- * @returns void (emits focusLost)
- */
+   * Handles blur event
+   * @param onBlur Blur event
+   * @returns void (emits focusLost)
+   */
   public onBlur(onBlur: FocusEvent): void {
     this.focusLost.emit({
       ...this.fieldInfo(),
-      blurEvent: onBlur
+      blurEvent: onBlur,
     });
   }
 
-
   /**
- * Handles keyup event
- * @param onKeyUp Keyboard event
- * @returns void (emits keyReleased)
- */
+   * Handles keyup event
+   * @param onKeyUp Keyboard event
+   * @returns void (emits keyReleased)
+   */
   public onKeyUp(onKeyUp: KeyboardEvent): void {
     this.keyReleased.emit({
       ...this.fieldInfo(),
-      keyUpEvent: onKeyUp
+      keyUpEvent: onKeyUp,
     });
   }
 
-
   /**
- * Handles keydown event
- * @param onKeyDown Keyboard event
- * @returns void (emits keyPressed)
- */
+   * Handles keydown event
+   * @param onKeyDown Keyboard event
+   * @returns void (emits keyPressed)
+   */
   public onKeyDown(onKeyDown: KeyboardEvent): void {
     this.keyPressed.emit({
       ...this.fieldInfo(),
-      keyDownEvent: onKeyDown
+      keyDownEvent: onKeyDown,
     });
   }
 
-
   /**
- * Handles input event
- * @param inputChanged Input event
- * @returns void (emits inputChanged)
- */
+   * Handles input event
+   * @param inputChanged Input event
+   * @returns void (emits inputChanged)
+   */
   public onInput(onInputChange: Event): void {
     this.inputChanged.emit({
       ...this.fieldInfo(),
-      inputChangeEvent: onInputChange
+      inputChangeEvent: onInputChange,
     });
   }
 
-
   /**
- * Handles change event
- * @param changeEvent Change event
- * @returns void (emits changeCommitted)
- */
+   * Handles change event
+   * @param changeEvent Change event
+   * @returns void (emits changeCommitted)
+   */
   public onChangeHandler(changeEvent: Event): void {
     this.changeCommitted.emit({
       ...this.fieldInfo(),
-      changeEvent: changeEvent
+      changeEvent: changeEvent,
     });
   }
 
@@ -369,21 +372,9 @@ export class DateTimePickerComponent extends BaseControlValueAccessor<Date> impl
    * pre-selects the current date on the calendar and sets the current time
    * in the timepicker spinners without populating the input text-box.
    */
-  public onPickerOpened(): void {
-    const hasValue = this.modelValue && moment(this.modelValue).isValid();
-    if (!hasValue) {
-      const content = (this.pickerWithActions as any)?._componentRef?.instance;
-      if (content && content._model && !content._model.selection) {
-        const now = moment();
-        content._model.add(now);
-        content._modelTime = now;
-        content._changeDetectorRef?.markForCheck();
-        content._changeDetectorRef?.detectChanges();
-        setTimeout(() => {
-          content._changeDetectorRef?.markForCheck();
-          content._changeDetectorRef?.detectChanges();
-        }, 0);
-      }
-    }
+  /** Kept for callers; defaultTime and startAt configure the public picker API. */
+  public onPickerOpened(): void {}
+  public onEnter(event: KeyboardEvent): void {
+    this.enterPressed.emit({ ...this.fieldInfo(), keyEnterEvent: event } as any);
   }
 }

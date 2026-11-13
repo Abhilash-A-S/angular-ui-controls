@@ -1,8 +1,5 @@
 <div class="d-flex gap-2 align-items-center" (focusout)="setZeroBefore()">
-  <mat-form-field
-    class="timePicker"
-    [ngClass]="{ 'mandatory-bg-color': required }"
-  >
+  <mat-form-field class="timePicker" [ngClass]="{ 'mandatory-bg-color': required }">
     <mat-label>Hours</mat-label>
     <input
       matInput
@@ -14,9 +11,9 @@
       (keypress)="acceptNumberOnly($event)"
       uiDigitLimit="2"
       (keyup)="onKeyUp($event, 23, 'hours')"
-      
       [id]="effectiveIdHr"
-      uiPreventClipboard [preventCopyPasteCut]="preventCopyPasteCut"
+      uiPreventClipboard
+      [preventCopyPasteCut]="preventCopyPasteCut"
       [disabled]="disabled"
       (ngModelChange)="modelValueChange($event)"
       (input)="inputChange($event)"
@@ -28,10 +25,7 @@
     />
   </mat-form-field>
   <span>:</span>
-  <mat-form-field
-    class="timePicker"
-    [ngClass]="{ 'mandatory-bg-color': required }"
-  >
+  <mat-form-field class="timePicker" [ngClass]="{ 'mandatory-bg-color': required }">
     <mat-label>Minutes</mat-label>
     <input
       matInput
@@ -44,9 +38,9 @@
       uiDigitLimit="2"
       (focusout)="setZeroBefore()"
       (keyup)="onKeyUp($event, 59, 'minutes')"
-      
       [id]="effectiveIdMin"
-      uiPreventClipboard [preventCopyPasteCut]="preventCopyPasteCut"
+      uiPreventClipboard
+      [preventCopyPasteCut]="preventCopyPasteCut"
       [disabled]="disabled"
       (ngModelChange)="modelValueChange($event)"
       (input)="inputChange($event)"

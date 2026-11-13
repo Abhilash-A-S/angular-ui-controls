@@ -9,7 +9,7 @@
         [id]="effectiveId"
         [(ngModel)]="inputModelValue"
         [ngModelOptions]="{ standalone: true }"
-        [disabled]="disabled"
+        [disabled]="disabled || preventToggleOnClick"
         [required]="required"
         [disableRipple]="disableRipple"
         [color]="color"
@@ -19,20 +19,20 @@
         (toggleChange)="onToggleChange()"
         (click)="handleOnClick($event)"
       >
-        @if(label){
-        {{ label | translate }}
+        @if (label) {
+          {{ label | translate }}
         }
       </mat-slide-toggle>
 
       @if (preventToggleOnClick) {
-      <div class="click-blocker" (click)="handleOverlayClick($event)"></div>
+        <div class="click-blocker" (click)="handleOverlayClick($event)"></div>
       }
     </div>
 
     @if (required && errorMessage && !inputModelValue) {
-    <div>
-      {{ errorMessage | translate }}
-    </div>
+      <div>
+        {{ errorMessage | translate }}
+      </div>
     }
   </div>
 </div>

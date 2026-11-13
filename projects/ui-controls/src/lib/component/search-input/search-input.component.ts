@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, Output, Optional, Self, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  Optional,
+  Self,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../material.module';
 import { NgControl } from '@angular/forms';
@@ -12,7 +20,7 @@ import {
   SearchInputKeydownEvent,
   SearchInputKeyEnterEvent,
   SearchInputKeyupEvent,
-  SearchInputModelChangeEvent
+  SearchInputModelChangeEvent,
 } from './search-input.interface';
 import { UiUtilitiesModule } from '../../utilities';
 
@@ -21,7 +29,7 @@ import { UiUtilitiesModule } from '../../utilities';
   standalone: true,
   imports: [CommonModule, MaterialModule, UiUtilitiesModule],
   templateUrl: './search-input.component.html',
-  styleUrl: './search-input.component.scss'
+  styleUrl: './search-input.component.scss',
 })
 export class SearchInputComponent extends BaseControlValueAccessor<any> {
   /**
@@ -123,7 +131,7 @@ export class SearchInputComponent extends BaseControlValueAccessor<any> {
    * Maximum number of characters allowed
    * @type number
    */
-  @Input() maxLength !: number;
+  @Input() maxLength!: number;
 
   /**
    * Determines where the search button is rendered relative to the input
@@ -159,7 +167,7 @@ export class SearchInputComponent extends BaseControlValueAccessor<any> {
    * @type string
    * @renamedFrom searchBtnToolTip
    */
-  @Input() searchButtonTooltip: string = "";
+  @Input() searchButtonTooltip: string = '';
 
   /**
    * Emits when the component model-change handler runs.
@@ -167,7 +175,8 @@ export class SearchInputComponent extends BaseControlValueAccessor<any> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onModelChange
    */
-  @Output() modelChange: EventEmitter<SearchInputModelChangeEvent> = new EventEmitter<SearchInputModelChangeEvent>();
+  @Output() modelChange: EventEmitter<SearchInputModelChangeEvent> =
+    new EventEmitter<SearchInputModelChangeEvent>();
 
   /**
    * Emits from the existing input/change handler.
@@ -175,7 +184,8 @@ export class SearchInputComponent extends BaseControlValueAccessor<any> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onInputChange
    */
-  @Output() inputChanged: EventEmitter<SearchInputInputEvent> = new EventEmitter<SearchInputInputEvent>();
+  @Output() inputChanged: EventEmitter<SearchInputInputEvent> =
+    new EventEmitter<SearchInputInputEvent>();
 
   /**
    * Emits when the inner field gains focus.
@@ -183,7 +193,8 @@ export class SearchInputComponent extends BaseControlValueAccessor<any> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onFocusChange
    */
-  @Output() focusGained: EventEmitter<SearchInputFocusEvent> = new EventEmitter<SearchInputFocusEvent>();
+  @Output() focusGained: EventEmitter<SearchInputFocusEvent> =
+    new EventEmitter<SearchInputFocusEvent>();
 
   /**
    * Emits when the inner field loses focus.
@@ -191,7 +202,8 @@ export class SearchInputComponent extends BaseControlValueAccessor<any> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onBlurChange
    */
-  @Output() focusLost: EventEmitter<SearchInputBlurEvent> = new EventEmitter<SearchInputBlurEvent>();
+  @Output() focusLost: EventEmitter<SearchInputBlurEvent> =
+    new EventEmitter<SearchInputBlurEvent>();
 
   /**
    * Emits on the inner field keydown event.
@@ -199,7 +211,8 @@ export class SearchInputComponent extends BaseControlValueAccessor<any> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onKeydownHandle
    */
-  @Output() keyPressed: EventEmitter<SearchInputKeydownEvent> = new EventEmitter<SearchInputKeydownEvent>();
+  @Output() keyPressed: EventEmitter<SearchInputKeydownEvent> =
+    new EventEmitter<SearchInputKeydownEvent>();
 
   /**
    * Emits on the inner field keyup event.
@@ -207,7 +220,8 @@ export class SearchInputComponent extends BaseControlValueAccessor<any> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onKeyupHandle
    */
-  @Output() keyReleased: EventEmitter<SearchInputKeyupEvent> = new EventEmitter<SearchInputKeyupEvent>();
+  @Output() keyReleased: EventEmitter<SearchInputKeyupEvent> =
+    new EventEmitter<SearchInputKeyupEvent>();
 
   /**
    * Emits when Enter is released in the inner field.
@@ -215,7 +229,8 @@ export class SearchInputComponent extends BaseControlValueAccessor<any> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onKeyEnterHandle
    */
-  @Output() enterPressed: EventEmitter<SearchInputKeyEnterEvent> = new EventEmitter<SearchInputKeyEnterEvent>();
+  @Output() enterPressed: EventEmitter<SearchInputKeyEnterEvent> =
+    new EventEmitter<SearchInputKeyEnterEvent>();
 
   /**
    * Emits when the inner input is clicked.
@@ -223,8 +238,8 @@ export class SearchInputComponent extends BaseControlValueAccessor<any> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onInputClickHandle
    */
-  @Output() inputClicked: EventEmitter<SearchInputClickEvent> = new EventEmitter<SearchInputClickEvent>();
-
+  @Output() inputClicked: EventEmitter<SearchInputClickEvent> =
+    new EventEmitter<SearchInputClickEvent>();
 
   /**
    * Emits when the search action is activated.
@@ -234,53 +249,54 @@ export class SearchInputComponent extends BaseControlValueAccessor<any> {
    */
   @Output() searchClicked: EventEmitter<SearchInputInfo> = new EventEmitter<SearchInputInfo>();
 
-
-  constructor(@Optional() @Self() public override ngControl: NgControl, private changeDetectorRef: ChangeDetectorRef
+  constructor(
+    @Optional() @Self() public override ngControl: NgControl,
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     super(ngControl, changeDetectorRef);
   }
 
   /**
- * Returns shared field information attached
- * to all emitted events.
- *
- * Includes:
- * - Input DOM reference (if inputId is provided)
- * - Current model value
- * - Field identifier
- */
+   * Returns shared field information attached
+   * to all emitted events.
+   *
+   * Includes:
+   * - Input DOM reference (if inputId is provided)
+   * - Current model value
+   * - Field identifier
+   */
 
   private fieldInfo(): SearchInputInfo {
     let inputRef: Element | null = null;
     if (this.effectiveId) {
-      inputRef = document.querySelector(`#${this.effectiveId}`);
+      inputRef = typeof document === 'undefined' ? null : document.getElementById(this.effectiveId);
     }
     return {
-      ...inputRef && { inputRef: inputRef },
+      ...(inputRef && { inputRef: inputRef }),
       modelValue: this.modelValue,
-      fieldName: this.fieldName
+      fieldName: this.fieldName,
     };
   }
 
   /**
-  * Emits when the model value changes
-  * @param modelChangeEvent - Updated model value
-  */
+   * Emits when the model value changes
+   * @param modelChangeEvent - Updated model value
+   */
   public modelValueChange(modelChangeEvent: string): void {
     this.modelChange.emit({
       ...this.fieldInfo(),
-      modelChangeEvent: modelChangeEvent
+      modelChangeEvent: modelChangeEvent,
     });
   }
 
   /**
-  * Emits on input value change
-  * @param changeValue - Input event
-  */
+   * Emits on input value change
+   * @param changeValue - Input event
+   */
   public inputChange(changeValue: Event): void {
     this.inputChanged.emit({
       ...this.fieldInfo(),
-      changeEvent: changeValue
+      changeEvent: changeValue,
     });
   }
 
@@ -291,7 +307,7 @@ export class SearchInputComponent extends BaseControlValueAccessor<any> {
   public focusChange(onFocusEvent: FocusEvent): void {
     this.focusGained.emit({
       ...this.fieldInfo(),
-      focusEvent: onFocusEvent
+      focusEvent: onFocusEvent,
     });
   }
 
@@ -302,40 +318,40 @@ export class SearchInputComponent extends BaseControlValueAccessor<any> {
   public blurChange(blurEvent: FocusEvent): void {
     this.focusLost.emit({
       ...this.fieldInfo(),
-      blurEvent: blurEvent
+      blurEvent: blurEvent,
     });
   }
 
   /**
- * Emits on keydown action
- * @param keyDownEvent - Keyboard event
- */
+   * Emits on keydown action
+   * @param keyDownEvent - Keyboard event
+   */
   public keydownHandle(keyDownEvent: KeyboardEvent): void {
     this.keyPressed.emit({
       ...this.fieldInfo(),
-      keyDownEvent: keyDownEvent
+      keyDownEvent: keyDownEvent,
     });
   }
 
   /**
-  * Emits on keyup action
-  * @param keyUpEvent - Keyboard event
-  */
+   * Emits on keyup action
+   * @param keyUpEvent - Keyboard event
+   */
   public keyupHandle(keyUpEvent: KeyboardEvent): void {
     this.keyReleased.emit({
       ...this.fieldInfo(),
-      keyUpEvent: keyUpEvent
+      keyUpEvent: keyUpEvent,
     });
   }
 
   /**
-  * Emits when Enter key is pressed
-  * @param event - Keyboard or input event
-  */
+   * Emits when Enter key is pressed
+   * @param event - Keyboard or input event
+   */
   public keyEnterHandle(event: Event): void {
     this.enterPressed.emit({
       ...this.fieldInfo(),
-      keyEnterEvent: event
+      keyEnterEvent: event,
     });
   }
 
@@ -346,7 +362,7 @@ export class SearchInputComponent extends BaseControlValueAccessor<any> {
   public inputClick(clickEvent: MouseEvent): void {
     this.inputClicked.emit({
       ...this.fieldInfo(),
-      clickEvent: clickEvent
+      clickEvent: clickEvent,
     });
   }
 

@@ -1,4 +1,13 @@
-import { Component, EventEmitter, inject, Input, Output, Optional, Self, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+  Optional,
+  Self,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { MaterialModule } from '../../material.module';
 import { UiUtilitiesModule } from '../../utilities';
 import { NgControl } from '@angular/forms';
@@ -62,12 +71,14 @@ export class TimeInputComponent extends BaseControlValueAccessor<string> {
   }
 
   private configureTimeIds(): void {
-    this.effectiveIdHr = this.rawIdPrefix && this.rawInputIdHr 
-      ? `${this.rawIdPrefix}_${this.rawInputIdHr}` 
-      : this.rawInputIdHr;
-    this.effectiveIdMin = this.rawIdPrefix && this.rawInputIdMin 
-      ? `${this.rawIdPrefix}_${this.rawInputIdMin}` 
-      : this.rawInputIdMin;
+    this.effectiveIdHr =
+      this.rawIdPrefix && this.rawInputIdHr
+        ? `${this.rawIdPrefix}_${this.rawInputIdHr}`
+        : this.rawInputIdHr;
+    this.effectiveIdMin =
+      this.rawIdPrefix && this.rawInputIdMin
+        ? `${this.rawIdPrefix}_${this.rawInputIdMin}`
+        : this.rawInputIdMin;
   }
 
   /**
@@ -85,7 +96,6 @@ export class TimeInputComponent extends BaseControlValueAccessor<string> {
    */
   @Input() required: boolean = false;
 
-
   /**
    * Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved.
    * @type string | number
@@ -99,8 +109,6 @@ export class TimeInputComponent extends BaseControlValueAccessor<string> {
    * @type boolean
    */
   @Input() readonly: boolean = false;
-
-
 
   public hours = '';
   public minutes = '';
@@ -125,8 +133,9 @@ export class TimeInputComponent extends BaseControlValueAccessor<string> {
     }
   }
 
-  constructor(@Optional() @Self() public override ngControl: NgControl,
-    private changeDetectorRef: ChangeDetectorRef
+  constructor(
+    @Optional() @Self() public override ngControl: NgControl,
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     super(ngControl, changeDetectorRef);
   }
@@ -199,15 +208,14 @@ export class TimeInputComponent extends BaseControlValueAccessor<string> {
    */
   @Output() enterPressed: EventEmitter<any> = new EventEmitter<any>();
 
-
   /**
- * Returns common field information
- * reused across emitted events.
- */
+   * Returns common field information
+   * reused across emitted events.
+   */
   private fieldInfo(): any {
     return {
-      modelValue: this.selectedHoursOrMinuts(),
-      textFieldName: this.fieldName
+      modelValue: this.formatTimeValue(),
+      textFieldName: this.fieldName,
     };
   }
 
@@ -216,45 +224,46 @@ export class TimeInputComponent extends BaseControlValueAccessor<string> {
    * @param modelChange - Updated model value
    */
   public modelValueChange(modelChange: any): void {
-    const timeVal = this.selectedHoursOrMinuts();
+    const timeVal = this.formatTimeValue();
     this.value = timeVal;
+    this.commitValue(timeVal);
     this.modelChange.emit({
       ...this.fieldInfo(),
-      modelChangeEvent: timeVal
+      modelChangeEvent: timeVal,
     });
   }
 
   /**
-  * Emits when the input value changes
-  * @param changeValue - Input change event
-  */
+   * Emits when the input value changes
+   * @param changeValue - Input change event
+   */
   public inputChange(changeValue: Event): void {
     this.inputChanged.emit({
       ...this.fieldInfo(),
-      changeEvent: changeValue
+      changeEvent: changeValue,
     });
   }
 
   /**
- * Emits when input gains focus
- * @param onFocus - Focus event
- */
+   * Emits when input gains focus
+   * @param onFocus - Focus event
+   */
   public focusChange(onFocus: FocusEvent): void {
     this.focusGained.emit({
       ...this.fieldInfo(),
-      focusEvent: onFocus
+      focusEvent: onFocus,
     });
   }
 
   /**
- * Emits when input loses focus
- * @param blurEvent - Blur event
- */
+   * Emits when input loses focus
+   * @param blurEvent - Blur event
+   */
 
   public blurChange(blurEvent: FocusEvent): void {
     this.focusLost.emit({
       ...this.fieldInfo(),
-      blurEvent: blurEvent
+      blurEvent: blurEvent,
     });
   }
 
@@ -265,7 +274,7 @@ export class TimeInputComponent extends BaseControlValueAccessor<string> {
   public keydownHandle(event: KeyboardEvent): void {
     this.keyPressed.emit({
       ...this.fieldInfo(),
-      keyDownEvent: event
+      keyDownEvent: event,
     });
   }
 
@@ -276,27 +285,35 @@ export class TimeInputComponent extends BaseControlValueAccessor<string> {
   public keyupHandle(event: KeyboardEvent): void {
     this.keyReleased.emit({
       ...this.fieldInfo(),
-      keyUpEvent: event
+      keyUpEvent: event,
     });
   }
 
   /**
-  * Emits when Enter key is pressed
-  * @param event - Keyboard or input event
-  */
+   * Emits when Enter key is pressed
+   * @param event - Keyboard or input event
+   */
   public keyEnterHandle(event: Event): void {
     this.enterPressed.emit({
       ...this.fieldInfo(),
-      keyEnterEvent: event
+      keyEnterEvent: event,
     });
   }
 
-  private selectedHoursOrMinuts() {
-    let time = null;
-    if (this.hours || this.minutes) {
-      time = `${this.hours.toString().padStart(2, '0')}:${this.minutes.toString().padStart(2, '0')}`;
-    }
-    return time;
+  private formatTimeValue(): string | null {
+    if (this.hours === '' && this.minutes === '') return null;
+    const hours = Number(this.hours || 0);
+    const minutes = Number(this.minutes || 0);
+    if (
+      !Number.isInteger(hours) ||
+      !Number.isInteger(minutes) ||
+      hours < 0 ||
+      hours > 23 ||
+      minutes < 0 ||
+      minutes > 59
+    )
+      return null;
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
   }
 
   public onKeyUp(event: KeyboardEvent, restrictNumber: number, modalValue: string) {
@@ -311,7 +328,7 @@ export class TimeInputComponent extends BaseControlValueAccessor<string> {
   public setZeroBefore() {
     this.hours = this.hours ? this.hours.toString().padStart(2, '0') : '';
     this.minutes = this.minutes ? this.minutes.toString().padStart(2, '0') : '';
-    this.value = this.selectedHoursOrMinuts();
+    this.value = this.formatTimeValue();
   }
   public acceptNumberOnly(event: any): boolean {
     const charCode = event.which ? event.which : event.keyCode;

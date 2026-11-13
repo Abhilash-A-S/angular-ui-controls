@@ -1,4 +1,4 @@
-import { NgxMatDatepickerInputEvent } from "@ngxmc/datetime-picker";
+import { NgxMatDatepickerInputEvent } from '@ngxmc/datetime-picker';
 
 /**
  * Base field information for DateTime picker
@@ -17,8 +17,7 @@ export interface DateTimePickerFieldInfo {
 /**
  * Date picker change event payload
  */
-export interface DateTimePickerDateChangeEvent
-  extends DateTimePickerFieldInfo {
+export interface DateTimePickerDateChangeEvent extends DateTimePickerFieldInfo {
   /** Date-time picker change value */
   dateChangeEvent: NgxMatDatepickerInputEvent<any, any>;
 }
@@ -26,8 +25,7 @@ export interface DateTimePickerDateChangeEvent
 /**
  * ngModel change event payload
  */
-export interface DateTimePickerModelChangeEvent
-  extends DateTimePickerFieldInfo {
+export interface DateTimePickerModelChangeEvent extends DateTimePickerFieldInfo {
   /** Updated model value */
   modelChangeEvent: Date;
 }
@@ -35,8 +33,7 @@ export interface DateTimePickerModelChangeEvent
 /**
  * Focus event payload
  */
-export interface DateTimePickerFocusEvent
-  extends DateTimePickerFieldInfo {
+export interface DateTimePickerFocusEvent extends DateTimePickerFieldInfo {
   /** Native focus event */
   focusEvent: FocusEvent;
 }
@@ -44,8 +41,7 @@ export interface DateTimePickerFocusEvent
 /**
  * Blur event payload
  */
-export interface DateTimePickerBlurEvent
-  extends DateTimePickerFieldInfo {
+export interface DateTimePickerBlurEvent extends DateTimePickerFieldInfo {
   /** Native blur event */
   blurEvent: FocusEvent;
 }
@@ -53,8 +49,7 @@ export interface DateTimePickerBlurEvent
 /**
  * Input event payload
  */
-export interface DateTimePickerInputEvent
-  extends DateTimePickerFieldInfo {
+export interface DateTimePickerInputEvent extends DateTimePickerFieldInfo {
   /** Native input event */
   inputChangeEvent: Event;
 }
@@ -62,8 +57,7 @@ export interface DateTimePickerInputEvent
 /**
  * Native change event payload
  */
-export interface DateTimePickerChangeEvent
-  extends DateTimePickerFieldInfo {
+export interface DateTimePickerChangeEvent extends DateTimePickerFieldInfo {
   /** Native change event */
   changeEvent: Event;
 }
@@ -71,8 +65,7 @@ export interface DateTimePickerChangeEvent
 /**
  * Keyup event payload
  */
-export interface DateTimePickerKeyupEvent
-  extends DateTimePickerFieldInfo {
+export interface DateTimePickerKeyupEvent extends DateTimePickerFieldInfo {
   /** Native keyboard event */
   keyUpEvent: KeyboardEvent;
 }
@@ -80,16 +73,14 @@ export interface DateTimePickerKeyupEvent
 /**
  * Keydown event payload
  */
-export interface DateTimePickerKeydownEvent
-  extends DateTimePickerFieldInfo {
+export interface DateTimePickerKeydownEvent extends DateTimePickerFieldInfo {
   /** Native keyboard event */
   keyDownEvent: KeyboardEvent;
 }
 /**
  * Keydown event payload
  */
-export interface DateTimePickerKeyEnter
-  extends DateTimePickerFieldInfo {
+export interface DateTimePickerKeyEnter extends DateTimePickerFieldInfo {
   /** Native keyboard event */
   keyDownEvent: KeyboardEvent;
 }

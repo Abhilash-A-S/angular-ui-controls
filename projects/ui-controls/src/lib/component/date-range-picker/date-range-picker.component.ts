@@ -1,9 +1,18 @@
-import { Component, EventEmitter, Input, Output, Optional, Self, ChangeDetectorRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  Optional,
+  Self,
+  ChangeDetectorRef,
+  ViewChild,
+} from '@angular/core';
 import { MaterialModule } from '../../material.module';
 import { AutoPopulateCurrentDateDirective } from '../../directive/auto-populate-current-date.directive';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatMomentDateModule, provideMomentDateAdapter } from '@angular/material-moment-adapter';
 import { MatDateRangePicker } from '@angular/material/datepicker';
 import { DATE_FORMATS, UiUtilitiesModule } from '../../utilities';
 import {
@@ -17,7 +26,7 @@ import {
   DateRangeKeydownEvent,
   DateRangeKeyupEvent,
   DateRangeModelChangeEvent,
-  DateType
+  DateType,
 } from './date-range.interface';
 import { BaseControlValueAccessor } from '../base-control-value-accessor.directive';
 import { NgControl } from '@angular/forms';
@@ -29,10 +38,11 @@ import { NgControl } from '@angular/forms';
     MaterialModule,
     UiUtilitiesModule,
     MatMomentDateModule,
-    AutoPopulateCurrentDateDirective],
+    AutoPopulateCurrentDateDirective,
+  ],
   templateUrl: './date-range-picker.component.html',
   styleUrl: './date-range-picker.component.scss',
-  providers: [{ provide: MAT_DATE_FORMATS, useValue: DATE_FORMATS }]
+  providers: [provideMomentDateAdapter(DATE_FORMATS)],
 })
 export class DateRangePickerComponent extends BaseControlValueAccessor<any> {
   // Reference to mat-date-range-picker
@@ -80,12 +90,14 @@ export class DateRangePickerComponent extends BaseControlValueAccessor<any> {
   }
 
   private configureRangeIds(): void {
-    this.effectiveIdFrom = this.rawIdPrefix && this.rawInputIdFrom 
-      ? `${this.rawIdPrefix}_${this.rawInputIdFrom}` 
-      : this.rawInputIdFrom;
-    this.effectiveIdTo = this.rawIdPrefix && this.rawInputIdTo 
-      ? `${this.rawIdPrefix}_${this.rawInputIdTo}` 
-      : this.rawInputIdTo;
+    this.effectiveIdFrom =
+      this.rawIdPrefix && this.rawInputIdFrom
+        ? `${this.rawIdPrefix}_${this.rawInputIdFrom}`
+        : this.rawInputIdFrom;
+    this.effectiveIdTo =
+      this.rawIdPrefix && this.rawInputIdTo
+        ? `${this.rawIdPrefix}_${this.rawInputIdTo}`
+        : this.rawInputIdTo;
   }
 
   /**
@@ -121,7 +133,7 @@ export class DateRangePickerComponent extends BaseControlValueAccessor<any> {
 
   constructor(
     @Optional() @Self() public override ngControl: NgControl,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     super(ngControl, changeDetectorRef);
   }
@@ -225,7 +237,8 @@ export class DateRangePickerComponent extends BaseControlValueAccessor<any> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onModelChange
    */
-  @Output() modelChange: EventEmitter<DateRangeModelChangeEvent> = new EventEmitter<DateRangeModelChangeEvent>();
+  @Output() modelChange: EventEmitter<DateRangeModelChangeEvent> =
+    new EventEmitter<DateRangeModelChangeEvent>();
 
   /**
    * Emits from the existing change handler.
@@ -233,7 +246,8 @@ export class DateRangePickerComponent extends BaseControlValueAccessor<any> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onChange
    */
-  @Output() changeCommitted: EventEmitter<DateRangeChangeEvent> = new EventEmitter<DateRangeChangeEvent>();
+  @Output() changeCommitted: EventEmitter<DateRangeChangeEvent> =
+    new EventEmitter<DateRangeChangeEvent>();
 
   /**
    * Emits from the existing input/change handler.
@@ -241,7 +255,8 @@ export class DateRangePickerComponent extends BaseControlValueAccessor<any> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onInputChange
    */
-  @Output() inputChanged: EventEmitter<DateRangeInputEvent> = new EventEmitter<DateRangeInputEvent>();
+  @Output() inputChanged: EventEmitter<DateRangeInputEvent> =
+    new EventEmitter<DateRangeInputEvent>();
 
   /**
    * Emits when the inner field gains focus.
@@ -249,7 +264,8 @@ export class DateRangePickerComponent extends BaseControlValueAccessor<any> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onFocusChange
    */
-  @Output() focusGained: EventEmitter<DateRangeFocusEvent> = new EventEmitter<DateRangeFocusEvent>();
+  @Output() focusGained: EventEmitter<DateRangeFocusEvent> =
+    new EventEmitter<DateRangeFocusEvent>();
 
   /**
    * Emits when the inner field loses focus.
@@ -265,7 +281,8 @@ export class DateRangePickerComponent extends BaseControlValueAccessor<any> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onKeydownHandle
    */
-  @Output() keyPressed: EventEmitter<DateRangeKeydownEvent> = new EventEmitter<DateRangeKeydownEvent>();
+  @Output() keyPressed: EventEmitter<DateRangeKeydownEvent> =
+    new EventEmitter<DateRangeKeydownEvent>();
 
   /**
    * Emits on the inner field keyup event.
@@ -273,14 +290,16 @@ export class DateRangePickerComponent extends BaseControlValueAccessor<any> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onKeyupHandle
    */
-  @Output() keyReleased: EventEmitter<DateRangeKeyupEvent> = new EventEmitter<DateRangeKeyupEvent>();
+  @Output() keyReleased: EventEmitter<DateRangeKeyupEvent> =
+    new EventEmitter<DateRangeKeyupEvent>();
 
   /**
    * Reserved output retained for API compatibility. No emission site exists in the supplied implementation.
    * @payload DateRangeEnterEvent
    * @renamedFrom onKeyEnterHandle
    */
-  @Output() enterPressed: EventEmitter<DateRangeEnterEvent> = new EventEmitter<DateRangeEnterEvent>();
+  @Output() enterPressed: EventEmitter<DateRangeEnterEvent> =
+    new EventEmitter<DateRangeEnterEvent>();
 
   /**
    * Emits when the date-selection handler runs.
@@ -288,28 +307,27 @@ export class DateRangePickerComponent extends BaseControlValueAccessor<any> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onDateChange
    */
-  @Output() dateChange: EventEmitter<DateRangeDateChangeEvent> = new EventEmitter<DateRangeDateChangeEvent>();
-
+  @Output() dateChange: EventEmitter<DateRangeDateChangeEvent> =
+    new EventEmitter<DateRangeDateChangeEvent>();
 
   /**
- * Returns complete date range field information
- * @returns object containing start date, end date, and field name
- */
+   * Returns complete date range field information
+   * @returns object containing start date, end date, and field name
+   */
   private fieldInfo(): DateRangeFieldInfo {
     return {
       endDate: this.endModelValue,
       fieldName: this.fieldName,
-      startDate: this.startModelValue
+      startDate: this.startModelValue,
     };
   }
 
-
   /**
- * Handles date change for start or end date
- * @param event Date change event
- * @param dateType Indicates START_DATE or END_DATE
- * @returns void (emits dateChange)
- */
+   * Handles date change for start or end date
+   * @param event Date change event
+   * @param dateType Indicates START_DATE or END_DATE
+   * @returns void (emits dateChange)
+   */
   public handleDateChange(event: any, dateType: DateType): void {
     if (dateType === 'END_DATE' && this.endModelValue) {
       this.dateRangePicker?.close();
@@ -317,110 +335,105 @@ export class DateRangePickerComponent extends BaseControlValueAccessor<any> {
     this.dateChange.emit({
       ...this.fieldInfo(),
       dateType: dateType,
-      dateChangeEvent: event
+      dateChangeEvent: event,
     });
   }
 
-
   /**
- * Handles ngModel change for start or end date
- * @param event Updated date value
- * @param dateType Indicates START_DATE or END_DATE
- * @returns void (emits modelChange)
- */
+   * Handles ngModel change for start or end date
+   * @param event Updated date value
+   * @param dateType Indicates START_DATE or END_DATE
+   * @returns void (emits modelChange)
+   */
   public handleModelChange(event: Date, dateType: DateType): void {
     this.modelChange.emit({
       ...this.fieldInfo(),
       dateType: dateType,
-      modelChangeEvent: event
+      modelChangeEvent: event,
     });
   }
 
-
   /**
- * Handles focus event for start or end date input
- * @param event Focus event
- * @param dateType Indicates START_DATE or END_DATE
- * @returns void (emits focusGained)
- */
+   * Handles focus event for start or end date input
+   * @param event Focus event
+   * @param dateType Indicates START_DATE or END_DATE
+   * @returns void (emits focusGained)
+   */
   public onFocus(event: FocusEvent, dateType: DateType): void {
     this.focusGained.emit({
       ...this.fieldInfo(),
       dateType: dateType,
-      onFocusEvent: event
+      onFocusEvent: event,
     });
   }
 
-
   /**
- * Handles blur event for start or end date input
- * @param event Blur event
- * @param dateType Indicates START_DATE or END_DATE
- * @returns void (emits focusLost)
- */
+   * Handles blur event for start or end date input
+   * @param event Blur event
+   * @param dateType Indicates START_DATE or END_DATE
+   * @returns void (emits focusLost)
+   */
   public onBlur(event: FocusEvent, dateType: DateType): void {
     this.focusLost.emit({
       ...this.fieldInfo(),
       dateType: dateType,
-      blurEvent: event
+      blurEvent: event,
     });
   }
 
-
   /**
- * Handles keyup event for start or end date input
- * @param event Keyboard event
- * @param dateType Indicates START_DATE or END_DATE
- * @returns void (emits keyReleased)
- */
+   * Handles keyup event for start or end date input
+   * @param event Keyboard event
+   * @param dateType Indicates START_DATE or END_DATE
+   * @returns void (emits keyReleased)
+   */
   public onKeyUp(event: KeyboardEvent, dateType: DateType): void {
     this.keyReleased.emit({
       ...this.fieldInfo(),
       dateType: dateType,
-      keyUpEvent: event
+      keyUpEvent: event,
     });
   }
 
   /**
- * Handles keydown event for start or end date input
- * @param event Keyboard event
- * @param dateType Indicates START_DATE or END_DATE
- * @returns void (emits keyPressed)
- */
+   * Handles keydown event for start or end date input
+   * @param event Keyboard event
+   * @param dateType Indicates START_DATE or END_DATE
+   * @returns void (emits keyPressed)
+   */
   public onKeyDown(event: KeyboardEvent, dateType: DateType): void {
     this.keyPressed.emit({
       ...this.fieldInfo(),
       dateType: dateType,
-      keyDownEvent: event
+      keyDownEvent: event,
     });
   }
 
-
   /**
- * Handles input event for start or end date input
- * @param event Input event
- * @param dateType Indicates START_DATE or END_DATE
- * @returns void (emits inputChanged)
- */
+   * Handles input event for start or end date input
+   * @param event Input event
+   * @param dateType Indicates START_DATE or END_DATE
+   * @returns void (emits inputChanged)
+   */
   public onInput(event: Event, dateType: DateType): void {
     this.inputChanged.emit({
       ...this.fieldInfo(),
       dateType: dateType,
-      inputChangeEvent: event
+      inputChangeEvent: event,
     });
   }
 
   /**
- * Handles change event for start or end date input
- * @param event Change event
- * @param dateType Indicates START_DATE or END_DATE
- * @returns void (emits changeCommitted)
- */
+   * Handles change event for start or end date input
+   * @param event Change event
+   * @param dateType Indicates START_DATE or END_DATE
+   * @returns void (emits changeCommitted)
+   */
   public onChangeHandler(event: any, dateType: DateType): void {
     this.changeCommitted.emit({
       ...this.fieldInfo(),
       dateType: dateType,
-      changeEvent: event
+      changeEvent: event,
     });
   }
 }

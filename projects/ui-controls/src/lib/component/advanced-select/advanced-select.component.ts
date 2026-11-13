@@ -1,13 +1,32 @@
-import { ChangeDetectionStrategy, Component, computed, EventEmitter, Input, OnInit, OnChanges, SimpleChanges, Output, Signal, signal, viewChild, viewChildren, ViewEncapsulation, Optional, Self, ChangeDetectorRef } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  EventEmitter,
+  Input,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+  Output,
+  Signal,
+  signal,
+  viewChild,
+  viewChildren,
+  ViewEncapsulation,
+  Optional,
+  Self,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { MaterialModule } from '../../material.module';
 import { MatOption, MatSelect, MatSelectChange } from '@angular/material/select';
 import { UiUtilitiesModule } from '../../utilities';
 import {
-  SearchableSelectOption, SearchableSelectToggleAllEvent,
+  SearchableSelectOption,
+  SearchableSelectToggleAllEvent,
   SearchableSelectSelectionChangeEvent,
   SearchableSelectOpenCloseEvent,
   SearchableSelectFieldInfo,
-  SearchableSelectOptionClickEvent
+  SearchableSelectOptionClickEvent,
 } from './advanced-select.interface';
 import { ScrollingModule, CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { NgControl } from '@angular/forms';
@@ -21,7 +40,10 @@ import { BaseControlValueAccessor } from '../base-control-value-accessor.directi
   styleUrl: './advanced-select.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AdvancedSelectComponent extends BaseControlValueAccessor<any> implements OnInit, OnChanges, OnChanges {
+export class AdvancedSelectComponent
+  extends BaseControlValueAccessor<any>
+  implements OnInit, OnChanges
+{
   /**
    * Height in pixels of each option for virtual scrolling (defaults to 36px)
    * @default 36
@@ -81,7 +103,6 @@ export class AdvancedSelectComponent extends BaseControlValueAccessor<any> imple
    * @type boolean
    */
   @Input() required: boolean = false;
-
 
   /**
    * Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved.
@@ -255,6 +276,8 @@ export class AdvancedSelectComponent extends BaseControlValueAccessor<any> imple
   }
   private sortKeyValue: string = '';
 
+  private readonly allOptionKey = Symbol('select-all');
+  private readonly primitiveAllOption = { toString: () => 'All' };
   private _allOptionObj: any = null;
   private modelNameMapping: Map<string, string> = new Map();
   private multiSelectInternalList: any[] = [];
@@ -316,7 +339,7 @@ export class AdvancedSelectComponent extends BaseControlValueAccessor<any> imple
     this._inputModelValue = value;
     let cleanValue = value;
     if (this.multiple && Array.isArray(value)) {
-      cleanValue = value.filter(item => !this.compareObjects(item, this._allOptionObj));
+      cleanValue = value.filter((item) => !this.compareObjects(item, this._allOptionObj));
     }
     if (!this.areValuesEqual(cleanValue, this.value)) {
       this.value = cleanValue;
@@ -367,7 +390,8 @@ export class AdvancedSelectComponent extends BaseControlValueAccessor<any> imple
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom toggleSelectHandle
    */
-  @Output() selectAllChange: EventEmitter<SearchableSelectToggleAllEvent> = new EventEmitter<SearchableSelectToggleAllEvent>();
+  @Output() selectAllChange: EventEmitter<SearchableSelectToggleAllEvent> =
+    new EventEmitter<SearchableSelectToggleAllEvent>();
 
   /**
    * Emits when the selection handler processes a selection.
@@ -375,7 +399,8 @@ export class AdvancedSelectComponent extends BaseControlValueAccessor<any> imple
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onselectionChange
    */
-  @Output() selectionChange: EventEmitter<SearchableSelectSelectionChangeEvent> = new EventEmitter<SearchableSelectSelectionChangeEvent>();
+  @Output() selectionChange: EventEmitter<SearchableSelectSelectionChangeEvent> =
+    new EventEmitter<SearchableSelectSelectionChangeEvent>();
 
   /**
    * Emits when the select panel open state changes.
@@ -383,7 +408,8 @@ export class AdvancedSelectComponent extends BaseControlValueAccessor<any> imple
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onOpenedChange
    */
-  @Output() panelOpenChange: EventEmitter<SearchableSelectOpenCloseEvent> = new EventEmitter<SearchableSelectOpenCloseEvent>();
+  @Output() panelOpenChange: EventEmitter<SearchableSelectOpenCloseEvent> =
+    new EventEmitter<SearchableSelectOpenCloseEvent>();
 
   /**
    * Emits when the select panel opens.
@@ -391,7 +417,8 @@ export class AdvancedSelectComponent extends BaseControlValueAccessor<any> imple
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onOpened
    */
-  @Output() panelOpened: EventEmitter<SearchableSelectFieldInfo> = new EventEmitter<SearchableSelectFieldInfo>();
+  @Output() panelOpened: EventEmitter<SearchableSelectFieldInfo> =
+    new EventEmitter<SearchableSelectFieldInfo>();
 
   /**
    * Emits when the select panel closes.
@@ -399,7 +426,8 @@ export class AdvancedSelectComponent extends BaseControlValueAccessor<any> imple
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onClosed
    */
-  @Output() panelClosed: EventEmitter<SearchableSelectFieldInfo> = new EventEmitter<SearchableSelectFieldInfo>();
+  @Output() panelClosed: EventEmitter<SearchableSelectFieldInfo> =
+    new EventEmitter<SearchableSelectFieldInfo>();
 
   /**
    * Emits when the control loses focus.
@@ -407,7 +435,8 @@ export class AdvancedSelectComponent extends BaseControlValueAccessor<any> imple
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onBlur
    */
-  @Output() blurred: EventEmitter<SearchableSelectFieldInfo> = new EventEmitter<SearchableSelectFieldInfo>();
+  @Output() blurred: EventEmitter<SearchableSelectFieldInfo> =
+    new EventEmitter<SearchableSelectFieldInfo>();
 
   /**
    * Emits when an option is clicked.
@@ -415,7 +444,8 @@ export class AdvancedSelectComponent extends BaseControlValueAccessor<any> imple
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onOptionClick
    */
-  @Output() optionClicked: EventEmitter<SearchableSelectOptionClickEvent> = new EventEmitter<SearchableSelectOptionClickEvent>();
+  @Output() optionClicked: EventEmitter<SearchableSelectOptionClickEvent> =
+    new EventEmitter<SearchableSelectOptionClickEvent>();
 
   /**
    * Emits the updated search string for consumer filtering.
@@ -438,27 +468,23 @@ export class AdvancedSelectComponent extends BaseControlValueAccessor<any> imple
   // but currently NOT rendered inside the virtual scroll viewport
   public hiddenOptions: Signal<any[]>;
 
-  constructor(@Optional() @Self() public override ngControl: NgControl,
-    private changeDetectorRef: ChangeDetectorRef
+  constructor(
+    @Optional() @Self() public override ngControl: NgControl,
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     super(ngControl, changeDetectorRef);
     // Computed signal that recalculates whenever:
     // - virtualOptions change
     // - inputModelValue changes
     this.hiddenOptions = computed(() => {
-
       // Create a Set of currently rendered option values
       // This makes lookup O(1) when checking if a value exists
-      const virtualOptions = new Set(
-        this.virtualOptions().map((matOption) => matOption.value),
-      );
+      const virtualOptions = new Set(this.virtualOptions().map((matOption) => matOption.value));
       const selectedValue = this._modelValueTracker();
 
       // If there is a selected value (single or multiple)
       if (selectedValue !== null && selectedValue !== undefined) {
-        const selectedArray = Array.isArray(selectedValue)
-          ? selectedValue
-          : [selectedValue];
+        const selectedArray = Array.isArray(selectedValue) ? selectedValue : [selectedValue];
 
         // Return selected values that are NOT currently rendered
         // in the virtual scroll viewport
@@ -479,17 +505,21 @@ export class AdvancedSelectComponent extends BaseControlValueAccessor<any> imple
   private areValuesEqual(val1: any, val2: any): boolean {
     if (Array.isArray(val1) && Array.isArray(val2)) {
       if (val1.length !== val2.length) return false;
-      return val1.every(item => val2.some(other => this.compareObjects(item, other)));
+      return val1.every((item) => val2.some((other) => this.compareObjects(item, other)));
     }
     return this.compareObjects(val1, val2);
   }
 
   compareObjects = (option1: any, option2: any): boolean => {
     if (this.valueKey && option1 != null && option2 != null) {
-      const val1 = typeof option1 === 'object' ?
-        option1 === "" ? this.modelValue?.[this.valueKey]
-          : option1[this.valueKey]
-        : option1 === "" ? this.inputModelValue : option1;
+      const val1 =
+        typeof option1 === 'object'
+          ? option1 === ''
+            ? this.modelValue?.[this.valueKey]
+            : option1[this.valueKey]
+          : option1 === ''
+            ? this.inputModelValue
+            : option1;
       const val2 = typeof option2 === 'object' ? option2[this.valueKey] : option2;
       return val1 === val2;
     }
@@ -516,31 +546,44 @@ export class AdvancedSelectComponent extends BaseControlValueAccessor<any> imple
   }
 
   /**
-  * Returns shared field information
-  * attached to all emitted events
-  */
+   * Returns shared field information
+   * attached to all emitted events
+   */
   private fieldInfo(): SearchableSelectFieldInfo {
     let inputRef: Element | null = null;
     if (this.effectiveId) {
-      inputRef = document.querySelector(`#${this.effectiveId}`);
+      inputRef = typeof document === 'undefined' ? null : document.getElementById(this.effectiveId);
     }
     return {
       ...(inputRef && { inputRef: inputRef }),
-      modelValue: this.multiple ?
-        (Array.isArray(this.inputModelValue) ? this.inputModelValue.filter((selectionOption: any) => !this.compareObjects(selectionOption, this._allOptionObj)) : this.inputModelValue) :
-        this.getSelectedModelValue(this.inputModelValue),
-      textFieldName: this.fieldName
+      modelValue: this.multiple
+        ? Array.isArray(this.inputModelValue)
+          ? this.inputModelValue.filter(
+              (selectionOption: any) => !this.compareObjects(selectionOption, this._allOptionObj),
+            )
+          : this.inputModelValue
+        : this.getSelectedModelValue(this.inputModelValue),
+      textFieldName: this.fieldName,
     };
   }
 
   getSelectedModelValue(selectedValue: any) {
     const listToSearch = this.isGroupingEnabled
-      ? (this.fullSelectableOptions?.length ? this.fullSelectableOptions : this.allSelectableOptions)
-      : (this.allSelectableOptions?.length ? this.allSelectableOptions : this.options);
+      ? this.fullSelectableOptions?.length
+        ? this.fullSelectableOptions
+        : this.allSelectableOptions
+      : this.allSelectableOptions?.length
+        ? this.allSelectableOptions
+        : this.options;
     if (!listToSearch) return selectedValue ?? this.inputModelValue;
-    return listToSearch.find((selectionItem) =>
-      (this.valueKey ? selectionItem[this.valueKey] === selectedValue || selectionItem[this.valueKey] === selectedValue?.[this.valueKey] : selectionItem === selectedValue)
-    ) ?? this.inputModelValue;
+    return (
+      listToSearch.find((selectionItem) =>
+        this.valueKey
+          ? selectionItem[this.valueKey] === selectedValue ||
+            selectionItem[this.valueKey] === selectedValue?.[this.valueKey]
+          : selectionItem === selectedValue,
+      ) ?? this.inputModelValue
+    );
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -589,25 +632,25 @@ export class AdvancedSelectComponent extends BaseControlValueAccessor<any> imple
       return;
     }
 
-    const list = (this.options || []).filter(item => !item?.[this.hiddenKey]);
+    const list = (this.options || []).filter((item) => !item?.[this.hiddenKey]);
     this.allSelectableOptions = [...list];
 
     if (this.multiple || this.enableAllOption) {
       if (this.valueKey || this.labelKey) {
         this._allOptionObj = {
-          ...(this.valueKey ? { [this.valueKey]: 'All' } : {}),
-          ...(this.labelKey ? { [this.labelKey]: 'All' } : {})
+          ...(this.valueKey ? { [this.valueKey]: this.allOptionKey } : {}),
+          ...(this.labelKey ? { [this.labelKey]: 'All' } : {}),
         };
       } else {
-        this._allOptionObj = 'All';
+        this._allOptionObj = this.primitiveAllOption;
       }
 
-      const hasAll = list.some(item => this.compareObjects(item, this._allOptionObj));
+      const hasAll = list.some((item) => this.compareObjects(item, this._allOptionObj));
       if (!hasAll) {
         this.rawOptionsList = [this._allOptionObj, ...list];
       } else {
         this.rawOptionsList = [...list];
-        this._allOptionObj = list.find(item => this.compareObjects(item, this._allOptionObj));
+        this._allOptionObj = list.find((item) => this.compareObjects(item, this._allOptionObj));
       }
     } else {
       this.rawOptionsList = [...list];
@@ -615,14 +658,17 @@ export class AdvancedSelectComponent extends BaseControlValueAccessor<any> imple
 
     this.modelNameMapping.clear();
     const key = this.labelKey || (this.displayFields?.length ? this.displayFields[0] : '');
-    for (const option of (this.options || [])) {
+    for (const option of this.options || []) {
       if (this.valueKey && option) {
         const label = this.getOptionText(option) || (key ? option[key] : option);
-        this.modelNameMapping.set((option[this.valueKey] ?? option), label);
+        this.modelNameMapping.set(option[this.valueKey] ?? option, label);
       }
     }
     if (this._allOptionObj && this.valueKey) {
-      this.modelNameMapping.set((this._allOptionObj[this.valueKey] ?? this._allOptionObj), (this._allOptionObj[this.labelKey] ?? this._allOptionObj));
+      this.modelNameMapping.set(
+        this._allOptionObj[this.valueKey] ?? this._allOptionObj,
+        this._allOptionObj[this.labelKey] ?? this._allOptionObj,
+      );
     }
 
     if (this.enableSorting) {
@@ -654,23 +700,27 @@ export class AdvancedSelectComponent extends BaseControlValueAccessor<any> imple
           }
         }
         const fullText = String(this.getOptionText(item) || item || '').toLowerCase();
-        return this.filterConditionStartWith
-          ? fullText.startsWith(term)
-          : fullText.includes(term);
+        return this.filterConditionStartWith ? fullText.startsWith(term) : fullText.includes(term);
       });
     }
   }
 
   private syncMultiSelectModel(): void {
-    const selectableList = this.isGroupingEnabled ? this.fullSelectableOptions : this.allSelectableOptions;
+    const selectableList = this.isGroupingEnabled
+      ? this.fullSelectableOptions
+      : this.allSelectableOptions;
     if (!this.multiple || !selectableList?.length) return;
     if (!Array.isArray(this._inputModelValue)) return;
 
-    const currentRealItems = this._inputModelValue.filter(item => !this.compareObjects(item, this._allOptionObj));
+    const currentRealItems = this._inputModelValue.filter(
+      (item) => !this.compareObjects(item, this._allOptionObj),
+    );
     const selectableCount = selectableList.length;
 
     if (currentRealItems.length > 0 && currentRealItems.length === selectableCount) {
-      this._inputModelValue = this.isGroupingEnabled ? [...this.fullSelectableOptions] : [...this.rawOptionsList];
+      this._inputModelValue = this.isGroupingEnabled
+        ? [...this.fullSelectableOptions]
+        : [...this.rawOptionsList];
       this._modelValueTracker.set(this._inputModelValue);
     } else {
       this._inputModelValue = currentRealItems;
@@ -679,9 +729,9 @@ export class AdvancedSelectComponent extends BaseControlValueAccessor<any> imple
   }
 
   /**
-  * Initializes component and resolves
-  * model value when valueKey is present
-  */
+   * Initializes component and resolves
+   * model value when valueKey is present
+   */
   ngOnInit(): void {
     if (!this.labelKey && this.displayFields?.length) {
       this.labelKey = this.displayFields[0];
@@ -706,12 +756,12 @@ export class AdvancedSelectComponent extends BaseControlValueAccessor<any> imple
     const key = this.labelKey || (this.displayFields?.length ? this.displayFields[0] : '');
     if (this.multiple) {
       if (Array.isArray(this.inputModelValue) && this.inputModelValue.length > 0) {
-        const isAllSelected = this.inputModelValue.find(
-          item => this.compareObjects(item, this._allOptionObj)
+        const isAllSelected = this.inputModelValue.find((item) =>
+          this.compareObjects(item, this._allOptionObj),
         );
 
         if (isAllSelected) {
-          return this.labelKey ? this._allOptionObj[this.labelKey] : "All";
+          return this.labelKey ? this._allOptionObj[this.labelKey] : 'All';
         } else {
           return this.inputModelValue
             .map((item: any) => {
@@ -719,7 +769,7 @@ export class AdvancedSelectComponent extends BaseControlValueAccessor<any> imple
                 const mapped = this.modelNameMapping.get(item[this.valueKey] ?? item);
                 if (mapped) return mapped;
               }
-              return (key ? item?.[key] : item);
+              return key ? item?.[key] : item;
             })
             .filter((val: any) => val !== null && val !== undefined && val !== '')
             .join(', ');
@@ -729,7 +779,10 @@ export class AdvancedSelectComponent extends BaseControlValueAccessor<any> imple
     }
     if (this.inputModelValue !== null && this.inputModelValue !== undefined) {
       if (this.valueKey && this.inputModelValue) {
-        const lookupKey = typeof this.inputModelValue === 'object' ? this.inputModelValue[this.valueKey] : this.inputModelValue;
+        const lookupKey =
+          typeof this.inputModelValue === 'object'
+            ? this.inputModelValue[this.valueKey]
+            : this.inputModelValue;
         const mapped = this.modelNameMapping.get(lookupKey);
         if (mapped) return mapped;
       }
@@ -747,37 +800,47 @@ export class AdvancedSelectComponent extends BaseControlValueAccessor<any> imple
    */
   public configureModelValue(modelvalue: any): void {
     const candidateList = this.isGroupingEnabled
-      ? (this.fullSelectableOptions?.length ? this.fullSelectableOptions : this.allSelectableOptions)
-      : (this.allSelectableOptions?.length ? this.allSelectableOptions : this.options);
+      ? this.fullSelectableOptions?.length
+        ? this.fullSelectableOptions
+        : this.allSelectableOptions
+      : this.allSelectableOptions?.length
+        ? this.allSelectableOptions
+        : this.options;
     if (this.isMultiSelect || this.multiple) {
       if (Array.isArray(modelvalue)) {
-        const modelList = modelvalue.map((option) => (option && typeof option === 'object' && this.valueKey in option ? option[this.valueKey] : option));
-        this.inputModelValue = candidateList.filter((option) => modelList.includes(option[this.valueKey]));
+        const modelList = modelvalue.map((option) =>
+          option && typeof option === 'object' && this.valueKey in option
+            ? option[this.valueKey]
+            : option,
+        );
+        this.inputModelValue = candidateList.filter((option) =>
+          modelList.includes(option[this.valueKey]),
+        );
       }
     } else {
-      this.inputModelValue = candidateList.find(
-        (selectionItem) =>
-          selectionItem[this.valueKey] === modelvalue
-          || selectionItem[this.valueKey] === modelvalue?.[this.valueKey])
-        || this.inputModelValue;
+      this.inputModelValue =
+        candidateList.find(
+          (selectionItem) =>
+            selectionItem[this.valueKey] === modelvalue ||
+            selectionItem[this.valueKey] === modelvalue?.[this.valueKey],
+        ) || this.inputModelValue;
     }
   }
 
   private sortInternalSelectList(): void {
     const sortFn = (firstValue: any, secondValue: any) => {
-      const key = this.sortKeyValue || this.labelKey || (this.displayFields?.length ? this.displayFields[0] : '');
+      const key =
+        this.sortKeyValue ||
+        this.labelKey ||
+        (this.displayFields?.length ? this.displayFields[0] : '');
 
       const first = key ? firstValue?.[key] : firstValue;
       const second = key ? secondValue?.[key] : secondValue;
 
-      const sortResult = String(first ?? "").localeCompare(
-        String(second ?? ""),
-        undefined,
-        {
-          numeric: true,
-          sensitivity: "base"
-        }
-      );
+      const sortResult = String(first ?? '').localeCompare(String(second ?? ''), undefined, {
+        numeric: true,
+        sensitivity: 'base',
+      });
 
       return this.isAscendingOrder ? sortResult : -sortResult;
     };
@@ -793,20 +856,26 @@ export class AdvancedSelectComponent extends BaseControlValueAccessor<any> imple
     const isAllObj = this.compareObjects(option, this._allOptionObj);
 
     let currentVal = Array.isArray(this.inputModelValue) ? [...this.inputModelValue] : [];
-    let baseItems = currentVal.filter(item => !this.compareObjects(item, this._allOptionObj));
+    let baseItems = currentVal.filter((item) => !this.compareObjects(item, this._allOptionObj));
 
-    const selectableList = this.isGroupingEnabled ? this.fullSelectableOptions : this.allSelectableOptions;
+    const selectableList = this.isGroupingEnabled
+      ? this.fullSelectableOptions
+      : this.allSelectableOptions;
     const selectableCount = selectableList.length;
 
     if (isChecking) {
       if (isAllObj) {
-        this.multiSelectInternalList = this.isGroupingEnabled ? [...this.fullSelectableOptions] : [...this.rawOptionsList];
+        this.multiSelectInternalList = this.isGroupingEnabled
+          ? [...this.fullSelectableOptions]
+          : [...this.rawOptionsList];
       } else {
-        if (!baseItems.some(item => this.compareObjects(item, option))) {
+        if (!baseItems.some((item) => this.compareObjects(item, option))) {
           baseItems.push(option);
         }
         if (baseItems.length === selectableCount) {
-          this.multiSelectInternalList = this.isGroupingEnabled ? [...this.fullSelectableOptions] : [...this.rawOptionsList];
+          this.multiSelectInternalList = this.isGroupingEnabled
+            ? [...this.fullSelectableOptions]
+            : [...this.rawOptionsList];
         } else {
           this.multiSelectInternalList = baseItems;
         }
@@ -815,92 +884,99 @@ export class AdvancedSelectComponent extends BaseControlValueAccessor<any> imple
       if (isAllObj) {
         this.multiSelectInternalList = [];
       } else {
-        this.multiSelectInternalList = baseItems.filter(item => !this.compareObjects(item, option));
+        this.multiSelectInternalList = baseItems.filter(
+          (item) => !this.compareObjects(item, option),
+        );
       }
     }
   }
 
   /**
- * Emits when the selected value changes in the dropdown.
- *
- * @param handleSelectionChange - MatSelect change event containing selected value(s)
- * @returns void
- */
+   * Emits when the selected value changes in the dropdown.
+   *
+   * @param handleSelectionChange - MatSelect change event containing selected value(s)
+   * @returns void
+   */
   public handleSelectionChange(selectionChange: MatSelectChange): void {
     this.selectionChange.emit({
       ...this.fieldInfo(),
-      selectionChange: selectionChange
+      selectionChange: selectionChange,
     });
+    this.commitValue();
   }
 
   /**
- * Handles select-all toggle action from search checkbox.
- *
- * @param selectAllValue - True to select all options, false to clear selection
- * @returns void
- */
+   * Handles select-all toggle action from search checkbox.
+   *
+   * @param selectAllValue - True to select all options, false to clear selection
+   * @returns void
+   */
   public toggleSelectAll(selectAllValue: boolean): void {
+    if (this.disabled || this.readonly) return;
     const selectable = this.isGroupingEnabled
-      ? (this.fullSelectableOptions?.length ? [...this.fullSelectableOptions] : [...this.allSelectableOptions])
+      ? this.fullSelectableOptions?.length
+        ? [...this.fullSelectableOptions]
+        : [...this.allSelectableOptions]
       : [...this.allSelectableOptions];
     this.inputModelValue = selectAllValue ? selectable : [];
+    this.commitValue();
     this.selectAllChange.emit({
       ...this.fieldInfo(),
-      selectAllValue
+      selectAllValue,
     });
   }
 
   /**
- * Emits when the open state of the dropdown changes.
- *
- * @param changeEvent - Boolean indicating open (true) or closed (false) state
- * @returns void
- */
+   * Emits when the open state of the dropdown changes.
+   *
+   * @param changeEvent - Boolean indicating open (true) or closed (false) state
+   * @returns void
+   */
   public openedChange(opened: boolean) {
     this.panelOpenChange.emit({
       ...this.fieldInfo(),
-      selectionChange: opened
+      selectionChange: opened,
     });
   }
 
   /**
- * Emits when the dropdown panel is opened.
- *
- * @returns void
- */
+   * Emits when the dropdown panel is opened.
+   *
+   * @returns void
+   */
   public opened() {
     this.panelOpened.emit(this.fieldInfo());
   }
 
   /**
- * Emits when the dropdown panel is closed.
- *
- * @returns void
- */
+   * Emits when the dropdown panel is closed.
+   *
+   * @returns void
+   */
   public closed() {
     this.panelClosed.emit(this.fieldInfo());
   }
 
   /**
- * Emits when the select element loses focus.
- *
- * @returns void
- */
+   * Emits when the select element loses focus.
+   *
+   * @returns void
+   */
   public blur() {
     this.blurred.emit(this.fieldInfo());
   }
 
   /**
- * Emits when a select option is clicked.
- *
- * @param selectedOption - The option object that was clicked
- * @returns void
- */
+   * Emits when a select option is clicked.
+   *
+   * @param selectedOption - The option object that was clicked
+   * @returns void
+   */
 
   public optionClick(selectedOption: any) {
     if (selectedOption?.isGroupHeader) return;
     this.optionClicked.emit({
-      activeOption: selectedOption
+      activeOption: selectedOption,
     });
   }
 
@@ -921,19 +997,15 @@ export class AdvancedSelectComponent extends BaseControlValueAccessor<any> imple
         matchingChildren = children.filter((child: any) => {
           const textVal = String(
             this.labelKey
-              ? child?.[this.labelKey] ?? ''
-              : (this.getOptionText(child) || child) ?? ''
+              ? (child?.[this.labelKey] ?? '')
+              : ((this.getOptionText(child) || child) ?? ''),
           ).toLowerCase();
-          return this.filterConditionStartWith
-            ? textVal.startsWith(term)
-            : textVal.includes(term);
+          return this.filterConditionStartWith ? textVal.startsWith(term) : textVal.includes(term);
         });
       }
 
       // Check if group header itself matches search term
-      const groupHeaderTitle = String(
-        group?.[this.groupLabelKey] ?? ''
-      ).toLowerCase();
+      const groupHeaderTitle = String(group?.[this.groupLabelKey] ?? '').toLowerCase();
       const groupHeaderMatches = term ? groupHeaderTitle.includes(term) : false;
 
       // If group matches, keep all its children; otherwise keep matching children
@@ -1018,13 +1090,15 @@ export class AdvancedSelectComponent extends BaseControlValueAccessor<any> imple
   }
 
   clearSelect() {
+    if (this.disabled || this.readonly) return;
     this.inputModelValue = null;
     if (this.multiple) {
       this.inputModelValue = [];
     }
+    this.commitValue();
     this.selectionChange.emit({
       ...this.fieldInfo(),
-      selectionChange: null
+      selectionChange: null,
     });
   }
 }

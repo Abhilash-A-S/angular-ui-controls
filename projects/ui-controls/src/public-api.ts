@@ -30,3 +30,9 @@ export { MaterialModule } from './lib/material.module';
 export { LibraryCommonService } from './lib/services/library-common.service';
 export { UiInputsModule } from './lib/ui-inputs.module';
 export * from './lib/utilities';
+
+export { RadioButtonComponent as RadioGroupComponent } from './lib/component/radio-button/radio-button.component';
+export type { TabOption as SegmentOption } from './lib/component/segmented-control/segmented-control.component';
+
+export { LibraryCommonService as LanguageService } from './lib/services/library-common.service';
+export type { SearchFilterValue } from './lib/component/search-filter/search-filter.component';

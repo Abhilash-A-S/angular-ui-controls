@@ -16,8 +16,7 @@ export interface NumberInputFieldInfo {
 /**
  * Model value change payload
  */
-export interface NumberInputModelChangeEvent
-  extends NumberInputFieldInfo {
+export interface NumberInputModelChangeEvent extends NumberInputFieldInfo {
   /** Updated numeric value */
   modelChangeEvent: number;
 }
@@ -25,8 +24,7 @@ export interface NumberInputModelChangeEvent
 /**
  * Input event payload
  */
-export interface NumberInputInputEvent
-  extends NumberInputFieldInfo {
+export interface NumberInputInputEvent extends NumberInputFieldInfo {
   /** Native input/change event */
   changeEvent: Event;
 }
@@ -34,8 +32,7 @@ export interface NumberInputInputEvent
 /**
  * Focus event payload
  */
-export interface NumberInputFocusEvent
-  extends NumberInputFieldInfo {
+export interface NumberInputFocusEvent extends NumberInputFieldInfo {
   /** Native focus event */
   focusEvent: FocusEvent;
 }
@@ -43,8 +40,7 @@ export interface NumberInputFocusEvent
 /**
  * Blur event payload
  */
-export interface NumberInputBlurEvent
-  extends NumberInputFieldInfo {
+export interface NumberInputBlurEvent extends NumberInputFieldInfo {
   /** Native blur event */
   blurEvent: FocusEvent;
 }
@@ -52,8 +48,7 @@ export interface NumberInputBlurEvent
 /**
  * Keydown event payload
  */
-export interface NumberInputKeydownEvent
-  extends NumberInputFieldInfo {
+export interface NumberInputKeydownEvent extends NumberInputFieldInfo {
   /** Native keyboard event */
   keyDownEvent: KeyboardEvent;
 }
@@ -61,8 +56,7 @@ export interface NumberInputKeydownEvent
 /**
  * Keyup event payload
  */
-export interface NumberInputKeyupEvent
-  extends NumberInputFieldInfo {
+export interface NumberInputKeyupEvent extends NumberInputFieldInfo {
   /** Native keyboard event */
   keyUpEvent: KeyboardEvent;
 }
@@ -70,8 +64,7 @@ export interface NumberInputKeyupEvent
 /**
  * Enter key event payload
  */
-export interface NumberInputKeyEnterEvent
-  extends NumberInputFieldInfo {
+export interface NumberInputKeyEnterEvent extends NumberInputFieldInfo {
   /** Enter key or input-related event */
   keyEnterEvent: Event;
 }

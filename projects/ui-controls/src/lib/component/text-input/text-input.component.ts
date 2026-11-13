@@ -1,4 +1,13 @@
-import { Component, EventEmitter, forwardRef, Input, Output, Optional, Self, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+  Optional,
+  Self,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { BaseControlValueAccessor } from '../base-control-value-accessor.directive';
 import { MaterialModule } from '../../material.module';
@@ -11,7 +20,7 @@ import {
   TextInputKeydownEvent,
   TextInputKeyEnterEvent,
   TextInputKeyupEvent,
-  TextInputModelChangeEvent
+  TextInputModelChangeEvent,
 } from './text-input.interface';
 import { UiUtilitiesModule } from '../../utilities';
 import { TranslateService } from '@ngx-translate/core';
@@ -21,7 +30,7 @@ import { TranslateService } from '@ngx-translate/core';
   standalone: true,
   imports: [MaterialModule, UiUtilitiesModule],
   templateUrl: './text-input.component.html',
-  styleUrl: './text-input.component.scss'
+  styleUrl: './text-input.component.scss',
 })
 export class TextInputComponent extends BaseControlValueAccessor<string> {
   /**
@@ -96,7 +105,6 @@ export class TextInputComponent extends BaseControlValueAccessor<string> {
    */
   @Input() required: boolean = false;
 
-
   /**
    * Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved.
    * @type string | number
@@ -122,7 +130,7 @@ export class TextInputComponent extends BaseControlValueAccessor<string> {
    * Maximum number of characters allowed
    * @type number
    */
-  @Input() maxLength !: number;
+  @Input() maxLength!: number;
 
   /**
    * Shows the current input value in the tooltip when enabled.
@@ -195,7 +203,8 @@ export class TextInputComponent extends BaseControlValueAccessor<string> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onModelChange
    */
-  @Output() modelChange: EventEmitter<TextInputModelChangeEvent> = new EventEmitter<TextInputModelChangeEvent>();
+  @Output() modelChange: EventEmitter<TextInputModelChangeEvent> =
+    new EventEmitter<TextInputModelChangeEvent>();
 
   /**
    * Emits from the existing input/change handler.
@@ -203,7 +212,8 @@ export class TextInputComponent extends BaseControlValueAccessor<string> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onInputChange
    */
-  @Output() inputChanged: EventEmitter<TextInputInputEvent> = new EventEmitter<TextInputInputEvent>();
+  @Output() inputChanged: EventEmitter<TextInputInputEvent> =
+    new EventEmitter<TextInputInputEvent>();
 
   /**
    * Emits when the inner field gains focus.
@@ -211,7 +221,8 @@ export class TextInputComponent extends BaseControlValueAccessor<string> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onFocusChange
    */
-  @Output() focusGained: EventEmitter<TextInputFocusEvent> = new EventEmitter<TextInputFocusEvent>();
+  @Output() focusGained: EventEmitter<TextInputFocusEvent> =
+    new EventEmitter<TextInputFocusEvent>();
 
   /**
    * Emits when the inner field loses focus.
@@ -227,7 +238,8 @@ export class TextInputComponent extends BaseControlValueAccessor<string> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onKeydownHandle
    */
-  @Output() keyPressed: EventEmitter<TextInputKeydownEvent> = new EventEmitter<TextInputKeydownEvent>();
+  @Output() keyPressed: EventEmitter<TextInputKeydownEvent> =
+    new EventEmitter<TextInputKeydownEvent>();
 
   /**
    * Emits on the inner field keyup event.
@@ -235,7 +247,8 @@ export class TextInputComponent extends BaseControlValueAccessor<string> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onKeyupHandle
    */
-  @Output() keyReleased: EventEmitter<TextInputKeyupEvent> = new EventEmitter<TextInputKeyupEvent>();
+  @Output() keyReleased: EventEmitter<TextInputKeyupEvent> =
+    new EventEmitter<TextInputKeyupEvent>();
 
   /**
    * Emits when Enter is released in the inner field.
@@ -243,7 +256,8 @@ export class TextInputComponent extends BaseControlValueAccessor<string> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onKeyEnterHandle
    */
-  @Output() enterPressed: EventEmitter<TextInputKeyEnterEvent> = new EventEmitter<TextInputKeyEnterEvent>();
+  @Output() enterPressed: EventEmitter<TextInputKeyEnterEvent> =
+    new EventEmitter<TextInputKeyEnterEvent>();
 
   /**
    * Emits when the inner input is clicked.
@@ -251,58 +265,56 @@ export class TextInputComponent extends BaseControlValueAccessor<string> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onInputClickHandle
    */
-  @Output() inputClicked: EventEmitter<TextInputClickEvent> = new EventEmitter<TextInputClickEvent>();
-
+  @Output() inputClicked: EventEmitter<TextInputClickEvent> =
+    new EventEmitter<TextInputClickEvent>();
 
   /**
- * Returns shared field information attached
- * to all emitted events.
- *
- * Includes:
- * - Input DOM reference (if inputId is provided)
- * - Current model value
- * - Field identifier
- */
+   * Returns shared field information attached
+   * to all emitted events.
+   *
+   * Includes:
+   * - Input DOM reference (if inputId is provided)
+   * - Current model value
+   * - Field identifier
+   */
   constructor(
     @Optional() @Self() public override ngControl: NgControl,
     translateService: TranslateService,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     super(ngControl, changeDetectorRef);
-    translateService.setDefaultLang('en');
-    translateService.use('en');
   }
   private fieldInfo(): TextInputFieldInfo {
     let inputRef: Element | null = null;
     if (this.effectiveId) {
-      inputRef = document.querySelector(`#${this.effectiveId}`);
+      inputRef = typeof document === 'undefined' ? null : document.getElementById(this.effectiveId);
     }
     return {
-      ...inputRef && { inputRef: inputRef },
+      ...(inputRef && { inputRef: inputRef }),
       modelValue: this.modelValue,
-      fieldName: this.fieldName
+      fieldName: this.fieldName,
     };
   }
 
   /**
-  * Emits when the model value changes
-  * @param modelChangeEvent - Updated model value
-  */
+   * Emits when the model value changes
+   * @param modelChangeEvent - Updated model value
+   */
   public modelValueChange(modelChangeEvent: string): void {
     this.modelChange.emit({
       ...this.fieldInfo(),
-      modelChangeEvent: modelChangeEvent
+      modelChangeEvent: modelChangeEvent,
     });
   }
 
   /**
-  * Emits on input value change
-  * @param changeValue - Input event
-  */
+   * Emits on input value change
+   * @param changeValue - Input event
+   */
   public inputChange(changeValue: Event): void {
     this.inputChanged.emit({
       ...this.fieldInfo(),
-      changeEvent: changeValue
+      changeEvent: changeValue,
     });
   }
 
@@ -313,7 +325,7 @@ export class TextInputComponent extends BaseControlValueAccessor<string> {
   public focusChange(onFocusEvent: FocusEvent): void {
     this.focusGained.emit({
       ...this.fieldInfo(),
-      focusEvent: onFocusEvent
+      focusEvent: onFocusEvent,
     });
   }
 
@@ -324,40 +336,40 @@ export class TextInputComponent extends BaseControlValueAccessor<string> {
   public blurChange(blurEvent: FocusEvent): void {
     this.focusLost.emit({
       ...this.fieldInfo(),
-      blurEvent: blurEvent
+      blurEvent: blurEvent,
     });
   }
 
   /**
- * Emits on keydown action
- * @param keyDownEvent - Keyboard event
- */
+   * Emits on keydown action
+   * @param keyDownEvent - Keyboard event
+   */
   public keydownHandle(keyDownEvent: KeyboardEvent): void {
     this.keyPressed.emit({
       ...this.fieldInfo(),
-      keyDownEvent: keyDownEvent
+      keyDownEvent: keyDownEvent,
     });
   }
 
   /**
-  * Emits on keyup action
-  * @param keyUpEvent - Keyboard event
-  */
+   * Emits on keyup action
+   * @param keyUpEvent - Keyboard event
+   */
   public keyupHandle(keyUpEvent: KeyboardEvent): void {
     this.keyReleased.emit({
       ...this.fieldInfo(),
-      keyUpEvent: keyUpEvent
+      keyUpEvent: keyUpEvent,
     });
   }
 
   /**
-  * Emits when Enter key is pressed
-  * @param event - Keyboard or input event
-  */
+   * Emits when Enter key is pressed
+   * @param event - Keyboard or input event
+   */
   public keyEnterHandle(event: Event): void {
     this.enterPressed.emit({
       ...this.fieldInfo(),
-      keyEnterEvent: event
+      keyEnterEvent: event,
     });
   }
 
@@ -368,7 +380,7 @@ export class TextInputComponent extends BaseControlValueAccessor<string> {
   public inputClick(clickEvent: MouseEvent): void {
     this.inputClicked.emit({
       ...this.fieldInfo(),
-      clickEvent: clickEvent
+      clickEvent: clickEvent,
     });
   }
 }

@@ -3,15 +3,14 @@ import { Observable, Subject } from 'rxjs';
 import { Language } from '../models/language-model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LibraryCommonService {
-  public languageChangeHandle: Subject<Language> = new Subject();//Language change handle
+  public languageChangeHandle: Subject<Language> = new Subject(); //Language change handle
 
-  constructor() { }
+  constructor() {}
   public setLanguageChange(changedLanguage: Language) {
     this.languageChangeHandle.next(changedLanguage);
-
   }
   public getLanguageChange(): Observable<Language> {
     return this.languageChangeHandle.asObservable();

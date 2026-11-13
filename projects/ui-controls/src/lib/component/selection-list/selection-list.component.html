@@ -1,6 +1,8 @@
 <div
   class="w-100 selection-list-wrapper"
-  [ngClass]="{ 'required-text': required && (!inputModelValue || (multiple && inputModelValue.length === 0)) }"
+  [ngClass]="{
+    'required-text': required && (!inputModelValue || (multiple && inputModelValue.length === 0)),
+  }"
 >
   @if (label) {
     <div class="selection-list-label mb-2">
@@ -13,6 +15,7 @@
     [multiple]="multiple"
     [disabled]="disabled"
     [(ngModel)]="inputModelValue"
+    (ngModelChange)="commitValue()"
     [ngModelOptions]="{ standalone: true }"
     (selectionChange)="selectionChanged($event)"
   >

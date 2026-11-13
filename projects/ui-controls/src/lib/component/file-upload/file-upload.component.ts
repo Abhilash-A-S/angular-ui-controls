@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, Output, Optional, Self, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  Optional,
+  Self,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { FormsModule, NgControl } from '@angular/forms';
 import { MaterialModule } from '../../material.module';
 import { UiUtilitiesModule } from '../../utilities';
@@ -9,7 +17,7 @@ import { BaseControlValueAccessor } from '../base-control-value-accessor.directi
   standalone: true,
   imports: [MaterialModule, UiUtilitiesModule, FormsModule],
   templateUrl: './file-upload.component.html',
-  styleUrl: './file-upload.component.scss'
+  styleUrl: './file-upload.component.scss',
 })
 export class FileUploadComponent extends BaseControlValueAccessor<any> {
   /** HTML id attribute for the input element */
@@ -57,7 +65,6 @@ export class FileUploadComponent extends BaseControlValueAccessor<any> {
    * @type boolean
    */
   @Input() required: boolean = false;
-
 
   /**
    * File types allowed (e.g. '.csv, .xlsx', 'image/*', '.pdf')
@@ -112,6 +119,9 @@ export class FileUploadComponent extends BaseControlValueAccessor<any> {
    */
   @Output() validationError = new EventEmitter<string>();
 
+  /** Allow multiple files independently of the visual drop zone. */
+  @Input() multiple: boolean | null = null;
+  private nativeFileInput?: HTMLInputElement;
   fileName: string = '';
   selectedFiles: FileList | null = null;
   isInvalidFile: boolean = false;
@@ -119,22 +129,24 @@ export class FileUploadComponent extends BaseControlValueAccessor<any> {
   get acceptedFiles() {
     return this.accept?.replace(/\*\/\*|\./g, '');
   }
-  constructor(@Optional() @Self() public override ngControl: NgControl,
-    private changeDetectorRef: ChangeDetectorRef
+  constructor(
+    @Optional() @Self() public override ngControl: NgControl,
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     super(ngControl, changeDetectorRef);
   }
 
   override writeValue(value: any): void {
     super.writeValue(value);
+    if (!value && this.nativeFileInput) this.nativeFileInput.value = '';
     this.isInvalidFile = false;
     this.fileFormatErrorMessage = '';
     if (!value) {
       this.fileName = '';
       this.selectedFiles = null;
-    } else if (value instanceof File) {
+    } else if (typeof File !== 'undefined' && value instanceof File) {
       this.fileName = value.name;
-    } else if (value instanceof FileList) {
+    } else if (typeof FileList !== 'undefined' && value instanceof FileList) {
       this.selectedFiles = value;
       this.fileName = this.getFileNames(value);
     } else if (typeof value === 'string') {
@@ -147,11 +159,11 @@ export class FileUploadComponent extends BaseControlValueAccessor<any> {
       return true;
     }
 
-    const acceptedTypes = this.accept.split(',').map(type => type.trim().toLowerCase());
+    const acceptedTypes = this.accept.split(',').map((type) => type.trim().toLowerCase());
     const fileName = file.name.toLowerCase();
     const fileType = file.type.toLowerCase();
 
-    return acceptedTypes.some(type => {
+    return acceptedTypes.some((type) => {
       if (type.startsWith('.')) {
         // Check file extension (e.g., '.csv')
         return fileName.endsWith(type);
@@ -167,10 +179,12 @@ export class FileUploadComponent extends BaseControlValueAccessor<any> {
   }
 
   onFileChange(event: Event): void {
+    if (this.disabled) return;
     const input = event.target as HTMLInputElement;
+    this.nativeFileInput = input;
     if (input.files && input.files.length > 0) {
       const filesArray = Array.from(input.files);
-      const allValid = filesArray.every(file => this.validateFile(file));
+      const allValid = filesArray.every((file) => this.validateFile(file));
 
       if (!allValid) {
         this.isInvalidFile = true;
@@ -179,7 +193,7 @@ export class FileUploadComponent extends BaseControlValueAccessor<any> {
         this.selectedFiles = null;
         input.value = ''; // Clear native input
 
-        this.onChangeCallback(null);
+        this.commitValue(null);
         this.onTouchedCallback();
         this.validationError.emit(this.fileFormatErrorMessage);
         return;
@@ -190,23 +204,25 @@ export class FileUploadComponent extends BaseControlValueAccessor<any> {
       this.selectedFiles = input.files;
       this.fileName = this.getFileNames(input.files);
 
-      this.onChangeCallback(this.selectedFiles);
+      this.commitValue(this.selectedFiles);
       this.onTouchedCallback();
       this.fileSelected.emit({
         files: this.selectedFiles,
         fileName: this.fileName,
-        fieldName: this.fieldName
+        fieldName: this.fieldName,
       });
     }
   }
 
   clearFile(event: MouseEvent): void {
     event.stopPropagation();
+    if (this.disabled) return;
+    this.nativeFileInput?.value && (this.nativeFileInput.value = '');
     this.fileName = '';
     this.selectedFiles = null;
     this.isInvalidFile = false;
     this.fileFormatErrorMessage = '';
-    this.onChangeCallback(null);
+    this.commitValue(null);
     this.onTouchedCallback();
     this.cleared.emit();
   }

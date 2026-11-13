@@ -8,9 +8,8 @@ describe('InputComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TextInputComponent]
-    })
-    .compileComponents();
+      imports: [TextInputComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(TextInputComponent);
     component = fixture.componentInstance;

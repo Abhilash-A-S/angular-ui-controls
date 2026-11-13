@@ -1,7 +1,7 @@
-import { Directive, HostListener, Input } from "@angular/core";
+import { Directive, HostListener, Input } from '@angular/core';
 
 @Directive({
-  selector: "[uiPreventClipboard]",
+  selector: '[uiPreventClipboard]',
   standalone: true,
 })
 export class PreventClipboardDirective {
@@ -11,19 +11,19 @@ export class PreventClipboardDirective {
    */
   @Input() preventCopyPasteCut = false;
   constructor() {}
-  @HostListener("paste", ["$event"]) blockPaste(changeEvent: KeyboardEvent) {
+  @HostListener('paste', ['$event']) blockPaste(changeEvent: KeyboardEvent) {
     if (this.preventCopyPasteCut) {
       changeEvent.preventDefault();
     }
   }
 
-  @HostListener("copy", ["$event"]) blockCopy(changeEvent: KeyboardEvent) {
+  @HostListener('copy', ['$event']) blockCopy(changeEvent: KeyboardEvent) {
     if (this.preventCopyPasteCut) {
       changeEvent.preventDefault();
     }
   }
 
-  @HostListener("cut", ["$event"]) blockCut(changeEvent: KeyboardEvent) {
+  @HostListener('cut', ['$event']) blockCut(changeEvent: KeyboardEvent) {
     if (this.preventCopyPasteCut) {
       changeEvent.preventDefault();
     }

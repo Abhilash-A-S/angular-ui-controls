@@ -1,24 +1,38 @@
-<mat-menu #menuRef="matMenu" class="ui-more-details-menu {{panelClass}}" (closed)="onMenuClosed()">
-    @if (menuTitle) {
+<mat-menu
+  #menuRef="matMenu"
+  class="ui-more-details-menu {{ panelClass }}"
+  (closed)="onMenuClosed()"
+>
+  @if (menuTitle) {
     <div class="menu-header-title ps-2 mt-1 flex-grow-0">
-        {{ menuTitle }}
+      {{ menuTitle }}
     </div>
-    }
-    @if(menuItems?.length){
+  }
+  @if (menuItems?.length) {
     <div class="list-group bg-blue ui-more-details p-2 m-2">
-        @for (item of menuItems; track item) {
-        <div class="list-group-item gap-2"
-            [ngClass]="{'disabled': item.disabled, 'hstack': item.svgIcon, 'vstack': !item.svgIcon}"
-            [class]="item.classname" [attr.role]="item.action ? 'button' : null" (click)="onMenuItemClick(item)">
-            @if (item.svgIcon) {
-            <mat-icon [svgIcon]="item.svgIcon" [attr.aria-label]="item.svgIcon" class="menu-icon"></mat-icon>
-            }
-            @if (item.label) {
+      @for (item of menuItems; track item) {
+        <button
+          type="button"
+          mat-menu-item
+          [disabled]="item.disabled"
+          class="list-group-item gap-2"
+          [ngClass]="{ disabled: item.disabled, hstack: item.svgIcon, vstack: !item.svgIcon }"
+          [class]="item.classname"
+          (click)="onMenuItemClick(item)"
+        >
+          @if (item.svgIcon) {
+            <mat-icon
+              [svgIcon]="item.svgIcon"
+              [attr.aria-label]="item.svgIcon"
+              class="menu-icon"
+            ></mat-icon>
+          }
+          @if (item.label) {
             <div class="item-label">{{ item.label }}</div>
-            }
-            <div class="item-value">{{ item.value }}</div>
-        </div>
-        }
+          }
+          <div class="item-value">{{ item.value }}</div>
+        </button>
+      }
     </div>
-    }
+  }
 </mat-menu>

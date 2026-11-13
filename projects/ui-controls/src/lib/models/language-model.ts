@@ -1,5 +1,5 @@
 export interface Language {
-    value: string;
-    displayName: string;
-    languageValue: number;
+  value: string;
+  displayName: string;
+  languageValue: number;
 }

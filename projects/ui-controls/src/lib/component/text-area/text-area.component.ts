@@ -1,9 +1,25 @@
-import { Component, EventEmitter, Input, Output, ViewContainerRef, OnInit, ElementRef, Optional, Self, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewContainerRef,
+  OnInit,
+  ElementRef,
+  Optional,
+  Self,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { MaterialModule } from '../../material.module';
 import { MentionConfig } from 'angular-mentions';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject, takeUntil } from 'rxjs';
-import { AbbreviationEntry, ARABIC_LANGUAGE, UiUtilitiesModule, AbbreviationMentionConfig } from '../../utilities';
+import {
+  AbbreviationEntry,
+  ARABIC_LANGUAGE,
+  UiUtilitiesModule,
+  AbbreviationMentionConfig,
+} from '../../utilities';
 import { PreventClipboardDirective } from '../../directive/prevent-clipboard.directive';
 import { Language } from '../../models/language-model';
 import { BaseControlValueAccessor } from '../base-control-value-accessor.directive';
@@ -13,9 +29,9 @@ import { TextFieldModule } from '@angular/cdk/text-field';
 @Component({
   selector: 'ui-text-area',
   standalone: true,
-  imports: [MaterialModule, PreventClipboardDirective, UiUtilitiesModule,TextFieldModule],
+  imports: [MaterialModule, PreventClipboardDirective, UiUtilitiesModule, TextFieldModule],
   templateUrl: './text-area.component.html',
-  styleUrl: './text-area.component.scss'
+  styleUrl: './text-area.component.scss',
 })
 export class TextAreaComponent extends BaseControlValueAccessor<any> implements OnInit {
   container!: ViewContainerRef;
@@ -37,6 +53,8 @@ export class TextAreaComponent extends BaseControlValueAccessor<any> implements 
   }
   /** Indicates whether expandable view is active */
   public expandInput: boolean = false;
+  /** Show the optional inline editor expansion action. */
+  @Input() showExpandButton = false;
 
   /**
    * Enables or disables textarea resize
@@ -125,7 +143,6 @@ export class TextAreaComponent extends BaseControlValueAccessor<any> implements 
    */
   @Input() required: boolean = false;
 
-
   /**
    * Shows the remaining-character indicator when the existing focus/maxLength conditions allow it.
    * @default false
@@ -172,7 +189,10 @@ export class TextAreaComponent extends BaseControlValueAccessor<any> implements 
    * @default { labelKey: 'abbreviation', mentionSelect: this.onMentionSelect }
    * @type MentionConfig
    */
-  @Input() mentionConfig: MentionConfig = { labelKey: 'abbreviation', mentionSelect: this.onMentionSelect };
+  @Input() mentionConfig: MentionConfig = {
+    labelKey: 'abbreviation',
+    mentionSelect: this.onMentionSelect,
+  };
 
   /**
    * Enables abbreviation highlight textarea
@@ -229,9 +249,24 @@ export class TextAreaComponent extends BaseControlValueAccessor<any> implements 
 
   public selectedLanguage!: Language;
   public arabicLanguage: string = ARABIC_LANGUAGE;
-  public showWordsLimitLabel: boolean = false;
+  public isFocused = false;
+  /** @deprecated Use isFocused when inspecting focus state. */
+  public get showWordsLimitLabel(): boolean {
+    return this.isFocused;
+  }
+  public set showWordsLimitLabel(value: boolean) {
+    this.isFocused = value;
+  }
+  public get shouldShowRemainingCharacters(): boolean {
+    return this.showRemainingCharacters && this.isFocused && this.maxLength > 0;
+  }
+  public get characterCount(): number {
+    return this.modelValue?.length ?? 0;
+  }
+  public get remainingCharacters(): number {
+    return Math.max(0, this.maxLength - this.characterCount);
+  }
   public abbreviationHighlightMentionList: AbbreviationMentionConfig[] = [];
-
 
   /**
    * Emits the existing value-change payload; remains separate from modelChange.
@@ -263,20 +298,20 @@ export class TextAreaComponent extends BaseControlValueAccessor<any> implements 
   @Output() itemSelected: EventEmitter<any> = new EventEmitter<any>();
   constructor(
     @Optional() @Self() public override ngControl: NgControl,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     super(ngControl, changeDetectorRef);
   }
 
   /**
- * Returns shared field information
- *
- * @returns Object containing model value and field name
- */
+   * Returns shared field information
+   *
+   * @returns Object containing model value and field name
+   */
   private fieldInfo() {
     return {
       modelValue: this.modelValue,
-      fieldName: this.fieldName
+      fieldName: this.fieldName,
     };
   }
 
@@ -301,11 +336,13 @@ export class TextAreaComponent extends BaseControlValueAccessor<any> implements 
    */
   ngOnInit(): void {
     if (this.useAbbreviationHighlight && this.mentionsList?.length) {
-      this.abbreviationHighlightMentionList = [{
-        items: this.mentionsList,
-        triggerChar: '@',
-        isShortCut: false
-      }];
+      this.abbreviationHighlightMentionList = [
+        {
+          items: this.mentionsList,
+          triggerChar: '@',
+          isShortCut: false,
+        },
+      ];
     }
   }
 
@@ -315,30 +352,28 @@ export class TextAreaComponent extends BaseControlValueAccessor<any> implements 
    * @returns void
    */
   public updateChanges() {
-    this.onChange(this.modelValue);
+    this.commitValue(this.modelValue);
     this.valueChanged.emit({
       value: this.modelValue,
       textFieldName: this.fieldName,
-      labelField: this.label
+      labelField: this.label,
     });
   }
-
 
   /**
- * Handles native textarea input change
- *
- * @param e - Keyboard or input event
- * @returns void
- */
+   * Handles native textarea input change
+   *
+   * @param e - Keyboard or input event
+   * @returns void
+   */
   public changeTextareaValue(e: any) {
     this.modelValue = e.target.value;
-    this.onChange(e.target.value);
+
     this.inputChanged.emit({
       ...this.fieldInfo(),
-      ...{ changeEvent: e }
+      ...{ changeEvent: e },
     });
   }
-
 
   /**
    * Writes value from form control
@@ -351,56 +386,46 @@ export class TextAreaComponent extends BaseControlValueAccessor<any> implements 
   }
 
   /**
-  * Shows remaining characters on focus
-  *
-  * @returns void
-  */
+   * Shows remaining characters on focus
+   *
+   * @returns void
+   */
   public onTextAreaFocus() {
     this.showWordsLimitLabel = true;
   }
 
   /**
-  * Hides remaining characters on blur
-  *
-  * @returns void
-  */
-  public onTextAreaBlur() {
-    this.showWordsLimitLabel = false;
-    if (this.trimOnBlur && typeof this.modelValue === 'string') {
-      this.modelValue = this.modelValue.trim();
-    }
-  }
-  public openExpandableTextArea() {
-    // TO DO
-  }
-
-  /**
-   * Triggers expandable textarea dialog
+   * Hides remaining characters on blur
    *
    * @returns void
    */
+  public onTextAreaBlur() {
+    this.showWordsLimitLabel = false;
+    if (this.trimOnBlur && typeof this.modelValue === 'string') {
+      const trimmed = this.modelValue.trim();
+      if (trimmed !== this.modelValue) {
+        this.modelValue = trimmed;
+        this.updateChanges();
+      }
+    }
+  }
+  /** Toggle the inline expanded editor and notify consumers. */
+  public openExpandableTextArea(): void {
+    this.expandButton();
+  }
   public expandButton(): void {
-    // this.commonService.setExpandableInputConfig({
-    //   isAbbreviationTextArea: this.useAbbreviationHighlight,
-    //   abbreviationList: this.abbreviationList,
-    //   restrictedWords: this.restrictedWords,
-    //   value: this.modelValue,
-    //   textFieldName: this.textFieldName,
-    //   labelField: this.templateLabel,
-    //   maxLength: this.limit,
-    //   mentionsList: this.mentionsList,
-    //   boundRect: this.elementRef?.nativeElement?.parentElement?.getBoundingClientRect()
-    // });
+    if (this.disabled) return;
+    this.expandInput = !this.expandInput;
+    this.expandRequested.emit({ expanded: this.expandInput, value: this.modelValue });
   }
 
   /**
- * Handles mention selection
- *
- * @param selection - Selected mention object
- * @returns string - Inserted mention text
- */
-  public onMentionSelect(selection: { remarks: string; }): string {
+   * Handles mention selection
+   *
+   * @param selection - Selected mention object
+   * @returns string - Inserted mention text
+   */
+  public onMentionSelect(selection: { remarks: string }): string {
     return selection?.remarks;
   }
-
 }

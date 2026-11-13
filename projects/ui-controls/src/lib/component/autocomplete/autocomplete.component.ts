@@ -1,4 +1,19 @@
-import { AfterViewChecked, AfterViewInit, Component, DestroyRef, EventEmitter, inject, Input, OnInit, Output, ViewChild, Optional, Self, ChangeDetectorRef, viewChild } from '@angular/core';
+import {
+  AfterViewChecked,
+  AfterViewInit,
+  Component,
+  DestroyRef,
+  EventEmitter,
+  inject,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+  Optional,
+  Self,
+  ChangeDetectorRef,
+  viewChild,
+} from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { LibraryCommonService } from '../../services/library-common.service';
@@ -18,9 +33,12 @@ export const AUTOCOMPLETE_MODEL = { value: '', fieldId: '', fieldName: '' };
   standalone: true,
   imports: [MaterialModule, UiUtilitiesModule, ScrollingModule],
   templateUrl: './autocomplete.component.html',
-  styleUrl: './autocomplete.component.scss'
+  styleUrl: './autocomplete.component.scss',
 })
-export class AutocompleteComponent extends BaseControlValueAccessor<any> implements OnInit, AfterViewInit, AfterViewChecked {
+export class AutocompleteComponent
+  extends BaseControlValueAccessor<any>
+  implements OnInit, AfterViewInit, AfterViewChecked
+{
   // Unique ID for the input element (used for accessibility or testing);
   protected rawInputId: string = '';
 
@@ -40,7 +58,6 @@ export class AutocompleteComponent extends BaseControlValueAccessor<any> impleme
 
   // Current text typed in the input field;
   public searchText: string = '';
-
 
   /**
    * Requests the existing read-only behavior without disabling the parent form control.
@@ -98,7 +115,9 @@ export class AutocompleteComponent extends BaseControlValueAccessor<any> impleme
    * @default null
    * @type ((option: any) => string | string[] | Set<string> | Record<string, boolean>) | null
    */
-  @Input() optionNgClass: ((option: any) => string | string[] | Set<string> | Record<string, boolean>) | null = null;
+  @Input() optionNgClass:
+    | ((option: any) => string | string[] | Set<string> | Record<string, boolean>)
+    | null = null;
 
   /**
    * Additional CSS class or classes applied to the existing overlay panel.
@@ -268,16 +287,16 @@ export class AutocompleteComponent extends BaseControlValueAccessor<any> impleme
     private libraryCommonService: LibraryCommonService,
     private translate: TranslateService,
     @Optional() @Self() public override ngControl: NgControl,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     super(ngControl, changeDetectorRef);
   }
   private readonly destroyRef = inject(DestroyRef);
   /**
- * Angular lifecycle hook.
- * Subscribes to language change events and updates
- * the default translation language accordingly.
- */
+   * Angular lifecycle hook.
+   * Subscribes to language change events and updates
+   * the default translation language accordingly.
+   */
   ngOnInit(): void {
     this.libraryCommonService
       .getLanguageChange()
@@ -288,23 +307,23 @@ export class AutocompleteComponent extends BaseControlValueAccessor<any> impleme
   }
 
   /**
- * Angular lifecycle hook.
- * Marks the autocomplete form control as touched
- * after the view has been fully initialized.
- * This helps trigger validation visuals if required.
- */
+   * Angular lifecycle hook.
+   * Marks the autocomplete form control as touched
+   * after the view has been fully initialized.
+   * This helps trigger validation visuals if required.
+   */
   ngAfterViewInit() {
-    this.autoComplete?.control?.markAsTouched();
+    // Validation starts when the user leaves the control, not during initialization.
   }
 
   /**
- * Handles changes in the input text field.
- * Updates the local searchText value.
- * If the input is cleared, resets the autocomplete model
- * and emits a selection change event.
- *
- * @param changeEvent - DOM input event
- */
+   * Handles changes in the input text field.
+   * Updates the local searchText value.
+   * If the input is cleared, resets the autocomplete model
+   * and emits a selection change event.
+   *
+   * @param changeEvent - DOM input event
+   */
   searchTextChanges(changeEvent: any) {
     this.searchText = changeEvent?.target?.value ?? '';
     if (!this.searchText) {
@@ -314,137 +333,140 @@ export class AutocompleteComponent extends BaseControlValueAccessor<any> impleme
   }
 
   /**
- * Determines the display value for an autocomplete option.
- * Priority:
- * 1. labelKey of the list item matching a bound primitive value (e.g. an id)
- * 2. valueKey
- * 3. labelKey
- * 4. fallback to the option itself
- *
- * @param autocompleteOption - Selected autocomplete object or bound value
- * @returns string - Value to display in the input field
- */
+   * Determines the display value for an autocomplete option.
+   * Priority:
+   * 1. labelKey of the list item matching a bound primitive value (e.g. an id)
+   * 2. valueKey
+   * 3. labelKey
+   * 4. fallback to the option itself
+   *
+   * @param autocompleteOption - Selected autocomplete object or bound value
+   * @returns string - Value to display in the input field
+   */
   autoCompleteBindvalue = (autocompleteOption: any): string => {
     if (!autocompleteOption) {
       return '';
     }
     if (typeof autocompleteOption !== 'object' && this.valueKey && this.labelKey) {
-      const matchedOption = this.options?.find?.((option: any) => option?.[this.valueKey] === autocompleteOption);
+      const matchedOption = this.options?.find?.(
+        (option: any) => option?.[this.valueKey] === autocompleteOption,
+      );
       if (matchedOption) {
         return matchedOption[this.labelKey];
       }
     }
-    return autocompleteOption[this.valueKey] ??
-      autocompleteOption[this.labelKey] ??
-      autocompleteOption;
+    return (
+      autocompleteOption[this.valueKey] ?? autocompleteOption[this.labelKey] ?? autocompleteOption
+    );
   };
 
   /**
- * Builds a shared payload object used by all emitted events.
- * Includes:
- * - Input DOM reference (if inputId is provided)
- * - Current autocomplete model value
- * - Text field identifier
- *
- * @returns object - Common event payload
- */
+   * Builds a shared payload object used by all emitted events.
+   * Includes:
+   * - Input DOM reference (if inputId is provided)
+   * - Current autocomplete model value
+   * - Text field identifier
+   *
+   * @returns object - Common event payload
+   */
   private fieldInfo() {
     let inputRef = null;
     if (this.effectiveId) {
-      inputRef = document.querySelector(`#${this.effectiveId}`);
+      inputRef = typeof document === 'undefined' ? null : document.getElementById(this.effectiveId);
     }
     return {
-      ...inputRef && { inputRef: inputRef },
+      ...(inputRef && { inputRef: inputRef }),
       value: this.autocompleteModel,
-      textFieldName: this.fieldName
+      textFieldName: this.fieldName,
     };
   }
 
   /**
- * Emits an event whenever the bound model value changes.
- * Typically triggered by Angular's ngModelChange.
- */
+   * Emits an event whenever the bound model value changes.
+   * Typically triggered by Angular's ngModelChange.
+   */
   public modelValueChange() {
     this.value = this._autoCompleteModel.value;
+    this.commitValue();
     this.modelChange.emit(this.fieldInfo());
   }
 
   /**
- * Emits an event on every input value change (typing).
- * Used for live search or filtering behaviors.
- */
+   * Emits an event on every input value change (typing).
+   * Used for live search or filtering behaviors.
+   */
   public inputChange() {
     this.inputChanged.emit(this.fieldInfo());
   }
 
   /**
- * Emits an event when the input field gains focus.
- */
+   * Emits an event when the input field gains focus.
+   */
   public focusChange() {
     this.focusGained.emit(this.fieldInfo());
   }
 
   /**
- * Emits an event when the input field loses focus.
- */
+   * Emits an event when the input field loses focus.
+   */
   public blurChange() {
     this.focusLost.emit(this.fieldInfo());
   }
 
   /**
- * Emits the raw keyboard event when a key is pressed down.
- *
- * @param event - KeyboardEvent triggered on keydown
- */
+   * Emits the raw keyboard event when a key is pressed down.
+   *
+   * @param event - KeyboardEvent triggered on keydown
+   */
   public keydownHandle(event: KeyboardEvent) {
     this.keyPressed.emit(event);
   }
 
   /**
- * Emits the raw keyboard event when a key is released.
- *
- * @param event - KeyboardEvent triggered on keyup
- */
+   * Emits the raw keyboard event when a key is released.
+   *
+   * @param event - KeyboardEvent triggered on keyup
+   */
 
   public keyupHandle(event: KeyboardEvent) {
     this.keyReleased.emit(event);
   }
 
   /**
- * Emits an event when the Enter key is pressed.
- *
- * @param event - Keyboard or form submit event
- */
+   * Emits an event when the Enter key is pressed.
+   *
+   * @param event - Keyboard or form submit event
+   */
   public keyEnterHandle(event: Event) {
     this.enterPressed.emit(event);
   }
 
   /**
- * Handles selection changes from the autocomplete dropdown.
- * Emits the selected value and resets the search text.
- */
+   * Handles selection changes from the autocomplete dropdown.
+   * Emits the selected value and resets the search text.
+   */
   public onSelectionChange() {
     this.valueChanged.emit(this.fieldInfo());
     this.searchText = '';
   }
 
   /**
- * Calculates the virtual scroll viewport height so short lists
- * don't leave empty space and long lists are capped.
- *
- * @param count - Number of filtered options
- * @returns number - Viewport height in px
- */
+   * Calculates the virtual scroll viewport height so short lists
+   * don't leave empty space and long lists are capped.
+   *
+   * @param count - Number of filtered options
+   * @returns number - Viewport height in px
+   */
   public getViewportHeight(count: number = 0): number {
     return Math.min(count * this.virtualScrollItemSize, this.virtualScrollMaxHeight);
   }
 
   /**
- * The viewport height follows the filtered list length, but cdk only measures
- * its size on init. If it was created while the list was empty (height 0) it
- * renders no rows, so mat-autocomplete sees no options and never shows the
- * panel while typing. Re-measure whenever the bound height changes.
- */
+   * The viewport height follows the filtered list length, but cdk only measures
+   * its size on init. If it was created while the list was empty (height 0) it
+   * renders no rows, so mat-autocomplete sees no options and never shows the
+   * panel while typing. Re-measure whenever the bound height changes.
+   */
   ngAfterViewChecked(): void {
     const viewport = this.virtualScrollViewport();
     if (!this.virtualScroll || !viewport) return;
@@ -456,23 +478,23 @@ export class AutocompleteComponent extends BaseControlValueAccessor<any> impleme
   }
 
   /**
- * Track function for cdkVirtualFor.
- */
+   * Track function for cdkVirtualFor.
+   */
   public trackByFn = (index: number, option: any) =>
-    this.valueKey && option ? option[this.valueKey] ?? index : index;
+    this.valueKey && option ? (option[this.valueKey] ?? index) : index;
 
   /**
- * The viewport is measured while the overlay is being attached,
- * so re-measure once the panel is rendered to avoid a blank list.
- */
+   * The viewport is measured while the overlay is being attached,
+   * so re-measure once the panel is rendered to avoid a blank list.
+   */
   public onPanelOpened() {
     if (!this.virtualScroll) return;
     setTimeout(() => this.virtualScrollViewport()?.checkViewportSize());
   }
 
   /**
- * Reset the virtual scroll position so the next open starts from the top.
- */
+   * Reset the virtual scroll position so the next open starts from the top.
+   */
   public onPanelClosed() {
     this.measuredViewportHeight = -1;
     this.virtualScrollViewport()?.scrollToOffset(0);

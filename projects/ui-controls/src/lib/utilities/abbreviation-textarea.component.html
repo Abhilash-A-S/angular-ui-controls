@@ -1,11 +1,36 @@
 <div class="editor">
-  <div #highlight class="highlight" aria-hidden="true">@for(token of tokens;track $index){<span
-      [class.abbreviation]="token.kind==='abbreviation'"
-      [class.restricted]="token.kind==='restricted'">{{token.text}}</span>}{{'\n'}}</div>
-  <textarea #input [value]="value" [disabled]="disabled" [readOnly]="readOnly" [required]="required" [rows]="minRows"
-    [style.max-height.em]="maxRows * 1.5" [attr.maxlength]="maxLength" [placeholder]="placeholder"
-    [attr.aria-describedby]="describedBy" [attr.aria-required]="required" [attr.aria-invalid]="errorState"
-    [attr.ChatGptAttr]="assistantFieldId || null" [mentionConfig]="mentionOptions" [mention]="[]"
-    (input)="onInput($event)" (focus)="onFocus($event)" (blur)="onBlur($event)" (scroll)="syncScroll()"
-    (copy)="block($event,preventCopy)" (cut)="block($event,preventCut)" (paste)="block($event,preventPaste)"></textarea>
+  <div #highlight class="highlight" aria-hidden="true">
+    @for (token of tokens; track $index) {
+      <span
+        [class.abbreviation]="token.kind === 'abbreviation'"
+        [class.restricted]="token.kind === 'restricted'"
+        >{{ token.text }}</span
+      >
+    }
+    {{ '\n' }}
+  </div>
+  <textarea
+    #input
+    [value]="value"
+    [disabled]="disabled"
+    [readOnly]="readOnly"
+    [required]="required"
+    [rows]="minRows"
+    [style.max-height.em]="maxRows * 1.5"
+    [attr.maxlength]="maxLength"
+    [placeholder]="placeholder"
+    [attr.aria-describedby]="describedBy"
+    [attr.aria-required]="required"
+    [attr.aria-invalid]="errorState"
+    [attr.ChatGptAttr]="assistantFieldId || null"
+    [mentionConfig]="mentionOptions"
+    [mention]="[]"
+    (input)="onInput($event)"
+    (focus)="onFocus($event)"
+    (blur)="onBlur($event)"
+    (scroll)="syncScroll()"
+    (copy)="block($event, preventCopy)"
+    (cut)="block($event, preventCut)"
+    (paste)="block($event, preventPaste)"
+  ></textarea>
 </div>
