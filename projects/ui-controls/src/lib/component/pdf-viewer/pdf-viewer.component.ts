@@ -8,12 +8,14 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   imports: [CommonModule],
   templateUrl: './pdf-viewer.component.html',
   styleUrl: './pdf-viewer.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PdfViewerComponent {
   /** Safe resource URL processed by DomSanitizer for iframe consumption */
   public urlSafe!: SafeResourceUrl;
 
+  /** Accessible title for the embedded document. */
+  @Input() title = 'PDF document';
   private readonly sanitizer = inject(DomSanitizer);
   /**
    * Resource URL embedded in the viewer. The current implementation trusts this URL; callers must supply a trusted source.
@@ -22,9 +24,15 @@ export class PdfViewerComponent {
   @Input()
   set pdfUrl(pdfUrl: string) {
     this.urlSafe = '';
-    if (pdfUrl) {
-      let url = `${pdfUrl}#toolbar=0&navpanes=0&view=FitH`;
-      this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    if (!pdfUrl) return;
+    const parsed = new URL(
+      pdfUrl,
+      typeof document === 'undefined' ? 'https://localhost/' : document.baseURI,
+    );
+    if (!['https:', 'http:', 'blob:'].includes(parsed.protocol)) {
+      throw new Error('pdfUrl must use HTTPS, HTTP, or a blob URL.');
     }
+    parsed.hash = 'toolbar=0&navpanes=0&view=FitH';
+    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(parsed.href);
   }
 }

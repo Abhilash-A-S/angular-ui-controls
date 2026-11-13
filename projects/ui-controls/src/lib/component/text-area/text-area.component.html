@@ -1,53 +1,60 @@
-<div [ngClass]="{ 'required-text': !!error || (!!required && !modelValue) }">
+<div
+  [class.expanded]="expandInput"
+  [ngClass]="{ 'required-text': !!error || (!!required && !modelValue) }"
+>
   <mat-form-field appearance="outline">
-    <mat-label *ngIf="label">{{ label | translate }}</mat-label>
-    <!-- add custom [cdkAutosizeMinRows], [cdkAutosizeMaxRows], [mention]-->
-    <ui-abbreviation-textarea
-      *ngIf="useAbbreviationHighlight; else defaultTextArea"
-      [preventCopy]="preventCopyPasteCut"
-      [preventCut]="preventCopyPasteCut"
-      [preventPaste]="preventCopyPasteCut"
-      [disabled]="disabled"
-      [(ngModel)]="modelValue"
-      [ngModelOptions]="{ standalone: true }"
-      (ngModelChange)="updateChanges()"
-      (controlTextChange)="onChange($event)"
-      [maxLength]="maxLength > 0 ? maxLength : null"
-      placeholder="{{ placeholder | translate }}"
-      [readOnly]="readonly"
-      [restrictedWords]="restrictedWords"
-      [abbreviationList]="abbreviationList"
-      (focusIn)="onTextAreaFocus()"
-      (focusOut)="onTextAreaBlur()"
-      [minRows]="minRows"
-      [maxRows]="maxRows"
-      [mentionConfig]="abbreviationMentionConfig?.length ? abbreviationMentionConfig : abbreviationHighlightMentionList"
-      [assistantFieldId]="assistantFieldId"
-    >
-    </ui-abbreviation-textarea>
-    <ng-template #defaultTextArea>
+    @if (label) {
+      <mat-label>{{ label | translate }}</mat-label>
+    }
+    @if (useAbbreviationHighlight) {
+      <ui-abbreviation-textarea
+        [preventCopy]="preventCopyPasteCut"
+        [preventCut]="preventCopyPasteCut"
+        [preventPaste]="preventCopyPasteCut"
+        [disabled]="disabled"
+        [(ngModel)]="modelValue"
+        [ngModelOptions]="{ standalone: true }"
+        (ngModelChange)="updateChanges()"
+        [maxLength]="maxLength > 0 ? maxLength : null"
+        placeholder="{{ placeholder | translate }}"
+        [readOnly]="readonly"
+        [restrictedWords]="restrictedWords"
+        [abbreviationList]="abbreviationList"
+        (focusIn)="onTextAreaFocus()"
+        (focusOut)="onTextAreaBlur()"
+        [minRows]="expandInput ? 12 : minRows"
+        [maxRows]="expandInput ? 24 : maxRows"
+        [mentionConfig]="
+          $any(
+            abbreviationMentionConfig?.length
+              ? abbreviationMentionConfig
+              : abbreviationHighlightMentionList
+          )
+        "
+        [assistantFieldId]="assistantFieldId"
+      >
+      </ui-abbreviation-textarea>
+    } @else {
       <textarea
         matInput
         uiPreventClipboard
         uiTrimLeadingSpace
         [preventCopyPasteCut]="preventCopyPasteCut"
         tabindex="0"
-        contenteditable="true"
         aria-multiline="true"
         [disabled]="disabled"
         [cols]="columns"
         [(ngModel)]="modelValue"
         [ngModelOptions]="{ standalone: true }"
         (ngModelChange)="updateChanges()"
-        [value]="modelValue"
         (input)="changeTextareaValue($event)"
         [attr.maxLength]="maxLength > 0 ? maxLength : null"
         (focus)="onTextAreaFocus()"
         (blur)="onTextAreaBlur()"
         cdkTextareaAutosize
         #autosize="cdkTextareaAutosize"
-        [cdkAutosizeMinRows]="minRows"
-        [cdkAutosizeMaxRows]="maxRows"
+        [cdkAutosizeMinRows]="expandInput ? 12 : minRows"
+        [cdkAutosizeMaxRows]="expandInput ? 24 : maxRows"
         placeholder="{{ placeholder | translate }}"
         [readonly]="readonly"
         [mention]="mentionsList"
@@ -58,40 +65,30 @@
         uiArabicInput
         [isEnabledArabicText]="enableArabicInput"
       ></textarea>
-    </ng-template>
+    }
   </mat-form-field>
-  <div
-    *ngIf="showRemainingCharacters"
-    class="remaining-words-section d-flex justify-content-end"
-  >
-    <span class="remaning-label" *ngIf="showWordsLimitLabel"
-      >{{ maxLength - (modelValue?.length || 0) }}/ {{ maxLength }}</span
+  @if (showExpandButton) {
+    <button
+      type="button"
+      [disabled]="disabled"
+      [attr.aria-expanded]="expandInput"
+      [attr.aria-controls]="effectiveId"
+      (click)="expandButton()"
     >
-  </div>
-  <!-- <button
-      (click)="!readonly ? expandButton() : ''"
-      class="expand-input-buttons"
-      id="expandBtnID"
-      [ngClass]="{
-        'arabic-expand-view': arabicLanguage === selectedLanguage?.value
-      }"
-    >
-      <mat-icon
-        class="Icon-sm text-primary show-me"
-        svgIcon="dialogueIcon"
-      ></mat-icon>
-    </button> -->
-  <div *ngIf="showCharacterCount">
-    <div id="the-count" *ngIf="!!maxLength && modelValue?.length < maxLength">
-      <span id="current"
-        >you have entered&nbsp;<b>{{
-          modelValue?.length ? modelValue?.length : 0
-        }}</b
-        >&nbsp;characters ,maximum:&nbsp;<b>{{ maxLength }}</b></span
-      >
+      {{ expandInput ? 'Collapse' : 'Expand' }}
+    </button>
+  }
+  @if (shouldShowRemainingCharacters) {
+    <div class="remaining-characters" [id]="effectiveId + '-remaining'">
+      {{ remainingCharacters }} / {{ maxLength }}
     </div>
-    <div id="the-count" *ngIf="!!maxLength && modelValue?.length == maxLength">
-      <span id="current">you have entered maximum characters</span>
+  }
+  @if (showCharacterCount) {
+    <div class="character-count" [id]="effectiveId + '-count'">
+      {{ characterCount }}
+      @if (maxLength > 0) {
+        / {{ maxLength }}
+      }
     </div>
-  </div>
+  }
 </div>

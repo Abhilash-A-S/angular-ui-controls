@@ -1,8 +1,19 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild, ViewEncapsulation, Optional, Self, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+  ViewEncapsulation,
+  Optional,
+  Self,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { AutoPopulateCurrentDateDirective } from '../../directive/auto-populate-current-date.directive';
 import { MaterialModule } from '../../material.module';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatMomentDateModule, provideMomentDateAdapter } from '@angular/material-moment-adapter';
 import { DATE_FORMATS } from '../../utilities';
 import {
   DatePickerModelChangeEvent,
@@ -14,7 +25,7 @@ import {
   DatePickerKeyUpEvent,
   DatePickerDateChangeEvent,
   DatePickerEnterEvent,
-  DatePickerFieldInfo
+  DatePickerFieldInfo,
 } from './date-picker.interface';
 import { MatDatepicker, MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { OverlayContainer } from '@angular/cdk/overlay';
@@ -25,14 +36,10 @@ import { NgControl } from '@angular/forms';
 @Component({
   selector: 'ui-date-picker',
   standalone: true,
-  imports: [
-    MaterialModule,
-    MatMomentDateModule,
-    AutoPopulateCurrentDateDirective
-  ],
+  imports: [MaterialModule, MatMomentDateModule, AutoPopulateCurrentDateDirective],
   templateUrl: './date-picker.component.html',
   styleUrl: './date-picker.component.scss',
-  providers: [{ provide: MAT_DATE_FORMATS, useValue: DATE_FORMATS }]
+  providers: [provideMomentDateAdapter(DATE_FORMATS)],
 })
 export class DatePickerComponent extends BaseControlValueAccessor<Date> {
   // Unique ID for the input element
@@ -93,7 +100,6 @@ export class DatePickerComponent extends BaseControlValueAccessor<Date> {
    */
   @Input() required: boolean = false;
 
-
   /**
    * Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved.
    * @type string | number
@@ -147,7 +153,8 @@ export class DatePickerComponent extends BaseControlValueAccessor<Date> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onModelChange
    */
-  @Output() modelChange: EventEmitter<DatePickerModelChangeEvent> = new EventEmitter<DatePickerModelChangeEvent>();
+  @Output() modelChange: EventEmitter<DatePickerModelChangeEvent> =
+    new EventEmitter<DatePickerModelChangeEvent>();
 
   /**
    * Emits from the existing change handler.
@@ -155,7 +162,8 @@ export class DatePickerComponent extends BaseControlValueAccessor<Date> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onChange
    */
-  @Output() changeCommitted: EventEmitter<DatePickerChangeEvent> = new EventEmitter<DatePickerChangeEvent>();
+  @Output() changeCommitted: EventEmitter<DatePickerChangeEvent> =
+    new EventEmitter<DatePickerChangeEvent>();
 
   /**
    * Emits from the existing input/change handler.
@@ -163,7 +171,8 @@ export class DatePickerComponent extends BaseControlValueAccessor<Date> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onInputChange
    */
-  @Output() inputChanged: EventEmitter<DatePickerInputEvent> = new EventEmitter<DatePickerInputEvent>();
+  @Output() inputChanged: EventEmitter<DatePickerInputEvent> =
+    new EventEmitter<DatePickerInputEvent>();
 
   /**
    * Emits when the inner field gains focus.
@@ -171,7 +180,8 @@ export class DatePickerComponent extends BaseControlValueAccessor<Date> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onFocusChange
    */
-  @Output() focusGained: EventEmitter<DatePickerFocusEvent> = new EventEmitter<DatePickerFocusEvent>();
+  @Output() focusGained: EventEmitter<DatePickerFocusEvent> =
+    new EventEmitter<DatePickerFocusEvent>();
 
   /**
    * Emits when the inner field loses focus.
@@ -187,7 +197,8 @@ export class DatePickerComponent extends BaseControlValueAccessor<Date> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onKeydownHandle
    */
-  @Output() keyPressed: EventEmitter<DatePickerKeyDownEvent> = new EventEmitter<DatePickerKeyDownEvent>();
+  @Output() keyPressed: EventEmitter<DatePickerKeyDownEvent> =
+    new EventEmitter<DatePickerKeyDownEvent>();
 
   /**
    * Emits on the inner field keyup event.
@@ -195,14 +206,16 @@ export class DatePickerComponent extends BaseControlValueAccessor<Date> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onKeyupHandle
    */
-  @Output() keyReleased: EventEmitter<DatePickerKeyUpEvent> = new EventEmitter<DatePickerKeyUpEvent>();
+  @Output() keyReleased: EventEmitter<DatePickerKeyUpEvent> =
+    new EventEmitter<DatePickerKeyUpEvent>();
 
   /**
    * Reserved output retained for API compatibility. No emission site exists in the supplied implementation.
    * @payload DatePickerEnterEvent
    * @renamedFrom onKeyEnterHandle
    */
-  @Output() enterPressed: EventEmitter<DatePickerEnterEvent> = new EventEmitter<DatePickerEnterEvent>();
+  @Output() enterPressed: EventEmitter<DatePickerEnterEvent> =
+    new EventEmitter<DatePickerEnterEvent>();
 
   /**
    * Emits when the date-selection handler runs.
@@ -210,172 +223,164 @@ export class DatePickerComponent extends BaseControlValueAccessor<Date> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onDateChange
    */
-  @Output() dateChange: EventEmitter<DatePickerDateChangeEvent> = new EventEmitter<DatePickerDateChangeEvent>();
+  @Output() dateChange: EventEmitter<DatePickerDateChangeEvent> =
+    new EventEmitter<DatePickerDateChangeEvent>();
 
   /**  ViewChild reference to the custom footer DOM element.
- *  This element is appended manually to the mat-calendar rendered inside
- * the Angular Material datepicker overlay.
+   *  This element is appended manually to the mat-calendar rendered inside
+   * the Angular Material datepicker overlay.
    */
-  @ViewChild('datePickerFooter', { static: false }) datePickerFooter: ElementRef;
+  @ViewChild('datePickerFooter', { static: false }) datePickerFooter?: ElementRef;
 
   /**ViewChild reference to the MatDatepicker component.
- *  Used to detect when the datepicker opens so overlay DOM manipulation
- *  can be safely performed.
- */
-  @ViewChild('datePicker', { static: false }) datePicker: MatDatepicker<any>;
+   *  Used to detect when the datepicker opens so overlay DOM manipulation
+   *  can be safely performed.
+   */
+  @ViewChild('datePicker', { static: false }) datePicker?: MatDatepicker<any>;
 
   // Stores today's date formatted as DD-MMM-YYYY (e.g., 29-Jan-2026)
-  public todayDate: string = "";
-
+  public todayDate: string = '';
 
   /** Angular Material OverlayContainer.
-  * Used to access the DOM of components rendered in CDK overlays (e.g. mat-datepicker),
-  *  since these elements are not part of the component template.
-  */
+   * Used to access the DOM of components rendered in CDK overlays (e.g. mat-datepicker),
+   *  since these elements are not part of the component template.
+   */
   constructor(
     private overlayContainer: OverlayContainer,
     @Optional() @Self() public override ngControl: NgControl,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     super(ngControl, changeDetectorRef);
   }
 
   ngOnInit(): void {
-    this.todayDate = `Today ( ${moment(new Date()).format('DD-MMM-YYYY')})`
+    this.todayDate = `Today ( ${moment(new Date()).format('DD-MMM-YYYY')})`;
   }
 
   /**
- * Returns field metadata along with current value
- * @returns object containing model value and field name
- */
+   * Returns field metadata along with current value
+   * @returns object containing model value and field name
+   */
   private fieldInfo(): DatePickerFieldInfo {
     let inputRef: HTMLElement | null = null;
     if (this.effectiveId) {
-      inputRef = document.querySelector(`#${this.effectiveId}`);
+      inputRef = typeof document === 'undefined' ? null : document.getElementById(this.effectiveId);
     }
     return {
-      ...inputRef && { inputRef: inputRef },
+      ...(inputRef && { inputRef: inputRef }),
       modelValue: this.modelValue,
-      textFieldName: this.fieldName
+      textFieldName: this.fieldName,
     };
   }
 
-
   /**
- * Handles date picker change event
- * @param onDateChangeEvent Date change event
- * @returns void (emits dateChange)
- */
+   * Handles date picker change event
+   * @param onDateChangeEvent Date change event
+   * @returns void (emits dateChange)
+   */
   public handleDateChange(onDateChangeEvent: MatDatepickerInputEvent<Date>): void {
     this.dateChange.emit({
       ...this.fieldInfo(),
-      dateChangeEvent: onDateChangeEvent
+      dateChangeEvent: onDateChangeEvent,
     });
   }
 
-
   /**
- * Handles ngModel change event
- * @param handleModelChange Updated model value
- * @returns void (emits modelChange)
- */
+   * Handles ngModel change event
+   * @param handleModelChange Updated model value
+   * @returns void (emits modelChange)
+   */
   public handleModelChange(modelChange: Date | null): void {
     this.modelChange.emit({
       ...this.fieldInfo(),
-      modelChangeEvent: modelChange
+      modelChangeEvent: modelChange,
     });
   }
 
-
   /**
- * Handles focus event
- * @param onFocus Focus event
- * @returns void (emits focusGained)
- */
+   * Handles focus event
+   * @param onFocus Focus event
+   * @returns void (emits focusGained)
+   */
   public onFocus(onFocus: FocusEvent): void {
     this.focusGained.emit({
       ...this.fieldInfo(),
-      onFocusEvent: onFocus
+      onFocusEvent: onFocus,
     });
   }
 
-
   /**
- * Handles blur event
- * @param onBlur Blur event
- * @returns void (emits focusLost)
- */
+   * Handles blur event
+   * @param onBlur Blur event
+   * @returns void (emits focusLost)
+   */
   public onBlur(onBlur: FocusEvent): void {
     this.focusLost.emit({
       ...this.fieldInfo(),
-      onBlurEvent: onBlur
+      onBlurEvent: onBlur,
     });
   }
 
-
   /**
- * Handles keyup event
- * @param onkeyUp Keyboard event
- * @returns void (emits keyReleased)
- */
+   * Handles keyup event
+   * @param onkeyUp Keyboard event
+   * @returns void (emits keyReleased)
+   */
   public onKeyUp(onkeyUp: KeyboardEvent): void {
     this.keyReleased.emit({
       ...this.fieldInfo(),
-      onKeyUpEvent: onkeyUp
+      onKeyUpEvent: onkeyUp,
     });
   }
 
-
-
   /**
- * Handles keydown event
- * @param onkeyDown Keyboard event
- * @returns void (emits keyPressed)
- */
+   * Handles keydown event
+   * @param onkeyDown Keyboard event
+   * @returns void (emits keyPressed)
+   */
   public onKeyDown(onkeyDown: KeyboardEvent): void {
     this.keyPressed.emit({
       ...this.fieldInfo(),
-      onkeyDownEvent: onkeyDown
+      onkeyDownEvent: onkeyDown,
     });
   }
 
   /**
- * Handles keydown event
- * @param onkeyDown Keyboard event
- * @returns void (emits keyPressed)
- */
+   * Handles keydown event
+   * @param onkeyDown Keyboard event
+   * @returns void (emits keyPressed)
+   */
   public onInput(event: Event): void {
     this.inputChanged.emit({
       ...this.fieldInfo(),
-      changeEvent: event
+      changeEvent: event,
     });
   }
 
   /**
- * Handles change event
- * @param event Change event
- * @returns void (emits changeCommitted)
- */
+   * Handles change event
+   * @param event Change event
+   * @returns void (emits changeCommitted)
+   */
   public onChangeHandler(event: any): void {
     this.changeCommitted.emit({
       ...this.fieldInfo(),
-      onChangeEvent: event
+      onChangeEvent: event,
     });
   }
-  calendarOpen() {
-    if (this.showTodayDate) {
-      this.appendFooter();
-    }
-  }
-  private appendFooter() {
-    const overlay = this.overlayContainer.getContainerElement();
-    const calendar = overlay?.getElementsByTagName("mat-calendar")?.[0] as HTMLElement;
-    if (calendar) {
-      calendar.appendChild(this.datePickerFooter.nativeElement);
-    }
-  }
-  todayDateSelection() {
-    this.datePicker.select(moment(new Date()));
-    this.datePicker.close();
+  /** Retained for compatibility; Material owns overlay rendering. */
+  calendarOpen(): void {}
+  todayDateSelection(): void {
+    if (this.disabled || this.readonly) return;
+    const today = moment();
+    if (
+      (this.minDate && today.isBefore(this.minDate, 'day')) ||
+      (this.maxDate && today.isAfter(this.maxDate, 'day'))
+    )
+      return;
+    this.modelValue = today as any;
+    this.commitValue();
+    this.handleModelChange(this.modelValue);
+    this.datePicker?.close();
   }
 }

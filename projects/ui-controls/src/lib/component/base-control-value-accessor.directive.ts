@@ -3,15 +3,16 @@ import {
   ChangeDetectorRef,
   Directive,
   Input,
+  Output,
+  EventEmitter,
+  HostListener,
   Optional,
   Self,
-} from "@angular/core";
-import { ControlValueAccessor, NgControl } from "@angular/forms";
+} from '@angular/core';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
 
 @Directive()
-export abstract class BaseControlValueAccessor<
-  T = any,
-> implements ControlValueAccessor {
+export abstract class BaseControlValueAccessor<T = any> implements ControlValueAccessor {
   /** The internal value of the control */
   protected _value: T | null = null;
 
@@ -20,10 +21,10 @@ export abstract class BaseControlValueAccessor<
   public onTouchedCallback: () => void = () => {};
 
   /** Internal storage for idPrefix */
-  protected rawIdPrefix: string = "";
+  protected rawIdPrefix: string = '';
 
   /** Plain string property bound in template [id]="effectiveId" (zero function or CD overhead) */
-  public effectiveId: string = "";
+  public effectiveId: string = '';
 
   /** Internal storage for disabled state */
   protected _disabled: boolean = false;
@@ -52,7 +53,7 @@ export abstract class BaseControlValueAccessor<
    */
   @Input()
   set idPrefix(prefix: string) {
-    this.rawIdPrefix = prefix || "";
+    this.rawIdPrefix = prefix || '';
     this.configureId();
   }
   get idPrefix(): string {
@@ -61,33 +62,51 @@ export abstract class BaseControlValueAccessor<
 
   public configureId(): void {
     const rawId = (this as any).rawInputId || (this as any).inputId;
-    this.effectiveId =
-      this.rawIdPrefix && rawId ? `${this.rawIdPrefix}_${rawId}` : rawId || "";
+    this.effectiveId = this.rawIdPrefix && rawId ? `${this.rawIdPrefix}_${rawId}` : rawId || '';
   }
 
-  /**
-   * Shared control value. Assigning this input follows the existing change/touch callback behavior; Angular Forms writes use writeValue.
-   * @type T | null
-   */
+  /** Canonical value binding. Programmatic writes never emit user change events. */
   @Input()
   get value(): T | null {
     return this._value;
   }
-
-  /** Setter for internal value that automatically notifies the form control */
-  set value(val: T | null) {
-    if (val !== this._value) {
-      this._value = val;
-      this.onChangeCallback(val);
-      this.onTouchedCallback();
-      if (this.cdr) {
-        this.cdr.markForCheck();
-      }
+  set value(value: T | null) {
+    if (this.writingValue) {
+      this._value = value;
+      return;
     }
+    this.writingValue = true;
+    try {
+      this.writeValue(value);
+    } finally {
+      this.writingValue = false;
+    }
+  }
+  private writingValue = false;
+
+  /** Raw value emitted once per committed user edit; supports [(value)]. */
+  @Output() readonly valueChange = new EventEmitter<T | null>();
+
+  /** Commit a view edit after the inner control has updated its local model. */
+  public commitValue(value: T | null = this.value): void {
+    if (this.disabled) return;
+    this._value = value;
+    this.onChangeCallback(value);
+    this.valueChange.emit(value);
+    this.cdr?.markForCheck();
+  }
+
+  /** Touch the outer control only when focus leaves the whole composite control. */
+  @HostListener('focusout', ['$event'])
+  public handleFocusOut(event: FocusEvent): void {
+    const host = event.currentTarget as HTMLElement | null;
+    if (event.relatedTarget && host?.contains(event.relatedTarget as Node)) return;
+    this.onTouchedCallback();
   }
 
   /**
    * Alternate binding to the shared value, retained on the base class for compatibility.
+   * @deprecated Use value instead.
    * @type T | null
    */
   @Input()

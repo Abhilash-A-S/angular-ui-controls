@@ -1,6 +1,17 @@
-import { Component, EventEmitter, Input, Output, OnInit, inject, DestroyRef, Optional, Self, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  OnInit,
+  inject,
+  DestroyRef,
+  Optional,
+  Self,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
-import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
+
 import { RichTextEditorService } from './rich-text-editor.service';
 import RichTextEditorImageUpload from './rich-text-editor-image-upload';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
@@ -16,21 +27,30 @@ import { NgControl } from '@angular/forms';
   standalone: true,
   imports: [FormsModule, CKEditorModule],
   templateUrl: './rich-text-editor.component.html',
-  styleUrl: './rich-text-editor.component.scss'
+  styleUrl: './rich-text-editor.component.scss',
 })
 export class RichTextEditorComponent extends BaseControlValueAccessor<string> implements OnInit {
-
   /** Controls editor rendering (used for language reload) */
   public showEditor: boolean = true;
+  /** CKEditor license configuration; GPL requires a GPL-compatible use case. */
+  @Input() licenseKey = 'GPL';
 
   /** CKEditor decoupled editor reference */
-  public decoupledEditor: any = DecoupledEditor;
+  public decoupledEditor: any;
+  public editorLoadError = false;
+  @Output() editorLoadFailed = new EventEmitter<unknown>();
 
   /** Injected text editor configuration service */
   private textEditorService = inject(RichTextEditorService);
 
   /** CKEditor configuration object */
-  public editorConfig: any = { ...this.textEditorService.TEXT_EDITOR_CONFIG };
+  public editorConfig: any = {
+    ...this.textEditorService.TEXT_EDITOR_CONFIG,
+    toolbar: {
+      ...this.textEditorService.TEXT_EDITOR_CONFIG.toolbar,
+      items: [...this.textEditorService.TEXT_EDITOR_CONFIG.toolbar.items],
+    },
+  };
 
   /** Unique input identifier */
   protected rawInputId: string = '';
@@ -60,7 +80,6 @@ export class RichTextEditorComponent extends BaseControlValueAccessor<string> im
   set modelValue(val: string) {
     this.value = val;
   }
-
 
   /**
    * Toolbar item identifiers removed from the editor configuration.
@@ -103,11 +122,19 @@ export class RichTextEditorComponent extends BaseControlValueAccessor<string> im
 
   /**
    * Displays validation error state
+   * @deprecated Use errorMessage.
    * @default false
    * @type boolean
    * @remarks Retained input; no consumer of this setting is present in the supplied class/template.
    */
   @Input() error: boolean = false;
+
+  /**
+   * Error message or translation key displayed when validation fails.
+   * @default ''
+   * @type string
+   */
+  @Input() errorMessage: string = '';
 
   /**
    * Marks this control as required in its existing template; parent-form validators remain separately configured.
@@ -158,7 +185,7 @@ export class RichTextEditorComponent extends BaseControlValueAccessor<string> im
   constructor(
     private libraryCommonService: LibraryCommonService,
     @Optional() @Self() public override ngControl: NgControl,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     super(ngControl, changeDetectorRef);
   }
@@ -171,7 +198,48 @@ export class RichTextEditorComponent extends BaseControlValueAccessor<string> im
    * @returns void
    */
   ngOnInit(): void {
-    this.CheckRemoveToolList();
+    this.configureToolbar();
+    this.editorConfig.placeholder = this.placeholder;
+    this.editorConfig.licenseKey = this.licenseKey;
+    if (typeof window !== 'undefined') {
+      import('ckeditor5')
+        .then((editor) => {
+          if (this.destroyRef.destroyed) return;
+          this.editorConfig.plugins = [
+            editor.Essentials,
+            editor.Paragraph,
+            editor.Bold,
+            editor.Italic,
+            editor.Underline,
+            editor.Strikethrough,
+            editor.Heading,
+            editor.Font,
+            editor.Alignment,
+            editor.Link,
+            editor.Image,
+            editor.ImageUpload,
+            editor.ImageToolbar,
+            editor.ImageCaption,
+            editor.ImageStyle,
+            editor.ImageResize,
+            editor.Table,
+            editor.TableToolbar,
+            editor.List,
+            editor.ListProperties,
+            editor.BlockQuote,
+            editor.Indent,
+            editor.IndentBlock,
+          ];
+          this.decoupledEditor = editor.DecoupledEditor;
+          this.changeDetectorRef.markForCheck();
+        })
+        .catch((error) => {
+          if (this.destroyRef.destroyed) return;
+          this.editorLoadError = true;
+          this.editorLoadFailed.emit(error);
+          this.changeDetectorRef.markForCheck();
+        });
+    }
     this.libraryCommonService
       .getLanguageChange()
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -179,72 +247,72 @@ export class RichTextEditorComponent extends BaseControlValueAccessor<string> im
         this.editorConfig.language = language.value;
         this.showEditor = false;
         setTimeout(() => {
+          if (this.destroyRef.destroyed) return;
           this.showEditor = true;
+          this.changeDetectorRef.markForCheck();
         });
       });
   }
 
   /**
- * Filters CKEditor toolbar items
- * Removes tools listed in hiddenToolbarItems input
- *
- * @returns void
- */
+   * Filters CKEditor toolbar items
+   * Removes tools listed in hiddenToolbarItems input
+   *
+   * @returns void
+   */
+  /** @deprecated Use configureToolbar. */
   CheckRemoveToolList(): void {
-    this.editorConfig.toolbar.items = this.editorConfig
-      .toolbar
-      .items
-      .filter((toolbar: string) => !this.hiddenToolbarItems.includes(toolbar));
+    this.configureToolbar();
+  }
+
+  configureToolbar(): void {
+    this.editorConfig.toolbar.items = this.editorConfig.toolbar.items.filter(
+      (toolbar: string) => !this.hiddenToolbarItems.includes(toolbar),
+    );
   }
 
   /**
- * CKEditor ready callback
- * - Moves toolbar above editable area
- * - Registers custom image upload adapter
- *
- * @param editor CKEditor instance
- * @returns void
- */
+   * CKEditor ready callback
+   * - Moves toolbar above editable area
+   * - Registers custom image upload adapter
+   *
+   * @param editor CKEditor instance
+   * @returns void
+   */
   onReady(editor: any): void {
     editor.ui
       .getEditableElement()
-      .parentElement.insertBefore(
-        editor.ui.view.toolbar.element,
-        editor.ui.getEditableElement()
-      );
+      .parentElement.insertBefore(editor.ui.view.toolbar.element, editor.ui.getEditableElement());
 
-    editor.plugins.get('FileRepository').createUploadAdapter = (
-      loader: any
-    ) => {
+    editor.plugins.get('FileRepository').createUploadAdapter = (loader: any) => {
       return new RichTextEditorImageUpload(loader, editor.config);
     };
   }
 
   /**
- * Handles editor content change
- * Emits updated value to parent component
- *
- * @returns void (emits modelChange)
- */
+   * Handles editor content change
+   * Emits updated value to parent component
+   *
+   * @returns void (emits modelChange)
+   */
   onChangeHandler(): void {
     this.modelChange.emit({
       editorType: this.editorType,
-      modelValue: this.modelValue
+      modelValue: this.modelValue,
     });
   }
 
   /**
- * Handles editor blur event
- * Reserved for future validation or touch handling
- *
- * @returns void
- */
+   * Handles editor blur event
+   * Reserved for future validation or touch handling
+   *
+   * @returns void
+   */
   onBlurHandler(): void {
     this.onTouchedCallback();
     this.blurred.emit({
       editorType: this.editorType,
-      modelValue: this.modelValue
+      modelValue: this.modelValue,
     });
   }
-
 }

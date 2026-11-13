@@ -1,8 +1,8 @@
-import { Directive, HostListener, Input } from "@angular/core";
-import { NgControl } from "@angular/forms";
+import { Directive, HostListener, Input } from '@angular/core';
+import { NgControl } from '@angular/forms';
 
 @Directive({
-  selector: "[uiAutoPopulateCurrentDate]",
+  selector: '[uiAutoPopulateCurrentDate]',
   standalone: true,
 })
 export class AutoPopulateCurrentDateDirective {
@@ -11,10 +11,10 @@ export class AutoPopulateCurrentDateDirective {
    * @default true
    * @renamedFrom yarAutopopulateCurrentDate
    */
-  @Input("uiAutoPopulateCurrentDate") enabled = true;
+  @Input('uiAutoPopulateCurrentDate') enabled = true;
 
   constructor(private inputForm: NgControl) {}
-  @HostListener("keydown.Shift.r", ["$event"])
+  @HostListener('keydown.Shift.r', ['$event'])
   autoPopulateCurrentDate(keyboardEvent: any) {
     if (this.enabled) {
       keyboardEvent.preventDefault();

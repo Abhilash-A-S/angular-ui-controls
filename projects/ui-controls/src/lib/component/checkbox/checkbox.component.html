@@ -4,20 +4,20 @@
     [disabled]="disabled"
     [(ngModel)]="inputModelValue"
     [ngModelOptions]="{ standalone: true }"
-    (ngModelChange)="modelValueChange()"
+    (ngModelChange)="commitValue(); modelValueChange()"
     [id]="effectiveId"
     [indeterminate]="indeterminate"
     (change)="onChangeHandle($event, 'change')"
     (input)="inputChange($event, 'input')"
     (click)="onCheckboxClick($event)"
   >
-    @if(label){
-    <mat-label>{{ label | translate }}</mat-label>
+    @if (label) {
+      <mat-label>{{ label | translate }}</mat-label>
     }
   </mat-checkbox>
-  @if(required && errorMessage){
-  <div>
-    {{ errorMessage | translate }}
-  </div>
+  @if (required && errorMessage) {
+    <div>
+      {{ errorMessage | translate }}
+    </div>
   }
 </div>

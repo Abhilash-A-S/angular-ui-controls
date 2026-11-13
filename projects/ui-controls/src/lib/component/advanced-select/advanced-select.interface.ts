@@ -17,10 +17,9 @@ export interface SearchableSelectFieldInfo {
 /**
  * Selection change event payload
  */
-export interface SearchableSelectSelectionChangeEvent
-  extends SearchableSelectFieldInfo {
+export interface SearchableSelectSelectionChangeEvent extends SearchableSelectFieldInfo {
   /** MatSelect change event containing selected value(s) */
-  selectionChange: MatSelectChange;
+  selectionChange: MatSelectChange | null;
 }
 
 /**
@@ -61,4 +60,3 @@ export interface SearchableSelectOptionItem {
  * Can be primitive (string/number) or an object with arbitrary keys
  */
 export type SearchableSelectOption = any;
-

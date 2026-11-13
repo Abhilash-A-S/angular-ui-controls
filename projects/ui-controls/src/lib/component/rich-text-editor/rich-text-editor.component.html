@@ -1,5 +1,19 @@
-@if(showEditor){
-<ckeditor [id]="effectiveId" [editor]="decoupledEditor" [(ngModel)]="modelValue" [ngModelOptions]="{ standalone: true }" (ready)="onReady($event)"
-    [config]="editorConfig" (change)="onChangeHandler()" [disabled]="disabled" (blur)="onBlurHandler()">
-</ckeditor>
+@if (showEditor && decoupledEditor) {
+  <ckeditor
+    [id]="effectiveId"
+    [editor]="decoupledEditor"
+    [(ngModel)]="modelValue"
+    [ngModelOptions]="{ standalone: true }"
+    (ngModelChange)="commitValue()"
+    (ready)="onReady($event)"
+    [config]="editorConfig"
+    (change)="onChangeHandler()"
+    [disabled]="disabled || readonly"
+    (blur)="onBlurHandler()"
+  >
+  </ckeditor>
+}
+
+@if (editorLoadError) {
+  <p role="alert">Unable to load the text editor.</p>
 }

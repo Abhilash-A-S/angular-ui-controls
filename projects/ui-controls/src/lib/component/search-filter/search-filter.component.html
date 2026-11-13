@@ -2,8 +2,8 @@
   <div class="col-sm-8 col-lg-8 col-8 p-0">
     <ng-content select="[primaryFilter]">
       <mat-form-field appearance="outline">
-        @if(searchTextLabel){
-        <mat-label>{{ searchTextLabel | translate }}</mat-label>
+        @if (searchTextLabel) {
+          <mat-label>{{ searchTextLabel | translate }}</mat-label>
         }
         <button
           type="button"
@@ -12,26 +12,22 @@
           [matTooltip]="searchButtonTooltip"
           matIconPrefix
         >
-          <mat-icon
-            matIconPrefix
-            svgIcon="searchIcon"
-            class="text-primary Icon-sm"
-          >
-          </mat-icon>
+          <mat-icon matIconPrefix svgIcon="ui:search" class="text-primary Icon-sm"> </mat-icon>
         </button>
         <input
-          [id]="effectiveId"
+          [id]="effectiveId + '-search'"
           type="text"
           matInput
           uiInputRules
           [inputType]="inputType"
-          uiPreventClipboard [preventCopyPasteCut]="preventCopyPasteCut"
+          uiPreventClipboard
+          [preventCopyPasteCut]="preventCopyPasteCut"
           uiTrimLeadingSpace
           [disabled]="disabled"
           [(ngModel)]="modelValue"
           [ngModelOptions]="{ standalone: true }"
           [maxLength]="maxLength"
-          (ngModelChange)="modelValueChange($event)"
+          (ngModelChange)="commitValue(); modelValueChange($event)"
           (input)="inputChange($event)"
           [attr.maxLength]="wordsLimit > 0 ? wordsLimit : null"
           aria-required="true"
@@ -44,10 +40,10 @@
           (keyup.enter)="keyEnterHandle($event)"
           (click)="inputClick($event)"
         />
-        @if(required && errorMessage){
-        <mat-error>
-          {{ errorMessage | translate }}
-        </mat-error>
+        @if (required && errorMessage) {
+          <mat-error>
+            {{ errorMessage | translate }}
+          </mat-error>
         }
       </mat-form-field>
     </ng-content>
@@ -55,27 +51,29 @@
   <div class="col-sm-4 col-lg-4 col-4 p-0 search-select">
     <ng-content select="[secondaryFilter]">
       <mat-form-field appearance="outline">
-        @if(searchSelectLabel){
-        <mat-label [uiEllipsisTooltip]="searchSelectLabel | translate">{{
-          searchSelectLabel | translate
-        }}</mat-label>
-        } @if(inputModelValue && showClearIcon){
-        <button
-          type="button"
-          matTooltip="Clear"
-          matSuffix
-          mat-icon-button
-          (click)="$event.stopPropagation(); clearSelect()"
-        >
-          <mat-icon
-            svgIcon="closeIcon"
-            class="Icon-xs text-danger me-1 text-danger d-flex"
-          ></mat-icon>
-        </button>
+        @if (searchSelectLabel) {
+          <mat-label [uiEllipsisTooltip]="searchSelectLabel | translate">{{
+            searchSelectLabel | translate
+          }}</mat-label>
+        }
+        @if (inputModelValue && showClearIcon) {
+          <button
+            type="button"
+            matTooltip="Clear"
+            matSuffix
+            mat-icon-button
+            (click)="$event.stopPropagation(); clearSelect()"
+          >
+            <mat-icon
+              svgIcon="ui:close"
+              class="Icon-xs text-danger me-1 text-danger d-flex"
+            ></mat-icon>
+          </button>
         }
         <mat-select
-          [id]="effectiveId"
+          [id]="effectiveId + '-select'"
           [(ngModel)]="inputModelValue"
+          (ngModelChange)="commitValue()"
           [ngModelOptions]="{ standalone: true }"
           placeholder="{{ selectPlaceholder | translate }}"
           (selectionChange)="handleSelectionChange($event)"
@@ -86,23 +84,23 @@
           (blur)="blur()"
           [disabled]="disabled"
         >
-          @for(option of options; track option){
-          <mat-option
-            [value]="valueKey && !multiple ? option[valueKey] : option"
-            (onSelectionChange)="optionSelectionChange($event, option)"
-            (click)="optionClick(option)"
-            [matTooltip]="labelKey ? option[labelKey] : option"
-            [disabled]="option?.['isDisabled']"
-            matTooltipPosition="above"
-          >
-            {{ labelKey ? option[labelKey] : option }}
-          </mat-option>
+          @for (option of options; track option) {
+            <mat-option
+              [value]="valueKey && !multiple ? option[valueKey] : option"
+              (onSelectionChange)="optionSelectionChange($event, option)"
+              (click)="optionClick(option)"
+              [matTooltip]="labelKey ? option[labelKey] : option"
+              [disabled]="option?.['isDisabled']"
+              matTooltipPosition="above"
+            >
+              {{ labelKey ? option[labelKey] : option }}
+            </mat-option>
           }
         </mat-select>
-        @if(required && errorMessage){
-        <mat-error>
-          {{ errorMessage | translate }}
-        </mat-error>
+        @if (required && errorMessage) {
+          <mat-error>
+            {{ errorMessage | translate }}
+          </mat-error>
         }
       </mat-form-field>
     </ng-content>

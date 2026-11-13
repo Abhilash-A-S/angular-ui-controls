@@ -1,3 +1,9 @@
 <div class="pdf-viewer-container">
-  <iframe [src]="urlSafe" class="pdf-iframe" allowtransparency="true"></iframe>
+  <iframe
+    [title]="title"
+    referrerpolicy="no-referrer"
+    [src]="urlSafe"
+    class="pdf-iframe"
+    allowtransparency="true"
+  ></iframe>
 </div>

@@ -1,4 +1,4 @@
 export interface IRadioButtonModel {
-    displayLabel: string,
-    value: string | number
+  displayLabel: string;
+  value: string | number;
 }

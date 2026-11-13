@@ -1,22 +1,18 @@
 <div [ngClass]="{ 'required-text': required && (inputModelValue | isEmpty) }">
   <mat-form-field appearance="outline">
-    @if(label){
-    <mat-label [uiEllipsisTooltip]="label | translate">{{
-      label | translate
-    }}</mat-label>
-    } @if(inputModelValue && showClearIcon){
-    <button
-      type="button"
-      matTooltip="Clear"
-      matSuffix
-      mat-icon-button
-      (click)="$event.stopPropagation(); clearSelect()"
-    >
-      <mat-icon
-        svgIcon="closeIcon"
-        class="Icon-xs text-danger me-1 text-danger d-flex"
-      ></mat-icon>
-    </button>
+    @if (label) {
+      <mat-label [uiEllipsisTooltip]="label | translate">{{ label | translate }}</mat-label>
+    }
+    @if (inputModelValue && showClearIcon) {
+      <button
+        type="button"
+        matTooltip="Clear"
+        matSuffix
+        mat-icon-button
+        (click)="$event.stopPropagation(); clearSelect()"
+      >
+        <mat-icon svgIcon="ui:close" class="Icon-xs text-danger me-1 text-danger d-flex"></mat-icon>
+      </button>
     }
     <mat-select
       [id]="effectiveId"
@@ -29,27 +25,27 @@
       (opened)="opened()"
       (closed)="closed()"
       (blur)="blur()"
-      [disabled]="disabled"
+      [disabled]="disabled || readonly"
       [compareWith]="compareObjects"
     >
       @if (hasSelectedValue) {
-      <mat-select-trigger>
-        {{ getTriggerText() }}
-      </mat-select-trigger>
+        <mat-select-trigger>
+          {{ getTriggerText() }}
+        </mat-select-trigger>
       }
-      @if(showSearch && internalSelectList?.length){
-      <mat-option>
-        <ngx-mat-select-search
-          placeholderLabel="{{ searchPlaceholder | translate }}"
-          [noEntriesFoundLabel]="noEntriesFoundLabel"
-          [(ngModel)]="searchText"
-          [ngModelOptions]="{ standalone: true }"
-          [showToggleAllCheckbox]="showSearchCheckbox"
-          [toggleAllCheckboxTooltipMessage]="toggleAllCheckboxTooltipMessage"
-          (toggleAll)="toggleSelectAll($event)"
-          (ngModelChange)="searchTextModelChange($event)"
-        ></ngx-mat-select-search>
-      </mat-option>
+      @if (showSearch && internalSelectList?.length) {
+        <mat-option>
+          <ngx-mat-select-search
+            placeholderLabel="{{ searchPlaceholder | translate }}"
+            [noEntriesFoundLabel]="noEntriesFoundLabel"
+            [(ngModel)]="searchText"
+            [ngModelOptions]="{ standalone: true }"
+            [showToggleAllCheckbox]="showSearchCheckbox || showToggleAllCheckbox"
+            [toggleAllCheckboxTooltipMessage]="toggleAllCheckboxTooltipMessage"
+            (toggleAll)="toggleSelectAll($event)"
+            (ngModelChange)="searchTextModelChange($event)"
+          ></ngx-mat-select-search>
+        </mat-option>
       }
       <cdk-virtual-scroll-viewport
         [class.single-line-viewport]="singleLineOption"
@@ -57,16 +53,14 @@
         minBufferPx="600"
         maxBufferPx="1000"
         [style.height.px]="
-          internalSelectList?.length < 6
-            ? internalSelectList?.length * itemSize
-            : 216
+          (internalSelectList?.length || 0) < 6 ? (internalSelectList?.length || 0) * itemSize : 216
         "
       >
         @for (option of hiddenOptions(); track option) {
-        <!-- IMPORTANT! Keep the content of 'mat-option' the same -->
-        <mat-option [value]="option" [style.display]="'none'">
-          {{ labelKey ? option?.[labelKey] : option }}
-        </mat-option>
+          <!-- IMPORTANT! Keep the content of 'mat-option' the same -->
+          <mat-option [value]="option" [style.display]="'none'">
+            {{ labelKey ? option?.[labelKey] : option }}
+          </mat-option>
         }
         <mat-option
           #virtualOption
@@ -89,29 +83,26 @@
           matTooltipPosition="above"
           [matTooltipDisabled]="
             singleLineOption ||
-            isTooltipDisabled(
-              virtualOption,
-              labelKey ? option[labelKey] : option
-            )
+            isTooltipDisabled(virtualOption, labelKey ? option[labelKey] : option)
           "
         >
           @if (singleLineOption) {
-          <span
-            class="single-line-option-text"
-            [uiEllipsisTooltip]="labelKey ? option[labelKey] : option"
-            tooltipPosition="above"
-            >{{ labelKey ? option[labelKey] : option }}</span
-          >
+            <span
+              class="single-line-option-text"
+              [uiEllipsisTooltip]="labelKey ? option[labelKey] : option"
+              tooltipPosition="above"
+              >{{ labelKey ? option[labelKey] : option }}</span
+            >
           } @else {
-          {{ labelKey ? option[labelKey] : option }}
+            {{ labelKey ? option[labelKey] : option }}
           }
         </mat-option>
       </cdk-virtual-scroll-viewport>
     </mat-select>
-    @if(required && errorMessage){
-    <mat-error>
-      {{ errorMessage | translate }}
-    </mat-error>
+    @if (required && errorMessage) {
+      <mat-error>
+        {{ errorMessage | translate }}
+      </mat-error>
     }
   </mat-form-field>
 </div>

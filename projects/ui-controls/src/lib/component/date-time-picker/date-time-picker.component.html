@@ -1,8 +1,8 @@
 <div [ngClass]="{ 'required-text': required && !modelValue }">
   <div class="d-flex flex-column">
     <mat-form-field appearance="outline">
-      @if(label){
-      <mat-label>{{ label | translate }}</mat-label>
+      @if (label) {
+        <mat-label>{{ label | translate }}</mat-label>
       }
       <input
         matInput
@@ -11,10 +11,11 @@
         [ngModelOptions]="{ standalone: true }"
         [id]="effectiveId"
         (dateChange)="handleDateChange($event)"
-        (ngModelChange)="handleModelChange($event)"
+        (ngModelChange)="commitValue(); handleModelChange($event)"
         (focus)="onFocus($event)"
         (blur)="onBlur($event)"
         (keyup)="onKeyUp($event)"
+        (keyup.enter)="onEnter($event)"
         (keydown)="onKeyDown($event)"
         (input)="onInput($event)"
         (change)="onChangeHandler($event)"
@@ -26,24 +27,22 @@
         [readonly]="readonly"
         [required]="required"
       />
-      @if(required && errorMessage){
-      <mat-error>
-        {{ errorMessage | translate }}
-      </mat-error>
+      @if (required && errorMessage) {
+        <mat-error>
+          {{ errorMessage | translate }}
+        </mat-error>
       }
-      <ngx-mat-datepicker-toggle
-        matSuffix
-        [for]="pickerWithActions"
-      ></ngx-mat-datepicker-toggle>
-      <ngx-mat-datetime-picker #pickerWithActions (opened)="onPickerOpened()">
+      <ngx-mat-datepicker-toggle matSuffix [for]="pickerWithActions"></ngx-mat-datepicker-toggle>
+      <ngx-mat-datetime-picker #pickerWithActions [disabled]="disabled || readonly">
         <ngx-mat-datepicker-actions>
           <button
             type="button"
             class="text-primary mb-2"
             [disabled]="isApplyDisabled(pickerWithActions)"
+            aria-label="Apply date and time"
             ngxMatDatepickerApply
           >
-            <mat-icon svgIcon="tickIcon" class="Icon-xs"></mat-icon>
+            <mat-icon svgIcon="ui:check" class="Icon-xs"></mat-icon>
           </button>
         </ngx-mat-datepicker-actions>
       </ngx-mat-datetime-picker>

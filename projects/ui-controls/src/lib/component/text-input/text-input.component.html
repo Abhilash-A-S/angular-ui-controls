@@ -1,9 +1,10 @@
 <div [ngClass]="{ 'required-text': required && !modelValue }">
   <mat-form-field appearance="outline">
-    @if(label){
-    <mat-label>{{ label | translate }}</mat-label>
-    } @if (enablePrefix) {
-    <span matTextPrefix>{{ prefix }}&nbsp;</span>
+    @if (label) {
+      <mat-label>{{ label | translate }}</mat-label>
+    }
+    @if (enablePrefix) {
+      <span matTextPrefix>{{ prefix }}&nbsp;</span>
     }
     <input
       [id]="effectiveId"
@@ -14,16 +15,16 @@
       uiTrimLeadingSpace
       inputType="text"
       uiArabicInput
-      uiPreventClipboard [preventCopyPasteCut]="preventCopyPasteCut"
+      uiPreventClipboard
+      [preventCopyPasteCut]="preventCopyPasteCut"
       [isEnabledArabicText]="enableArabicInput"
       [disabled]="disabled"
       [(ngModel)]="modelValue"
       [ngModelOptions]="{ standalone: true }"
-      [maxLength]="maxLength"
       [onlyAlphabets]="onlyAlphabets"
-      (ngModelChange)="modelValueChange($event)"
+      (ngModelChange)="commitValue(); modelValueChange($event)"
       (input)="inputChange($event)"
-      [attr.maxLength]="wordsLimit > 0 ? wordsLimit : null"
+      [attr.maxlength]="maxLength > 0 ? maxLength : wordsLimit > 0 ? wordsLimit : null"
       aria-required="true"
       (focus)="focusChange($event)"
       (blur)="blurChange($event)"
@@ -37,12 +38,12 @@
       [matTooltip]="showTooltip ? modelValue : ''"
     />
     @if (enablePostfix) {
-    <span matTextSuffix>&nbsp;{{ suffix }}</span>
+      <span matTextSuffix>&nbsp;{{ suffix }}</span>
     }
-    @if(required && errorMessage){
-    <mat-error>
-      {{ errorMessage | translate }}
-    </mat-error>
+    @if (required && errorMessage) {
+      <mat-error>
+        {{ errorMessage | translate }}
+      </mat-error>
     }
   </mat-form-field>
 </div>

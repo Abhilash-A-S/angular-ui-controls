@@ -16,8 +16,7 @@ export interface PasswordInputFieldInfo {
 /**
  * Model value change event payload
  */
-export interface PasswordInputModelChangeEvent
-  extends PasswordInputFieldInfo {
+export interface PasswordInputModelChangeEvent extends PasswordInputFieldInfo {
   /** Updated password value */
   modelChangeEvent: string;
 }
@@ -25,8 +24,7 @@ export interface PasswordInputModelChangeEvent
 /**
  * Input event payload
  */
-export interface PasswordInputInputEvent
-  extends PasswordInputFieldInfo {
+export interface PasswordInputInputEvent extends PasswordInputFieldInfo {
   /** Native input event */
   inputChangeEvent: Event;
 }
@@ -34,8 +32,7 @@ export interface PasswordInputInputEvent
 /**
  * Focus event payload
  */
-export interface PasswordInputFocusEvent
-  extends PasswordInputFieldInfo {
+export interface PasswordInputFocusEvent extends PasswordInputFieldInfo {
   /** Native focus event */
   focusEvent: FocusEvent;
 }
@@ -43,8 +40,7 @@ export interface PasswordInputFocusEvent
 /**
  * Blur event payload
  */
-export interface PasswordInputBlurEvent
-  extends PasswordInputFieldInfo {
+export interface PasswordInputBlurEvent extends PasswordInputFieldInfo {
   /** Native blur event */
   blurEvent: FocusEvent;
 }
@@ -52,8 +48,7 @@ export interface PasswordInputBlurEvent
 /**
  * Keydown event payload
  */
-export interface PasswordInputKeydownEvent
-  extends PasswordInputFieldInfo {
+export interface PasswordInputKeydownEvent extends PasswordInputFieldInfo {
   /** Native keyboard event */
   keyDownEvent: KeyboardEvent;
 }
@@ -61,8 +56,7 @@ export interface PasswordInputKeydownEvent
 /**
  * Keyup event payload
  */
-export interface PasswordInputKeyupEvent
-  extends PasswordInputFieldInfo {
+export interface PasswordInputKeyupEvent extends PasswordInputFieldInfo {
   /** Native keyboard event */
   keyUpEvent: KeyboardEvent;
 }
@@ -70,8 +64,7 @@ export interface PasswordInputKeyupEvent
 /**
  * Enter key event payload
  */
-export interface PasswordInputKeyEnterEvent
-  extends PasswordInputFieldInfo {
+export interface PasswordInputKeyEnterEvent extends PasswordInputFieldInfo {
   /** Enter key or input-related event */
   keyEnterEvent: Event;
 }

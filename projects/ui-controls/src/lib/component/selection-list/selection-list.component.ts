@@ -1,8 +1,20 @@
-import { Component, ChangeDetectorRef, EventEmitter, Input, Output, Optional, Self } from '@angular/core';
+import {
+  Component,
+  ChangeDetectorRef,
+  EventEmitter,
+  Input,
+  Output,
+  Optional,
+  Self,
+} from '@angular/core';
 import { MaterialModule } from '../../material.module';
 import { UiUtilitiesModule } from '../../utilities';
 import { MatSelectionListChange } from '@angular/material/list';
-import { SelectionListFieldInfo, SelectionListSelectionChangeEvent, SelectionListModelChangeEvent } from './selection-list.interface';
+import {
+  SelectionListFieldInfo,
+  SelectionListSelectionChangeEvent,
+  SelectionListModelChangeEvent,
+} from './selection-list.interface';
 import { BaseControlValueAccessor } from '../base-control-value-accessor.directive';
 import { NgControl } from '@angular/forms';
 
@@ -11,7 +23,7 @@ import { NgControl } from '@angular/forms';
   standalone: true,
   imports: [MaterialModule, UiUtilitiesModule],
   templateUrl: './selection-list.component.html',
-  styleUrl: './selection-list.component.scss'
+  styleUrl: './selection-list.component.scss',
 })
 export class SelectionListComponent extends BaseControlValueAccessor<any> {
   // Unique ID for the selection list element
@@ -59,7 +71,6 @@ export class SelectionListComponent extends BaseControlValueAccessor<any> {
    */
   @Input() required: boolean = false;
 
-
   /**
    * Enables the existing multiple-selection mode.
    * @default true
@@ -104,7 +115,8 @@ export class SelectionListComponent extends BaseControlValueAccessor<any> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onSelectionChange
    */
-  @Output() selectionChange: EventEmitter<SelectionListSelectionChangeEvent> = new EventEmitter<SelectionListSelectionChangeEvent>();
+  @Output() selectionChange: EventEmitter<SelectionListSelectionChangeEvent> =
+    new EventEmitter<SelectionListSelectionChangeEvent>();
 
   /**
    * Emits when the component model-change handler runs.
@@ -112,7 +124,8 @@ export class SelectionListComponent extends BaseControlValueAccessor<any> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onModelChange
    */
-  @Output() modelChange: EventEmitter<SelectionListModelChangeEvent> = new EventEmitter<SelectionListModelChangeEvent>();
+  @Output() modelChange: EventEmitter<SelectionListModelChangeEvent> =
+    new EventEmitter<SelectionListModelChangeEvent>();
 
   /** Internal model bound to selection list */
   public get inputModelValue(): any {
@@ -135,7 +148,7 @@ export class SelectionListComponent extends BaseControlValueAccessor<any> {
 
   constructor(
     @Optional() @Self() public override ngControl: NgControl,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     super(ngControl, changeDetectorRef);
   }
@@ -147,12 +160,12 @@ export class SelectionListComponent extends BaseControlValueAccessor<any> {
   private fieldInfo(): SelectionListFieldInfo {
     let inputRef = null;
     if (this.effectiveId) {
-      inputRef = document.querySelector(`#${this.effectiveId}`);
+      inputRef = typeof document === 'undefined' ? null : document.getElementById(this.effectiveId);
     }
     return {
       ...(inputRef && { inputRef }),
       modelValue: this.inputModelValue,
-      textFieldName: this.fieldName
+      textFieldName: this.fieldName,
     };
   }
 
@@ -164,7 +177,7 @@ export class SelectionListComponent extends BaseControlValueAccessor<any> {
   public modelValueChange(val: any): void {
     this.modelChange.emit({
       ...this.fieldInfo(),
-      modelChangeEvent: val
+      modelChangeEvent: val,
     });
   }
 
@@ -176,7 +189,7 @@ export class SelectionListComponent extends BaseControlValueAccessor<any> {
   public selectionChanged(changeValue: MatSelectionListChange): void {
     this.selectionChange.emit({
       ...this.fieldInfo(),
-      selectionChangeEvent: changeValue
+      selectionChangeEvent: changeValue,
     });
   }
 

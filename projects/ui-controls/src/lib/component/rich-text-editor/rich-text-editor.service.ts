@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RichTextEditorService {
   public TEXT_EDITOR_CONFIG: any = {
@@ -13,8 +13,8 @@ export class RichTextEditorService {
         '|',
         'heading',
         '|',
-        'fontfamily',
-        'fontsize',
+        'fontFamily',
+        'fontSize',
         'fontColor',
         'fontBackgroundColor',
         '|',
@@ -33,8 +33,8 @@ export class RichTextEditorService {
         'bulletedList',
         'numberedList',
         'outdent',
-        'indent'
-      ]
+        'indent',
+      ],
     },
     image: {
       resizeUnit: 'px',
@@ -44,15 +44,15 @@ export class RichTextEditorService {
         'imageStyle:breakText',
         '|',
         'toggleImageCaption',
-        'imageTextAlternative'
-      ]
+        'imageTextAlternative',
+      ],
     },
     table: { contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'] },
     list: { properties: { styles: true, startIndex: true, reversed: true } },
     language: 'en',
     fontSize: {
-      options: [8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72]
-    }
+      options: [8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72],
+    },
   };
-  constructor() { }
+  constructor() {}
 }

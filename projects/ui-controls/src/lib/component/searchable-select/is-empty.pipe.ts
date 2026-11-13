@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'isEmpty',
   pure: true,
-  standalone: true
+  standalone: true,
 })
 export class IsEmptyPipe implements PipeTransform {
   transform(value: any): boolean {

@@ -7,5 +7,5 @@ export interface SlideToggleFieldInfo {
 
   /** Optional native input element reference */
   inputRef?: Element | null;
-  changeEvent?: MouseEvent
+  changeEvent?: MouseEvent;
 }

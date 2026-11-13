@@ -1,20 +1,28 @@
-import { Component, EventEmitter, Input, Output, Optional, Self, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  Optional,
+  Self,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { MaterialModule } from '../../material.module';
 import {
   RadioButtonFieldInfo,
   RadioButtonInputEvent,
   RadioButtonModelChangeEvent,
-  RadioButtonOption
+  RadioButtonOption,
 } from './radio-button.interface';
 import { BaseControlValueAccessor } from '../base-control-value-accessor.directive';
 import { NgControl } from '@angular/forms';
 
 @Component({
-  selector: 'ui-radio-button',
+  selector: 'ui-radio-group, ui-radio-button',
   standalone: true,
   imports: [MaterialModule],
   templateUrl: './radio-button.component.html',
-  styleUrl: './radio-button.component.scss'
+  styleUrl: './radio-button.component.scss',
 })
 export class RadioButtonComponent extends BaseControlValueAccessor<any> {
   /** HTML id attribute for the radio button group */
@@ -71,7 +79,6 @@ export class RadioButtonComponent extends BaseControlValueAccessor<any> {
    */
   @Input() required: boolean = false;
 
-
   /**
    * Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved.
    * @type string | number
@@ -93,7 +100,8 @@ export class RadioButtonComponent extends BaseControlValueAccessor<any> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onModelChange
    */
-  @Output() modelChange: EventEmitter<RadioButtonModelChangeEvent> = new EventEmitter<RadioButtonModelChangeEvent>();
+  @Output() modelChange: EventEmitter<RadioButtonModelChangeEvent> =
+    new EventEmitter<RadioButtonModelChangeEvent>();
 
   /**
    * Emits from the existing input/change handler.
@@ -101,7 +109,8 @@ export class RadioButtonComponent extends BaseControlValueAccessor<any> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onInputChange
    */
-  @Output() inputChanged: EventEmitter<RadioButtonInputEvent> = new EventEmitter<RadioButtonInputEvent>();
+  @Output() inputChanged: EventEmitter<RadioButtonInputEvent> =
+    new EventEmitter<RadioButtonInputEvent>();
 
   /** Internal model bound to mat-radio-group */
   get inputModelValue(): any {
@@ -120,7 +129,10 @@ export class RadioButtonComponent extends BaseControlValueAccessor<any> {
   }
   set modelValue(modelvalue: any) {
     if (modelvalue && this.valueKey) {
-      this.inputModelValue = modelvalue[this.valueKey] || modelvalue;
+      this.inputModelValue =
+        modelvalue != null && typeof modelvalue === 'object' && this.valueKey in modelvalue
+          ? modelvalue[this.valueKey]
+          : modelvalue;
     } else {
       this.inputModelValue = modelvalue;
     }
@@ -128,54 +140,79 @@ export class RadioButtonComponent extends BaseControlValueAccessor<any> {
 
   constructor(
     @Optional() @Self() public override ngControl: NgControl,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     super(ngControl, changeDetectorRef);
   }
 
   /**
- * Returns common field information
- * attached to emitted events.
- */
+   * Returns common field information
+   * attached to emitted events.
+   */
   private fieldInfo(): RadioButtonFieldInfo {
     let inputRef: Element | null = null;
     if (this.effectiveId) {
-      inputRef = document.querySelector(`#${this.effectiveId}`);
+      inputRef = typeof document === 'undefined' ? null : document.getElementById(this.effectiveId);
     }
     return {
-      ...inputRef && { inputRef: inputRef },
+      ...(inputRef && { inputRef: inputRef }),
       modelValue: this.getModelValue(),
-      textFieldName: this.fieldName
+      textFieldName: this.fieldName,
     };
   }
 
   /**
- * Emits when the selected radio value changes
- * @param modelChange - Updated selected value
- * @returns void (emits modelChange)
- */
+   * Emits when the selected radio value changes
+   * @param modelChange - Updated selected value
+   * @returns void (emits modelChange)
+   */
   public modelValueChange(modelChange: RadioButtonOption): void {
     this.modelChange.emit({
       ...this.fieldInfo(),
       modelChangeEvent: modelChange,
-      index: this.options.findIndex((radioOption) => (this.valueKey ? radioOption[this.valueKey] : radioOption) === this.inputModelValue)
+      index: this.options.findIndex(
+        (radioOption) =>
+          (this.valueKey ? (radioOption as Record<string, any>)[this.valueKey] : radioOption) ===
+          this.inputModelValue,
+      ),
     });
   }
 
   /**
-  * Emits when a radio input change event occurs
-  * @param changeValue - Input change event
-  * @returns void (emits inputChanged)
-  */
+   * Emits when a radio input change event occurs
+   * @param changeValue - Input change event
+   * @returns void (emits inputChanged)
+   */
   public inputChange(changeValue: Event): void {
     this.inputChanged.emit({
       ...this.fieldInfo(),
-      changeEvent: changeValue
+      changeEvent: changeValue,
     });
   }
+  getOptionValue(option: RadioButtonOption): any {
+    return this.valueKey && typeof option === 'object' && option !== null
+      ? option[this.valueKey]
+      : option;
+  }
+
+  getOptionLabel(option: RadioButtonOption): any {
+    return this.labelKey && typeof option === 'object' && option !== null
+      ? option[this.labelKey]
+      : option;
+  }
+
+  isOptionDisabled(option: RadioButtonOption): boolean {
+    return typeof option === 'object' && option !== null ? Boolean(option['disabled']) : false;
+  }
+
   getModelValue() {
     if (this.valueKey) {
-      this.options.find((radioOption) => radioOption[this.valueKey] === this.inputModelValue)
+      return (
+        this.options.find(
+          (radioOption) =>
+            (radioOption as Record<string, any>)[this.valueKey] === this.inputModelValue,
+        ) ?? this.inputModelValue
+      );
     }
     return this.inputModelValue;
   }

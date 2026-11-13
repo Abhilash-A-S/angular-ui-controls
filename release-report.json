@@ -1,0 +1,33 @@
+{
+  "version": "0.1.0-rc.1",
+  "status": "release-candidate; not certified for production",
+  "source_base_commit": "9a2fe484c11473e025b0a8d6bb8ea9c9d3273bad",
+  "verified_on": "2026-11-13",
+  "checks": {
+    "prettier": "passed",
+    "original_public_bindings_retained": 505,
+    "utility_tests_passed": 5,
+    "component_tests_passed": 29,
+    "library_build": "passed",
+    "production_demo_build": "passed with CommonJS optimization warnings",
+    "npm_tarball_consumer_build": "passed; npm-installed tarball, reused installed peers, no TypeScript library paths",
+    "runtime_dependency_audit": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "git_diff_check": "passed"
+  },
+  "remaining_release_gates": [
+    "Full browser, mobile, keyboard and screen-reader tests for every control",
+    "Browser validation of the CKEditor 49 integration and licensing configuration",
+    "Enable strict TypeScript and strict template checks and resolve diagnostics",
+    "Complete legacy API and payload normalization using compatibility aliases",
+    "Remove remaining utility CSS assumptions and review every unused legacy flag"
+  ],
+  "package_sha256": "f1f3768ab240dc87d958518368a702dc7a2f26e32b5183737a54d5a601039228",
+  "published": false
+}

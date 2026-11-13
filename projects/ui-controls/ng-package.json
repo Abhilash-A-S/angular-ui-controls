@@ -4,14 +4,6 @@
   "lib": {
     "entryFile": "src/public-api.ts"
   },
-  "allowedNonPeerDependencies": [
-    "tslib"
-  ],
-  "assets": [
-    "README.md",
-    "LICENSE",
-    "DEPENDENCY_REPLACEMENTS.md",
-    "VALIDATION.md",
-    "CONTRIBUTING.md"
-  ]
+  "allowedNonPeerDependencies": ["tslib"],
+  "assets": ["README.md", "LICENSE"]
 }

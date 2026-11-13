@@ -56,9 +56,7 @@ export class TimePickerComponent extends BaseControlValueAccessor<string> {
     }
     const input =
       this.timeInput?.nativeElement ||
-      (this.effectiveId
-        ? (document.getElementById(this.effectiveId) as HTMLInputElement)
-        : null);
+      (this.effectiveId ? (document.getElementById(this.effectiveId) as HTMLInputElement) : null);
     if (input && typeof (input as any).showPicker === 'function') {
       try {
         (input as any).showPicker();
@@ -89,7 +87,7 @@ export class TimePickerComponent extends BaseControlValueAccessor<string> {
 
   constructor(
     @Optional() @Self() public override ngControl: NgControl,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     super(ngControl, changeDetectorRef);
   }
@@ -107,7 +105,6 @@ export class TimePickerComponent extends BaseControlValueAccessor<string> {
    * @type boolean
    */
   @Input() required: boolean = false;
-
 
   /**
    * Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved.
@@ -157,8 +154,7 @@ export class TimePickerComponent extends BaseControlValueAccessor<string> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onChange
    */
-  @Output() changeCommitted: EventEmitter<TimePickerChange> =
-    new EventEmitter<TimePickerChange>();
+  @Output() changeCommitted: EventEmitter<TimePickerChange> = new EventEmitter<TimePickerChange>();
 
   /**
    * Emits from the existing input/change handler.
@@ -221,7 +217,7 @@ export class TimePickerComponent extends BaseControlValueAccessor<string> {
   private fieldInfo(): TimePickerFieldInfo {
     let inputRef: HTMLElement | null = null;
     if (this.effectiveId) {
-      inputRef = document.querySelector(`#${this.effectiveId}`);
+      inputRef = typeof document === 'undefined' ? null : document.getElementById(this.effectiveId);
     }
     return {
       ...(inputRef && { inputRef: inputRef }),
@@ -306,5 +302,8 @@ export class TimePickerComponent extends BaseControlValueAccessor<string> {
       ...this.fieldInfo(),
       ...{ changeEvent: event },
     });
+  }
+  public onEnter(event: Event): void {
+    this.enterPressed.emit({ ...this.fieldInfo(), keyEnterEvent: event } as any);
   }
 }

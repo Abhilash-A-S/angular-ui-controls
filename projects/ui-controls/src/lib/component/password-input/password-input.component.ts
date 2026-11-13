@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, ChangeDetectorRef, EventEmitter, Input, Output, Optional, Self } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ChangeDetectorRef,
+  EventEmitter,
+  Input,
+  Output,
+  Optional,
+  Self,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../material.module';
 import {
@@ -9,7 +18,7 @@ import {
   PasswordInputKeydownEvent,
   PasswordInputKeyupEvent,
   PasswordInputKeyEnterEvent,
-  PasswordInputFieldInfo
+  PasswordInputFieldInfo,
 } from './password-input.interface';
 import { UiUtilitiesModule } from '../../utilities';
 import { BaseControlValueAccessor } from '../base-control-value-accessor.directive';
@@ -21,9 +30,9 @@ import { NgControl } from '@angular/forms';
   imports: [CommonModule, MaterialModule, UiUtilitiesModule],
   templateUrl: './password-input.component.html',
   styleUrl: './password-input.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PasswordInputComponent extends BaseControlValueAccessor<string | number> {
+export class PasswordInputComponent extends BaseControlValueAccessor<string> {
   /**
    * Clipboard restriction flag retained with its current wiring. The local uiPreventClipboard directive blocks copy, cut, and paste when true.
    * @default false
@@ -69,7 +78,7 @@ export class PasswordInputComponent extends BaseControlValueAccessor<string | nu
 
   constructor(
     @Optional() @Self() public override ngControl: NgControl,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     super(ngControl, changeDetectorRef);
   }
@@ -86,7 +95,6 @@ export class PasswordInputComponent extends BaseControlValueAccessor<string | nu
    * @default false
    */
   @Input() required = false;
-
 
   /**
    * Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved.
@@ -126,7 +134,8 @@ export class PasswordInputComponent extends BaseControlValueAccessor<string | nu
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onModelChange
    */
-  @Output() modelChange: EventEmitter<PasswordInputModelChangeEvent> = new EventEmitter<PasswordInputModelChangeEvent>();
+  @Output() modelChange: EventEmitter<PasswordInputModelChangeEvent> =
+    new EventEmitter<PasswordInputModelChangeEvent>();
 
   /**
    * Emits from the existing input/change handler.
@@ -134,7 +143,8 @@ export class PasswordInputComponent extends BaseControlValueAccessor<string | nu
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onInputChange
    */
-  @Output() inputChanged: EventEmitter<PasswordInputInputEvent> = new EventEmitter<PasswordInputInputEvent>();
+  @Output() inputChanged: EventEmitter<PasswordInputInputEvent> =
+    new EventEmitter<PasswordInputInputEvent>();
 
   /**
    * Emits when the inner field gains focus.
@@ -142,7 +152,8 @@ export class PasswordInputComponent extends BaseControlValueAccessor<string | nu
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onFocusChange
    */
-  @Output() focusGained: EventEmitter<PasswordInputFocusEvent> = new EventEmitter<PasswordInputFocusEvent>();
+  @Output() focusGained: EventEmitter<PasswordInputFocusEvent> =
+    new EventEmitter<PasswordInputFocusEvent>();
 
   /**
    * Emits when the inner field loses focus.
@@ -150,7 +161,8 @@ export class PasswordInputComponent extends BaseControlValueAccessor<string | nu
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onBlurChange
    */
-  @Output() focusLost: EventEmitter<PasswordInputBlurEvent> = new EventEmitter<PasswordInputBlurEvent>();
+  @Output() focusLost: EventEmitter<PasswordInputBlurEvent> =
+    new EventEmitter<PasswordInputBlurEvent>();
 
   /**
    * Emits on the inner field keydown event.
@@ -158,7 +170,8 @@ export class PasswordInputComponent extends BaseControlValueAccessor<string | nu
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onKeydownHandle
    */
-  @Output() keyPressed: EventEmitter<PasswordInputKeydownEvent> = new EventEmitter<PasswordInputKeydownEvent>();
+  @Output() keyPressed: EventEmitter<PasswordInputKeydownEvent> =
+    new EventEmitter<PasswordInputKeydownEvent>();
 
   /**
    * Emits on the inner field keyup event.
@@ -166,7 +179,8 @@ export class PasswordInputComponent extends BaseControlValueAccessor<string | nu
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onKeyupHandle
    */
-  @Output() keyReleased: EventEmitter<PasswordInputKeyupEvent> = new EventEmitter<PasswordInputKeyupEvent>();
+  @Output() keyReleased: EventEmitter<PasswordInputKeyupEvent> =
+    new EventEmitter<PasswordInputKeyupEvent>();
 
   /**
    * Emits when Enter is released in the inner field.
@@ -174,67 +188,67 @@ export class PasswordInputComponent extends BaseControlValueAccessor<string | nu
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onKeyEnterHandle
    */
-  @Output() enterPressed: EventEmitter<PasswordInputKeyEnterEvent> = new EventEmitter<PasswordInputKeyEnterEvent>();
-
+  @Output() enterPressed: EventEmitter<PasswordInputKeyEnterEvent> =
+    new EventEmitter<PasswordInputKeyEnterEvent>();
 
   /**
- * Returns shared field information
- * attached to all emitted events.
- */
+   * Returns shared field information
+   * attached to all emitted events.
+   */
   private fieldInfo(): PasswordInputFieldInfo {
     let inputRef: Element | null = null;
     if (this.effectiveId) {
-      inputRef = document.querySelector(`#${this.effectiveId}`);
+      inputRef = typeof document === 'undefined' ? null : document.getElementById(this.effectiveId);
     }
     return {
-      ...inputRef && { inputRef: inputRef },
+      ...(inputRef && { inputRef: inputRef }),
       modelValue: this.modelValue,
-      textFieldName: this.fieldName
+      textFieldName: this.fieldName,
     };
   }
 
   /**
-  * Emits when the password model value changes
-  * @param modelValueChange - Updated model value
-  */
+   * Emits when the password model value changes
+   * @param modelValueChange - Updated model value
+   */
   public modelValueChange(modelValueChange: string): void {
     this.modelChange.emit({
       ...this.fieldInfo(),
-      modelChangeEvent: modelValueChange
+      modelChangeEvent: modelValueChange,
     });
   }
 
   /**
- * Emits on input change event
- * @param changeValue - Input event
- */
+   * Emits on input change event
+   * @param changeValue - Input event
+   */
   public inputChange(changeValue: Event): void {
     this.inputChanged.emit({
       ...this.fieldInfo(),
-      inputChangeEvent: changeValue
+      inputChangeEvent: changeValue,
     });
   }
 
   /**
- * Emits when input gains focus
- * @param onFocusEvent - Focus event
- */
+   * Emits when input gains focus
+   * @param onFocusEvent - Focus event
+   */
 
   public focusChange(onFocusEvent: FocusEvent): void {
     this.focusGained.emit({
       ...this.fieldInfo(),
-      focusEvent: onFocusEvent
+      focusEvent: onFocusEvent,
     });
   }
 
   /**
- * Emits when input loses focus
- * @param blurEvent - Blur event
- */
+   * Emits when input loses focus
+   * @param blurEvent - Blur event
+   */
   public blurChange(blurEvent: FocusEvent): void {
     this.focusLost.emit({
       ...this.fieldInfo(),
-      blurEvent: blurEvent
+      blurEvent: blurEvent,
     });
   }
 
@@ -245,7 +259,7 @@ export class PasswordInputComponent extends BaseControlValueAccessor<string | nu
   public keydownHandle(event: KeyboardEvent): void {
     this.keyPressed.emit({
       ...this.fieldInfo(),
-      keyDownEvent: event
+      keyDownEvent: event,
     });
   }
 
@@ -256,7 +270,7 @@ export class PasswordInputComponent extends BaseControlValueAccessor<string | nu
   public keyupHandle(event: KeyboardEvent): void {
     this.keyReleased.emit({
       ...this.fieldInfo(),
-      keyUpEvent: event
+      keyUpEvent: event,
     });
   }
 
@@ -267,7 +281,7 @@ export class PasswordInputComponent extends BaseControlValueAccessor<string | nu
   public keyEnterHandle(event: Event): void {
     this.enterPressed.emit({
       ...this.fieldInfo(),
-      keyEnterEvent: event
+      keyEnterEvent: event,
     });
   }
 }

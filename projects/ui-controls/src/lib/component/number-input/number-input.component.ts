@@ -1,4 +1,12 @@
-import { Component, ChangeDetectorRef, EventEmitter, Input, Output, Optional, Self } from '@angular/core';
+import {
+  Component,
+  ChangeDetectorRef,
+  EventEmitter,
+  Input,
+  Output,
+  Optional,
+  Self,
+} from '@angular/core';
 import { MaterialModule } from '../../material.module';
 import { UiUtilitiesModule } from '../../utilities';
 import {
@@ -9,7 +17,7 @@ import {
   NumberInputKeydownEvent,
   NumberInputKeyupEvent,
   NumberInputKeyEnterEvent,
-  NumberInputFieldInfo
+  NumberInputFieldInfo,
 } from './number-input.interface';
 import { BaseControlValueAccessor } from '../base-control-value-accessor.directive';
 import { NgControl } from '@angular/forms';
@@ -19,7 +27,7 @@ import { NgControl } from '@angular/forms';
   standalone: true,
   imports: [MaterialModule, UiUtilitiesModule],
   templateUrl: './number-input.component.html',
-  styleUrl: './number-input.component.scss'
+  styleUrl: './number-input.component.scss',
 })
 export class NumberInputComponent extends BaseControlValueAccessor<number> {
   /**
@@ -76,7 +84,7 @@ export class NumberInputComponent extends BaseControlValueAccessor<number> {
 
   constructor(
     @Optional() @Self() public override ngControl: NgControl,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     super(ngControl, changeDetectorRef);
   }
@@ -94,7 +102,6 @@ export class NumberInputComponent extends BaseControlValueAccessor<number> {
    * @type boolean
    */
   @Input() required: boolean = false;
-
 
   /**
    * Consumer-defined field identifier included in event metadata. Existing event payload key names are preserved.
@@ -208,7 +215,8 @@ export class NumberInputComponent extends BaseControlValueAccessor<number> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onModelChange
    */
-  @Output() modelChange: EventEmitter<NumberInputModelChangeEvent> = new EventEmitter<NumberInputModelChangeEvent>();
+  @Output() modelChange: EventEmitter<NumberInputModelChangeEvent> =
+    new EventEmitter<NumberInputModelChangeEvent>();
 
   /**
    * Emits from the existing input/change handler.
@@ -216,7 +224,8 @@ export class NumberInputComponent extends BaseControlValueAccessor<number> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onInputChange
    */
-  @Output() inputChanged: EventEmitter<NumberInputInputEvent> = new EventEmitter<NumberInputInputEvent>();
+  @Output() inputChanged: EventEmitter<NumberInputInputEvent> =
+    new EventEmitter<NumberInputInputEvent>();
 
   /**
    * Emits when the inner field gains focus.
@@ -224,7 +233,8 @@ export class NumberInputComponent extends BaseControlValueAccessor<number> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onFocusChange
    */
-  @Output() focusGained: EventEmitter<NumberInputFocusEvent> = new EventEmitter<NumberInputFocusEvent>();
+  @Output() focusGained: EventEmitter<NumberInputFocusEvent> =
+    new EventEmitter<NumberInputFocusEvent>();
 
   /**
    * Emits when the inner field loses focus.
@@ -232,7 +242,8 @@ export class NumberInputComponent extends BaseControlValueAccessor<number> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onBlurChange
    */
-  @Output() focusLost: EventEmitter<NumberInputBlurEvent> = new EventEmitter<NumberInputBlurEvent>();
+  @Output() focusLost: EventEmitter<NumberInputBlurEvent> =
+    new EventEmitter<NumberInputBlurEvent>();
 
   /**
    * Emits on the inner field keydown event.
@@ -240,7 +251,8 @@ export class NumberInputComponent extends BaseControlValueAccessor<number> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onKeydownHandle
    */
-  @Output() keyPressed: EventEmitter<NumberInputKeydownEvent> = new EventEmitter<NumberInputKeydownEvent>();
+  @Output() keyPressed: EventEmitter<NumberInputKeydownEvent> =
+    new EventEmitter<NumberInputKeydownEvent>();
 
   /**
    * Emits on the inner field keyup event.
@@ -248,7 +260,8 @@ export class NumberInputComponent extends BaseControlValueAccessor<number> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onKeyupHandle
    */
-  @Output() keyReleased: EventEmitter<NumberInputKeyupEvent> = new EventEmitter<NumberInputKeyupEvent>();
+  @Output() keyReleased: EventEmitter<NumberInputKeyupEvent> =
+    new EventEmitter<NumberInputKeyupEvent>();
 
   /**
    * Emits when Enter is released in the inner field.
@@ -256,22 +269,22 @@ export class NumberInputComponent extends BaseControlValueAccessor<number> {
    * @remarks Payload shape is unchanged; see the emitting handler for field metadata.
    * @renamedFrom onKeyEnterHandle
    */
-  @Output() enterPressed: EventEmitter<NumberInputKeyEnterEvent> = new EventEmitter<NumberInputKeyEnterEvent>();
-
+  @Output() enterPressed: EventEmitter<NumberInputKeyEnterEvent> =
+    new EventEmitter<NumberInputKeyEnterEvent>();
 
   /**
- * Returns common field information
- * reused across emitted events.
- */
+   * Returns common field information
+   * reused across emitted events.
+   */
   private fieldInfo(): NumberInputFieldInfo {
     let inputRef: Element | null = null;
     if (this.effectiveId) {
-      inputRef = document.querySelector(`#${this.effectiveId}`);
+      inputRef = typeof document === 'undefined' ? null : document.getElementById(this.effectiveId);
     }
     return {
-      ...inputRef && { inputRef: inputRef },
+      ...(inputRef && { inputRef: inputRef }),
       modelValue: this.modelValue,
-      textFieldName: this.fieldName
+      textFieldName: this.fieldName,
     };
   }
 
@@ -282,41 +295,41 @@ export class NumberInputComponent extends BaseControlValueAccessor<number> {
   public modelValueChange(modelChange: number): void {
     this.modelChange.emit({
       ...this.fieldInfo(),
-      modelChangeEvent: modelChange
+      modelChangeEvent: modelChange,
     });
   }
 
   /**
-  * Emits when the input value changes
-  * @param changeValue - Input change event
-  */
+   * Emits when the input value changes
+   * @param changeValue - Input change event
+   */
   public inputChange(changeValue: Event): void {
     this.inputChanged.emit({
       ...this.fieldInfo(),
-      changeEvent: changeValue
+      changeEvent: changeValue,
     });
   }
 
   /**
- * Emits when input gains focus
- * @param onFocus - Focus event
- */
+   * Emits when input gains focus
+   * @param onFocus - Focus event
+   */
   public focusChange(onFocus: FocusEvent): void {
     this.focusGained.emit({
       ...this.fieldInfo(),
-      focusEvent: onFocus
+      focusEvent: onFocus,
     });
   }
 
   /**
- * Emits when input loses focus
- * @param blurEvent - Blur event
- */
+   * Emits when input loses focus
+   * @param blurEvent - Blur event
+   */
 
   public blurChange(blurEvent: FocusEvent): void {
     this.focusLost.emit({
       ...this.fieldInfo(),
-      blurEvent: blurEvent
+      blurEvent: blurEvent,
     });
   }
 
@@ -327,7 +340,7 @@ export class NumberInputComponent extends BaseControlValueAccessor<number> {
   public keydownHandle(event: KeyboardEvent): void {
     this.keyPressed.emit({
       ...this.fieldInfo(),
-      keyDownEvent: event
+      keyDownEvent: event,
     });
   }
 
@@ -338,18 +351,18 @@ export class NumberInputComponent extends BaseControlValueAccessor<number> {
   public keyupHandle(event: KeyboardEvent): void {
     this.keyReleased.emit({
       ...this.fieldInfo(),
-      keyUpEvent: event
+      keyUpEvent: event,
     });
   }
 
   /**
-  * Emits when Enter key is pressed
-  * @param event - Keyboard or input event
-  */
+   * Emits when Enter key is pressed
+   * @param event - Keyboard or input event
+   */
   public keyEnterHandle(event: Event): void {
     this.enterPressed.emit({
       ...this.fieldInfo(),
-      keyEnterEvent: event
+      keyEnterEvent: event,
     });
   }
 

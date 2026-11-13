@@ -9,13 +9,13 @@
     "importHelpers": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "strict": false,
+    "strict": true,
     "lib": ["ES2022", "DOM"],
     "paths": { "@abhilash-as/angular-ui-controls": ["dist/ui-controls"] }
   },
   "angularCompilerOptions": {
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": false
+    "strictTemplates": true
   }
 }

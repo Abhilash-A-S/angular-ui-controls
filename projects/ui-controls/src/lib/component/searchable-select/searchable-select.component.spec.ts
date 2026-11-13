@@ -8,10 +8,9 @@ describe('SelectSearchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SearchableSelectComponent]
-    })
-    .compileComponents();
-    
+      imports: [SearchableSelectComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(SearchableSelectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

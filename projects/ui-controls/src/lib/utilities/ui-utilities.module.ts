@@ -1,4 +1,4 @@
-import { NgModule, Pipe, PipeTransform } from "@angular/core";
+import { NgModule, Pipe, PipeTransform } from '@angular/core';
 import {
   InputRulesDirective,
   TrimLeadingSpaceDirective,
@@ -6,17 +6,17 @@ import {
   ArabicInputDirective,
   EllipsisTooltipDirective,
   AutocompletePositionDirective,
-} from "./input-utilities.directive";
-import { PreventClipboardDirective } from "../directive/prevent-clipboard.directive";
-import { AbbreviationTextareaComponent } from "./abbreviation-textarea.component";
-import { filterOptions } from "./input-rules";
+} from './input-utilities.directive';
+import { PreventClipboardDirective } from '../directive/prevent-clipboard.directive';
+import { AbbreviationTextareaComponent } from './abbreviation-textarea.component';
+import { filterOptions } from './input-rules';
 /** Case-insensitive local option filtering. Server-backed callers can pass an empty query. */
-@Pipe({ name: "searchFilter", standalone: true })
+@Pipe({ name: 'searchFilter', standalone: true })
 export class SearchFilterPipe implements PipeTransform {
   transform<T>(
     items: readonly T[] | null | undefined,
     query: unknown,
-    key = "",
+    key = '',
     startsWith = false,
   ): T[] {
     return filterOptions(items, query, key, startsWith);

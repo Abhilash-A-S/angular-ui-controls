@@ -7,7 +7,9 @@
   align-items: center;
   justify-content: space-between;
   user-select: none;
-  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition:
+    border-color 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
   min-height: 38px;
   font-size: 14px;
   color: #495057;
@@ -44,57 +46,57 @@
   width: 100%;
 }
 
-.file-upload-drag-drop{
-    border-radius: 13px;
-    background: var(--theme-white);
-    box-shadow: -2px 0px 8px rgba(39, 39, 39, 0.11);
-    z-index: 1001;
-    transform: translateX(0px);
-    transition: 0.3s ease;
+.file-upload-drag-drop {
+  border-radius: 13px;
+  background: var(--theme-white);
+  box-shadow: -2px 0px 8px rgba(39, 39, 39, 0.11);
+  z-index: 1001;
+  transform: translateX(0px);
+  transition: 0.3s ease;
 }
-.file-up{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: pointer;
-    z-index: 3;
+.file-up {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 3;
 }
-.drag-holder{
-    border: 1px dashed #b3d5e3;
-    border-radius: 7px;
-    height: 100%;
-    color: #6e9aad;
-    width: 100%;
+.drag-holder {
+  border: 1px dashed #b3d5e3;
+  border-radius: 7px;
+  height: 100%;
+  color: #6e9aad;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 2;
+  .browse-file {
+    color: #4b4b4b;
+  }
+  .icon-area {
+    width: 97%;
+    height: 48px;
+    background: #f8fbff;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    z-index: 2;
-    .browse-file{
-        color: #4b4b4b;
+    justify-content: center;
+    border-radius: 7px;
+    .mat-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    .icon-area{
-        width: 97%;
-        height: 48px;
-        background: #F8FBFF;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 7px;
-        .mat-icon{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-    }
-    .accepted-files{
-        font-size: 0.95rem;
-        text-transform: uppercase;
-    }
+  }
+  .accepted-files {
+    font-size: 0.95rem;
+    text-transform: uppercase;
+  }
 }
-.upload-top{
-    height: 200px;
+.upload-top {
+  height: 200px;
 }

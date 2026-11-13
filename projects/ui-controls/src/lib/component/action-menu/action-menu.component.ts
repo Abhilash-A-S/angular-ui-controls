@@ -5,18 +5,18 @@ import {
   EventEmitter,
   ViewChild,
   ViewEncapsulation,
-} from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { MatMenu, MatMenuModule } from "@angular/material/menu";
-import { MatIconModule } from "@angular/material/icon";
-import { MenuItem } from "../../utilities";
+} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatMenu, MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MenuItem } from '../../utilities';
 
 @Component({
-  selector: "ui-action-menu",
+  selector: 'ui-action-menu',
   standalone: true,
   imports: [CommonModule, MatMenuModule, MatIconModule],
-  templateUrl: "./action-menu.component.html",
-  styleUrls: ["./action-menu.component.scss"],
+  templateUrl: './action-menu.component.html',
+  styleUrls: ['./action-menu.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 export class ActionMenuComponent {
@@ -56,7 +56,7 @@ export class ActionMenuComponent {
    * @type string
    * @renamedFrom customPanelClass
    */
-  @Input() panelClass: string = "";
+  @Input() panelClass: string = '';
 
   onMenuItemClick(item: MenuItem): void {
     if (!item.disabled) {
